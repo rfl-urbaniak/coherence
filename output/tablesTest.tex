@@ -1,0 +1,41 @@
+\documentclass{article}
+
+% %packages
+ \usepackage{booktabs}
+ \usepackage[table]{xcolor}
+\usepackage{graphicx}
+
+\begin{document}
+
+
+\begin{center}
+\hspace{-10mm}
+\begin{tabular}{lllllll}
+\toprule
+  & DouvenMeijs & Fitelson & Olsson & RA & Roche & Shogenji\\
+\midrule
+\rowcolor{gray!6}  Beatles: incoherent & FALSE & TRUE & NA & TRUE & TRUE & TRUE\\
+Books: AR$>$A$\neg$R & TRUE & TRUE & TRUE & FALSE & TRUE & TRUE\\
+\rowcolor{gray!6}  Books: AR$>\neg$AR & TRUE & TRUE & FALSE & FALSE & TRUE & TRUE\\
+Books: $\neg$A$\neg$R$>$A$\neg$R & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
+\rowcolor{gray!6}  Books: $\neg$A$\neg$R$>\neg$AR & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
+Dodecahedron: Regular$=$Dodecahedron & FALSE & FALSE & TRUE & FALSE & FALSE & FALSE\\
+\rowcolor{gray!6}  Dunnit: Dunnit$<$Twin & FALSE & TRUE & FALSE & FALSE & FALSE & TRUE\\
+Swords: JO2$>$JO1 & TRUE & TRUE & TRUE & TRUE & TRUE & FALSE\\
+\rowcolor{gray!6}  Swords: JO2$>$JO3 & TRUE & TRUE & FALSE & TRUE & TRUE & TRUE\\
+Penguins: BG$<$BGP & TRUE & TRUE & FALSE & TRUE & TRUE & TRUE\\
+\rowcolor{gray!6}  Penguins: BP$\geq$ BGP & TRUE & TRUE & TRUE & TRUE & TRUE & FALSE\\
+Robbers: PR$>$P$\neg$R & FALSE & FALSE & TRUE & FALSE & FALSE & FALSE\\
+\rowcolor{gray!6}  Robbers: PR$>$neutral & FALSE & FALSE & NA & FALSE & FALSE & FALSE\\
+Depth: X$_1>$X$_2$ & TRUE & TRUE & TRUE & FALSE & TRUE & FALSE\\
+\rowcolor{gray!6}  Witness: W$_1$W$_2>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
+Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{center}
+
+
+
+
+\end{document}

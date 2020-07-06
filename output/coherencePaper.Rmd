@@ -1,0 +1,159 @@
+---
+title: "Coherence"
+author: "Rafal Urbaniak, Alicja Kowalewska"
+output:
+  pdf_document:
+    number_sections: true
+    df_print: kable 
+    keep_tex: true
+    includes:
+      in_header:
+        - Rafal_latex4.sty
+fontsize: 10pt
+documentclass: scrartcl
+---
+
+
+
+
+```{r,echo=FALSE,eval=TRUE, fig.width=1.6, fig.height=.7,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",message=FALSE,warning=FALSE,cache=TRUE}
+# Load all libraries used etc.
+# Load all libraries used
+library(ggplot2)
+library(gridExtra)
+library(bnlearn)
+library(knitr)
+library(kableExtra)
+library(gRain)
+library(reshape2)
+library(tidyverse)
+library(plyr)
+library(rje)
+library(utils)
+library(useful)
+library(stringr)
+
+
+#________ Load all utility function
+source("..//utils//CombinationsBN.R")
+source("..//utils//CptCreate.R")
+source("..//utils//LogicAndBNs.R")
+source("..//utils//kableCPTs.R")
+
+
+
+
+#_______ Load confirmation measures
+source("..//measures//DouvenMeijs.R")
+source("..//measures//Fitelson.R")
+source("..//measures//Olsson.R")
+source("..//measures//RA.R")
+source("..//measures//Roche.R")
+source("..//measures//Shogenji.R")
+source("..//measures//CoherenceMeasures2Var.R")
+
+
+#______ Load the BNs used as examples
+source("..//bns//Books.R")
+source("..//bns//Depth.R")
+source("..//bns//Dodecahedron.R")
+source("..//bns//Dunnit.R")
+source("..//bns//Penguins.R")
+source("..//bns//Robbers.R")
+source("..//bns//Witness.R")
+source("..//bns//JapaneseSwords.R")
+source("..//bns//Beatles.R")
+
+#_______ Load the calculations used
+source("..//utils//CoherenceTables.R")
+
+
+source("..//calculations/PenguinsCoherence.R")
+source("..//calculations/DunnitCoherence.R")
+source("..//calculations/DodecahedronCoherence.R")
+source("..//calculations/RobbersCoherence.R")
+source("..//calculations/DepthCoherence.R")
+source("..//calculations/WitnessCoherence.R")
+source("..//calculations/BooksCoherence.R")
+source("..//calculations/JapaneseSwordsCoherence.R")
+source("..//calculations/BeatlesCoherence.R")
+
+source("..//calculations/AllCoherenceTables.R")
+
+
+#don't know why this shit from kableCPT fails to load on its own; remove once fixed
+# tableLaTeX <- function(table){
+# table %>% kable(format = "latex",booktabs=T,
+#                         #col.names = c(node, "1", "0"),
+#                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped"))
+# }
+```
+
+
+
+
+
+
+<!-- ```{r child="tablesForIntuitionsPenguins.Rmd", echo=FALSE} -->
+<!-- ``` -->
+
+
+
+
+<!-- ```{r child="tablesForIntuitionsDunnit.Rmd", echo=FALSE} -->
+<!-- ``` -->
+
+
+
+
+
+
+<!-- ```{r child="tablesForIntuitionsRobbers.Rmd", echo=FALSE} -->
+<!-- ``` -->
+
+
+
+<!-- ```{r child="tablesForIntuitionsDepth.Rmd", echo=FALSE} -->
+<!-- ``` -->
+
+
+
+
+
+<!-- ```{r child="tablesForIntuitionsWitness.Rmd", echo=FALSE} -->
+<!-- ``` -->
+
+
+
+<!-- ```{r child="tablesForIntuitionsBooks.Rmd", echo=FALSE} -->
+<!-- ``` -->
+
+
+
+
+<!-- ```{r child="tablesForIntuitionsJapaneseSwords.Rmd", echo=FALSE} -->
+<!-- ``` -->
+
+
+
+
+
+
+
+<!-- ```{r child="tablesForIntuitionsBeatles.Rmd", echo=FALSE} -->
+<!-- ``` -->
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+AllCoherencesLaTeX
+
+```
+
+
+
+
+<!-- ```{r child="tablesAll.Rmd", echo=FALSE} -->
+<!-- ``` -->
+
+
+

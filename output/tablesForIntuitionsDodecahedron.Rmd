@@ -1,0 +1,82 @@
+
+###   Dodecahedron
+
+
+```{r,echo=FALSE,eval=TRUE, fig.width=1.6, fig.height=.7,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",message=FALSE,warning=FALSE}
+library(tidyverse)
+```
+
+
+```{r,echo=FALSE,eval=TRUE, fig.width = 2, fig.height = 2,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", message = FALSE, }
+graphviz.plot(DodDAG)
+source("..//utils//kableCPTs.R")
+source("..//calculations/DodecahedronCoherence.R")
+```
+
+
+
+
+
+
+
+Regular Die
+
+
+
+
+
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+CPkable0("RegularBN","O")
+```
+
+
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+CPkable1("RegularBN","T")
+```
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+CPkable1("RegularBN","TF")
+```
+
+
+
+
+
+
+Dodecahedron
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+CPkable0("DodecahedronBN","O")
+```
+
+
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+CPkable1("DodecahedronBN","T")
+```
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+CPkable1("DodecahedronBN","TF")
+```
+
+
+
+
+
+```{r,echo=FALSE,eval=TRUE, fig.width=1.6, fig.height=.7,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+tableLaTeX(DodecahedronTable)
+tableLaTeX(DodecahedronResults)
+```
+
+
+
+
+
