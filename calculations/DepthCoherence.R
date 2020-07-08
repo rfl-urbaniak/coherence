@@ -12,7 +12,9 @@ depthTable <- CoherencesTable(DepthBN,
                               statesList   = list(c("1","1","1"),c("1","1","1")),
                               exampleName = "Depth"
 )
-#depthTable
+depthTable
+
+
 
 depthTableLaTeX <- tableLaTeX(depthTable)
 #depthTableLaTeX

@@ -13,18 +13,20 @@ booksTable
 
 booksTableLaTeX <- tableLaTeX(booksTable)
 
-booksTable
+#booksTable
 
 ARgreaterAnR <- booksTable[1,] > booksTable[2,] 
 #ARgreaterAnR 
 
 ARgreaternAR <- booksTable[1,] > booksTable[3,] 
+#ARgreaternAR
+
 
 nAnRgreaterAnR <- booksTable[4,] > booksTable[2,] 
 #ARgreaterAnR 
 
 nAnRgreaternAR <- booksTable[4,] > booksTable[3,] 
-
+#nAnRgreaternAR
 
 
 booksResults <- as.data.frame(rbind(ARgreaterAnR,ARgreaternAR,nAnRgreaterAnR,nAnRgreaternAR))

@@ -7,18 +7,14 @@ BeatlesTable <- CoherencesTable(BeatlesBN,
                                         exampleName = "Beatles"
 )
 
-#BeatlesTable
-
-
-BeatlesTable <- rbind(BeatlesTable)
-
-
 BeatlesTable
+
+
 
 BeatlesTableLaTeX <- tableLaTeX(BeatlesTable)
 
 
-neutralPoints <- c(0,0 ,NA, .5, .5, 1)
+neutralPoints <- c(0,0 ,NA, .5, .5, 1, 0, 0)
 
 BeatlesIncoherent <- BeatlesTable[1,] < neutralPoints 
 #BeatlesIncoherent

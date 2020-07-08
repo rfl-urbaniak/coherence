@@ -5,6 +5,8 @@
 
 
 
+
+
 #_______________
 #Fitelson
 
@@ -93,8 +95,20 @@ RegularDouvenMeijs <- DouvenMeijsCoherenceForBNs(BN = RegularBN,narrationNodes =
 
 DodecahedronDouvenMeijs <- DouvenMeijsCoherenceForBNs(BN = DodecahedronBN,narrationNodes = c("T","TF"),states = c("1","1"))
 
+
+#_______________
+# structured
+
+regularStructured <- structuredCoherence(BN = RegularBN,narrationNodes = c("T","TF"),states = c("1","1"))
+
+dodecahedronStructured <- structuredCoherence(BN = DodecahedronBN,narrationNodes = c("T","TF"),states = c("1","1"))
+
+
 #__________________
 #TABLES
+
+
+
 
 
 rownamesDodecahedron <- c("Regular","Dodecahedron")
@@ -111,6 +125,10 @@ DodecahedronTRoche <- c(RegularRoche[[3]],DodecahedronRoche[[3]])
 
 DodecahedronTFitelson <- c(RegularFitelson[[3]],DodecahedronFitelson[[3]])
 
+DodecahedronTStructured <- c(regularStructured[[3]],dodecahedronStructured[[3]])
+
+
+
 
 
 
@@ -122,25 +140,30 @@ DodecahedronTable <- data.frame(
   Olsson = DodecahedronTOlsson,
   RA = DodecahedronTRA,
   Roche = DodecahedronTRoche,
-  Shogenji = DodecahedronTShogenji)
+  Shogenji = DodecahedronTShogenji,
+  Structured = DodecahedronTStructured)
 
+#DodecahedronTable
 
 rownames(DodecahedronTable) <- rownamesDodecahedron
 
 
 
-#DodecahedronTable
-
-RegularSameDodecahedron <- DodecahedronTable[1,] == DodecahedronTable[2,] 
-
-#RegularSameDodecahedron
-
-DodecahedronResults <- as.data.frame(rbind(RegularSameDodecahedron))
+DodecahedronTableLaTeX <- tableLaTeX(DodecahedronTable)
 
 
-rownames(DodecahedronResults) <- c("Dodecahedron: Regular$=$Dodecahedron")
+RegularSameDod <- DodecahedronTable[1,] == DodecahedronTable[2,] 
+
+#RegularSameDod
+
+DodecahedronResults <- as.data.frame(RegularSameDod)
 
 #DodecahedronResults
 
+rownames(DodecahedronResults) <- c("Dodecahedron:  Regular $=$  Dodecahedron")
+
+#DodecahedronResults
+
+DodecahedronResultsLaTeX <- tableLaTeX(DodecahedronResults)
 
 

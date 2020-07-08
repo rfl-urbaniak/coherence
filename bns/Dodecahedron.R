@@ -1,4 +1,4 @@
-#The scenario:You’re either tossing a regular die, or a dodecahedron,Xisthe result.  Consider the coherence of:{X= 2,(X= 2∨X= 4)}. 
+#The scenario:You’re either tossing a regular die, or a dodecahedron,X is the result.  Consider the coherence of:{X= 2,(X= 2∨X= 4)}. 
 #The desideratum: coherence should not change, whether it's a fair die or a dodecahedron
 
 DodDAG <- model2network("[O][T|O][TF|O]")
@@ -24,9 +24,15 @@ TFprob <- array(c(0,1,1,0,0,1,
 
 #build BN
 RegularCPT <- list(O=Oprob,T=Tprob,TF=TFprob)
+RegularCPT
+
 RegularBN <- custom.fit(DodDAG,RegularCPT)
 
 #graphviz.chart(RegularBN,type="barprob")
+
+#JN <- compile(as.grain(RegularBN))
+
+#querygrain(JN,nodes = c("TF","O"), type = "joint")
 
 #Dodecahedron
 DOprob <- array(rep(1/12,12), dim = 12, dimnames = list(O =  1:12))

@@ -93,10 +93,17 @@ jplot3 <- scatter3D(options$pyx,options$pynx,options$j2,pch=19,cex=.2,byt="g",al
 #_________________________-
 
 #test
-#structuredCoherence(BirdBN,narrationNodes,states)
+#structuredCoherence(BirdBN,narrationNodes,states)[[3]]
 
 
+BN <- robbersBN
 
+graphviz.plot(BN)
+
+narrationNodes <- c("MIsP","MIsR")
+states <- c("1","1")
+
+structuredCoherence(robbersBN,c("MIsP","MIsR"),c("1","1"))
 
 
 structuredCoherence <- function(BN,narrationNodes,states){
@@ -106,27 +113,37 @@ JN <- compile(as.grain(BN))
 #find non-root nodes
 parented <- unique(arcs(BN)[,2])
 
+parented
+
 #assign parents to parented
 parentList <- list()
 for(node in 1:length(parented)){
   parentList[[node]] <- parents(BN,parented[node])  
 }
 
+
+parentList
+
 #initiate lists of results
 expConfFull <- list()
 expConf <- numeric(length(parented))
 
+
 for (i in 1:length(parented)){
 
+
+    
 consequent <- parented[i]
+
 consequentStates <- if (consequent %in% narrationNodes){
   stateOfNode(node = consequent, narrationNodes = narrationNodes, states = states)    
 } else {
   findStates(consequent)
 }
 
-
 antecedents  <- parentList[i]
+
+
 antecedentStates <- list()
 for(a in 1:length(antecedents[[1]])){
   antecedentStates[[a]] <- if (antecedents[[1]][a] %in% narrationNodes){
@@ -136,9 +153,14 @@ for(a in 1:length(antecedents[[1]])){
   }
 }
 
+
+
 #start the otucome table
 variants <-  expand.grid(c(list(consequentStates),antecedentStates))
 colnames(variants) <- c(consequent,antecedents[[1]])
+
+
+variants
 
 
 #add the prior of consequent, to be used for Z calculation
@@ -147,6 +169,9 @@ for (s in 1:nrow(variants)){
 pr[s] <- as.numeric(querygrain(JN, nodes = consequent)[[1]][as.character(eval(parse(text = paste("variants$",consequent,"[s]",sep=""))))])
 }
 variants <- cbind(variants, priorCons = pr)
+
+
+variants
 
 
 #and so for posteriors and weights
@@ -158,28 +183,103 @@ posteriors[row]   <-   querygrain(JNtemp, nodes = consequent)[[1]][as.character(
 variants <- cbind(variants,posteriors)
 
 
+variants
+
+
+#weighing with conjunctions
 weights <- numeric(nrow(variants))
+
 for (row in 1:nrow(variants)){
   rowNodes <- as.vector(unlist(c(consequent,antecedents)))
   rowStates <- as.vector(unlist(variants[row,1:(length(antecedents[[1]])+1)]))
-  weights[row] <- FindPriorJN(JN,nodes = rowNodes, states = rowStates)
+  
+  PriorJoints <- querygrain(JN,nodes=rowNodes,type="joint")
+  PriorJoints <- aperm(PriorJoints, rowNodes)
+  
+#node.ordering(BN)
+#nodes(BN)
+#rowNodes[order(match(rowNodes,node.ordering(BN)))]
+#rowNodesOrdered <- rowNodes[order(match(rowNodes,nodes(BN)))]
+#rowStatesOrdered <- rowStates[order(match(rowNodes,nodes(BN)))] 
+#  rowNodesOrdered <- rowNodes[order(match(rowNodes,node.ordering(BN)))]
+#  rowStatesOrdered <- rowStates[order(match(rowNodes,node.ordering(BN)))] 
+#rowNodesOrdered <- rowNodes[order(match(rowNodes,dimnames(PriorJoints)))]
+
+steps <- numeric(length(rowNodesOrdered))
+  for(rn in 1:length(rowNodesOrdered)){
+    steps[rn] <- paste(rowNodesOrdered[rn], "=", "\"",rowStatesOrdered[rn],"\"")
+  }
+  steps<- gsub(" ", "", steps, fixed = TRUE)
+  steps
+  final <- paste("PriorJoints[",paste(steps,collapse=","),"]",sep="")
+  noquote(final)
+  prior <- eval(parse(text=final))
+  weights[row] <- prior
 }
-variants$Weights <- weights
+
+#weights
+# #weighing with conjunctions
+# for (row in 1:nrow(variants)){
+#   rowNodes <- as.vector(unlist(c(consequent,antecedents)))
+#   rowStates <- as.vector(unlist(variants[row,1:(length(antecedents[[1]])+1)]))
+#   weights[row] <- FindPriorJN(JN,nodes = rowNodes, states = rowStates)
+# }
+
+
+# #weighting with antecedents
+# for (row in 1:nrow(variants)){
+#   rowNodes <- as.vector(unlist(c(antecedents)))
+#   rowStates <- as.vector(unlist(variants[row,2:(length(antecedents[[1]])+1)]))
+#   weights[row] <- FindPriorJN(JN,nodes = rowNodes, states = rowStates)
+# }
+
+
+variants$JointPr <- weights
+
+if(sum(variants$JointPr) > 0){
+variants$Weights <-  variants$JointPr / sum(variants$JointPr)
+} else {
+variants$Weights <-  1/nrow(variants)
+}
+
+
+variants
+
 
 #add Zs
 variants$Z <- Z(posterior = variants$posteriors, prior = variants$priorCons)
+#variants$Zweighted <- variants$Z * variants$Weights
 variants$Zweighted <- variants$Z * variants$Weights
 
+
+#sum(variants$Zweighted)
+
+
 expConfFull[[i]] <- list( "Consequent node" = consequent,
-                      "Options & calculations" = variants, "Expected confirmation" = sum(variants$Zweighted))
+                      "Options & calculations" = variants, "Expected arrow strength" = sum(variants$Zweighted))
+
+
+
 expConf[i] <- sum(variants$Zweighted)
 }
 
-score <- if (min(expConf) <= 0) {
-  (mean(expConf) - sd(expConf)) * (min(expConf +1)) - min(expConf)^2
-} else {
-  (mean(expConf) - sd(expConf))
+#expConf
+expConfFull
+
+
+populationSD <- function( vector ){
+  sqrt(sum((vector - mean(vector))^2)/(length(vector)))
 }
 
-return(list("Full calculations" = expConfFull, "Expected influences" = expConf, "structured Coherence" = score))
+
+structuredScore <- function(expConf)  if (min(expConf) <= 0) {
+  (mean(expConf) - populationSD(expConf)) * (min(expConf +1)) - min(expConf)^2
+} else {
+  (mean(expConf) - populationSD(expConf))
 }
+
+
+
+return(list("Full calculations" = expConfFull, "Expected influences" = expConf, "structured Coherence" = structuredScore(expConf)))
+}
+

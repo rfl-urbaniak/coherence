@@ -13,12 +13,14 @@ robbersTable <- CoherencesTable(robbersBN,
 
 #robbersTable
 
+
+
 robbersTableLaTeX <- tableLaTeX(robbersTable)
 
-robbersTableLaTeX
+#robbersTableLaTeX
 
 #d,f, o, ra, r,
-neutralPoints <- c(0,0 ,NA, 0.5, .5, 1)
+neutralPoints <- c(0,0 ,NA, 0.5, .5, 1, 0)
 
 PRgreaterPnR <- robbersTable[1,] > robbersTable[2,] 
 #PRgreaterPnR
