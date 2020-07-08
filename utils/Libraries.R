@@ -37,6 +37,7 @@ source("measures//Olsson.R")
 source("measures//RA.R")
 source("measures//Roche.R")
 source("measures//Shogenji.R")
+source("measures//structuredCoherence.R")
 
 
 #______ Load the BNs used as examples
