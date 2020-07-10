@@ -1,6 +1,3 @@
-
-
-
 #let's assume no logical conenction for Fitelson, then we can apply the general format
 
 BGP <- c("B","G","P")
@@ -9,6 +6,7 @@ BP <- c("B","P")
 
 rownamesPenguins <- c("BGP","BG","BP")
 
+BN <- BirdBN
 penguinsTable <- CoherencesTable(BirdBN,
                                scenariosList = list(BGP,BG,BP),
                                statesList   = list(c("1","1","1"),c("1","1"), c("1","1")),
@@ -16,8 +14,14 @@ penguinsTable <- CoherencesTable(BirdBN,
 )
 
 
-
 rownames(penguinsTable) <- rownamesPenguins
+
+#penguinsTable
+
+
+#structuredCoherence(BirdBN,BGP, rep("1",3))
+#structuredCoherence(BirdBN,BG, rep("1",2))
+#structuredCoherence(BirdBN,BP,rep("1",2))
 
 
 
@@ -33,7 +37,7 @@ penguinsResults <- as.data.frame(rbind(BGlessBGP,BPatleastBGP))
 
 rownames(penguinsResults) <- c("Penguins: BG$<$BGP", "Penguins: BP$\\geq$ BGP")
 
-penguinsResults
+#penguinsResults
 
 
 penguinsResultsLaTeX <- tableLaTeX(penguinsResults)

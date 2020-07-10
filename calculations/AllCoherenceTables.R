@@ -1,15 +1,26 @@
 
-AllCoherences <- rbind(BeatlesTable,booksTable,depthTable,DodecahedronTable,
+AllCoherences <- rbind(BeatlesTable,booksTable,depthTable,dodecahedronTable,
                        DunnitTable,JapaneseSwordsTable,penguinsTable,robbersTable,witnessTable
 )
 
 
 #AllCoherences
 
+
+
 AllCoherencesLaTeX <- tableLaTeX(AllCoherences)
 
 
-AllResults <- rbind(BeatlesResults,booksResults,depthResults,DodecahedronResults,DunnitResults,JapaneseSwordsResults,penguinsResults,robbersResults,witnessResults)
+AllCoherencesLaTeX 
+
+
+
+AllResults <- rbind(BeatlesResults,booksResults,depthResults,DodecahedronResults,DunnitResults,
+                    JapaneseSwordsResults,penguinsResults,robbersResults,witnessResults)
+
+#AllResults
+
+
 
 AllResultsLaTeX <- tableLaTeX(AllResults)
 
@@ -17,5 +28,5 @@ AllResultsLaTeX
 
 
 #success rate 
-success <- colSums(AllResults,na.rm=TRUE)/nrow(AllResults)
-#success
+#colMeans(AllResults, na.rm = TRUE, dims = 1)
+

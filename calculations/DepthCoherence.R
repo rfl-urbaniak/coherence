@@ -7,12 +7,21 @@
 X1 <- c("T123","T124","T134")
 X2 <- c("T123","T145","T167")
 
+BN <- DepthBN
 depthTable <- CoherencesTable(DepthBN,
                               scenariosList = list(X1,X2),
                               statesList   = list(c("1","1","1"),c("1","1","1")),
                               exampleName = "Depth"
 )
-depthTable
+
+#depthTable
+
+
+
+
+#structuredCoherence(DepthBN,X1,rep("1",3))
+
+#structuredCoherence(DepthBN,X2,rep("1",3))
 
 
 
@@ -31,6 +40,9 @@ rownames(depthResults) <- c("Depth: X$_1=$X$_2$")
 
 depthResultsLaTeX <- tableLaTeX(depthResults)
 #depthResultsLaTeX
+
+
+#OUTDATED
 
 #RAcoherenceForBNs(BN = DepthBN,narrationNodes = X1,states = c("1","1","1"))
 #coherence 0.2380952

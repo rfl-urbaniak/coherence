@@ -9,6 +9,7 @@
 Dunnit <- c("M","G","W","I")
 DunnitTwin<- c("M","T","G","W","I")
 
+BN <- DunnitBN
 DunnitTable <- CoherencesTable(DunnitBN,
                               scenariosList = list(Dunnit,DunnitTwin),
                               statesList   = list(c("1","1","1","1"),c("1","1","1","1","1")),
@@ -19,8 +20,11 @@ DunnitTable <- CoherencesTable(DunnitBN,
 
 
 
+#structuredCoherence(DunnitBN,Dunnit,rep("1",5))
+
+
 DunnitTableLaTeX <- tableLaTeX(DunnitTable)
-#depthTableLaTeX
+#DUnnitTableLaTeX
 
 
 DunnitLessTwin <- DunnitTable[1,] < DunnitTable[2,] 
@@ -29,6 +33,9 @@ DunnitResults <- as.data.frame(DunnitLessTwin)
 
 
 rownames(DunnitResults) <- c("Dunnit: Dunnit$<$Twin")
+
+#DunnitResults
+
 
 DunnitResultsLaTeX <- tableLaTeX(DunnitTable)
 

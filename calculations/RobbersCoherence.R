@@ -5,6 +5,8 @@
 
 #source("..//measures//Fitelson.R")
 
+
+BN <- robbersBN
 robbersTable <- CoherencesTable(robbersBN,
         scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
         statesList   = list(c("1","1"),c("1","0"),c("0","1")),
@@ -31,7 +33,7 @@ robbersResults <- as.data.frame(rbind(PRgreaterPnR,PRgreaterNeutral))
 
 rownames(robbersResults) <- c("Robbers: PR$>$P$\\neg$R","Robbers: PR$>$neutral")
 
-robbersResults
+#robbersResults
 
 robbersResultsLaTeX <- tableLaTeX(robbersResults)
 

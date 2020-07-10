@@ -3,14 +3,17 @@ B <- c("W3","W4")
 C <- c("W4","W5")
 
 
+BN <- WitnessBN
 witnessTable <- CoherencesTable(WitnessBN,
                               scenariosList = list(A,B,C),
                               statesList   = list(c("1","1"),c("1","1"),c("1","1")),
                               exampleName = "Witness"
 )
 
-witnessTable
+#witnessTable
 
+
+#structuredCoherence(WitnessBN, A, rep("1",2))
 
 witnessTableLaTeX <- tableLaTeX(witnessTable)
 

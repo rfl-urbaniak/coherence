@@ -1,13 +1,17 @@
 B <- c("J","P","G","R","D")
 
 
+BN <- BeatlesBN
 BeatlesTable <- CoherencesTable(BeatlesBN,
                                         scenariosList = list(B),
                                         statesList   = list(c("1","1","1","1","1")),
                                         exampleName = "Beatles"
 )
 
-BeatlesTable
+#BeatlesTable
+
+
+#structuredCoherence(BeatlesBN, B, rep("1",5) )
 
 
 

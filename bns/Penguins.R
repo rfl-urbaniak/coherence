@@ -26,6 +26,34 @@ BirdCPT <-list(B=BProb,G=GProb,P=PProb)
 #BirdBN
 BirdBN <- custom.fit(BirdDAG,BirdCPT)
 
+#Now, build in uncertainties that are natural
+
+BirdDAG2 <- model2network("[G][P|G:B][B|G]")
+
+GProb2 <-  priorCPT("G",prob1 = .5)
+
+#there are around 18 000 species of birds, and around 60 of them are flightless; couldn't find information about counts
+# note also there are many things that are not grounded but are not birds, mostly insects, and there's plenty of them
+
+BProb2 <- singleCPT(eNode = "B",hNode = "G", probEifHS1 = .02, probEifHS2 = .4)  
+
+#why TF the probability of being a penguin is 1 if you're G and B? What the hell did you do to chickens?? 
+
+
+PProb2 <- doubleCPT(eNode = "P",h1Node = "B",h2Node = "G",
+                    probEifH1S1H2S1 =  .4,  #this was 1; way too much, there are many grounded birds; charitably changed to .4
+                   probEifH1S1H2S2 = 0,  #ok, if you're not grounded, you're not a penguin, fine 
+                   probEifH1S2H2S1 = 0,  # and you're not a penguin if you're not a bird
+                   probEifH1S2H2S2 = 0)
+
+
+BirdCPT2 <-list(B=BProb2,G=GProb2,P=PProb2)
+
+#BirdBN2
+BirdBN2 <- custom.fit(BirdDAG2,BirdCPT2)
+
+
+
 #have a look 
 #graphviz.chart(BirdBN,type="barprob")
 

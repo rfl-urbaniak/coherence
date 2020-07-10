@@ -13,15 +13,18 @@ CoherencesRow <- function (BN, narrationNodes, states,
   RA <- RAcoherenceForBNs(BN,narrationNodes,states)[[3]]
   RO <- RocheCoherenceForBNs(BN,narrationNodes,states)[[3]]
   SH <- ShogenjiCoherenceForBNs(BN,narrationNodes,states)[[3]]
-  Structured <- structuredCoherence(BN,narrationNodes,states)[[3]]
-
+  StructuredCon <- structuredCoherence(BN,narrationNodes,states)$`structured Coherence Con`
+  StructuredAnte <- structuredCoherence(BN,narrationNodes,states)$`structured Coherence Ante`
+  
+  
   row <- data.frame( "DouvenMeijs" = DM,
                      Fitelson = FI,
              Olsson = OL,
              RA = RA,
              Roche = RO,
              Shogenji = SH,
-             Structured = Structured)
+             StructuredCon = StructuredCon,
+             StructuredAnte = StructuredAnte)
 
   rownames(row) <- paste(paste(exampleName, ":", sep = ""), paste(narrationNodes, sep = "", collapse=""), paste(states, sep = "", collapse=""), sep = " ")
 

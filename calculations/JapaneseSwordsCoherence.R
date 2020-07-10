@@ -1,6 +1,7 @@
 J <- c("J","O")
 
 
+BN <- Jap1BN
 JapaneseSwordsTable1 <- CoherencesTable(Jap1BN,
                                 scenariosList = list(J),
                                 statesList   = list(c("1","1")),
@@ -8,13 +9,14 @@ JapaneseSwordsTable1 <- CoherencesTable(Jap1BN,
 )
 
 
+BN <- Jap2BN
 JapaneseSwordsTable2 <- CoherencesTable(Jap2BN,
                                         scenariosList = list(J),
                                         statesList   = list(c("1","1")),
                                         exampleName = "Japanese Swords 2"
 )
 
-
+BN <- Jap3BN
 JapaneseSwordsTable3 <- CoherencesTable(Jap3BN,
                                         scenariosList = list(J),
                                         statesList   = list(c("1","1")),
@@ -26,7 +28,7 @@ JapaneseSwordsTable3 <- CoherencesTable(Jap3BN,
 JapaneseSwordsTable <- rbind(JapaneseSwordsTable1,JapaneseSwordsTable2,JapaneseSwordsTable3)
 
 
-JapaneseSwordsTable
+#JapaneseSwordsTable
 
 
 JapaneseSwordsTableLaTeX <- tableLaTeX(JapaneseSwordsTable)
