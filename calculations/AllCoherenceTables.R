@@ -9,6 +9,8 @@ AllCoherences <- rbind(BeatlesTable,booksTable,depthTable,dodecahedronTable,
 AllCoherencesRounded <- AllCoherences %>%  mutate_if(is.numeric, round, digits = 3)
 
 
+#AllCoherencesRounded
+
 AllCoherencesLaTeX <- tableLaTeX(AllCoherences)
 AllCoherencesRoundedLaTeX <- tableLaTeX(AllCoherencesRounded)
 

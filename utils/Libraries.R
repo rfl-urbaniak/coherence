@@ -36,6 +36,8 @@ source("measures//Olsson.R")
 source("measures//RA.R")
 source("measures//Roche.R")
 source("measures//Shogenji.R")
+source("measures//generalizedShogenji.R")
+source("measures//generalizedOlsson.R")
 source("measures//structuredCoherence.R")
 
 
