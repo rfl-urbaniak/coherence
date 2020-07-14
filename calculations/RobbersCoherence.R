@@ -13,7 +13,12 @@ robbersTable <- CoherencesTable(robbersBN,
         exampleName = "Robbers"
 )
 
-#robbersTable
+robbersTable
+
+
+graphviz.plot(robbersBN)
+
+structuredCoherence(robbersBN,c("MIsP","MIsR"),c("1","0"))
 
 
 

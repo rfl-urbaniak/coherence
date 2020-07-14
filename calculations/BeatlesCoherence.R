@@ -2,6 +2,7 @@ B <- c("J","P","G","R","D")
 
 
 BN <- BeatlesBN
+#graphviz.plot(BN)
 BeatlesTable <- CoherencesTable(BeatlesBN,
                                         scenariosList = list(B),
                                         statesList   = list(c("1","1","1","1","1")),
@@ -12,6 +13,16 @@ BeatlesTable <- CoherencesTable(BeatlesBN,
 
 
 #structuredCoherence(BeatlesBN, B, rep("1",5) )
+
+
+#B2 <- c("J","P","R","D")
+#structuredCoherence(BeatlesBN, B2, rep("1",5) )
+
+
+
+#B3 <- c("J","P","R","D")
+#structuredCoherence(BeatlesBN, B3, c("0","0","1","1"))
+
 
 
 

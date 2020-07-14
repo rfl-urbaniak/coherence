@@ -40,4 +40,11 @@ DepthBN <- custom.fit(DepthDAG,DepthCPT)
 
 #DepthBN
 
+graphviz.plot(DepthBN)
+
+JN <- compile(as.grain(DepthBN))
+
+JNevc <- 
+
+
 #graphviz.chart(DepthBN,type="barprob")

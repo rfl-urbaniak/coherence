@@ -85,3 +85,48 @@ BirdBN2 <- custom.fit(BirdDAG2,BirdCPT2)
 #querygrain(Bird,nodes = "G")
 #ok. So the network seems to work.
 
+
+
+
+#____________________________________________
+
+BirdDAG3 <- model2network("[B][P|B][G|B:P]")
+
+graphviz.plot(BirdDAG3)
+
+
+#Define CPTS
+BProb <-  priorCPT("B",prob1 = .5)
+#BProb  
+
+
+
+PProb <- singleCPT(eNode = "P",hNode = "B", probEifHS1 = .02, probEifHS2 = 0)  
+#PProb
+
+
+
+#GProb <- singleCPT(eNode = "G",hNode = "P", probEifHS1 = 1, probEifHS2 = 0.49)  
+#GProb
+
+GProb <- doubleCPT(eNode = "G",h1Node = "B",h2Node = "P",probEifH1S1H2S1 =  1, 
+                   probEifH1S1H2S2 = 0, probEifH1S2H2S1 = 0, probEifH1S2H2S2 = 0.98)
+
+GProb
+
+#BirdCPT
+BirdCPT3 <-list(B=BProb,G=GProb,P=PProb)
+
+#BirdBN
+BirdBN3 <- custom.fit(BirdDAG3,BirdCPT3)
+
+
+
+JN <- compile(as.grain(BirdBN3))
+
+
+querygrain(JN,nodes = c("B","P","G"), type = "joint")
+
+
+
+structuredCoherence()

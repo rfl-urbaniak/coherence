@@ -6,8 +6,13 @@ BP <- c("B","P")
 
 rownamesPenguins <- c("BGP","BG","BP")
 
-BN <- BirdBN
-penguinsTable <- CoherencesTable(BirdBN,
+
+#BN <- BirdBN
+
+
+BN <- BirdBN3
+
+penguinsTable <- CoherencesTable(BirdBN3,
                                scenariosList = list(BGP,BG,BP),
                                statesList   = list(c("1","1","1"),c("1","1"), c("1","1")),
                                exampleName = "Penguins"
@@ -16,12 +21,34 @@ penguinsTable <- CoherencesTable(BirdBN,
 
 rownames(penguinsTable) <- rownamesPenguins
 
-#penguinsTable
+
+penguinsTable
 
 
 #structuredCoherence(BirdBN,BGP, rep("1",3))
+
 #structuredCoherence(BirdBN,BG, rep("1",2))
-#structuredCoherence(BirdBN,BP,rep("1",2))
+
+
+
+#BN <- BirdBN3
+
+#graphviz.plot(BN)
+
+
+#structuredCoherence(BirdBN3,BGP, rep("1",3))
+
+#structuredCoherence(BirdBN3,BG, rep("1",2))
+
+#structuredCoherence(BirdBN3,BP,rep("1",2))
+
+
+
+
+
+rownamesPenguins <- c("BGP","BG","BP")
+
+
 
 
 
@@ -37,7 +64,7 @@ penguinsResults <- as.data.frame(rbind(BGlessBGP,BPatleastBGP))
 
 rownames(penguinsResults) <- c("Penguins: BG$<$BGP", "Penguins: BP$\\geq$ BGP")
 
-#penguinsResults
+penguinsResults
 
 
 penguinsResultsLaTeX <- tableLaTeX(penguinsResults)

@@ -5,6 +5,7 @@
 
 
 dodN <- c("T","TF")
+#graphviz.plot(BN)
 
 BN <- RegularBN
 dodecahedronTableRegular <- CoherencesTable(RegularBN,
@@ -14,7 +15,7 @@ dodecahedronTableRegular <- CoherencesTable(RegularBN,
 )
 
 #dodecahedronTableRegular
-#structuredCoherence(RegularBN, depthN, c("1","1"))
+#structuredCoherence(RegularBN, dodN, c("1","1"))
 
 
 BN <- DodecahedronBN

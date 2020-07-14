@@ -18,7 +18,9 @@ Tprob <- priorCPT(node = "T", prob1 = .034)
 #Tprob
 
 
-#The probability of guilt given motive, non-negligible, but rather low; most people with a motive don't commit a murder; say 5%; the probability of murdering without a motive should be even lower, say .5\%
+#The probability of guilt given motive, non-negligible, but rather low; 
+#most people with a motive don't commit a murder; say 5%; 
+#the probability of murdering without a motive should be even lower, say .5\%
 
 Gprob <- singleCPT(eNode = "G",hNode = "M", probEifHS1 = .05, probEifHS2 = .005) 
 
