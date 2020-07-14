@@ -4,11 +4,11 @@
 #source("bns//Dodecahedron.R")
 
 
-depthN <- c("T","TF")
+dodN <- c("T","TF")
 
 BN <- RegularBN
 dodecahedronTableRegular <- CoherencesTable(RegularBN,
-                              scenariosList = list(depthN),
+                              scenariosList = list(dodN),
                               statesList   = list(c("1","1")),
                               exampleName = "Regular die"
 )
@@ -19,7 +19,7 @@ dodecahedronTableRegular <- CoherencesTable(RegularBN,
 
 BN <- DodecahedronBN
 dodecahedronTableDodecahedron <- CoherencesTable(DodecahedronBN,
-                                     scenariosList = list(depthN),
+                                     scenariosList = list(dodN),
                                      statesList   = list(c("1","1")),
                                      exampleName = "Dodecahedron"
 )
@@ -30,7 +30,7 @@ dodecahedronTableDodecahedron <- CoherencesTable(DodecahedronBN,
 dodecahedronTable <- rbind(dodecahedronTableRegular,dodecahedronTableDodecahedron)
 
 
-dodecahedronTable
+#dodecahedronTable
 #structuredCoherence(DodecahedronBN, depthN, c("1","1"))
 
 

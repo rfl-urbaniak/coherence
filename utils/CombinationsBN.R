@@ -23,6 +23,14 @@ PairsOfSubsets <- function (vector) {
 # pairs <- PairsOfSubsets(1:3)
 # pairs
 
+NonSingletonSubsets <- function(narrationNodes){
+  subsets <- powerSet(narrationNodes)
+  idsToRemove <- sapply(subsets, function(i) length(i) < 2)
+  nonSingletons <- subsets[!idsToRemove]
+  return(nonSingletons)
+}
+
+
 
 #this does the same, but eliminates pairs repeated in a different order
 UniquePairsOfSubsets <- function (vector) {
@@ -133,28 +141,46 @@ parents <- function(net,node){
 
 
 FindPriorJN <- function(JN,nodes,states){
-  PriorJoints <- querygrain(JN,nodes=nodes,type="joint")  
-  steps <- numeric(length(nodes))
-  for(i in 1:length(nodes)){
-    steps[i] <- paste(nodes[i], "=", "\"",states[i],"\"")
+PriorJoints <- querygrain(JN,nodes=nodes,type="joint")
+    PriorJoints <- aperm(PriorJoints, nodes)
+    steps <- numeric(length(nodes))
+    for(rn in 1:length(nodes)){
+      steps[rn] <- paste(nodes[rn], "=", "\"",states[rn],"\"")
+    }
+    steps<- gsub(" ", "", steps, fixed = TRUE)
+    final <- paste("PriorJoints[",paste(steps,collapse=","),"]",sep="")
+    noquote(final)
+    prior <- eval(parse(text=final))
+    return(prior)
   }
-  steps<- gsub(" ", "", steps, fixed = TRUE)
-  final <- paste("PriorJoints[",paste(steps,collapse=","),"]",sep="")
-  prior <- eval(parse(text=final))
-  return(prior)
-}
+  
+  
+  
+#   ##OUTDATED
+#   PriorJoints <- querygrain(JN,nodes=nodes,type="joint")  
+#   steps <- numeric(length(nodes))
+#   for(i in 1:length(nodes)){
+#     steps[i] <- paste(nodes[i], "=", "\"",states[i],"\"")
+#   }
+#   steps<- gsub(" ", "", steps, fixed = TRUE)
+#   final <- paste("PriorJoints[",paste(steps,collapse=","),"]",sep="")
+#   prior <- eval(parse(text=final))
+#   return(prior)
+# }
 
 
 
 FindPriorBN  <- function(BN,nodes,states){
   JN <- compile(as.grain(BN)) 
-  PriorJoints <- querygrain(JN,nodes=nodes,type="joint")  
+  PriorJoints <- querygrain(JN,nodes=nodes,type="joint")
+  PriorJoints <- aperm(PriorJoints, nodes)
   steps <- numeric(length(nodes))
-  for(i in 1:length(nodes)){
-    steps[i] <- paste(nodes[i], "=", "\"",states[i],"\"")
+  for(rn in 1:length(nodes)){
+    steps[rn] <- paste(nodes[rn], "=", "\"",states[rn],"\"")
   }
   steps<- gsub(" ", "", steps, fixed = TRUE)
   final <- paste("PriorJoints[",paste(steps,collapse=","),"]",sep="")
+  noquote(final)
   prior <- eval(parse(text=final))
   return(prior)
 }

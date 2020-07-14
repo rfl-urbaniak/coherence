@@ -9,7 +9,7 @@ booksTable <- CoherencesTable(BooksBN,
 )
 
 
-booksTable
+#booksTable
 
 
 #structuredCoherence(BooksBN,AR,c("1","1"))

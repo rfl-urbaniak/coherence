@@ -6,12 +6,15 @@ AllCoherences <- rbind(BeatlesTable,booksTable,depthTable,dodecahedronTable,
 
 #AllCoherences
 
+AllCoherencesRounded <- AllCoherences %>%  mutate_if(is.numeric, round, digits = 3)
 
 
 AllCoherencesLaTeX <- tableLaTeX(AllCoherences)
+AllCoherencesRoundedLaTeX <- tableLaTeX(AllCoherencesRounded)
 
 
-AllCoherencesLaTeX 
+
+#AllCoherencesRoundedLaTeX 
 
 
 
@@ -24,7 +27,7 @@ AllResults <- rbind(BeatlesResults,booksResults,depthResults,DodecahedronResults
 
 AllResultsLaTeX <- tableLaTeX(AllResults)
 
-AllResultsLaTeX
+#AllResultsLaTeX
 
 
 #success rate 

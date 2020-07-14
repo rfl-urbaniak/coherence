@@ -10,23 +10,32 @@ CoherencesRow <- function (BN, narrationNodes, states,
                               states = states, statusLR,statusRL)[[3]]
   DM <- DouvenMeijsCoherenceForBNs(BN,narrationNodes,states)[[3]]
   OL <- OlssonCoherenceForBNs(BN,narrationNodes,states)[[3]]
-  RA <- RAcoherenceForBNs(BN,narrationNodes,states)[[3]]
-  RO <- RocheCoherenceForBNs(BN,narrationNodes,states)[[3]]
+  OLg <- OlssonGeneralizedCoherence(BN, narrationNodes, states)[[1]]
   SH <- ShogenjiCoherenceForBNs(BN,narrationNodes,states)[[3]]
+  SHg <- ShogenjiGeneralizedCoherence(BN, narrationNodes, states)[[1]]
+  RO <- RocheCoherenceForBNs(BN,narrationNodes,states)[[3]]
+  RA <- RAcoherenceForBNs(BN,narrationNodes,states)[[3]]
+  
   StructuredCon <- structuredCoherence(BN,narrationNodes,states)$`structured Coherence Con`
   StructuredAnte <- structuredCoherence(BN,narrationNodes,states)$`structured Coherence Ante`
-  
-  
-  row <- data.frame( "DouvenMeijs" = DM,
-                     Fitelson = FI,
-             Olsson = OL,
-             RA = RA,
+  StructuredConS <- structuredCoherence(BN,narrationNodes,states)$`structured Coherence Con scaled`
+  StructuredAnteS <- structuredCoherence(BN,narrationNodes,states)$`structured Coherence Ante scaled`
+    
+  row <- data.frame( 
+             Ol = OL,
+             OlG = OLg,
+             Sh = SH,
+             ShG = SHg,
+             Fit = FI,
+             "DouvenMeijs" = DM,
              Roche = RO,
-             Shogenji = SH,
-             StructuredCon = StructuredCon,
-             StructuredAnte = StructuredAnte)
+             RA = RA,
+             StrCon = StructuredCon,
+             StrAnte = StructuredAnte,
+             StrConS = StructuredConS,
+             StrAnteS = StructuredAnteS)
 
-  rownames(row) <- paste(paste(exampleName, ":", sep = ""), paste(narrationNodes, sep = "", collapse=""), paste(states, sep = "", collapse=""), sep = " ")
+rownames(row) <- paste(paste(exampleName, ":", sep = ""), paste(narrationNodes, sep = "", collapse=""), paste(states, sep = "", collapse=""), sep = " ")
 
 return(row)
 }
@@ -35,36 +44,8 @@ return(row)
 
 #___________test on penguins
 
+#test <- CoherencesRow(BN = BirdBN, narrationNodes = c("B","G","P"), states = c("1", "1", "1"), exampleName = "Penguins")
 
-#BirdStatusLR <- c("Ind","Ent","Ent","Ent","Ent","Ent")
-#BirdStatusRL <- c("Ind","Ind","Ind","Ind","Ind","Ind")
-
-#R1 <- CoherencesRow(BN = BirdBN, narrationNodes = c("B","G","P"),
-#             states = c("1", "1", "1"), statusLR = BirdStatusLR,
-#            statusRL = BirdStatusRL, exampleName = "Penguins")
-#                states = c("1", "1", "1"), exampleName = "Penguins")
-
-
-#R1Ind
-#note R1Ind is different from R1!!
-
-
-#R2 <- CoherencesRow(BN = BirdBN, narrationNodes = c("B","G"),
- #             states = c("1", "1"),exampleName = "Penguins" )
-
-
-#BirdStatusLR <- c("Ent")
-#BirdStatusRL <- c("Ind")
-
-#R3Ind <- CoherencesRow(BN = BirdBN, narrationNodes = c("B","P"),
-#              states = c("1", "1"), exampleName = "Penguins")
-
-#R3 <- CoherencesRow(BN = BirdBN, narrationNodes = c("B", "P"),
-#                    states = c("1", "1"), statusLR = BirdStatusLR,
-#                    statusRL = BirdStatusRL, exampleName = "Penguins")
-
-
-#rbind(R1,R2,R3)
 
 
 
@@ -82,32 +63,6 @@ return(table)
 
 
 
-#gsub("[A-Z]", "1", scenariosList[[s]])
-# rows[[s]] <-  ifelse((statesList == gsub("[A-Z]", "1", scenariosList)),
-#                      CoherencesRow(BN,scenariosList[[s]], eval(parse(text = statesList[[s]])),  exampleName = exampleName),
-
-# onesFromScenarioList <- function(scenarioList){
-# str_split(string = gsub("[A-Z]", "1", scenariosList), pattern = ",")
-# }
-# 
-# 
-# scenariosList <-  list(c("B","G", "P"),c("B","G"),c("B","P"))
-# statesList <- onesFromScenarioList(scenariosList)
-# 
-# as.vector(str_split(statesList[[1]], pattern = ",")))
-
-#example of use
-# CoherencesTable(BirdBN, 
-#                 scenariosList =  list(c("B","G", "P"),c("B","G"),c("B","P")),
-#                 statesList = list(c("1","1", "1"),c("1","1"),c("1","1")),
-#                 exampleName = "Penguins")
-# 
-# 
-# CoherencesTable(BirdBN, 
-#                 scenariosList =  list(c("B","G", "P"),c("B","G"),c("B","P")),
-#                 statesList = list(c("1","1","0"),c("1","0"), c("0","1")),
-#                 exampleName = "Penguins")
-# 
 
 
 

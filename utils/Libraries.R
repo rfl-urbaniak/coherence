@@ -13,7 +13,6 @@ library(bnlearn)
 library(utils)
 library(useful)
 library(tidyverse)
-library(tidyverse)
 library(stringr)
 library(plot3D)
 
@@ -55,14 +54,16 @@ source("bns//Beatles.R")
 
 source("utils//CoherenceTables.R")
 
-
-
-source("calculations/PenguinsCoherence.R")
-source("calculations/DunnitCoherence.R")
-source("calculations/DodecahedronCoherence.R")
-source("calculations/RobbersCoherence.R")
-source("calculations/DepthCoherence.R")
-source("calculations/WitnessCoherence.R")
-source("calculations/BooksCoherence.R")
-source("calculations/JapaneseSwordsCoherence.R")
 source("calculations/BeatlesCoherence.R")
+source("calculations/BooksCoherence.R")
+source("calculations/DepthCoherence.R")
+source("calculations/DodecahedronCoherence.R")
+source("calculations/DunnitCoherence.R")
+source("calculations/JapaneseSwordsCoherence.R")
+source("calculations/PenguinsCoherence.R")
+source("calculations/RobbersCoherence.R")
+source("calculations/WitnessCoherence.R")
+
+
+source("calculations/AllCoherenceTables.R")
+

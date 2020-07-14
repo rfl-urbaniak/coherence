@@ -1,10 +1,4 @@
-#source("measures//Fitelson.R")
-#source("measures//RA.R")
-#source("measures//CoherenceMeasures2Var.R")
-#source("bns/Dunnit.R")
-
 #The intuition is that M, G, W, I should be less coherent than M, T, G, W, I 
-
 
 Dunnit <- c("M","G","W","I")
 DunnitTwin<- c("M","T","G","W","I")
@@ -18,24 +12,18 @@ DunnitTable <- CoherencesTable(DunnitBN,
 
 #DunnitTable
 
-
-
 #structuredCoherence(DunnitBN,Dunnit,rep("1",5))
-
 
 DunnitTableLaTeX <- tableLaTeX(DunnitTable)
 #DUnnitTableLaTeX
-
 
 DunnitLessTwin <- DunnitTable[1,] < DunnitTable[2,] 
 
 DunnitResults <- as.data.frame(DunnitLessTwin)
 
-
 rownames(DunnitResults) <- c("Dunnit: Dunnit$<$Twin")
 
 #DunnitResults
-
 
 DunnitResultsLaTeX <- tableLaTeX(DunnitTable)
 
