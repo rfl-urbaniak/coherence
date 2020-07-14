@@ -4,7 +4,6 @@ Dunnit <- c("M","G","W","I")
 DunnitTwin<- c("M","T","G","W","I")
 
 BN <- DunnitBN
-
 #graphviz.plot(BN)
 DunnitTable <- CoherencesTable(DunnitBN,
                               scenariosList = list(Dunnit,DunnitTwin),
@@ -12,12 +11,11 @@ DunnitTable <- CoherencesTable(DunnitBN,
                               exampleName = "Dunnit"
 )
 
-#DunnitTable
+DunnitTable
 
-#structuredCoherence(DunnitBN,Dunnit,rep("1",4))
+structuredCoherence(DunnitBN,Dunnit,rep("1",4))
 
-
-#structuredCoherence(DunnitBN,DunnitTwin,rep("1",5))
+structuredCoherence(DunnitBN,DunnitTwin,rep("1",5))
 
 
 DunnitTableLaTeX <- tableLaTeX(DunnitTable)
@@ -29,7 +27,7 @@ DunnitResults <- as.data.frame(DunnitLessTwin)
 
 rownames(DunnitResults) <- c("Dunnit: Dunnit$<$Twin")
 
-#DunnitResults
+DunnitResults
 
 DunnitResultsLaTeX <- tableLaTeX(DunnitTable)
 
