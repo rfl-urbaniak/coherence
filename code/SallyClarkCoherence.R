@@ -1,17 +1,17 @@
-#installation of packages, if needed
-install.packages("https://www.bnlearn.com/releases/bnlearn_latest.tar.gz", 
-                 repos = NULL, type = "source")
-install.packages("BiocManager")
-if (!requireNamespace("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-BiocManager::install()
-BiocManager::install(c("graph", "Rgraphviz"))
-BiocManager::install(c("graph", "RBGL", "Rgraphviz"))
-install.packages("https://www.bnlearn.com/releases/bnlearn_latest.tar.gz", 
-                 repos = NULL, type = "source")
-install.packages("gRbase", dependencies=TRUE); 
-install.packages("gRain", dependencies=TRUE); 
-install.packages("gRim", dependencies=TRUE)
+# #installation of packages, if needed
+# install.packages("https://www.bnlearn.com/releases/bnlearn_latest.tar.gz", 
+#                  repos = NULL, type = "source")
+# install.packages("BiocManager")
+# if (!requireNamespace("BiocManager", quietly = TRUE))
+#   install.packages("BiocManager")
+# BiocManager::install()
+# BiocManager::install(c("graph", "Rgraphviz"))
+# BiocManager::install(c("graph", "RBGL", "Rgraphviz"))
+# install.packages("https://www.bnlearn.com/releases/bnlearn_latest.tar.gz", 
+#                  repos = NULL, type = "source")
+# install.packages("gRbase", dependencies=TRUE); 
+# install.packages("gRain", dependencies=TRUE); 
+# install.packages("gRim", dependencies=TRUE)
 
 library(bnlearn)
 library(Rgraphviz)
@@ -49,7 +49,14 @@ Z <- function(posterior,prior){
 SallyClarkDAG <- model2network("[Abruising|Amurder][Adisease|Amurder][Bbruising|Bmurder][Bdisease|Bmurder][Amurder][Bmurder|Amurder]")
 
 #plot 
+png(file="../images/SC.png", 
+    units="in", 
+    width=6, 
+    height=6, 
+    pointsize = 1,
+    res=400)
 graphviz.plot(SallyClarkDAG)
+dev.off()
 
 
 #CPTs as used in Fenton & al.
@@ -77,7 +84,16 @@ SallyClarkCPT <- list(Amurder=AmurderProb,Adisease = AdiseaseProb,
 # join with the DAG to get a BN
 SallyClarkBN <- custom.fit(SallyClarkDAG,SallyClarkCPT)
 
+
+png(file="../images/SCBN.png", 
+    units="in", 
+    width=6, 
+    height=6, 
+    pointsize = 1,
+    res=400)
 graphviz.chart(SallyClarkBN,type="barprob", scale = c(0.7,1.3), main = "Priors in the Sally Clark case")
+dev.off()
+
 
 
 
@@ -129,12 +145,6 @@ ShogenjiCoherenceForBNs(SallyClarkBN,SCnodes,c("0","1"))
 
 #----------------------
 
-
-
-RocheCoherenceForBNs
-
-
-
 RocheCoherenceForBNs(SallyClarkBN,SCnodes,c("0","0"))
 RocheCoherenceForBNs(SallyClarkBN,SCnodes,c("1","1"))
 RocheCoherenceForBNs(SallyClarkBN,SCnodes,c("1","0"))
@@ -144,6 +154,35 @@ RocheCoherenceForBNs(SallyClarkBN,SCnodes,c("0","1"))
 
 
 
+
+
+#updating with evidence
+SCnodesEvidence <- c("Amurder","Bmurder", "Abruising", "Bbruising","Adisease","Bdisease")
+
+
+
+BN <- SallyClarkBN
+structuredNoSD(SallyClarkBN,SCnodesEvidence,c("0","0","1","1","0","0"))
+structuredNoSD(SallyClarkBN,SCnodesEvidence,c("0","0","1","1","1","0"))
+structuredNoSD(SallyClarkBN,SCnodesEvidence,c("0","0","1","1","1","1"))
+
+
+structuredNoSD(SallyClarkBN,SCnodesEvidence,c("1","1","1","1","1","0"))
+structuredNoSD(SallyClarkBN,SCnodesEvidence,c("1","1","1","1","1","1"))
+structuredNoSD(SallyClarkBN,SCnodesEvidence,c("1","1","1","1","0","0")) #nice!
+
+
+
+structuredNoSD(SallyClarkBN,SCnodesEvidence,c("1","0","1","1","1","0"))
+
+structuredNoSD(SallyClarkBN,SCnodesEvidence,c("0","1","1","1","1","0"))
+
+
+
+FitelsonCoherenceForBNs(SallyClarkBN,SCnodesEvidence,c("0","0","1","1","1","0"))
+FitelsonCoherenceForBNs(SallyClarkBN,SCnodes,c("1","1"))
+FitelsonCoherenceForBNs(SallyClarkBN,SCnodes,c("1","0"))
+FitelsonCoherenceForBNs(SallyClarkBN,SCnodes,c("0","1"))
 
 
 
