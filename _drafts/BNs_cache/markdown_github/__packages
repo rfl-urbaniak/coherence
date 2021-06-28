@@ -1,0 +1,13 @@
+base
+bnlearn
+BiocGenerics
+graph
+Rgraphviz
+knitr
+kableExtra
+gRbase
+DiagrammeR
+DiagrammeRsvg
+magrittr
+rsvg
+gRain
