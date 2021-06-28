@@ -1,9 +1,0 @@
-
-
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
-AllCoherencesLaTeX
-AllResultsLaTeX
-```
-
-
-
