@@ -1,3 +1,4 @@
+#installation of packages, if needed
 install.packages("https://www.bnlearn.com/releases/bnlearn_latest.tar.gz", 
                  repos = NULL, type = "source")
 install.packages("BiocManager")
@@ -8,16 +9,18 @@ BiocManager::install(c("graph", "Rgraphviz"))
 BiocManager::install(c("graph", "RBGL", "Rgraphviz"))
 install.packages("https://www.bnlearn.com/releases/bnlearn_latest.tar.gz", 
                  repos = NULL, type = "source")
-
-
 install.packages("gRbase", dependencies=TRUE); 
 install.packages("gRain", dependencies=TRUE); 
 install.packages("gRim", dependencies=TRUE)
+
 library(bnlearn)
 library(Rgraphviz)
 library(gRain)
 
+#check you have utils and measures as sufolders of your working directory
 getwd()
+
+#load scripts
 source("utils//CombinationsBN.R")
 source("utils//CptCreate.R")
 source("utils//LogicAndBNs.R")
@@ -32,40 +35,44 @@ source("measures//generalizedShogenji.R")
 source("measures//Shogenji.R")
 source("measures//Roche.R")
 #source("measures//RA.R")
+
+#define Z function
 Z <- function(posterior,prior){
   d <- posterior - prior
   ifelse(prior == posterior, 0, ifelse(posterior > prior, d/(1-prior), d/prior))
 }
 
-source("cptCreate.R")
+
 
 
 #define the structure of the Sally Clark BN
-SallyClarkDAG <- model2network("[Abruising|Acause][Adisease|Acause][Bbruising|Bcause][Bdisease|Bcause][Acause][Bcause|Acause][NoMurdered|Acause:Bcause][Guilty|NoMurdered]")
+SallyClarkDAG <- model2network("[Abruising|Amurder][Adisease|Amurder][Bbruising|Bmurder][Bdisease|Bmurder][Amurder][Bmurder|Amurder]")
 
 #plot 
 graphviz.plot(SallyClarkDAG)
 
 
 #CPTs as used in Fenton & al.
-AcauseProb <-prior.CPT("Acause","SIDS","Murder",0.921659)
-AbruisingProb <- single.CPT("Abruising","Acause","Yes","No","SIDS","Murder",0.01,0.05)
-AdiseaseProb <- single.CPT("Adisease","Acause","Yes","No","SIDS","Murder",0.05,0.001)
-BbruisingProb <- single.CPT("Bbruising","Bcause","Yes","No","SIDS","Murder",0.01,0.05)
-BdiseaseProb <- single.CPT("Bdisease","Bcause","Yes","No","SIDS","Murder",0.05,0.001)
-BcauseProb <- single.CPT("Bcause","Acause","SIDS","Murder","SIDS","Murder",0.9993604,1-0.9998538)
+AmurderProb <-prior.CPT("Amurder","0","1",0.921659)
+AbruisingProb <- single.CPT("Abruising","Amurder","1","0","0","1",0.01,0.05)
+AdiseaseProb <- single.CPT("Adisease","Amurder","1","0","0","1",0.05,0.001)
+BbruisingProb <- single.CPT("Bbruising","Bmurder","1","0","0","1",0.01,0.05)
+BdiseaseProb <- single.CPT("Bdisease","Bmurder","1","0","0","1",0.05,0.001)
+BmurderProb <- single.CPT("Bmurder","Amurder","0","1","0","1",0.9993604,1-0.9998538)
+
+
 
 #E goes first; order: last variable through levels, second last, then first
-NoMurderedProb <- array(c(0, 0, 1, 0, 1, 0, 0,1,0,1,0,0), dim = c(3, 2, 2),dimnames = list(NoMurdered = c("both","one","none"),Bcause = c("SIDS","Murder"), Acause = c("SIDS","Murder")))
+#NoMurderedProb <- array(c(0, 0, 1, 0, 1, 0, 0,1,0,1,0,0), dim = c(3, 2, 2),dimnames = list(NoMurdered = c("both","one","none"),Bmurder = c("SIDS","Murder"), Amurder = c("SIDS","Murder")))
 
 #this one is definitional
-GuiltyProb <-  array(c( 1,0, 1,0, 0,1), dim = c(2,3),dimnames = list(Guilty = c("Yes","No"), NoMurdered = c("both","one","none")))
+#GuiltyProb <-  array(c( 1,0, 1,0, 0,1), dim = c(2,3),dimnames = list(Guilty = c("Yes","No"), NoMurdered = c("both","one","none")))
 
 # Put CPTs together
-SallyClarkCPT <- list(Acause=AcauseProb,Adisease = AdiseaseProb,
-                      Bcause = BcauseProb,Bdisease=BdiseaseProb,
-                      Abruising = AbruisingProb,Bbruising = BbruisingProb,
-                      NoMurdered = NoMurderedProb,Guilty=GuiltyProb)
+SallyClarkCPT <- list(Amurder=AmurderProb,Adisease = AdiseaseProb,
+                      Bmurder = BmurderProb,Bdisease=BdiseaseProb,
+                      Abruising = AbruisingProb,Bbruising = BbruisingProb)
+                      #NoMurdered = NoMurderedProb,Guilty=GuiltyProb)
 
 # join with the DAG to get a BN
 SallyClarkBN <- custom.fit(SallyClarkDAG,SallyClarkCPT)
@@ -74,17 +81,79 @@ graphviz.chart(SallyClarkBN,type="barprob", scale = c(0.7,1.3), main = "Priors i
 
 
 
-SCnodes <- c("Acause","Bcause")
+SCnodes <- c("Amurder","Bmurder")
 
-SCstates <- list(c("SIDS","SIDS"), c("Murder", "Murder"), c("SIDS", "Murder"), c("Murder", "SIDS"))
-
-SCtable <- CoherencesTable(SallyClarkBN, scenariosList = SCnodes,
-          statesList = c("SIDS","SIDS"), exampleName = "Sally Clark")
+SCstates <- list(c("0","0"), c("1", "1"), c("0", "1"), c("1", "0"))
 
 
+BN <- SallyClarkBN
+structuredNoSD(SallyClarkBN,SCnodes,c("0","0"))
+
+structuredNoSD(SallyClarkBN,SCnodes,c("1","1"))
+
+structuredNoSD(SallyClarkBN,SCnodes,c("0","1"))
+
+structuredNoSD(SallyClarkBN,SCnodes,c("1","0"))
+
+
+#--------------------
+
+FitelsonCoherenceForBNs(SallyClarkBN,SCnodes,c("0","0"))
+FitelsonCoherenceForBNs(SallyClarkBN,SCnodes,c("1","1"))
+FitelsonCoherenceForBNs(SallyClarkBN,SCnodes,c("1","0"))
+FitelsonCoherenceForBNs(SallyClarkBN,SCnodes,c("0","1"))
+
+#--------------------
+
+DouvenMeijsCoherenceForBNs(SallyClarkBN,SCnodes,c("0","0"))
+DouvenMeijsCoherenceForBNs(SallyClarkBN,SCnodes,c("1","1"))
+DouvenMeijsCoherenceForBNs(SallyClarkBN,SCnodes,c("1","0"))
+DouvenMeijsCoherenceForBNs(SallyClarkBN,SCnodes,c("0","1"))
+
+
+#---------------------
+
+OlssonCoherenceForBNs(SallyClarkBN,SCnodes,c("0","0"))
+OlssonCoherenceForBNs(SallyClarkBN,SCnodes,c("1","1"))
+OlssonCoherenceForBNs(SallyClarkBN,SCnodes,c("1","0"))
+OlssonCoherenceForBNs(SallyClarkBN,SCnodes,c("0","1"))
+
+
+#---------------------
+
+ShogenjiCoherenceForBNs(SallyClarkBN,SCnodes,c("0","0"))
+ShogenjiCoherenceForBNs(SallyClarkBN,SCnodes,c("1","1"))
+ShogenjiCoherenceForBNs(SallyClarkBN,SCnodes,c("1","0"))
+ShogenjiCoherenceForBNs(SallyClarkBN,SCnodes,c("0","1"))
+
+
+#----------------------
 
 
 
-penguinsTable <- rbind(penguinsTableBGP,penguinsTableBG,penguinsTableBP)
+RocheCoherenceForBNs
+
+
+
+RocheCoherenceForBNs(SallyClarkBN,SCnodes,c("0","0"))
+RocheCoherenceForBNs(SallyClarkBN,SCnodes,c("1","1"))
+RocheCoherenceForBNs(SallyClarkBN,SCnodes,c("1","0"))
+RocheCoherenceForBNs(SallyClarkBN,SCnodes,c("0","1"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

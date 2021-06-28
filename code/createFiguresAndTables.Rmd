@@ -1,0 +1,1093 @@
+---
+title: "Measuring coherence with Bayesian Networks"
+# author: 
+#   - "\\normalsize Rafal Urbaniak ([LoPSE research group](http://lopsegdansk.blogspot.com/p/lopse-team.html), University of Gdansk)"
+#   - "\\normalsize Alicja Kowalewska  (Carnegie Mellon University \\& [LoPSE research group](http://lopsegdansk.blogspot.com/p/lopse-team.html))" 
+output:
+  pdf_document:
+    number_sections: true
+    df_print: kable 
+    keep_tex: true
+    toc_depth: 3
+    includes:
+      in_header:
+        - Rafal_latex4.sty
+fontsize: 10pt
+bibliography: munich3.bib
+csl: apa-single-spaced.csl  
+documentclass: scrartcl
+linkcolor: blue 
+filecolor: blue
+citecolor: blue
+urlcolor: blue
+toccolor: blue
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+require("knitr")
+opts_knit$set(root.dir = "../../")
+
+```
+
+
+```{r setup2, include=FALSE, cache = TRUE}
+library(tidyverse)
+library(ggplot2)
+library(gridExtra)
+library(bnlearn)
+library(knitr)
+library(kableExtra)
+library(gRain)
+library(reshape2)
+library(tidyverse)
+library(plyr)
+library(rje)
+library(bnlearn)
+library(utils)
+library(latex2exp)
+library(useful)
+library(tidyverse)
+library(stringr)
+library(plot3D)
+library(tinytex)
+
+
+source("utils//CombinationsBN.R")
+source("utils//CptCreate.R")
+source("utils//LogicAndBNs.R")
+source("utils//kableCPTs.R")
+source("measures//structuredCoherence.R")
+source("utils//CoherenceTables.R")
+source("measures//Fitelson.R")
+source("measures//DouvenMeijs.R")
+source("measures//generalizedOlsson.R")
+source("measures//Olsson.R")
+source("measures//generalizedShogenji.R")
+source("measures//Shogenji.R")
+source("measures//Roche.R")
+source("measures//RA.R")
+Z <- function(posterior,prior){
+  d <- posterior - prior
+  ifelse(prior == posterior, 0, ifelse(posterior > prior, d/(1-prior), d/prior))
+}
+```
+
+
+
+
+
+
+
+\section{Handling counterexamples}
+
+
+
+Using the notation and desiderata already introduced, let's go over BNs for the counterexamples involved, and  use the counterexamples to evaluate the performace of the new measure.
+
+
+\subsection{Penguins}
+
+
+We used the distribution used in the original formulation to build three BNs corresponding to the narrations at play (Fig. \ref{fig:BGP}-\ref{fig:BP}).\footnote{Not without concerns. There are around 18 000 species of birds, and around 60 of them are flightless. We  couldn't find information about counts, but it seems the probability of being a penguin if one is grounded is overestimated by philosophers.  Also, there are many things that are not grounded but are not birds, mostly insects, and there's plenty of them. We did spend some time coming up with plausible ranges of probabilities to correct for such factors, and none of them actually makes a difference to the main point. So, for the sake of simplicity, we leave the original unrealistic distribution in our discussion.}
+
+
+
+
+
+
+\begin{figure}
+\hspace{2cm}\scalebox{0.8}{\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "100%", dpi = 300}
+source("bns//Penguins.R")
+graphviz.plot(BirdDAGbgp)
+```
+\end{subfigure}} \hfill
+\hspace{-3cm}\begin{subfigure}[!ht]{0.7\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+source("utils//kableCPTs.R")
+CPkable0("BirdBNbgp","B")
+CPkable1("BirdBNbgp","P")
+CPkable2("BirdBNbgp","G")
+```
+\end{subfigure}
+\caption{Bayesian network for the \textsf{BGP} scenario.}
+\label{fig:BGP}
+\end{figure}
+
+
+
+
+\begin{figure}
+\hspace{2cm}\scalebox{0.6}{
+\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%",  dpi = 300, fig.height=2.5, fig.width=2}
+graphviz.plot(BirdDAGbg)
+```
+\end{subfigure} }
+\hfill
+\hspace{-3cm}\begin{subfigure}[!ht]{0.7\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("BirdBNbg","B")
+CPkable1("BirdBNbg","G")
+```
+\end{subfigure}
+\label{fig-BG}
+\caption{Bayesian network for the \textsf{BG} scenario.}
+\end{figure}
+
+
+
+
+
+\begin{figure}
+\scalebox{0.6}{
+\hspace{4cm}\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", dpi = 300, fig.width=2, fig.height= 2.5}
+graphviz.plot(BirdDAGbp)
+```
+\end{subfigure}} \hfill
+\hspace{-3cm}\begin{subfigure}[!ht]{0.7\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("BirdBNbp","B")
+CPkable1("BirdBNbp","P")
+```
+\end{subfigure}
+\caption{Bayesian network for the \textsf{BP} scenario.}
+\label{fig:BP}
+\end{figure}
+
+
+
+Now, let's calculate the coherences and see if the desiderata are satisfied (the abbreviations we already used are as before, and \textsf{S} stands for \emph{Structured}, our coherence measure):
+
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", warning = FALSE, message = FALSE}
+library(bnlearn)
+library(gRain)
+library(rje)
+library(useful)
+library(kableExtra)
+
+
+source("bns//Penguins.R")
+source("utils//CombinationsBN.R")
+
+BGP <- c("B","G","P")
+BG <- c("B","G")
+BP <- c("B","P")
+
+penguinsTableBGP <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP), statesList   = list(c("1","1","1")),exampleName = "Penguins")
+
+
+penguinsTableBG <- CoherencesTable(BirdBNbg, scenariosList = list(BG), statesList   = list(c("1","1")),exampleName = "Penguins")
+
+penguinsTableBP <- CoherencesTable(BirdBNbp, scenariosList = list(BP), statesList   = list(c("1","1")),exampleName = "Penguins")
+
+penguinsTable <- rbind(penguinsTableBGP,penguinsTableBG,penguinsTableBP)
+
+round(penguinsTable,3) %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped", "scale_down")) 
+
+BGlessBGP <- penguinsTable[1,] > penguinsTable[2,] 
+#BPatleastBGP <- round(penguinsTable[3,],4) >= round(penguinsTable[1,],4)
+BPapproxBGP <- abs(penguinsTable[3,] - penguinsTable[1,]) <= 0.05
+
+penguinsResults <- as.data.frame(rbind(BGlessBGP,BPapproxBGP))
+rownames(penguinsResults) <- c("Penguins: BG$<$BGP","Penguins: BP$\\approx$ BGP")
+
+penguinsResults %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped", "scale_down")) 
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Dunnit
+
+Here, we deal with two separate BNs. One, before the \textsf{Twin} node is even considered (Fig. \ref{fig:twinless}), and one with the \textsf{Twin} node (Fig. \ref{fig:twin}).  
+
+
+
+
+
+
+The CPTs for the no-twin version are in agreement with those in the ones in the Twin case. Since the original example didn't specify exact probabilities, we came up with some plausible values.
+
+
+
+
+
+\begin{figure}
+
+\scalebox{1.7}{
+\begin{subfigure}[!ht]{0.3\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+source("bns//Dunnit.R")
+graphviz.plot(DunnitNoTwinDAG, layout = "twopi")
+```
+\end{subfigure}} 
+\hspace{-0.8cm}\begin{subfigure}[!ht]{0.2\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("DunnitNoTwinBN","M")
+CPkable1("DunnitNoTwinBN","G")
+```
+\end{subfigure}  
+ \hspace{0.5cm}\begin{subfigure}[!ht]{0.2\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+
+CPkable1("DunnitNoTwinBN","I")
+CPkable1("DunnitNoTwinBN","W")
+```
+\end{subfigure}
+\caption{Twin-less BN for the \textsf{Dunnit} problem.}
+\label{fig:twinless}
+\end{figure}
+
+
+
+
+
+
+
+\begin{figure}
+\scalebox{1.7}{
+\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+graphviz.plot(DunnitDAG, layout = "twopi")
+```
+\end{subfigure}} 
+\hspace{-1cm}\begin{subfigure}[!ht]{0.3\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable2("DunnitBN","W")
+```
+\end{subfigure}
+\caption{BN for the \textsf{Dunnit} problem. The key difference for the twin version lies in the construction of the CPT for \textsf{W}. The table gives conditional probabilities for \textsf{W} given various joint states of \textsf{Tw} and \textsf{G}.}
+\label{fig:twin}
+\end{figure}
+
+\newpage
+
+Coherence calculations result in the following:
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+#The intuition is that M, G, W, I should be less coherent than M, T, G, W, I 
+# 
+
+Dunnit <- c("M","G","W","I")
+DunnitTwin<- c("M","Tw","G","W","I")
+# #
+
+DunnitNoTwinTable <- CoherencesTable(DunnitNoTwinBN,
+  scenariosList = list(Dunnit),
+  statesList   = list(c("1","1","1","1")),
+  exampleName = "Dunnit"
+)
+  
+  
+
+DunnitTwinTable <- CoherencesTable(DunnitBN,
+  scenariosList = list(DunnitTwin),
+  statesList   = list(c("1","1","1","1","1")),
+  exampleName = "Dunnit"
+)
+
+DunnitTableSeparate <- rbind(DunnitNoTwinTable,DunnitTwinTable)
+
+DunnitTableSeparate %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+DunnitLessTwin <- DunnitTableSeparate[1,] < DunnitTableSeparate[2,] 
+DunnitResultsSeparate <- as.data.frame(DunnitLessTwin)
+rownames(DunnitResultsSeparate) <- c("Dunnit: Dunnit$<$Twin")
+
+DunnitResultsSeparate %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+
+#load("calculations/RdataObjects/DunnitTableSeparate.Rda")
+#load("calculations/RdataObjects/DunnitResultsSeparate.Rda")
+
+
+#colnames(DunnitTableSeparate) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
+#colnames(DunnitResultsSeparate) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
+
+
+#round(DunnitTableSeparate,3) %>%  kable(format = "latex",booktabs=T,
+#                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+#DunnitResultsSeparate %>%  kable(format = "latex",booktabs=T,
+#                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+```
+
+
+
+
+
+
+
+
+
+
+##  The Beatles
+
+
+
+\begin{figure}
+\scalebox{1.6}{
+\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+source("bns//Beatles.R")
+graphviz.plot(BeatlesDAG)
+
+```
+\end{subfigure}} \hfill
+\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("BeatlesBN","G")
+#CPkable1("BirdBNbgp","P")
+#CPkable2("BirdBNbgp","G")
+```
+\end{subfigure}
+\caption{Bayesian network for the \textsf{Beatles} scenario.}
+\end{figure}
+
+We assume the prior probability of each individual band member being dead to 0.5 (as in the above table), and the CPT for \textsf{D} is many-dimensional and so difficult to present concisely, but the method is straigtforward: probability 1 is given to \textsf{D} in all combinations of the parents in which exactly one is true, and otherwise \textsf{D} gets conditional probability 0. Coherence calculations give the following results:
+
+
+
+
+
+
+
+\todo{check new minima and neutral points}
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+B <- c("J","P","G","R","D")
+BN <- BeatlesBN
+
+BeatlesTable3 <- CoherencesTable(BeatlesBN,
+                                        scenariosList = list(B),
+                                        statesList   = list(c("1","1","1","1","1")),
+                                        exampleName = "Beatles"
+)
+
+BeatlesTable3 %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+minima <-  c(0, 0 ,0, 0, -1, -1, 0, -1, -1, -1, -1, -1, -1, -1)
+neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0)
+
+BeatlesMinimal <- BeatlesTable3[1,] == minima
+BeatlesBelowNeutral <- BeatlesTable3[1,] < neutralPoints 
+# # BeatlesIncoherent
+# # BeatlesMinimal
+# # 
+# # # 
+# # # 
+BeatlesResults3 <- as.data.frame(rbind(BeatlesBelowNeutral, BeatlesMinimal))
+# # # 
+# # # 
+ rownames(BeatlesResults3) <- c("Beatles: below neutral", "Beatles: minimal")
+# # 
+BeatlesResults3 %>%  kable(format = "latex",booktabs=T,
+                       linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+# load("calculations/RdataObjects/BeatlesTable3.Rda")
+# load("calculations/RdataObjects/BeatlesResults3.Rda")
+# 
+# 
+# colnames(BeatlesTable3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
+# colnames(BeatlesResults3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
+# 
+# 
+# round(BeatlesTable3,3) %>%  kable(format = "latex",booktabs=T,
+#                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+# 
+# BeatlesResults3 %>%  kable(format = "latex",booktabs=T,
+#                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+```
+
+
+
+
+
+
+
+
+## Alicja and books
+
+
+
+The BN is fairly straightforward (Fig. \ref{fig:books}) and the results are as follows:
+
+
+
+\begin{figure}
+
+\hspace{20mm}
+\scalebox{0.5}{\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", dpi = 300,fig.align="center"}
+source("bns//Books.R")
+graphviz.plot(BooksDAG)
+
+```
+\end{subfigure}} \hfill
+\begin{subfigure}[!ht]{0.6\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("BooksBN","A")
+CPkable1("BooksBN","R")
+#CPkable2("BirdBNbgp","G")
+```
+\end{subfigure}
+\caption{Bayesian network for the \textsf{Books} problem.}
+\label{fig:books}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+AR <- c("A","R")
+BN <- BooksBN
+booksTable3 <- CoherencesTable(BooksBN,
+                                 scenariosList = list(AR,AR,AR,AR),
+                                 statesList   = list(c("1","1"),c("1","0"),c("0","1"),c("0","0")),
+                                 exampleName = "Books"
+ )
+
+booksTable3%>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+ARgreaterAnR2 <- booksTable3[1,] > booksTable3[2,]
+ARgreaternAR2 <- booksTable3[1,] > booksTable3[3,]
+nAnRgreaterAnR2 <- booksTable3[4,] > booksTable3[2,]
+nAnRgreaternAR2 <- booksTable3[4,] > booksTable3[3,]
+#nAnRgreaternAR
+booksResults3 <- as.data.frame(rbind(ARgreaterAnR2,ARgreaternAR2,nAnRgreaterAnR2,nAnRgreaternAR2))
+# #
+# #
+# #
+rownames(booksResults3) <- c("Books: AR$>$A$\\neg$R",
+                             "Books: AR$>\\neg$AR",
+                             "Books: $\\neg$A$\\neg$R$>$A$\\neg$R",
+                             "Books: $\\neg$A$\\neg$R$>\\neg$AR")
+
+booksResults3 %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down")) 
+
+
+#load("calculations/RdataObjects/booksTable3.Rda")
+#load("calculations/RdataObjects/booksResults3.Rda")
+
+
+#colnames(booksTable3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
+#colnames(booksResults3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
+
+#round(booksTable3,3) %>%  kable(format = "latex",booktabs=T,
+#                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+#booksResults3 %>%  kable(format = "latex",booktabs=T,
+#                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+```
+
+
+
+
+# Japanese swords
+
+
+
+
+## Japanese nodes with two nodes
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("bns//JapaneseSwords.R")
+
+J <- c("J","O")
+
+BN <- Jap1BN
+JapaneseSwordsTableA <- CoherencesTable(Jap1BN,
+                                  scenariosList = list(J),
+                                  statesList   = list(c("1","1")),
+                                 exampleName = "Japanese Swords 1"
+ )
+
+BN <- Jap2BN
+JapaneseSwordsTableB <- CoherencesTable(Jap2BN,
+                                         scenariosList = list(J),
+                                         statesList   = list(c("1","1")),
+                                         exampleName = "Japanese Swords 2"
+ )
+
+BN <- Jap3BN
+  JapaneseSwordsTableC <- CoherencesTable(Jap3BN,
+                                         scenariosList = list(J),
+                                         statesList   = list(c("1","1")),
+                                         exampleName = "Japanese Swords 3"
+ )
+JapaneseSwordsSeparateTable <- rbind(JapaneseSwordsTableA,JapaneseSwordsTableB,JapaneseSwordsTableC)
+
+JapaneseSwordsSeparateTable %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+ JO2greaterJO1 <- JapaneseSwordsSeparateTable[2,] > JapaneseSwordsSeparateTable[1,] 
+ JO2greaterJO3 <- JapaneseSwordsSeparateTable[2,] > JapaneseSwordsSeparateTable[3,] 
+ JapaneseSwordsSeparateResults <- as.data.frame(rbind(JO2greaterJO1,JO2greaterJO3))
+ rownames(JapaneseSwordsSeparateResults) <- c("Swords: JO2$>$JO1","Swords: JO2$>$JO3")
+
+
+JapaneseSwordsSeparateResults %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+```
+
+
+
+## Japanese swords with three nodes
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("bns//JapaneseSwords.R")
+source("utils//CoherenceTables.R")
+J <- c("J","O")
+
+  BN <- japThreeBN1
+  JapaneseSwordsTableThreeA <- CoherencesTable(japThreeBN1,
+                                  scenariosList = list(J),
+                                  statesList   = list(c("1","1")),
+                                 exampleName = "Japanese Swords 1"
+ )
+    BN <- japThreeBN2
+ JapaneseSwordsTableThreeB <- CoherencesTable(japThreeBN2,
+                                         scenariosList = list(J),
+                                         statesList   = list(c("1","1")),
+                                         exampleName = "Japanese Swords 2"
+ )
+# #
+   BN <- japThreeBN3
+  JapaneseSwordsTableThreeC <- CoherencesTable(japThreeBN3,
+                                         scenariosList = list(J),
+                                         statesList   = list(c("1","1")),
+                                         exampleName = "Japanese Swords 3"
+ )
+
+JapaneseSwordsSeparateThreeTable <- rbind(JapaneseSwordsTableThreeA,JapaneseSwordsTableThreeB,JapaneseSwordsTableThreeC)
+# #  #
+
+JapaneseSwordsSeparateThreeTable %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+# Table
+JO2greaterThreeJO1 <- JapaneseSwordsSeparateThreeTable[2,] > JapaneseSwordsSeparateThreeTable[1,] 
+
+JO2greaterThreeJO3 <- JapaneseSwordsSeparateThreeTable[2,] > JapaneseSwordsSeparateThreeTable[3,] 
+
+JapaneseSwordsSeparateThreeResults <- as.data.frame(rbind(JO2greaterThreeJO1,JO2greaterThreeJO3))
+
+rownames(JapaneseSwordsSeparateThreeResults) <- c("Swords: JO2$>$JO1","Swords: JO2$>$JO3")
+ 
+JapaneseSwordsSeparateThreeResults  %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+```
+
+
+
+
+
+# Robbers
+
+## Two nodes, arrow from P to R
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("bns//Robbers.R")
+
+
+robbersNarrTable <- CoherencesTable(robbersNarrBN, 
+                                  scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
+                                 statesList   = list(c("1","1"),c("1","0"),c("0","1")),
+                                 exampleName = "Robbers"
+)
+
+
+robbersNarrTable  %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 0, 0, 0, 0)
+PRgreaterPnR <- robbersNarrTable[1,] > robbersNarrTable[2,] 
+PRgreaterNeutral <- robbersNarrTable[1,] > neutralPoints
+robbersNarrResults <- as.data.frame(rbind(PRgreaterPnR,PRgreaterNeutral))
+rownames(robbersNarrResults) <- c("Robbers: PR$>$P$\\neg$R","Robbers: PR$>$neutral")
+robbersNarrResults  %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+```
+
+
+
+## Three nodes
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+BN <- robbersBN
+robbersTable3 <- CoherencesTable(robbersBN,
+        scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
+        statesList   = list(c("1","1"),c("1","0"),c("0","1")),
+        exampleName = "Robbers"
+)
+
+robbersTable3 %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 0, 0, 0, 0)
+PRgreaterPnR <- robbersTable3[1,] > robbersTable3[2,] 
+PRgreaterNeutral <- robbersTable3[1,] > neutralPoints
+robbersResults3 <- as.data.frame(rbind(PRgreaterPnR,PRgreaterNeutral)) 
+
+rownames(robbersResults3) <- c("Robbers: PR$>$P$\\neg$R","Robbers: PR$>$neutral")
+
+robbersResults3  %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+```
+
+
+
+# Depth
+
+No change really:
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("bns//Depth.R")
+X1 <- c("T123","T124","T134")
+X2 <- c("T123","T145","T167")
+# # #
+BN <- DepthBN
+
+depthTableNarrX1 <- CoherencesTable(DX1BN,
+                               scenariosList = list(X1),
+                               statesList   = list(c("1","1","1")),
+                               exampleName = "Depth"
+)
+
+
+depthTableNarrX2 <- CoherencesTable(DX2BN,
+                                        scenariosList = list(X2),
+                                        statesList   = list(c("1","1","1")),
+                                        exampleName = "Depth"
+)
+
+
+depthTableNarr <- rbind(depthTableNarrX1,depthTableNarrX2)
+
+
+
+
+depthTableNarr%>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+X1greaterX2<- depthTableNarr[1,] > depthTableNarr[2,]
+
+depthResultsNarr <- as.data.frame(rbind(X1greaterX2))
+rownames(depthResultsNarr) <- c("Depth: X$_1>$X$_2$")
+
+depthResultsNarr %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+```
+
+
+
+Now for the restricted BN, witness perspective:
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+witnessA1 <- CoherencesTable(T123BN,
+                                 scenariosList = list(c("T123","T124")),
+                                 statesList   = list(c("1","1")),
+                                 exampleName = "WitnessA"
+)
+
+
+witnessB1 <- CoherencesTable(T123BN2,
+                             scenariosList = list(c("T123","T145")),
+                             statesList   = list(c("1","1")),
+                             exampleName = "WitnessB"
+)
+
+
+depthPerspectiveTable <- rbind(witnessA1,witnessB1)
+
+
+rownames(depthPerspectiveTable) <- c("DepthA: T123T124 11", "DepthB: T123T145 11")
+
+
+depthPerspectiveTable  %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+X1greaterX2<- depthPerspectiveTable[1,] > depthPerspectiveTable[2,] 
+depthPerspectiveResults <- as.data.frame(rbind(X1greaterX2))
+rownames(depthPerspectiveResults) <- c("Depth: X$_1>$X$_2$")
+depthPerspectiveResults %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+```
+
+
+
+# Dice
+
+## With two nodes
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+Dod2DAG <- model2network("[T][TF|T]")
+
+
+
+#graphviz.plot(Dod2DAG)
+
+
+TprobReg2 <- array(c(1/6,5/6), dim = 2, dimnames = list(T =  c("1","0")))
+
+
+TFprobReg2 <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/5) 
+
+
+
+TprobDod2 <- array(c(1/12,11/12), dim = 2, dimnames = list(T =  c("1","0")))
+
+TFprobDod2 <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/11) 
+
+
+Dod2RegCPT <- list(T=TprobReg2,TF=TFprobReg2)
+
+Dod2DodCPT <- list(T=TprobDod2,TF=TFprobDod2)
+
+
+
+Dod2RegBN <-  custom.fit(Dod2DAG,Dod2RegCPT)
+Dod2DodBN <-  custom.fit(Dod2DAG,Dod2DodCPT)
+
+RegularTableTwo <- CoherencesTable(Dod2RegBN,
+                    scenariosList = list(c("T","TF")),
+                    statesList   = list(c("1","1")),
+                    exampleName = "Regular"
+)
+
+
+DodecahedronTableTwo <- CoherencesTable(Dod2DodBN,
+                scenariosList = list(c("T","TF")),
+                statesList   = list(c("1","1")),
+                exampleName = "Dodecahedron"
+)
+
+
+
+DiceTableTwo <- rbind(RegularTableTwo,DodecahedronTableTwo)
+
+DiceTableTwo %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+RegularSameDod <- DiceTableTwo[1,] == DiceTableTwo[2,] 
+dodecahedronResults <- as.data.frame(RegularSameDod)
+rownames(dodecahedronResults) <- c("Dodecahedron:  Regular $=$  Dodecahedron")
+dodecahedronResults %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+```
+
+
+
+
+
+## Without updating on the content
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("bns//Dodecahedron.R")
+source("measures//structuredCoherence.R")
+source("utils//CoherenceTables.R")
+DodDAG <- model2network("[O][T|O][TF|O]")
+#graphviz.plot(DodDAG)
+
+#Outcome 
+Oprob <- array(rep(1/6,6), dim = 6, dimnames = list(O =  1:6))
+
+#The result is a Two
+Tprob <- array(c(0,1,1,0,0,1,
+             0,1,0,1,0,1), dim = c(2,6),
+                  dimnames = list(T = c("1","0"), O = 1:6))
+
+
+#The result is either a Two or a Four
+TFprob <- array(c(0,1,1,0,0,1,
+             1,0,0,1,0,1), dim = c(2,6),
+           dimnames = list(TF = c("1","0"), O = 1:6))
+
+
+RegularCPT <- list(O=Oprob,T=Tprob,TF=TFprob)
+RegularBN <- custom.fit(DodDAG,RegularCPT)
+
+
+#structuredNoSD(RegularBN,c("O","T","TF"),c("2","1","1"))
+
+
+DOprob <- array(rep(1/12,12), dim = 12, dimnames = list(O =  1:12))
+DTprob <- array(c(0,1,1,0,0,1,
+                 0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1), dim = c(2,12),
+               dimnames = list(T = c("1","0"), O = 1:12))
+DTFprob <- array(c(0,1,1,0,0,1,
+                  1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1), dim = c(2,12),
+                dimnames = list(TF = c("1","0"), O = 1:12))
+DodecahedronCPT <- list(O=DOprob,T=DTprob,TF=DTFprob)
+DodecahedronBN <- custom.fit(DodDAG,DodecahedronCPT)
+
+RegularTable <- CoherencesTable(RegularBN,
+                                     scenariosList = list(c("T","TF")),
+                                     statesList   = list(c("1","1")),
+                                     exampleName = "Regular"
+)
+
+
+
+
+
+DodecahedronTable <- CoherencesTable(DodecahedronBN,
+                                    scenariosList = list(c("T","TF")),
+                                    statesList   = list(c("1","1")),
+                                    exampleName = "Dodecahedron"
+)
+
+
+#structuredNoSD(DodecahedronBN,c("O","T","TF"),c("2","1","1"))
+
+
+
+DiceTableNew <- rbind(RegularTable,DodecahedronTable)
+
+DiceTableNew %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+RegularSameDod <- DiceTableNew[1,] == DiceTableNew[2,] 
+dodecahedronResults <- as.data.frame(RegularSameDod)
+rownames(dodecahedronResults) <- c("Dodecahedron:  Regular $=$  Dodecahedron")
+dodecahedronResults %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+```
+
+
+## With updating on the content 
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+
+RegularTableNarr <- CoherencesTableNarr(RegularBN,
+                                     scenariosList = list(c("T","TF")),
+                                     statesList   = list(c("1","1")),
+                                     exampleName = "Regular"
+)
+
+
+
+
+
+DodecahedronTableNarr <- CoherencesTableNarr(DodecahedronBN,
+                                    scenariosList = list(c("T","TF")),
+                                    statesList   = list(c("1","1")),
+                                    exampleName = "Dodecahedron"
+)
+
+
+
+
+DiceTableNarr <- rbind(RegularTableNarr,DodecahedronTableNarr)
+
+DiceTableNarr %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+
+RegularSameDodNarr <- DiceTableNarr[1,] == DiceTableNarr[2,] 
+dodecahedronResultsNarr <- as.data.frame(RegularSameDodNarr)
+rownames(dodecahedronResultsNarr) <- c("Dodecahedron:  Regular $=$  Dodecahedron")
+dodecahedronResultsNarr %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+```
+
+
+
+
+
+# Witnesses
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+
+#define D and its prob
+DStates <- c('Steve', 'Martin', 'David', 'John', 'James', 'Peter')
+dimnames <- list(DStates)
+names(dimnames) <- 'D' 
+DProb <-  array(c(1/6, 1/6, 1/6, 1/6, 1/6, 1/6),
+                dim = 6, dimnames = dimnames)
+
+
+#function for defining witness nodes
+witnessCPT <- function(eNode, probEifHS1, probEifHS2,probEifHS3, 
+                       probEifHS4,probEifHS5, probEifHS6){
+  eStates <- c(1,0)
+  dimnames <- list(eStates,DStates)
+  names(dimnames) <- c(eNode,'D')
+  array(
+    c(
+      probEifHS1, as.numeric(1-probEifHS1),
+      probEifHS2, as.numeric(1-probEifHS2),
+      probEifHS3, as.numeric(1-probEifHS3),
+      probEifHS4, as.numeric(1-probEifHS4),
+      probEifHS5, as.numeric(1-probEifHS5),
+      probEifHS6, as.numeric(1-probEifHS6)
+    ), 
+    dim = c(2,6),
+    dimnames = dimnames
+  )
+}
+
+
+W1Prob <- witnessCPT('W1', .8, .05, .05, .05, .05, .05)
+W2Prob <- witnessCPT('W2', .8, .05, .05, .05, .05, .05)
+W3Prob <- witnessCPT('W3', .8, .8, .8, .05, .05, .05)
+W4Prob <- witnessCPT('W4', .8, .05, .05, .8, .8, .05)
+W5Prob <- witnessCPT('W5', .8, .05, .05, .8, .05, .8)
+
+
+W12DAG <- model2network("[D][W1|D][W2|D]")
+W12CPT <-list(D=DProb, W1=W1Prob, W2=W2Prob)
+W12BN <- custom.fit(W12DAG,W12CPT)
+
+
+W34DAG <- model2network("[D][W3|D][W4|D]")
+W34CPT <-list(D=DProb, W3=W3Prob, W4=W4Prob)
+W34BN <- custom.fit(W34DAG,W34CPT)
+
+W45DAG <- model2network("[D][W4|D][W5|D]")
+W45CPT <-list(D=DProb, W4=W4Prob, W5=W5Prob)
+W45BN <- custom.fit(W45DAG,W45CPT)
+
+
+
+A <- c("W1","W2")
+B <- c("W3","W4")
+C <- c("W4","W5")
+
+W12Table <- CoherencesTableNarr(W12BN,
+                                scenariosList = list(A),
+                                statesList   = list(c("1","1")),
+                                exampleName = "Witness"
+)
+
+
+
+W34Table <- CoherencesTableNarr(W34BN,
+                                scenariosList = list(B),
+                                statesList   = list(c("1","1")),
+                                exampleName = "Witness"
+)
+
+
+W45Table <- CoherencesTableNarr(W45BN,
+                                scenariosList = list(C),
+                                statesList   = list(c("1","1")),
+                                exampleName = "Witness"
+)
+
+
+WTable <- as.data.frame(rbind(W12Table, 
+                                  W34Table,
+                                  W45Table
+))
+
+
+WTable %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+W1W2greaterW3W4 <- WTable[1,] > WTable[2,] 
+W4W5greaterW3W4 <- WTable[3,] > WTable[2,] 
+WResults <- as.data.frame(rbind(W1W2greaterW3W4,W4W5greaterW3W4))
+rownames(WResults) <- c("Witness: W$_1$W$_2>$W$_3$W$_4$","Witness: W$_4$W$_5>$W$_3$W$_4$")
+
+WResults %>%  kable(format = "latex",booktabs=T,
+                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+```
+
+
+
+<!-- However, the above is weird, because we didn't consider the values of D as part of narration. One reason why this results in a weird outcome, check out this table: -->
+
+<!-- \footnotesize -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- structuredNoSD(W12BN,c("W1","W2"),c("1","1")) -->
+<!-- ``` -->
+<!-- \normalsize -->
+
+<!-- So instead let's compare the coherence of "Steve" as that of, say, "Martin" given W1W2: -->
+
+
+<!-- \footnotesize -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- structuredNoSD(W12BN,c("W1","W2","D"),c("1","1","Steve")) -->
+<!-- structuredNoSD(W12BN,c("W1","W2","D"),c("1","1","Martin")) -->
+<!-- ``` -->
+<!-- \normalsize -->
+
+
+<!-- For W3 and W4 note that steve is less coherent than before, but positive and more coherent than Martin or Peter, and that Peter is less coherent than Martin. -->
+
+<!-- \footnotesize -->
+<!-- ```{r,echo=TRUE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- BN <- W34BN -->
+<!-- structuredNoSD(W34BN,c("W3","W4","D"),c("1","1","Steve")) -->
+<!-- structuredNoSD(W34BN,c("W3","W4","D"),c("1","1","Martin")) -->
+<!-- structuredNoSD(W34BN,c("W3","W4","D"),c("1","1","Peter")) -->
+<!-- ``` -->
+<!-- \normalsize -->
+
+
+<!-- For W4W5 the ones mentioned by both get equal positive coherence, peter gets negative, but less negative than, say, David: -->
+
+
+<!-- \footnotesize -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- BN <- W45BN -->
+<!-- structuredNoSD(W45BN,c("W4","W5","D"),c("1","1","Steve")) -->
+<!-- structuredNoSD(W45BN,c("W4","W5","D"),c("1","1","John")) -->
+<!-- structuredNoSD(W45BN,c("W4","W5","D"),c("1","1","Peter")) -->
+<!-- structuredNoSD(W45BN,c("W4","W5","D"),c("1","1","David")) -->
+<!-- ``` -->
+<!-- \normalsize -->
+
+
+
+
+
