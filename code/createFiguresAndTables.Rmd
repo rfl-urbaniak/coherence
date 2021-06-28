@@ -25,7 +25,7 @@ toccolor: blue
 
 ```{r setup, include=FALSE, echo=FALSE}
 require("knitr")
-opts_knit$set(root.dir = "../../")
+#opts_knit$set(root.dir = "../../")
 
 ```
 
@@ -99,6 +99,7 @@ We used the distribution used in the original formulation to build three BNs cor
 \hspace{2cm}\scalebox{0.8}{\begin{subfigure}[!ht]{0.4\textwidth}
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "100%", dpi = 300}
 source("bns//Penguins.R")
+ 
 graphviz.plot(BirdDAGbgp)
 ```
 \end{subfigure}} \hfill
@@ -353,7 +354,23 @@ DunnitResultsSeparate %>%  kable(format = "latex",booktabs=T,
 \begin{subfigure}[!ht]{0.4\textwidth}
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 source("bns//Beatles.R")
+png(file="../images/BeatlesDAG.png", 
+      units="in", 
+      width=6, 
+      height=6, 
+      pointsize = 1,
+      res=400)
 graphviz.plot(BeatlesDAG)
+dev.off()
+
+png(file="../images/BeatlesBN.png", 
+      units="in", 
+      width=6, 
+      height=6, 
+      pointsize = 1,
+      res=400)
+graphviz.chart(BeatlesBN,type="barprob", scale = c(0.7,1.3), main = "Priors in the Beatles example")
+dev.off()
 
 ```
 \end{subfigure}} \hfill
@@ -984,6 +1001,28 @@ W5Prob <- witnessCPT('W5', .8, .05, .05, .8, .05, .8)
 W12DAG <- model2network("[D][W1|D][W2|D]")
 W12CPT <-list(D=DProb, W1=W1Prob, W2=W2Prob)
 W12BN <- custom.fit(W12DAG,W12CPT)
+
+png(file="../images/w1w2DAG.png", 
+      units="in", 
+      width=6, 
+      height=6, 
+      pointsize = 1,
+      res=400)
+graphviz.plot(W12DAG)
+dev.off()
+
+
+png(file="../images/w1w2BN.png", 
+      units="in", 
+      width=6, 
+      height=6, 
+      pointsize = 1,
+      res=400)
+graphviz.chart(W12BN,type="barprob", scale = c(0.7,1.3), main = "Priors in the witnesses example (W1W2)")
+dev.off()
+
+
+
 
 
 W34DAG <- model2network("[D][W3|D][W4|D]")
