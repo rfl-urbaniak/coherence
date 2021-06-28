@@ -1,0 +1,1270 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <title>
+    
+       | Legal Probabilism BNs
+    
+  </title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+  <!-- Use Atom -->
+  <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Legal Probabilism BNs" />
+  <!-- Use RSS-2.0 -->
+  <!--<link href="/rss-feed.xml" type="application/rss+xml" rel="alternate" title="Legal Probabilism BNs | with R"/>
+  //-->
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quattrocento+Sans">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+      });
+  </script>
+
+  <!-- Google Analytics -->
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <!-- Use Jekyll SEO plugin -->
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Legal Probabilism BNs | with R</title>
+<meta name="generator" content="Jekyll v3.6.3" />
+<meta property="og:title" content="Legal Probabilism BNs" />
+<meta name="author" content="Rafal Urbaniak" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="with R" />
+<meta property="og:description" content="with R" />
+<meta property="og:site_name" content="Legal Probabilism BNs" />
+<script type="application/ld+json">
+{"@type":"WebSite","headline":"Legal Probabilism BNs","url":"/","name":"Legal Probabilism BNs","author":{"@type":"Person","name":"Rafal Urbaniak"},"description":"with R","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+<body>
+
+  <div class="container">
+    <header class="masthead">
+  <h3 class="masthead-title">
+    <a href="/">Legal Probabilism BNs</a>
+    <small class="masthead-subtitle">with R</small>
+    <div class="menu">
+  <nav class="menu-content">
+    
+  </nav>
+  <nav class="social-icons">
+    
+  
+  
+    <a href="https://github.com/rfl-urbaniak" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+
+  </nav>
+</div>
+
+  </h3>
+</header>
+
+
+    <div class="post-container">
+      <h1>
+  
+</h1>
+
+<h3 id="brief-description">Brief description</h3>
+
+<p>The <em>Legal Probabilism</em> entry in the Stanford Encyclopedia of Philosophy by <a href="https://www.marcellodibello.com/">Marcello Di Bello</a> and yours truly) includes a section on Bayesian Networks. Here, we provide more details and source code in R for those examples.</p>
+
+<ul>
+  <li>
+    <p>If you just want to get the code, here is <a href="https://github.com/rfl-urbaniak/LegalProbabilismBNs/tree/gh-pages/code">the folder</a> with  $\textsf{R}$ files containing bare code for the BNs and the wrapper functions.</p>
+  </li>
+  <li>
+    <p>If you prefer to look at the code with some explanation of what’s going on and why, read on, feel free to skip the last section.</p>
+  </li>
+  <li>
+    <p>If you’re interested in a few words of a more theoretical explanation, read the last  section.</p>
+  </li>
+</ul>
+
+<h3 id="recommended-readings">Recommended readings</h3>
+
+<p>Before we move on, if you’re interested in BNs, here are three really good sources to get you started:</p>
+
+<ul>
+  <li>
+    <p><a href="https://www.wiley.com/en-cg/Bayesian+Networks+for+Probabilistic+Inference+and+Decision+Analysis+in+Forensic+Science,+2nd+Edition-p-9780470979730">“Bayesian Networks and Probabilistic Inference in Forensic Science”</a> by Taroni, Aitken, Garbolino and Biedermann. This is clearly the one with forensic science in the focus.</p>
+  </li>
+  <li>
+    <p>For the more mathematically minded, <a href="https://www.amazon.com/Learning-Bayesian-Networks-Richard-Neapolitan/dp/0130125342">“Learning Bayesian Networks”</a> by Neapolitan is pretty awesome.</p>
+  </li>
+  <li>
+    <p>For a very accessible and fascinating account of the multiplicity of applications of Bayesian Neworks, check our <a href="https://www.routledge.com/Risk-Assessment-and-Decision-Analysis-with-Bayesian-Networks/Fenton-Neil/p/book/9781138035119">“Risk Assessment and Decision Analysis with Bayesian Networks”</a> by Fenton and Neil.</p>
+  </li>
+  <li>
+    <p>They don’t contain R code, though. For a great treatment on the use of <code class="highlighter-rouge">bnlearn</code> package, read <a href="https://www.routledge.com/Bayesian-Networks-With-Examples-in-R/Scutari-Denis/p/book/9781482225587">“Bayesian Networks
+With Examples in R”</a> by Marco Scutari and  Jean-Baptiste Denis.</p>
+  </li>
+</ul>
+
+<p><strong>Contents</strong></p>
+<ul id="markdown-toc">
+  <li><a href="#brief-description" id="markdown-toc-brief-description">Brief description</a></li>
+  <li><a href="#recommended-readings" id="markdown-toc-recommended-readings">Recommended readings</a></li>
+  <li><a href="#set-up" id="markdown-toc-set-up">Set-up</a></li>
+  <li><a href="#qualitative-bns-dags-with-node-labels" id="markdown-toc-qualitative-bns-dags-with-node-labels">Qualitative BNs (DAGs with node labels)</a></li>
+  <li><a href="#adding-conditional-probability-tables-cpts-to-obtain-bns" id="markdown-toc-adding-conditional-probability-tables-cpts-to-obtain-bns">Adding conditional probability tables (CPTs) to obtain BNs</a></li>
+  <li><a href="#legal-idioms" id="markdown-toc-legal-idioms">Legal idioms</a>    <ul>
+      <li><a href="#hypothesis-evidence" id="markdown-toc-hypothesis-evidence">Hypothesis-evidence</a></li>
+      <li><a href="#two-pieces-of-evidence" id="markdown-toc-two-pieces-of-evidence">Two pieces of evidence</a></li>
+      <li><a href="#calculating-posteriors-and-visualising-updated-bns" id="markdown-toc-calculating-posteriors-and-visualising-updated-bns">Calculating posteriors and visualising updated BNs</a></li>
+      <li><a href="#cause-measurement-synthesis" id="markdown-toc-cause-measurement-synthesis">Cause, measurement, synthesis</a></li>
+      <li><a href="#evidence-accuracy-opportunity" id="markdown-toc-evidence-accuracy-opportunity">Evidence accuracy, opportunity</a></li>
+      <li><a href="#dependency-between-items-of-evidence-alibi" id="markdown-toc-dependency-between-items-of-evidence-alibi">Dependency between items of evidence, alibi</a></li>
+    </ul>
+  </li>
+  <li><a href="#bns-for-mixed-dna-evidence-evaluation" id="markdown-toc-bns-for-mixed-dna-evidence-evaluation">BNs for mixed DNA evidence evaluation</a></li>
+  <li><a href="#a-bn-for-the-sally-clark-case" id="markdown-toc-a-bn-for-the-sally-clark-case">A BN for the Sally Clark case</a></li>
+  <li><a href="#scenarios-with-bns" id="markdown-toc-scenarios-with-bns">Scenarios with BNs</a></li>
+  <li><a href="#mathy-details" id="markdown-toc-mathy-details">Mathy details</a>    <ul>
+      <li><a href="#probabilistic-background" id="markdown-toc-probabilistic-background">Probabilistic background</a></li>
+      <li><a href="#relation-between-bns-and-probabilistic-measures" id="markdown-toc-relation-between-bns-and-probabilistic-measures">Relation between BNs and probabilistic measures</a></li>
+      <li><a href="#d-separation-and-independence" id="markdown-toc-d-separation-and-independence">D-separation and independence</a></li>
+      <li><a href="#whence-relative-simplicity" id="markdown-toc-whence-relative-simplicity">Whence (relative) simplicity?</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>The examples are given in R code, which we intertwine with additional
+explanations, which the reader is welcome to skip if they look familiar.</p>
+
+<h3 id="set-up">Set-up</h3>
+
+<p>First, you need to install the relevant R libraries. The crucial one is <code class="highlighter-rouge">bnlearn</code> <a href="https://www.bnlearn.com/about/">by Marco Scutari</a> (who was also kind enough to include some functionalities when I inquired about them). This is a bit
+tricky, because some of them have to be installed through BiocManager.
+One way to go is this:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"https://www.bnlearn.com/releases/bnlearn_latest.tar.gz"</span><span class="p">,</span><span class="w"> </span><span class="n">repos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"source"</span><span class="p">)</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"BiocManager"</span><span class="p">)</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">requireNamespace</span><span class="p">(</span><span class="s2">"BiocManager"</span><span class="p">,</span><span class="w"> </span><span class="n">quietly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
+  </span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"BiocManager"</span><span class="p">)</span><span class="w">
+</span><span class="n">BiocManager</span><span class="o">::</span><span class="n">install</span><span class="p">()</span><span class="w">
+</span><span class="n">BiocManager</span><span class="o">::</span><span class="n">install</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"graph"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Rgraphviz"</span><span class="p">))</span><span class="w">
+
+</span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"https://www.bnlearn.com/releases/bnlearn_latest.tar.gz"</span><span class="p">,</span><span class="w"> </span><span class="n">repos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"source"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Then load the libraries we use (you need to have them installed first):</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">bnlearn</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">Rgraphviz</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="qualitative-bns-dags-with-node-labels">Qualitative BNs (DAGs with node labels)</h3>
+
+<p>Instead, we start with representing dependencies between RVs in such a set by means of a <em>directed acyclic graph</em> (DAG). A DAG is a collection of <em>nodes</em> (called also <em>vertices</em>) – think of them as corresponding to the RVs, <em>directed edges</em> (also called <em>arcs</em>; they  can be thought of as ordered pairs of nodes), such that there is no sequence of nodes $v_0,\dots, v_k$ with edges from $v_i$ to $v_{i+1}$ for $0\leq i\leq k-1$ with $v_0=v_k$. (Sometimes it is also required that the graph should be connected: that for any two nodes there is an undirected path between them.) A <em>qualitative BN</em> (QBN) is a DAG with nodes labeled by RVs.</p>
+
+<p>Here’s one example of a QBN:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cancer1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">empty.graph</span><span class="p">(</span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"PS"</span><span class="p">,</span><span class="s2">"SH"</span><span class="p">,</span><span class="s2">"S"</span><span class="p">,</span><span class="s2">"C"</span><span class="p">))</span><span class="w">
+</span><span class="n">cancer1.arcs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"PS"</span><span class="p">,</span><span class="w"> </span><span class="s2">"SH"</span><span class="p">,</span><span class="w">
+                   </span><span class="s2">"PS"</span><span class="p">,</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w">
+                   </span><span class="s2">"SH"</span><span class="p">,</span><span class="w"> </span><span class="s2">"C"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"S"</span><span class="p">,</span><span class="w"> </span><span class="s2">"C"</span><span class="p">),</span><span class="w">
+                 </span><span class="n">byrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+                 </span><span class="n">dimnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"from"</span><span class="p">,</span><span class="w"> </span><span class="s2">"to"</span><span class="p">)))</span><span class="w">
+</span><span class="n">arcs</span><span class="p">(</span><span class="n">cancer1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cancer1.arcs</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">cancer1</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/cancer-1.png" style="display: block; margin: auto;" /></p>
+
+<p>With the intended reading:</p>
+
+<table style="width:50%;">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">RV</th>
+<th style="text-align: left;">Proposition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PS</td>
+<td style="text-align: left;">At least one parent smokes.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SH</td>
+<td style="text-align: left;">The subject is a second-hand smoker.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S</td>
+<td style="text-align: left;">The subject smokes.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">The subject develops cancer.</td>
+</tr>
+</tbody>
+</table>
+
+<p>This can be achieved in a somewhat simpler manner like this:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cancer2DAG</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[SH|PS][PS][S|PS][C|SH:S]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">cancer2DAG</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/cancerSimpler-1.png" style="display: block; margin: auto;" /></p>
+
+<p>The <em>ancestors</em> of $C$ are all the other RVs, the  parents of $C$ are $SH$ and $S$, the descentants of $PS$ are all the other RVs, and the children of $PS$ are $SH$ and $S$.</p>
+
+<p>The edges, intuitively, are meant to capture direct influence between RVs. The role that such direct influence plays is that in a BN any RV is conditionally independent of its nondescentants (including ancestors), given its parents. If this is the case for a given probabilistic measure $P{}$ and a given DAG $\mathsf{G}$, we say that $P{}$ is compatible with $\mathsf{G}$, or that it satisfies the <em>Markov condition</em>.</p>
+
+<h3 id="adding-conditional-probability-tables-cpts-to-obtain-bns">Adding conditional probability tables (CPTs) to obtain BNs</h3>
+
+<p>A quantitative BN (further on, simply BN) is a DAG with CPTs, and we say that it <em>represents</em> a probabilistic measure $\mathsf{P}$ quantitatively just in case they are compatible, and $\mathsf{P}$ agrees with its assignment of CPTs.</p>
+
+<p>Adding probabilities to the DAG we already have can be achieved easily using a bunch of wrappers we wrote for root nodes, and single- and double-parented nodes. First, load the script (in needs to be in your folder), then, remember that <code class="highlighter-rouge">E</code> stands for the child, and <code class="highlighter-rouge">H</code> for a parent. We assume states are binary, and so <code class="highlighter-rouge">S1</code> corresponds to a state occuring and <code class="highlighter-rouge">S2</code> to it failing to occur. So, for instance, if we have <code class="highlighter-rouge">h1Node = "S", h2Node = "SH"</code> then <code class="highlighter-rouge">probEifH1S1H2S1 = .6</code> means the probability of the child note (<code class="highlighter-rouge">E</code>) if the first hypothesis (<code class="highlighter-rouge">S</code>) is true (<code class="highlighter-rouge">S1</code>) and the second hypothesis (<code class="highlighter-rouge">SH</code>) is true as well (<code class="highlighter-rouge">S1</code>).</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">source</span><span class="p">(</span><span class="s2">"cptCreate.R"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#tables for separate nodes</span><span class="w">
+</span><span class="n">PSprob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">priorCPT</span><span class="p">(</span><span class="s2">"PS"</span><span class="p">,</span><span class="n">prob1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.3</span><span class="p">)</span><span class="w">
+
+</span><span class="n">Sprob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">singleCPT</span><span class="p">(</span><span class="n">eNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w"> </span><span class="n">hNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"PS"</span><span class="p">,</span><span class="w"> </span><span class="n">probEifHS1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.4</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">probEifHS2</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="m">.2</span><span class="p">)</span><span class="w">
+</span><span class="n">SHprob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">singleCPT</span><span class="p">(</span><span class="n">eNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"SH"</span><span class="p">,</span><span class="w"> </span><span class="n">hNode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"PS"</span><span class="p">,</span><span class="w"> </span><span class="n">probEifHS1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.8</span><span class="p">,</span><span class="w"> </span><span class="n">probEifHS2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.3</span><span class="p">)</span><span class="w">
+
+</span><span class="n">Cprob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">doubleCPT</span><span class="p">(</span><span class="n">eNode</span><span class="o">=</span><span class="w"> </span><span class="s2">"C"</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="m">1</span><span class="n">Node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"S"</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="m">2</span><span class="n">Node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"SH"</span><span class="p">,</span><span class="w">
+                   </span><span class="n">probEifH1S1H2S1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.6</span><span class="p">,</span><span class="w">
+                   </span><span class="n">probEifH1S1H2S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.4</span><span class="p">,</span><span class="w">
+                   </span><span class="n">probEifH1S2H2S1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.1</span><span class="p">,</span><span class="w">
+                   </span><span class="n">probEifH1S2H2S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">.01</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#put them together and add to the DAG to create a BN</span><span class="w">
+</span><span class="n">cancerCPT</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">PS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PSprob</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Sprob</span><span class="p">,</span><span class="w"> </span><span class="n">SH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SHprob</span><span class="p">,</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Cprob</span><span class="p">)</span><span class="w">
+</span><span class="n">cancerBN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">custom.fit</span><span class="p">(</span><span class="n">cancer2DAG</span><span class="p">,</span><span class="n">cancerCPT</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#display the CPTs for all the nodes</span><span class="w">
+</span><span class="n">cancerBN</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>##
+##   Bayesian network parameters
+##
+##   Parameters of node C (multinomial distribution)
+##
+## Conditional probability table:
+##
+## , , SH = 1
+##
+##    S
+## C      1    0
+##   1 0.60 0.10
+##   0 0.40 0.90
+##
+## , , SH = 0
+##
+##    S
+## C      1    0
+##   1 0.40 0.01
+##   0 0.60 0.99
+##
+##
+##   Parameters of node PS (multinomial distribution)
+##
+## Conditional probability table:
+##  PS
+##   1   0
+## 0.3 0.7
+##
+##   Parameters of node S (multinomial distribution)
+##
+## Conditional probability table:
+##
+##    PS
+## S     1   0
+##   1 0.4 0.2
+##   0 0.6 0.8
+##
+##   Parameters of node SH (multinomial distribution)
+##
+## Conditional probability table:
+##
+##    PS
+## SH    1   0
+##   1 0.8 0.3
+##   0 0.2 0.7
+</code></pre></div></div>
+
+<p>How do you read this?</p>
+
+<ul>
+  <li>
+    <p>Let’s look at the  parameters of node <code class="highlighter-rouge">PS</code> first. The table tells you that the prior probability of at least one parent smoking is .3.</p>
+  </li>
+  <li>
+    <p>For <code class="highlighter-rouge">S</code> and <code class="highlighter-rouge">SH</code> the table is 2-dimensional; the tables tell you the probabilies of various states of these nodes conditional on the state of the single parent node. For instance, the probability  that the patient smokes given that at least one of their parents smokes is .4, while the probability that a patient is a second-hand smoker given that their parents smoke is .8 (and .3 otherwise).</p>
+  </li>
+  <li>
+    <p>The table for <code class="highlighter-rouge">C</code> is three-dimensional, so $\mathsf{R}$ splits it onto layers. In one, we assume the subject is a second-hand smoker (<code class="highlighter-rouge">SH=1</code>), and in the second layer that they are not (<code class="highlighter-rouge">SH=0</code>). In each layer, the conditonal probability of <code class="highlighter-rouge">C</code> given two possible states of <code class="highlighter-rouge">S</code> is given.</p>
+  </li>
+</ul>
+
+<p>The BN can be plotted with the resulting <em>marginal</em> probabilties as follows:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">graphviz.chart</span><span class="p">(</span><span class="n">cancerBN</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"barprob"</span><span class="p">,</span><span class="w"> </span><span class="n">layout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"neato"</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1.5</span><span class="p">),</span><span class="w">
+               </span><span class="n">main</span><span class="o">=</span><span class="s2">"marginal probabilities for the cancer BN"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/cancerBarchart.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<h3 id="legal-idioms">Legal idioms</h3>
+
+<p>The idea that BNs can be used for probabilistic reasoning in legal fact-finding started gaining traction in late eighties (<a href="https://heinonline.org/HOL/LandingPage?handle=hein.journals/cdozo13&amp;div=54&amp;id=&amp;page=">Edwards 1991</a>). It gained some (albeit limited) traction with the work of many researchers, including the works of  <a href="https://www.eecs.qmul.ac.uk/~norman/papers/building_large_scale_bbns.pdf">Neil, Fenton, and Nielsen</a> and <a href="https://www.researchgate.net/publication/228309715_Object-Oriented_Graphical_Representations_of_Complex_Patterns_of_Evidence">Hepler, Dawid and Leucari</a>, reaching a fairly advanced stage with the monograph by <a href="https://www.amazon.com/Bayesian-Networks-Probabilistic-Inference-Forensic/dp/0470091738">Taroni, Aitken, Garbonino &amp; Biedermann</a>.</p>
+
+<h4 id="hypothesis-evidence">Hypothesis-evidence</h4>
+
+<p>One reccuring pattern captures the relation between a hypothesis and a piece of evidence, the idea being that it is whether the hypothesis is true that caused the (non-)occurence of the evidence.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">HE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[Evidence|Hypothesis][Hypothesis]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">HE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/HE.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p>For instance, $H$ might take values from the range of $1-40$, the distance in meters from which the gun has been shot, and $E$ might be a continuous variable representing the density of gun shot residues. (This example also indicates that RVs don’t have to be binary for legal applications.)</p>
+
+<p>Another example, this time with binary variables, takes $H$ to be the claim that the supect is guilty and $E$ the presence of a DNA match with a crime scene stain. One way the CPTs could look like in this case is this:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Hypothesis.prob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">array</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.01</span><span class="p">,</span><span class="w"> </span><span class="m">0.99</span><span class="p">),</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">dimnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">HP</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="nf">c</span><span class="p">(</span><span class="s2">"guilty"</span><span class="p">,</span><span class="s2">"not guilty"</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">Evidence.prob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">array</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="m">0.99999</span><span class="p">,</span><span class="w"> </span><span class="m">0.00001</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="n">dimnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">Evidence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"DNA match"</span><span class="p">,</span><span class="s2">"no match"</span><span class="p">),</span><span class="w">
+      </span><span class="n">Hypothesis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"guilty"</span><span class="p">,</span><span class="s2">"not guilty"</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">HEcpt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">Hypothesis</span><span class="o">=</span><span class="n">Hypothesis.prob</span><span class="p">,</span><span class="n">Evidence</span><span class="o">=</span><span class="n">Evidence.prob</span><span class="p">)</span><span class="w">
+</span><span class="n">HEbn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">custom.fit</span><span class="p">(</span><span class="n">HE</span><span class="p">,</span><span class="n">HEcpt</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+guilty
+</th>
+<th style="text-align:right;">
+not guilty
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+DNA match
+</td>
+<td style="text-align:right;">
+0.99999
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+No match
+</td>
+<td style="text-align:right;">
+0.00001
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="two-pieces-of-evidence">Two pieces of evidence</h4>
+
+<p>The true power of BNs, however, appears when we go beyond a simple two-node situations for which calculations can be done by hand. For instance, imagine we have two pieces of evidence: a DNA match, and a witness testimony. The DAG might look like this:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">HEE.dag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[H][W|H][DNA|H]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">HEE.dag</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/HEE.jpeg" style="display: block; margin: auto;" /></p>
+
+<p>The CPTs can, for instance,  be as follows:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">HEEdag</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[H][W|H][DNA|H]"</span><span class="p">)</span><span class="w">
+</span><span class="n">Hprob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">array</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0.01</span><span class="p">,</span><span class="w"> </span><span class="m">0.99</span><span class="p">),</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w">
+                </span><span class="n">dimnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"murder"</span><span class="p">,</span><span class="s2">"nomurder"</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">Wprob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">array</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="m">0.7</span><span class="p">,</span><span class="w"> </span><span class="m">0.3</span><span class="p">,</span><span class="w"> </span><span class="m">0.4</span><span class="p">,</span><span class="w"> </span><span class="m">0.6</span><span class="p">),</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="n">dimnames</span><span class="w"> </span><span class="o">=</span><span class="w">
+              </span><span class="nf">list</span><span class="p">(</span><span class="n">W</span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"seen"</span><span class="p">,</span><span class="s2">"notseen"</span><span class="p">),</span><span class="w"> </span><span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"murder"</span><span class="p">,</span><span class="s2">"nomurder"</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">DNAprob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">array</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0.001</span><span class="p">,</span><span class="w"> </span><span class="m">0.999</span><span class="p">),</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="w">
+                  </span><span class="n">dimnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">DNA</span><span class="w"> </span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"dnamatch"</span><span class="p">,</span><span class="s2">"nomatch"</span><span class="p">),</span><span class="w">
+                                  </span><span class="n">H</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"murder"</span><span class="p">,</span><span class="s2">"nomurder"</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">HEEcpt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="n">Hprob</span><span class="p">,</span><span class="n">W</span><span class="o">=</span><span class="n">Wprob</span><span class="p">,</span><span class="n">DNA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DNAprob</span><span class="p">)</span><span class="w">
+
+</span><span class="n">HEEbn</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">custom.fit</span><span class="p">(</span><span class="n">HEEdag</span><span class="p">,</span><span class="n">HEEcpt</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Pr(H)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+murder
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+no.murder
+</td>
+<td style="text-align:right;">
+0.99
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+H=murder
+</th>
+<th style="text-align:right;">
+H=no.murder
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+W=seen
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W=not.seen
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+H=murder
+</th>
+<th style="text-align:right;">
+H=no.murder
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+DNA=match
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DNA=no.match
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.999
+</td>
+</tr>
+</tbody>
+</table>
+
+<p>The CPT for the hypothesis contains the prior probability that a murder has been commited by the suspect. The CPTs for the other variables include (made up) probabilities of a DNA match and of a witness seeing the suspect near the crime scene at an appropriate time conditional on various states of the murder hypothesis:  $\mathsf{P} (\textrm{W=seen}\vert \textrm{H=murder})=0.7, \mathsf{P} (\textrm{W=seen}\vert \textrm{H=no.murder})=0.4$ etc.</p>
+
+<h4 id="calculating-posteriors-and-visualising-updated-bns">Calculating posteriors and visualising updated BNs</h4>
+
+<p>This BN is fairly simple, yet correct intuitive assessment of how the probability of the hypothesis depends on various states of the evidence is already rather difficult. Moreover, already at this level of complexity formula-based calculations by hand also become cumbersome. In contrast, a fairly  straightforward use of a dedicated piece of software to the BN will easily lead to the following results:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>DNA</th>
+      <th>W</th>
+      <th>$\mathsf{P} (H)$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>match</td>
+      <td>seen</td>
+      <td>0.9464</td>
+    </tr>
+    <tr>
+      <td>match</td>
+      <td>not.seen</td>
+      <td>0.8347</td>
+    </tr>
+    <tr>
+      <td>no.match</td>
+      <td>either</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>But how did we get these values? Well, we first convert the BNs to junction trees for calculations, then update them with evidence, and query about the values.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">bnlearn</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">gRain</span><span class="p">)</span><span class="w">
+</span><span class="n">junction</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">compile</span><span class="p">(</span><span class="n">as.grain</span><span class="p">(</span><span class="n">HEEbn</span><span class="p">))</span><span class="w">
+
+</span><span class="n">junctionMS</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setEvidence</span><span class="p">(</span><span class="n">junction</span><span class="p">,</span><span class="w"> </span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"DNA"</span><span class="p">,</span><span class="s2">"W"</span><span class="p">),</span><span class="w"> </span><span class="n">states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"dnamatch"</span><span class="p">,</span><span class="s2">"seen"</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">querygrain</span><span class="p">(</span><span class="n">junctionMS</span><span class="p">)</span><span class="o">$</span><span class="n">H</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## H
+##     murder   nomurder
+## 0.94645754 0.05354246
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">junctionMN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setEvidence</span><span class="p">(</span><span class="n">junction</span><span class="p">,</span><span class="w"> </span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"DNA"</span><span class="p">,</span><span class="s2">"W"</span><span class="p">),</span><span class="w"> </span><span class="n">states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"dnamatch"</span><span class="p">,</span><span class="s2">"notseen"</span><span class="p">))</span><span class="w">
+</span><span class="n">querygrain</span><span class="p">(</span><span class="n">junctionMN</span><span class="p">)</span><span class="o">$</span><span class="n">H</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## H
+##    murder  nomurder
+## 0.8347245 0.1652755
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">junctionNOMATCH</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setEvidence</span><span class="p">(</span><span class="n">junction</span><span class="p">,</span><span class="w"> </span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"DNA"</span><span class="p">),</span><span class="w"> </span><span class="n">states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"nomatch"</span><span class="p">))</span><span class="w">
+</span><span class="n">querygrain</span><span class="p">(</span><span class="n">junctionNOMATCH</span><span class="p">)</span><span class="o">$</span><span class="n">H</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## H
+##   murder nomurder
+##        0        1
+</code></pre></div></div>
+
+<p>Moreover, we can convert the updated junction trees back to bayesian networks and use them for visualisation:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">HEEms</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.bn.fit</span><span class="p">(</span><span class="n">junctionMS</span><span class="p">,</span><span class="w"> </span><span class="n">including.evidence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">HEEmn</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.bn.fit</span><span class="p">(</span><span class="n">junctionMN</span><span class="p">,</span><span class="w"> </span><span class="n">including.evidence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">HEEnomatch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.bn.fit</span><span class="p">(</span><span class="n">junctionNOMATCH</span><span class="p">,</span><span class="w"> </span><span class="n">including.evidence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">graphviz.chart</span><span class="p">(</span><span class="n">HEEms</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"barprob"</span><span class="p">,</span><span class="w">  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="w">
+               </span><span class="n">main</span><span class="o">=</span><span class="s2">"marginal probabilities after DNA match and  witness evidence"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">graphviz.chart</span><span class="p">(</span><span class="n">HEEmn</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"barprob"</span><span class="p">,</span><span class="w">  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="w">
+               </span><span class="n">main</span><span class="o">=</span><span class="s2">"marginal probabilities after DNA match and  negative witness evidence"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">graphviz.chart</span><span class="p">(</span><span class="n">HEEnomatch</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"barprob"</span><span class="p">,</span><span class="w">  </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span><span class="w">
+               </span><span class="n">main</span><span class="o">=</span><span class="s2">"marginal probabilities after DNA match and  no witness evidence"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/HEEms.jpeg" width="100%" style="display: block; margin: auto;" /><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/HEEmn.jpeg" width="100%" style="display: block; margin: auto;" /><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/HEEnomatch.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<h4 id="cause-measurement-synthesis">Cause, measurement, synthesis</h4>
+
+<p>The <em>Cause-Consequence Idiom</em> models a causal process in terms of the relationship between a cause and its consequence.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">CauseCon</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[Cause][Consequence|Cause]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">CauseCon</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/CauseConsequence.jpeg" style="display: block; margin: auto;" /></p>
+
+<p>In fact, a BN fragment for a hypothesis-evidence relationship often instantiates this idiom, because often there is a causal relationship between the hypothesis and the evidence.</p>
+
+<p>The <em>Measurement Idiom</em> is used to represent the uncertainty arising from the way a given variable is measured.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Measurement</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[Accuracy][Actual value][Observed value|Accuracy:Actual value]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">Measurement</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/Measurement.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p><em>Definitional/Synthesis Idiom</em> is used in situations in which a node is defined in terms of its parents nodes. For instance:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Measurement</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[Accuracy][Actual value][Observed value|Accuracy:Actual value]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">Measurement</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/Definitional.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p>We already discussed one idiom: <em>The Evidence Idiom</em>, which simply consists of a hypothesis node, and various pieces of evidence related to it as its children.
+The legal variant of the Measurement Idiom is called the <em>Evidence Accuracy Idiom</em>, and its instantiation might look like this:</p>
+
+<h4 id="evidence-accuracy-opportunity">Evidence accuracy, opportunity</h4>
+
+<p>We already discussed the evidence idiom, which simply consists of a hypothesis node, and various pieces of evidence related to it as its children.  The legal variant of the Measurement Idiom is called the <em>Evidence Accuracy Idiom</em>, and its instantiation might look like this:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">evidenceAccuracy</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[Accuracy of evidence][Excess alcohol level][Evidence for excess|Accuracy of evidence:Excess alcohol level]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">evidenceAccuracy</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/evidenceAccuracy.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p>A novelty appears, however, when we think about the notion of opportunity understood as a necessary requirement for the defendat’s guilt (such as being present at the scene). Oppotrunity is built in as a parent of the guilt hypothesis, here’s an example with a few moving elements:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">opportunity</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[H1][H2|H1][A1][A2][E1|H1:A1][E2|H1:A2]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">opportunity</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/opportunity.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Node</th>
+      <th>Proposition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>H1</td>
+      <td>Defendant present at the scene</td>
+    </tr>
+    <tr>
+      <td>H2</td>
+      <td>Defendant guilty</td>
+    </tr>
+    <tr>
+      <td>A1</td>
+      <td>Accuracy of eyewitness evidence</td>
+    </tr>
+    <tr>
+      <td>A2</td>
+      <td>Accuracy of security camera evidence</td>
+    </tr>
+    <tr>
+      <td>E1</td>
+      <td>Eyewitness testimony</td>
+    </tr>
+    <tr>
+      <td>E2</td>
+      <td>Evidence from security camera</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The same structure is used to build in a node for a motive.</p>
+
+<h4 id="dependency-between-items-of-evidence-alibi">Dependency between items of evidence, alibi</h4>
+
+<p>One useful aspect of BN representation is that we can clearly visualise and take under consideration the dependency between pieces of evidence. For instance, if one of  two security cameras captured an image of someone matching the suspect, it might be very likely that so did the second one. In such cases, additional evidence might be practically useless and presenting it as independent might lead to gross overestimation of its importance.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cameras</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[H][D][C1|H][C2|H:C1:D]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">cameras</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/cameras.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Node</th>
+      <th>Proposition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>H</td>
+      <td>Defendant present at the scene</td>
+    </tr>
+    <tr>
+      <td>C1</td>
+      <td>Camera 1 captures image of a matching person</td>
+    </tr>
+    <tr>
+      <td>C2</td>
+      <td>Camera 2 captures image of a matching person</td>
+    </tr>
+    <tr>
+      <td>D</td>
+      <td>What cameras capture is dependent</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The <em>Alibi Idiom</em>, on the other hand, is used to model alibi evidence which seems to directly contradict the prosecution hypothesis. Crucially, the hypothesis itself may have impact on the accuracy of the evidence:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">alibi</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[S present][S guilty|S present][Alibi accuracy|S guilty][Alibi|Alibi accuracy:S present]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">alibi</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/alibi.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<h3 id="bns-for-mixed-dna-evidence-evaluation">BNs for mixed DNA evidence evaluation</h3>
+
+<p>One type of legal applications of BNs is to evaluate DNA evidence. At each locus (a small region of the DNA) there occur short sequences of base pairs repeated multiple times. The number of times that the sequences are repeated varies between individuals. The length of a repeated sequences expressed as the number of repeats in the sequence is called an allele. At each locus there are two alleles, iherited from the parents. So a particular locus can be described in terms of two numbers, the genotype of that locus. The pairs can be the same (the person is then homozygous at that locus) or diferent (the person is then heterozygous). Normally, a genotype at a given locus is shared by 5-15% of the population. A DNA profiling system consists of a selection of loci (often 17 or 20). Information about genotypes at those loci together with their frequencies is then used to estimate the frequency of a given DNA profile. On the rather uncontroversial assumption of the independence of the loci used in DNA profiling, this is usually done by multiplying probabilities for each particular genotype.</p>
+
+<p>However, in practice, there are complications. If people are related, they are more likely to share genotypes. Moreover, sometimes a sample from the crime scene is of low quality and only a subset of the usual loci can be used. Finally, a profile can be mixed and involve DNA sample containing material from more than one individual. For instance, if three different alleles are found at locu TH01  (say, 7,8,9), it is clear that the profile is mixed. Say now the suspect S has genotype (7,7). The complication now is that there are many possible combinations  of the DNA (and only one of them doesn’t exclude the suspect):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Contributor 1 (C1)</th>
+      <th>Contributor 2  (C2)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>(7,7)</td>
+      <td>(8,9)</td>
+    </tr>
+    <tr>
+      <td>(7,8)</td>
+      <td>(8,9)</td>
+    </tr>
+    <tr>
+      <td>(7,8)</td>
+      <td>(9,9)</td>
+    </tr>
+    <tr>
+      <td>(7,8)</td>
+      <td>(9,9)</td>
+    </tr>
+    <tr>
+      <td>(8,8)</td>
+      <td>(7,9)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To properly evaluate this piece of evidence, the following BN can be used:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DNA789</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[S is C1][S is C2][Genotype of C1|S is C1][Genotype of C2|S is C2][S is the source|S is C1:S is C2][(7,8,9) found|Genotype of C1:Genotype of C2]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">DNA789</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/mixedDNA.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p>to establish that such evidence causes only a small increase of the source hypothesis, from 50% to 62.5%.</p>
+
+<h3 id="a-bn-for-the-sally-clark-case">A BN for the Sally Clark case</h3>
+
+<p>A BN can be used also at a more general level, to clearly investigate the interaction between various pieces of evidence involved in a case. For instance, a simple BN for the Sally Clark original trial looks like this:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SallyClarkDAG</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[Abruising|Acause][Adisease|Acause][Bbruising|Bcause][Bdisease|Bcause][Acause][Bcause|Acause][NoMurdered|Acause:Bcause][Guilty|NoMurdered]"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">SallyClarkDAG</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/sallyClark.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Node</th>
+      <th>Corresponding RV</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Abruising</td>
+      <td>Was bruising found on child A?</td>
+    </tr>
+    <tr>
+      <td>Bbruising</td>
+      <td>Was bruising  found on child B?</td>
+    </tr>
+    <tr>
+      <td>Acause</td>
+      <td>Was the cause of death of child A natural?</td>
+    </tr>
+    <tr>
+      <td>Bcause</td>
+      <td>Was the cause of death of child B natural?</td>
+    </tr>
+    <tr>
+      <td>Adisease</td>
+      <td>Were any sings of potentially lethal disease found in child A?</td>
+    </tr>
+    <tr>
+      <td>Bdisease</td>
+      <td>Were any sings of potentially lethal disease found in child B?</td>
+    </tr>
+    <tr>
+      <td>NoMurdered</td>
+      <td>How many children were murdered?</td>
+    </tr>
+    <tr>
+      <td>Guilty</td>
+      <td>Is Sally Clark responsible for any of these deaths?</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Now, let’s add CPTs and graph the marginal probabilites prior to obtaining any evidence:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#CPTs as used in Fenton &amp; al.</span><span class="w">
+
+</span><span class="n">AcauseProb</span><span class="w"> </span><span class="o">&lt;-</span><span class="n">prior.CPT</span><span class="p">(</span><span class="s2">"Acause"</span><span class="p">,</span><span class="s2">"SIDS"</span><span class="p">,</span><span class="s2">"Murder"</span><span class="p">,</span><span class="m">0.921659</span><span class="p">)</span><span class="w">
+</span><span class="n">AbruisingProb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">single.CPT</span><span class="p">(</span><span class="s2">"Abruising"</span><span class="p">,</span><span class="s2">"Acause"</span><span class="p">,</span><span class="s2">"Yes"</span><span class="p">,</span><span class="s2">"No"</span><span class="p">,</span><span class="s2">"SIDS"</span><span class="p">,</span><span class="s2">"Murder"</span><span class="p">,</span><span class="m">0.01</span><span class="p">,</span><span class="m">0.05</span><span class="p">)</span><span class="w">
+</span><span class="n">AdiseaseProb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">single.CPT</span><span class="p">(</span><span class="s2">"Adisease"</span><span class="p">,</span><span class="s2">"Acause"</span><span class="p">,</span><span class="s2">"Yes"</span><span class="p">,</span><span class="s2">"No"</span><span class="p">,</span><span class="s2">"SIDS"</span><span class="p">,</span><span class="s2">"Murder"</span><span class="p">,</span><span class="m">0.05</span><span class="p">,</span><span class="m">0.001</span><span class="p">)</span><span class="w">
+</span><span class="n">BbruisingProb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">single.CPT</span><span class="p">(</span><span class="s2">"Bbruising"</span><span class="p">,</span><span class="s2">"Bcause"</span><span class="p">,</span><span class="s2">"Yes"</span><span class="p">,</span><span class="s2">"No"</span><span class="p">,</span><span class="s2">"SIDS"</span><span class="p">,</span><span class="s2">"Murder"</span><span class="p">,</span><span class="m">0.01</span><span class="p">,</span><span class="m">0.05</span><span class="p">)</span><span class="w">
+</span><span class="n">BdiseaseProb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">single.CPT</span><span class="p">(</span><span class="s2">"Bdisease"</span><span class="p">,</span><span class="s2">"Bcause"</span><span class="p">,</span><span class="s2">"Yes"</span><span class="p">,</span><span class="s2">"No"</span><span class="p">,</span><span class="s2">"SIDS"</span><span class="p">,</span><span class="s2">"Murder"</span><span class="p">,</span><span class="m">0.05</span><span class="p">,</span><span class="m">0.001</span><span class="p">)</span><span class="w">
+</span><span class="n">BcauseProb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">single.CPT</span><span class="p">(</span><span class="s2">"Bcause"</span><span class="p">,</span><span class="s2">"Acause"</span><span class="p">,</span><span class="s2">"SIDS"</span><span class="p">,</span><span class="s2">"Murder"</span><span class="p">,</span><span class="s2">"SIDS"</span><span class="p">,</span><span class="s2">"Murder"</span><span class="p">,</span><span class="m">0.9993604</span><span class="p">,</span><span class="m">1-0.9998538</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">#E goes first; order: last variable through levels, second last, then first</span><span class="w">
+</span><span class="n">NoMurderedProb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">array</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">),</span><span class="n">dimnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">NoMurdered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="s2">"one"</span><span class="p">,</span><span class="s2">"none"</span><span class="p">),</span><span class="n">Bcause</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"SIDS"</span><span class="p">,</span><span class="s2">"Murder"</span><span class="p">),</span><span class="w"> </span><span class="n">Acause</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"SIDS"</span><span class="p">,</span><span class="s2">"Murder"</span><span class="p">)))</span><span class="w">
+
+</span><span class="c1">#this one is definitional</span><span class="w">
+</span><span class="n">GuiltyProb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="n">array</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">),</span><span class="w"> </span><span class="n">dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">),</span><span class="n">dimnames</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">Guilty</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Yes"</span><span class="p">,</span><span class="s2">"No"</span><span class="p">),</span><span class="w"> </span><span class="n">NoMurdered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"both"</span><span class="p">,</span><span class="s2">"one"</span><span class="p">,</span><span class="s2">"none"</span><span class="p">)))</span><span class="w">
+
+</span><span class="c1"># Put CPTs together</span><span class="w">
+</span><span class="n">SallyClarkCPT</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">Acause</span><span class="o">=</span><span class="n">AcauseProb</span><span class="p">,</span><span class="n">Adisease</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdiseaseProb</span><span class="p">,</span><span class="w">
+                      </span><span class="n">Bcause</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BcauseProb</span><span class="p">,</span><span class="n">Bdisease</span><span class="o">=</span><span class="n">BdiseaseProb</span><span class="p">,</span><span class="w">
+                      </span><span class="n">Abruising</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AbruisingProb</span><span class="p">,</span><span class="n">Bbruising</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">BbruisingProb</span><span class="p">,</span><span class="w">
+                      </span><span class="n">NoMurdered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NoMurderedProb</span><span class="p">,</span><span class="n">Guilty</span><span class="o">=</span><span class="n">GuiltyProb</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># join with the DAG to get a BN</span><span class="w">
+</span><span class="n">SallyClarkBN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">custom.fit</span><span class="p">(</span><span class="n">SallyClarkDAG</span><span class="p">,</span><span class="n">SallyClarkCPT</span><span class="p">)</span><span class="w">
+
+</span><span class="n">graphviz.chart</span><span class="p">(</span><span class="n">SallyClarkBN</span><span class="p">,</span><span class="n">type</span><span class="o">=</span><span class="s2">"barprob"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/SCpriors.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p>Now we can investigate the impact of subsequent developments.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#convert to a junction tree</span><span class="w">
+</span><span class="n">SallyClarkJN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">compile</span><span class="p">(</span><span class="n">as.grain</span><span class="p">(</span><span class="n">SallyClarkBN</span><span class="p">))</span><span class="w">
+
+</span><span class="c1">#the prior of guilt</span><span class="w">
+</span><span class="n">querygrain</span><span class="p">(</span><span class="n">SallyClarkJN</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Guilty"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## $Guilty
+## Guilty
+##        Yes         No
+## 0.07893049 0.92106951
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#say bruising was found on child A:</span><span class="w">
+</span><span class="n">SallyClarkJNbra</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setEvidence</span><span class="p">(</span><span class="n">SallyClarkJN</span><span class="p">,</span><span class="w"> </span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Abruising"</span><span class="p">),</span><span class="w"> </span><span class="n">states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Yes"</span><span class="p">))</span><span class="w">
+</span><span class="n">querygrain</span><span class="p">(</span><span class="n">SallyClarkJNbra</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Guilty"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## $Guilty
+## Guilty
+##       Yes        No
+## 0.2986944 0.7013056
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#say bruising is also found on child B:</span><span class="w">
+</span><span class="n">SallyClarkJNbrab</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setEvidence</span><span class="p">(</span><span class="n">SallyClarkJN</span><span class="p">,</span><span class="w"> </span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Abruising"</span><span class="p">,</span><span class="s2">"Bbruising"</span><span class="p">),</span><span class="w">
+                                </span><span class="n">states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Yes"</span><span class="p">,</span><span class="s2">"Yes"</span><span class="p">))</span><span class="w">
+</span><span class="n">querygrain</span><span class="p">(</span><span class="n">SallyClarkJNbrab</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Guilty"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## $Guilty
+## Guilty
+##       Yes        No
+## 0.6804408 0.3195592
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#if no sings of disease in children:</span><span class="w">
+</span><span class="n">SallyClarkJNbrabNoDisease</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setEvidence</span><span class="p">(</span><span class="n">SallyClarkJN</span><span class="p">,</span><span class="w"> </span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Abruising"</span><span class="p">,</span><span class="s2">"Bbruising"</span><span class="p">,</span><span class="s2">"Adisease"</span><span class="p">,</span><span class="s2">"Bdisease"</span><span class="p">),</span><span class="w">
+                                </span><span class="n">states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Yes"</span><span class="p">,</span><span class="s2">"Yes"</span><span class="p">,</span><span class="w"> </span><span class="s2">"No"</span><span class="p">,</span><span class="w"> </span><span class="s2">"No"</span><span class="p">))</span><span class="w">
+</span><span class="n">querygrain</span><span class="p">(</span><span class="n">SallyClarkJNbrabNoDisease</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Guilty"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## $Guilty
+## Guilty
+##       Yes        No
+## 0.7018889 0.2981111
+
+
+
+Quite crucially, the succesful appeal relied on the evidence of disease for Child A, and once we incorporate this evidence, we obtain the following situation:
+
+
+``` r
+# disease in Child A
+SallyClarkJNdiseaseA &lt;- setEvidence(SallyClarkJN, nodes = c("Abruising","Bbruising","Adisease","Bdisease"), states = c("Yes","Yes", "Yes", "No"))
+querygrain(SallyClarkJNdiseaseA, node = "Guilty")
+```
+
+    ## $Guilty
+    ## Guilty
+    ##        Yes         No
+    ## 0.04587482 0.95412518
+</code></pre></div></div>
+
+<p>The probability of guilt drops to 4.59% and the resulting marginals are as follows:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># disease in Child A</span><span class="w">
+</span><span class="n">SallyClarkJNdiseaseA</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setEvidence</span><span class="p">(</span><span class="n">SallyClarkJN</span><span class="p">,</span><span class="w"> </span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Abruising"</span><span class="p">,</span><span class="s2">"Bbruising"</span><span class="p">,</span><span class="s2">"Adisease"</span><span class="p">,</span><span class="s2">"Bdisease"</span><span class="p">),</span><span class="w"> </span><span class="n">states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Yes"</span><span class="p">,</span><span class="s2">"Yes"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Yes"</span><span class="p">,</span><span class="w"> </span><span class="s2">"No"</span><span class="p">))</span><span class="w">
+</span><span class="n">querygrain</span><span class="p">(</span><span class="n">SallyClarkJNdiseaseA</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Guilty"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## $Guilty
+## Guilty
+##        Yes         No
+## 0.04587482 0.95412518
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SallyClarkFinalBN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.bn.fit</span><span class="p">(</span><span class="n">SallyClarkJNdiseaseA</span><span class="p">,</span><span class="w"> </span><span class="n">including.evidence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.chart</span><span class="p">(</span><span class="n">SallyClarkFinalBN</span><span class="p">,</span><span class="n">type</span><span class="o">=</span><span class="s2">"barprob"</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0.7</span><span class="p">,</span><span class="m">1.3</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/SCposterior.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p>What would happen if  signs of disease were present on Child B?</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SallyClarkJNdiseaseAB</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">setEvidence</span><span class="p">(</span><span class="n">SallyClarkJN</span><span class="p">,</span><span class="w"> </span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Abruising"</span><span class="p">,</span><span class="s2">"Bbruising"</span><span class="p">,</span><span class="s2">"Adisease"</span><span class="p">,</span><span class="s2">"Bdisease"</span><span class="p">),</span><span class="w"> </span><span class="n">states</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"Yes"</span><span class="p">,</span><span class="s2">"Yes"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Yes"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Yes"</span><span class="p">))</span><span class="w">
+</span><span class="n">querygrain</span><span class="p">(</span><span class="n">SallyClarkJNdiseaseAB</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Guilty"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## $Guilty
+## Guilty
+##          Yes           No
+## 0.0009148263 0.9990851737
+</code></pre></div></div>
+
+<h3 id="scenarios-with-bns">Scenarios with BNs</h3>
+
+<p>Arguably, in legal contexts, it is not only individual pieces of evidence that need to be assessed, but also whole scenarios which make sense of all them and connect them to hypotheses about what happened and about the guilt of the suspect. A method for developing BNs for that purpose is has been provided  in the works of researchers such as  <a href="https://academic.oup.com/lpr/article/5/2/87/927726">Shen, Keppens, Aitken, Schafer, Lee </a>,  <a href="https://www.springer.com/gp/book/9789400701397">Bex</a>  and quite a few others (see our SEP entry for references).</p>
+
+<p>Start with collecting all relevant scenarios and deciding which guilt hypothesis node they support (making sure you use binary guilt nodes are either the same, or exclude each other). For each state and event mentioned in a scenario, and for each piece of evidence, include a binary node in the BN and connect them as appropriate.</p>
+
+<p>Next, add a binary scenario node as a parent of all the elements of the narration, and a guilt hypothesis node as its child. This is the <em>Scenario idiom</em>.
+The CPT for the scenario node is such that the probability of each of its child is 1 given the scenario node takes value <code class="highlighter-rouge">true</code>, and equals the prior probability of a given node if its \textrm{false}. The CPT for the guilt node is such that it takes value <code class="highlighter-rouge">true</code> if the scenario node is <code class="highlighter-rouge">true</code> and <code class="highlighter-rouge">false</code> otherwise. A simple example might look like this.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ScenarioBN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[Scenario][State/event 1|Scenario][State/event 2|Scenario:State/event 1][State/event 3|Scenario:State/event 2][Guilt|Scenario][Evidence 1|State/event 1][Evidence 2|State/event 2][Evidence 3|State/event 3]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">ScenarioBN</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/scenario.jpeg" width="100%" style="display: block; margin: auto;" /></p>
+
+<p>The advantage of adding a scenario node, supposedly, is that it keeps a narration as a coherent whole, so that now increasing the probability of one elements of the narration propagates to increase the probability of other elements of the scenario, and that it makes it possible to built a larger BN in which the interaction of multiple different narrations can be studied. WE find this debatable, but a deeper discussion is beyond the scope of what we’re doing now.</p>
+
+<p>To merge two scenarios, first  put their corresponding BNs together. Then, if some of the nodes in the scenarios are identical, replace them with a single node (including the guilt hypothesis node), and for any nodes which exclude each other add a constraint node:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">constraint</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[Constraint|Node 1:Node 2][Node 1][Node 2]"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>with values <code class="highlighter-rouge">allowed</code> and <code class="highlighter-rouge">not allowed</code>, setting the CPT such that the node takes value 1 just in case exatly one of the nodes takes value <code class="highlighter-rouge">true</code> and 0 otherwise.</p>
+
+<p>The merged scenarios might look like this:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ScenarioMerged</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model2network</span><span class="p">(</span><span class="s2">"[Scenario 1][Scenario 2][Event 1|Scenario 1][Event 2|Scenario 1:Event 1][Event 3|Scenario 2][Event 4|Scenario 2][Guilt|Scenario 1:Scenario 2][Evidence 1|Event 1][Evidence 2|Event 2][Evidence 3|Event 3][Evidence 4|Event 4]"</span><span class="p">)</span><span class="w">
+</span><span class="n">graphviz.plot</span><span class="p">(</span><span class="n">ScenarioMerged</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="https://rfl-urbaniak.github.io/LegalProbabilismBNs/images/merging.jpeg" style="display: block; margin: auto;" /></p>
+
+<p>That’s pretty much it,  at least for now. An interested reader might take a look at a bunch of neat arguments related to the simplicity obtained by the use of BNs, below.</p>
+
+<h3 id="mathy-details">Mathy details</h3>
+
+<h4 id="probabilistic-background">Probabilistic background</h4>
+
+<p>While Bayes’s Theorem is of immense use when it comes to calculating various conditional probabilities, if we’re interested in the interaction of multiple hypotheses at various levels and multiple pieces of evidence, calculations quickly become inconvenient, to say the least. Moreover, if such considerations are to be presented to a fact-finder, it is rather unlikely that they would be transparent and easily understood. Luckily, a tool exist to make such tasks easier. Bayesian networks (BNs) can be used for a fairly transparent and computationally more manageable evalation and presentation of the interaction of multiple pieces of evidence and hypotheses. We’ll start with a general presentation of BNs, and then go over a few main methods of employing BNs in presentation, aggregation and evaluation of evidence in legal fact-finding.</p>
+
+<p>A <em>random variable</em> (RV) $X$ is a function from the elements of a sample space into $\mathbb{R}$, the set of real numbers. For instance, if our sample space is the set of all potential outcomes of tossing a fair coin four times (each such outcome can be represented as a sequence, for instance  $HHHT$, or $HTHT$), $X$ can be the number of heads among the tosses.</p>
+
+<p>Given a probability measure $P$, two events $A$ and $B$ are conditionally independent given another event $C$, $I_{P}(A,B\vert C)$, just in case $P(A\wedge B\vert C) = P(A\vert C)P(B \vert C)$. Conditional and unconditional independence don’t have to coincide. If you toss twice a coin which is fair with probability $\frac{1}{2}$, and $\frac{3}{4}$ biased towards heads with probability $\frac{1}{2}$, the result of the second toss is not independent of the first one. After all, if the first result is heads, this increases the probability that the coin is biased, and so increases the probability of heads in the second toss. On the other hand, conditionally on knowledge whether the coin is fair, the results are independent. If the coin is fair, the probability of heads in the second toss is $\frac{1}{2}$ and if the coin is biased, it is $\frac{3}{4}$, no matter what the first result was. And in the opposite direction, indepedence can disappear when we condition. Say I have two friends, Alice and Peter, who call me regularly, but they decide to do so independently. Then, whether they call in five minutes is independent. Now, suppose the phone rings. Conditional on the phone ringing, I know that if it isn’t Alice, it’s Peter, and so the identities of the callers are no longer independent.</p>
+
+<p>Two RVs $X$ and $Y$ are conditionally independent given another RV $Z$, $I_{P}(X,Y\vert Z)$ just in case for any combination of values of these RVs $x,y,z$ it is the case that $I_{P}(X=x \wedge Y=y \vert Z=z)$ (notice: $X,Y$ and $Z$ are RVs, while $x,y$ and $z$ are some particular values they can take). The notion naturally generalizes to sets of RVs.
+Often, instead of saying things like $P(X_1 = x_1\wedge Y_5=y_5 \vert Z_3=z_3)$ we’ll rather say $P(x_1,y_5\vert z_3)$.</p>
+
+<p>Now, if we have $n$ RVs, even if we assume for simplicity that they’re binary (that is, they can take only one of two values), there are $2^n$ possible combinations of values they could take, and so a direct description of a probability measure for them would require $2^n-1$ numbers. This would be a highly unfeasible method of specifying a probability distribution for a set of random variables.</p>
+
+<p>Moreover, even if we had specified the joint probability distribution for all our combinations of values of Rvs $X, Y, Z$, using it wouldn’t be the most efficient way of calculating conditional probabilities or the probability that a certain selected RV takes a certain particular value. For instance, we would have to rely on:</p>
+
+<script type="math/tex; mode=display">P(x_1\vert y_1)  =  \frac{P(x_1,y_1)}{P(y_1)}   = \frac{\sum_{i}P(x_1,y_1,Z=z_i)}{
+\sum_{i,j}P(X=x_j,y_1,Z=z_i)}</script>
+
+<p>in which calculations we’d have to travel through all possible values of $Z$ and $X$ – this would become even less feasible as the number of RVs and their possible values increase. With 100 binary RVs we’d need $2^{99}$ terms in the sum in the denominator, so it seems that to be able to calculate a single conditional probability we’d have to elicit quite a few unconditional ones.</p>
+
+<h4 id="relation-between-bns-and-probabilistic-measures">Relation between BNs and probabilistic measures</h4>
+
+<p>A quantitative BN (further on, simply BN) is a DAG with CPTs, and we say that it <em>represents</em> a probabilistic measure $\mathsf{P} $ quantitatively just in case they are compatible, and $\mathsf{P} $ agrees with its assignment of CPTs. It can be shown that any quantitative BN represents a unique probabilistic measure.  However, any probabilistic measure can be represented by multiple BNs.</p>
+
+<p>Here’s a sketch of the argument for the last claim above, if you’re interested. Skip this passage if you aren’t. Take any permutation of the RVs under consideration, obtaining $X_1, \dots, X_k$. For each $i$ find a minimal subset $P_i$ such that $I_{\mathsf{P} {}}({X_1,\dots,x_{i-1}},X_i\vert P_i)$ — that is, a minimal set of RVs which are earlier in the squence, which makes $X_i$ independent of all the (other) RVs which are earlier in the squence. Such a set always exists, in the worst-case scenario, it is the set of all $X_1,\dots,X_{i-1}$. Next, make $P_i$ the parents of $X_i$ in the DAG and copy the values of $\mathsf{P} $ into the CPTs.</p>
+
+<p>The edges in a BN, intuitively, are meant to capture direct influence between RVs. The role that such direct influence plays is that in a BN any RV is conditionaly independent of its nondescentants (including ancestors), given its parents. If this is the case for a given probabilistic measure $\mathsf{P}$ and a given DAG $\mathsf{G}$, we say that $\mathsf{P}$ is compatible with $\mathsf{G}$, or that it satisfies the <em>Markov condition</em>.</p>
+
+<p>Now, why is dealing with BNs simpler? Here’s a rough explanation. The <em>chain rule</em> tells us that $\mathsf{P}(A\wedge B) = \mathsf{P}(A\vert B)\mathsf{P}(B)$. Its application to RVs (say the RVs in G are $X_1,\dots X_n$) yields:</p>
+
+<script type="math/tex; mode=display">\mathsf{P}(x_1,\cdots,x_n)  = \mathsf{P}(x_n\vert x_1,\cdots,x_{n-1})\times \\
+  \mathsf{P}(x_{n-1}\vert x_1,\cdots,x_{n-2})\times \\ \nonumber
+  \times \cdots \times \mathsf{P}(x_2 \vert x_1) \mathsf{P}(x_1)</script>
+
+<p>So, if $\mathsf{P}$ is compatible with $\mathsf{G}$, we don’t have to represent it directly by listing all the $2^n-1$ values. Instead, the joint probability $\mathsf{P}(X_1\dots,X_n)$ (note: this is really an assignment of probability values to <em>all</em> possible combinations of the values of these RVs), can be represented using the conditional probabilities on the right-hand side of the formula, and moreover, for each conditional probability of an RVs $X$ given some other RVs, non-parents of $X$ can be removed from the condition, since RVs are independent of them.</p>
+
+<h4 id="d-separation-and-independence">D-separation and independence</h4>
+
+<p>An explanation how independence is connected with the structure of a DAG. A reader familiar with the notion of d-separation can safely skip this section.</p>
+
+<p>Since information about which RVs are independent is important (they can be dropped in calculations), so is identifying the graphical counterpart of probabilistic independence, the so-called <em>d-separation</em>.  We say that two RVs, $X$ and $Y$, are d-separated given a set of RVs $\mathsf{Z}$ — $D(X,Y\vert \mathsf{Z})$ — iff for every undirected path from $X$ to $Y$ there is a node $Z’$ on the path such that either:</p>
+
+<ul>
+  <li>
+    <p>$Z’ \in \mathsf{Z}$ and there is a <em>serial</em> connection, $\rightarrow Z’ \rightarrow$, on the path,</p>
+  </li>
+  <li>
+    <p>$Z’\in \mathsf{Z}$ and there is a diverging connection, $\leftarrow Z’ \rightarrow $, on the path,</p>
+  </li>
+  <li>
+    <p>There is a connection $\rightarrow Z’ \leftarrow$ on the path, and neither $Z’$ nor its descendants are in $\mathsf{Z}$.</p>
+  </li>
+</ul>
+
+<p>Finally, two sets of RVs, $\mathsf{X}$ and $\mathsf{Y}$ are d-separated given $\mathsf{Z}$ if every node in $\mathsf{X}$ is d-separated from every node in $\mathsf{Y}$ given $\mathsf{Z}$.</p>
+
+<p>With serial connection, for instance, if:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>RV</th>
+      <th>Proposition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$G$</td>
+      <td>The suspect is guilty.</td>
+    </tr>
+    <tr>
+      <td>$B$</td>
+      <td>The blood stain comes from the suspect.</td>
+    </tr>
+    <tr>
+      <td>$M$</td>
+      <td>The crime scene stain and the suspect’s blood share their DNA profile.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We naturally would like to have the connection $G \rightarrow B \rightarrow M$. If we don’t know whether $B$ holds, $G$ seems to have an indirect impact on the probability of $M$. Yet, once we find out that $B$ is true, we expect the profile match, and whether $G$ holds has no further impact on the probability of $M$.</p>
+
+<p>The case of diverging connections has already been discussed when we talked about idependence. Whether a coin is fair, $F$, or not has impact on the result of the first toss, $H1$, and the result of the second toss, $H2$, and as long as we don’t know whether $F$, $H1$ increases the probability of $H2$. So $H1 \leftarrow F \rightarrow H2$ seems to be appropriate. Once we know that $F$, though, $H1$ and $H2$ become independent.</p>
+
+<p>For converging connections, let  $G$ and $B$ be as above, and let:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>RV</th>
+      <th>Proposition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$O$</td>
+      <td>The crime scene stain comes from the offender.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Both $G$ and $O$ influence $B$. If he’s guilty, it’s more likely that the blood stain comes from him, and if the blood crime stain comes from the offender it is more likely to come from the suspect (for instance, more so than if it comes from the victim). Moreover, $G$ and $O$ seem independent – whether the suspect is guilty doesn’t have any bearing on whether the stain comes from the offender. Thus, a converging connection $G\rightarrow B \leftarrow O$ seem appropriate. However, if you do find out that $B$ is true, that the stain comes from the suspect, whether the crime stain comes from the offender becomes relevant for whether the suspect is guilty.</p>
+
+<p>Coming back to the cancer example, ${SH, S}$ d-separates $PS$ from $C$, because of the first condition used in the definition of d-separation. ${PS}$ d-esparates $SH$ from $S$. There are two paths between these RVs. The top one goes through $PS$ and fits our second condition.  The bottom one goes through $C$ and fits the third condition. On the other hand, ${PS, C}$ does not d-separate $SH$ from $S$. While there is a path throuth $PS$ which satisfies the second condition, the other path  contains a connection converging on $C$, and yet $C$ is in the set on which we’re conditioning.</p>
+
+<p>One important reason why d-separation matters is that it can be proven that if two sets of RVs are d-separated given a third one, then they are independent given the third one, for any probabilistic measures compatible with a given DAG. Interestingly, lack of d-separation doesn’t entail dependence for any compatible probabilistic measure. Rather, it only allows for it: if RVs are d-separated, there is at least one probabilistic measure according to which they are independent.   So, at least, no false  independence can be inferred  from the DAG, and  all the dependencies are built into it.</p>
+
+<h4 id="whence-relative-simplicity">Whence (relative) simplicity?</h4>
+
+<p>This is a somewhat more technical explanation of how BNs help in reducing complexity. An uninterested reader can skip it.</p>
+
+<p>First, the <em>chain rule</em> tells us that $P(A\wedge B) = P(A\vert B)P(B)$. Its application to RVs (say the RVs in G are $X_1,\dots X_n$) yields:</p>
+
+<script type="math/tex; mode=display">P(x_1,\cdots,x_n)  = P(x_n\vert x_1,\cdots,x_{n-1})\times
+\\ = P(x_{n-1}\vert x_1,\cdots,x_{n-2})\times \\  \times \cdots \times P(x_2 \vert x_1) P(x_1)</script>
+
+<p>So, if $P$ is compatible with $\mathsf{G}$, we don’t have to represent it directly by listing all the $2^n-1$ values. Instead, the joint probability $P(X_1\dots,X_n)$ (note: this is really an assignment of probability values to <em>all</em> possible combinations of the values of these RVs), can be represented using the conditional probabilities on the right-hand side, and moreover, for each conditional probability of an RVs $X$ given some other RVs, non-parents of $X$ can be removed from the condition, since RVs are independent of them.
+Let’s slow down and take a look at the argument. Pick an ancestral ordering $X_1, \dots, X_n$, of the RVs, that is, an ordering in which if $Z$ is a descendant of $X$, $Z$ follows $Y$ in the ordering. Take any selection of values of these variables, $x_1, \dots, x_n$. Let $\mathsf{pa_i}$ be the set containing all the values of the parents of $X_i$ that belong to this sequence. Since this is an ancestral ordering, the parents have to occur before $x_i$. We need to prove</p>
+
+<script type="math/tex; mode=display">P(x_n, x_{n-1}, \dots, x_1) = P(x_n\vert \mathsf{pa_n})P(x_{n-1}\vert \mathsf{pa_{n-1}})\cdots P(x_1)</script>
+
+<p>We prove it by induction on the length of the sequence. The basic case comes for free. Now assume:</p>
+
+<script type="math/tex; mode=display">P(x_i, x_{i-1}, \dots, x_1 = P(x_i\vert \mathsf{pa_i})P(x_{i-1}\vert \mathsf{pa_{i-1}})\cdots P(x_1)</script>
+
+<p>we need to show:</p>
+
+<script type="math/tex; mode=display">P(x_{i+1}, x_{i}, \dots, x_1) = P(x_{i+1}\vert \mathsf{pa_{i+1}})P(x_{i}\vert \mathsf{pa_{i}})\cdots P(x_1)\label{eq:markoproof3}</script>
+
+<p>One option is that $P(x_i,x_{i-1},\dots,x)=0$. Then, also  $P(x_{i+1}, x_{i}, \dots, x_1)=0$, and by the induction hypothesis, there is a $1\leq k\leq i$ such that $P(x_k\vert \mathsf{pa_k})=0$, and so also the right-hand side   equals 0 and so the claim holds.</p>
+
+<p>Another option is that  $P(x_i,x_{i-1},\dots,x)\neq 0$.
+Then we reason:</p>
+
+<script type="math/tex; mode=display">P(x_{i+1}, x_{i}, \dots, x_1) = P(x_{i+1}\vert x_i, \dots, x_1) P(x_i, \dots, x_1)\\
+ = P(x_{i+1}\vert \mathsf{pa_{i+1}}) P(x_i, \dots, x_1)\\
+ = P(x_{i+1}\vert \mathsf{pa_{i+1}})  P(x_{i}\vert \mathsf{pa_{i}})\cdots P(x_1)</script>
+
+<p>The first step is by the chain rule. The second is by the Markov  condition and the fact that we employed an ancestral ordering. The third one uses an identity we already obtained. This ends the proof.</p>
+
+<p>Now, why  does the product of CPTs yield a joint probability distribution satisfying the Markov condition, if we’re dealing with discrete RVs?</p>
+
+<p>The argument for the discrete case is as follows. Fix an ancestral ordering of the RVs and definite  joint probability in terms of the conditional probabilities determined by the CPTs as we already did. We need to show it indeed is a probabilistic measure. Since the conditional probabilities are between 0 and 1, clearly so is their product. Then we need to show that the sum of $P(x_1,x_2,\dots,x_n)$ for all combinations of values of $X_1,X_2,\dots, X_n$ is 1. This can be shown by moving summation symbols around, the calculations start as follows:</p>
+
+<script type="math/tex; mode=display">\sum_{x_1,\dots,x_n}P(x_1,\dots, x_n)  =  \\  = \sum_{x_1,\dots,x_n} P(x_n\vert \mathsf{pa_n})P(x_{n-1}\vert \mathsf{pa_{n-1}})\cdots P(x_1)\\
+= \sum_{x_1,\dots,x_{n-1}}\left[\sum_{x_n}P(x_n\vert \mathsf{pa_n})\right]
+P(x_{n-1}\vert \mathsf{pa_{n-1}})\cdots P(x_1)\\
+= \sum_{x_1,\dots,x_{n-1}}P(x_1,\dots, x_{n-1})\left[1\right] \dots
+P(x_{n-1}\vert \mathsf{pa_{n-1}})\cdots P(x_1)\\</script>
+
+<p>when we continue this way, all the factors reduce to 1.</p>
+
+<p>To show that the Markov condition holds in the resulting joint distribution we have to show that for any $x_k$ we have $P(x_k\vert \mathsf{nd_k})= P(x_k \vert \mathsf{pa_k})$, where $nd_k$ is any combination of values for all the nondescendants of $X_k$, $\mathsf{ND_k}$. So take any $k$, order the nodes so that all and only the nondescendants of $X_k$ precede it. Let $\widehat{x}_k,\widehat{nd}_k$ be some particular values of $X_k$ and $\mathsf{ND_k}$. $\mathsf{d_k}$ ranges over combinations of values of the descendants of $X_K$. The reasoning goes:</p>
+
+<script type="math/tex; mode=display">P(\widehat{x}_k\vert \widehat{nd}_k)
+= \frac{P(\widehat{x}_k,\widehat{nd}_k)}{P(\widehat{nd}_k)}\\
+= \frac{\sum_{\mathsf{d_k}}P(\widehat{x}_1,
+  \dots,\widehat{x}_k,x_{k+1},\dots, x_n)}{
+\sum_{\mathsf{d_k}\cup\{x_k\}}P(\widehat{x}_1,
+  \dots,\widehat{x}_{k-1},x_{k},\dots, x_n)}
+\\
+= \frac{\sum_{\mathsf{d_k}}P(x_n\vert \mathsf{pa_n})\cdots
+P(x_{k+1}\vert \mathsf{pa_{k+1}})P(\widehat{x}_{k}\vert \mathsf{\widehat{pa}_{k}})\cdots P(\widehat{x}_1)
+}{
+\sum_{\mathsf{d_k}\cup\{x_k\}}P(x_n\vert \mathsf{pa_n})\cdots
+P(x_{k}\vert \mathsf{pa_{k}})P(\widehat{x}_{k-1}
+  \vert \mathsf{\widehat{pa}_{k-1}})\cdots P(\widehat{x}_1)
+} \\
+= \frac{P(\widehat{x}_{k}
+  \vert \mathsf{\widehat{pa}_{k}})
+  \cdots P(\widehat{x}_1)\sum_{\mathsf{d_k}}P(x_n\vert \mathsf{pa_n})\cdots
+P(x_{k+1}\vert \mathsf{pa_{k+1}})
+}{
+P(\widehat{x}_{k-1}
+  \vert \mathsf{\widehat{pa}_{k-1}})\cdots P(\widehat{x}_1)\sum_{\mathsf{d_k}\cup\{x_k\}}P(x_n\vert \mathsf{pa_n})\cdots
+P(x_{k}\vert \mathsf{pa_{k}})
+}</script>
+
+<p>Now, the sums in the fractions sum both to 1 (for reasons clear from the previous step of the proof), and</p>
+
+<script type="math/tex; mode=display">P(\widehat{x}_{k-1}
+  \vert \mathsf{\widehat{pa}_{k-1}}
+  )\cdots P(\widehat{x}_1)</script>
+
+<p>are both in the numerator and the denominator, so we are left with</p>
+
+<script type="math/tex; mode=display">P(\widehat{x}_{k}
+    \vert \mathsf{\widehat{pa}_{k}})</script>
+
+<p>as desired.</p>
+
+<p>The <em>chain rule</em> tells us that $\mathsf{P}(A\wedge B) = \mathsf{P}(A\vert B)\mathsf{P}(B)$. Its application to RVs (say the RVs in G are $X_1,\dots X_n$) yields:</p>
+
+<script type="math/tex; mode=display">\mathsf{P}(x_1,\cdots,x_n)  = \mathsf{P}(x_n\vert x_1,\cdots,x_{n-1})\times \\
+ \mathsf{P}(x_{n-1}\vert x_1,\cdots,x_{n-2})\times \\
+ \times \cdots \times \mathsf{P}(x_2 \vert x_1) \mathsf{P}(x_1)</script>
+
+<p>As we already pointed out, the joint probability $\mathsf{P}(X_1\dots,X_n)$ can be represented using the conditional probabilities on the right-hand side of the formula above, and moreover, for each conditional probability of an RVs $X$ given some other RVs, non-parents of $X$ can be removed from the condition, since RVs are independent of them.
+Let’s slow down and take a look at the argument. Pick an ancestral ordering $X_1, \dots, X_n$, of the RVs, that is, an ordering in which if $Z$ is a descendant of $X$, $Z$ follows $Y$ in the ordering. Take any selection of values of these variables, $x_1, \dots, x_n$. Let $\mathsf{pa_i}$ be the set cotaining all the values of the parents of $X_i$ that belong to this sequence. Since this is an ancestral ordering, the parents have to occur before $x_i$. We need to prove:</p>
+
+<script type="math/tex; mode=display">\mathsf{P}(x_n, x_{n-1}, \dots, x_1) = \mathsf{P}(x_n\vert \mathsf{pa_n})\mathsf{P}(x_{n-1}\vert \mathsf{pa_{n-1}})\cdots \mathsf{P}(x_1)\label{eq:markoproof1}</script>
+
+<p>We prove it by induction on the length of the sequence. The basic case comes for free. Now assume:</p>
+
+<script type="math/tex; mode=display">\mathsf{P}(x_i, x_{i-1}, \dots, x_1 = \mathsf{P}(x_i\vert \mathsf{pa_i})\mathsf{P}(x_{i-1}\vert \mathsf{pa_{i-1}})\cdots \mathsf{P}(x_1)\label{eq:markoproof2}</script>
+
+<p>we need to show:</p>
+
+<script type="math/tex; mode=display">\mathsf{P}(x_{i+1}, x_{i}, \dots, x_1) = \mathsf{P}(x_{i+1}\vert \mathsf{pa_{i+1}})\mathsf{P}(x_{i}\vert \mathsf{pa_{i}})\cdots \mathsf{P}(x_1)</script>
+
+<p>One option is that $\mathsf{P}(x_i,x_{i-1},\dots,x)=0$. Then, also  $\mathsf{P}(x_{i+1}, x_{i}, \dots, x_1)=0$, and by the induction hypothesis, there is a $1\leq k\leq i$ such that $\mathsf{P}(x_k\vert \mathsf{pa_k})=0$, and so also the right-hand side  equals 0 and so the claim holds.</p>
+
+<p>Another option is that  $\mathsf{P}(x_i,x_{i-1},\dots,x)\neq 0$.
+Then we reason:</p>
+
+<script type="math/tex; mode=display">\mathsf{P}(x_{i+1}, x_{i}, \dots, x_1) = \mathsf{P}(x_{i+1}\vert x_i, \dots, x_1) \mathsf{P}(x_i, \dots, x_1)\\
+ = \mathsf{P}(x_{i+1}\vert \mathsf{pa_{i+1}}) \mathsf{P}(x_i, \dots, x_1)\\
+ = \mathsf{P}(x_{i+1}\vert \mathsf{pa_{i+1}})  \mathsf{P}(x_{i}\vert \mathsf{pa_{i}})\cdots \mathsf{P}(x_1)</script>
+
+<p>The first step is by the chain rule. The second is by the Markov  condition and the fact that we employed an ancestral ordering. The third one uses \eqref{eq:markoproof2}. This ends the proof.</p>
+
+<p>Computation in BNs is easier than direct calculations, but this doesn’t mean it’s easy. In general, the problem is NP-hard, but  efficient algorithms exist for exact calculations and for Monte Carlo estimations (which employ simulations) for certain groups of BNs. More importantly, humans are decent at identifying features of reality that seem important for a given problem, but terrible at aggregating the information they have about all of them. This is where BNs come to the rescue: a human reasoner constructs a DAG according to their theoretical preconceptions, separately specifies what they think about parent nodes and their children, and automated calculation with a BN does the rest of the job.</p>
+
+
+    </div>
+
+    <footer class="footer">
+  
+  
+  
+    <a href="https://github.com/rfl-urbaniak" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+  
+
+  <div class="post-date"><a href="/menu/about.html">Legal Probabilism BNs | with R by Rafal Urbaniak</a></div>
+</footer>
+
+  </div>
+
+</body>
+</html>
