@@ -129,7 +129,7 @@ RocheCoherenceForBNs <- function (BN, narrationNodes, states){
   #now stop the calculations and the timer, and spit out everything
   stopTime <- proc.time()
   elapsedTime <- stopTime - startTime
-  Result <- list("Narration Prior" = narrationPrior, "Pairs and measures" = combinations, "Roche coherence"  = mean(c(combinations$DiffLR,combinations$DiffRL)),
+  Result <- list("Narration Prior" = narrationPrior, "Pairs and measures" = combinations, "Roche coherence"  = mean(c(combinations$PrLR,combinations$PrRL)),
                  "Computation time" = elapsedTime)
   Result
 }

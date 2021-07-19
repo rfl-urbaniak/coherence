@@ -404,6 +404,21 @@ BeatlesTable3 <- CoherencesTable(BeatlesBN,
                                         exampleName = "Beatles"
 )
 
+
+BeatlesTable3
+
+colnames(BeatlesTable3)
+
+bt <- BeatlesTable3[,c("StructuredNoSD","Fitelson","DouvenMeijs","Roche","Shogenji","OlssonGlass")]
+
+
+colnames(bt) <- c("Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass")
+
+bt <- round(bt,4)
+
+bt %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
 BeatlesTable3 %>%  kable(format = "latex",booktabs=T,
                         linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
 
@@ -1065,6 +1080,21 @@ WTable <- as.data.frame(rbind(W12Table,
                                   W34Table,
                                   W45Table
 ))
+
+
+colnames(WTable)
+
+wt <- WTable[,c("NarratedNoSD","Fitelson","DouvenMeijs","Roche","Shogenji","OlssonGlass")]
+
+colnames(bt) <- c("Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass")
+
+
+
+wt <- round(wt,4)
+
+wt %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FAL
+
 
 
 WTable %>%  kable(format = "latex",booktabs=T,
