@@ -407,7 +407,28 @@ BeatlesTable3 <- CoherencesTable(BeatlesBN,
 
 BeatlesTable3
 
-colnames(BeatlesTable3)
+colnames(W34Table)
+
+w34 <- W34Table[,c("Fitelson","DouvenMeijs","Roche")]
+
+colnames(w34)[2] <- "Douven-Meijs"
+colnames(bSmall)[2] <- "Douven-Meijs"
+
+w34
+
+
+colnames(w34)
+colnames(bSmall)
+
+
+bSmall <- BeatlesTable3[,c("Fitelson","DouvenMeijs","Roche")]
+
+smallTable <- round(rbind(w34,bSmall),4)
+
+smallTable %>% kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped","scale_down"))
+
+rownames(smallTable) <- c("Witness W34 (11)","Beatles (11111)")
 
 bt <- BeatlesTable3[,c("StructuredNoSD","Fitelson","DouvenMeijs","Roche","Shogenji","OlssonGlass")]
 
@@ -1027,13 +1048,13 @@ graphviz.plot(W12DAG)
 dev.off()
 
 
-png(file="../images/w1w2BN.png", 
+png(file="../images/w1w2BNv2.png", 
       units="in", 
       width=6, 
       height=6, 
       pointsize = 1,
       res=400)
-graphviz.chart(W12BN,type="barprob", scale = c(0.7,1.3), main = "Priors in the witnesses example (W1W2)")
+graphviz.chart(W12BN,type="barprob", scale = c(0.7,1.3))
 dev.off()
 
 
@@ -1068,6 +1089,9 @@ W34Table <- CoherencesTableNarr(W34BN,
                                 exampleName = "Witness"
 )
 
+
+
+W34Table
 
 W45Table <- CoherencesTableNarr(W45BN,
                                 scenariosList = list(C),
