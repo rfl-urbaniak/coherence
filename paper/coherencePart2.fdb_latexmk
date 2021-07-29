@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex coherencePart2"] 1626931835 "coherencePart2.aux" "coherencePart2.bbl" "coherencePart2" 1626931837
+["bibtex coherencePart2"] 1627572494 "coherencePart2.aux" "coherencePart2.bbl" "coherencePart2" 1627572582
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/apalike.bst" 1480098433 24635 604dafcc79f521a11ea73e506e1fbd98 ""
   "coherence.bib" 1626930782 1920042 1e3fe5436f18902a14efd5410aff02f4 ""
-  "coherencePart2.aux" 1626931836 9955 52b24e237e8051d44aabd74712e930e6 ""
+  "coherencePart2.aux" 1627572582 10367 df3bb694d258ac17035505cbefb9f5f8 ""
   "coherencePart2.bcf" 0 -1 0 ""
   (generated)
   "coherencePart2.blg"
   "coherencePart2.bbl"
-["pdflatex"] 1626931835 "coherencePart2.tex" "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.pdf" "coherencePart2" 1626931837
+["pdflatex"] 1627572581 "coherencePart2.tex" "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.pdf" "coherencePart2" 1627572582
   "/etc/texmf/web2c/texmf.cnf" 1594364599 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.aux" 1626931836 9955 52b24e237e8051d44aabd74712e930e6 ""
+  "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.aux" 1627572582 10367 df3bb694d258ac17035505cbefb9f5f8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1480098689 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -241,15 +241,17 @@
   "SC.png" 1626920216 84504 b1a4c520959783d11d5c5a1b570d8f3d ""
   "SCBN.png" 1626920216 82593 202fe9f899553ecabfadb78a7fd6473f ""
   "cohPlots.png" 1626920216 99214 ff8c7c8f694cc0f544a01e81f51393a0 ""
-  "coherencePart2.aux" 1626931836 9955 52b24e237e8051d44aabd74712e930e6 ""
-  "coherencePart2.bbl" 1626931835 5442 9f0ae9a11046dc7c42fdf4fb8e2e8c5b "bibtex coherencePart2"
-  "coherencePart2.out" 1626931836 1815 7d22c756915a6ced70a15a118b87e2cc ""
-  "coherencePart2.tex" 1626931832 52277 95f9d2ec600581b57e677f663c129b59 ""
+  "coherencePart2.aux" 1627572582 10367 df3bb694d258ac17035505cbefb9f5f8 ""
+  "coherencePart2.bbl" 1627572494 5442 9f0ae9a11046dc7c42fdf4fb8e2e8c5b "bibtex coherencePart2"
+  "coherencePart2.out" 1627572582 1815 7d22c756915a6ced70a15a118b87e2cc ""
+  "coherencePart2.tex" 1627572579 52336 65d1528f16c2068d3a62122e8cdfa8b6 ""
+  "coherencePart2.toc" 1627572582 1004 2f211d8c437f5b165eb2013a8e4874b8 ""
   "w1w2BNv2.png" 1626930723 46411 f6932bd3ad27d572c67472ba966f251f ""
   (generated)
-  "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.log"
-  "coherencePart2.aux"
-  "coherencePart2.out"
-  "coherencePart2.pdf"
+  "coherencePart2.toc"
   "coherencePart2.log"
+  "coherencePart2.out"
+  "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.log"
+  "coherencePart2.pdf"
   "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.pdf"
+  "coherencePart2.aux"

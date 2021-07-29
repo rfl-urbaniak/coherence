@@ -1,3 +1,11 @@
+% move results for Beatles and Witnesses to beginning of section 6, rename section, say a bit more about these results, make sure desiderata are clear in the subsections introducing the scenarios
+
+
+
+
+
+
+
 \documentclass[10pt,]{scrartcl}
  \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -151,72 +159,68 @@
 
 \begin{document}
 \maketitle
+\tableofcontents
 
 \section{Motivations \& introduction}
 
-The notion of coherence is often used in many philosophical, especially
-epistemological, discussions \citep[for instance, in discussions about the
-truth-conduciveness of coherence,][]{shogenji1999conducive,olsson2001conducive}. An explication of the key notion
-involved seems desirable.
 
-There is also a more practical reason to develop a better understanding
-of the notion: a plausible measure of coherence could be used to better
-evaluate the quality of some stories or narrations. For example in the
-legal context we would like to be able to assess the quality of a
-testimony in the court of law. Focusing only on the probability of a
-story is to some extent problematic, because from such a perspective,
-more detailed stories are penalized---they contain more propositions,
-so they (usually) have lower probabilities.  Moreover, a plausible coherence
-measure could perhaps be used to obtain sensible priors.
+When we talk about the coherence of a set of propositions or about the
+coherence of a story, we seem to refer to how well their individual
+pieces fit together. How are we to understand and apply this notion
+systematically, though?  As with beliefs, we can use both a binary and a graded notion of coherence. The binary notion is not very exciting: a set is incoherent
+just in case it is logically
+inconsistent.\footnote{There is a related notion in the neighborhood where an agent's  degrees of beliefs are coherent just in case it they are probabilistic. We will not use this notion in this paper.}  Our basic intuition is that graded coherence should satisfy  a generalization of this requirement: logically incoherent sets should have minimal level of graded coherence or, at least, lower coherence than consistent ones.  The goal of the paper is to provide an explication of the notion of coherence    that satisfies this requirement and  performs better than other measures. The key improvement  is that  once a narration is represented as a Bayesian network, its coherence is determined not only by the underlying probability measure, but also by the network structure. 
 
-Quite importantly, there is a disconnect between philosophical research on probabilistic coherence and the developments in Bayesian Network -based methods: the latter seems  seemingly unaware of the philosophical discussion. In particular, in the context of Bayesian networks developed
-for stories and narrations in legal contexts  \citep{vlek2013modeling,vlek2014building,vlek2015,vlek2016method,vlek2016stories,fenton2013general}, an approach to coherence has been
-developed by Vlek. The proposal is to capture the coherence of the story
-by introducing a single narration root node.\footnote{The root node  becomes an ancestor
+
+
+Why do we need an explication of the notion of coherence, though? 
+First, it is philosophically desirable, as  the notion is often used in many philosophical, especially
+epistemological, discussions \citep[for instance, in discussions about the truth-conduciveness of coherence,][]{shogenji1999conducive,olsson2001conducive}.  Second, a  plausible measure of coherence could be used to better evaluate the quality of  stories or narrations. One example  when it would be useful, is in the assessment of the quality of  narations in the court of law. Focusing only on the probability of a story is to some extent problematic, because from such a perspective, more detailed stories are penalized---they contain more propositions, so they (usually) have lower probabilities.  
+
+
+
+
+
+
+Interestingly, there is a disconnect between philosophical research on probabilistic coherence and the development of  Bayesian networks--based methods. The latter seems  unaware of the philosophical discussion, and the philosophical discussions of coherence do not refer to  Bayesian networks. Our paper  narrows this gap.
+
+
+
+In a  Bayesian networks approach to  modeling stories and narrations in legal contexts.
+\citet{vlek2013modeling} proposed an account  on which the coherence of a story (represented by a whole Bayesian network)
+is captured by the addition of a single narration root node.\footnote{The root node  becomes an ancestor
 node to all the other nodes such that the conditional probability of
 each dependent node given that the state of this root is 1 (that is, the
-corresponding proposition is assumed to be true), is also 1.}  Vlek then identifies
-coherence of a model with the prior probability of the narration node. We think this approach is too simplistic, as we want to capture the idea that coherence is distinct
+corresponding proposition is assumed to be true), is also 1. See \citep{vlek2014building,vlek2015,vlek2016method,vlek2016stories} for more details, and \citep{fenton2013general} for another take on Bayesian network representation of narrations.}  Its prior probability is identified with coherence. We think this approach is too simplistic, as we want to capture the idea that coherence is distinct
 from probability, and  the addition of a scenario node  introduces probabilistic
 dependencies by fiat. 
+
+
+
+
+
+
+
+
 
 
 % to asses an important aspect of a narration which
 %so far seems to escape probabilistic analysis.
 
-When we talk about the coherence of a set of propositions or about the
-coherence of a story, we seem to refer to how well their individual
-pieces fit together. How are we to understand and apply this notion
-systematically, though?
-
-As with beliefs, we can use both a binary and a graded notion of
-coherence. The binary notion is not very exciting: a set is incoherent
-just in case it is logically
-inconsistent.\footnote{There is a related notion in the neighborhood where an agent's  degrees of beliefs are coherent just in case it they are probabilistic. We will not use this notion in this paper.}
-Intuitively, graded coherence should be a generalization of this
-requirement: logically incoherent sets should have minimal level of graded coherence or, at least, lower coherence than
-consistent ones. What other requirements should a coherence measure
-satisfy and how should it be explicated formally, if we want to massage
-this notion into a more general framework of probabilistic epistemology?
-Defining a measure of graded coherence in probabilistic terms turned out
-to be quite a challenge, which resulted in heaps of literature.
 
 
-% We first introduce the main existing coherence measures. Then we describe a lengthy list of counterexamples to these measures. A general discussion of certain common features and issues we observed follows, which leads us to the description of our own coherence measure.
+
 
 Our measure diverges from the known candidates in three important
-respects: (1) It is not a function of a probabilistic measure and a set
+respects: (1) It is not a function of a probability measure and a set
 of propositions alone, because it is also sensitive to the selection and
-direction of arrows in a Bayesian Network representing an agent's credal state. (2) Unlike in the case of quite a few coherence measures, it is  sensitive
- the  weakest links in the narration,
-(3) The key elements used in coherence score calculations are not  not confirmation levels, but rather
-expected and weighted confirmation levels.
-% Finally, we apply our measure to the existing counterexamples and
-% compare its performance to the performance of the other measures.
-% Spoiler alert: it does a better job.
+direction of arrows in a Bayesian Network representing an agent's credal state. (2) Unlike in the case of quite a few coherence measures, it is  sensitive to
+ the  weakest links in the narration.
+(3) It is not obtained by simply averaging confirmation levels between all possible combinations of elements.
 
 
-We first describe the main probabilistic explications of coherence present in the literature (Section \ref{sec:measures}). Then, we describe two philosophically motivated thought experiments and one real-life example that will serve as illustration in our Bayesian network approach (Section \ref{sec:senariosAndBns}). Next we try to identify the key problems with  the existing measures (Section \ref{sec:challenges}), which leads us to our own positive proposal---that of \emph{structured coherence} (Section \ref{sec:structured}, which we explain with a running example in the background. With this tool in hand we approach our real-life example (the Sally Clark case) and argue that our measures handles it better than the other measures (Section \ref{sec:Sally}). We finish with the comparison of our measure with respect to the other examples we used, and a few closing comments (Section \ref{sec:discussion}). 
+
+We first describe the main probabilistic explications of coherence present in the literature (Section \ref{sec:measures}). Then, we describe two philosophically motivated thought experiments and one real-life example that will serve as illustration in our Bayesian network approach (Section \ref{sec:senariosAndBns}). Next we try to identify the key problems with  the existing measures (Section \ref{sec:challenges}), which leads us to our own positive proposal---that of \emph{structured coherence} (Section \ref{sec:structured}), which we explain with a running example in the background. With this tool in hand we approach our real-life example (the Sally Clark case) and argue that our measure handles it better than the other measures (Section \ref{sec:Sally}). We finish with the comparison of our measure with respect to the other examples we used, and a few closing comments (Section \ref{sec:discussion}). 
 
 
 
@@ -224,10 +228,33 @@ We first describe the main probabilistic explications of coherence present in th
 
 \section{Measures}\label{sec:measures}
 
-Quite a few different measures of coherence have already been developed. One of the first ones, the so-called deviation from independence measure, comes from Shogenji. Another early proposal, the relative overlap measure, was offered by  Olsson \& Glass. 
-Unfortunately, both of these approaches are susceptible to various objections and counterexamples \citep{Merricks1995,shogenji1999conducive, Akiba2000Shogenjis, Shogenji2001Reply, bovens2004bayesian,Siebel2004On-Fitelsons-me,siebel2006against,Shogenji2006Why,crupi2007BayesianMeasuresEvidential, koscholke2016evaluating, Schippers2019General}.
- We focus here on the most recent approach --- a class of measures called
-\textit{average mutual support}, which were developed to avoid these problems. Let’s take a look at  the general recipe for an \textit{average mutual support} measure.
+Quite a few different measures of coherence have already been developed.  Two early proposals are the so-called deviation from independence measure and  the relative overlap measure.
+
+\begin{itemize}
+    \item  Shogenji's 
+  \textit{deviation from independence} \citep{shogenji1999conducive}, is defined as the ratio between the probability of the
+conjunction of all claims, and the probability that the conjunction
+would get if all its conjuncts were probabilistically independent (scaling from 0 to $\infty$ with neutral point 1):
+
+\begin{align}
+    \tag{Shogenji}
+    \label{coh:Shogenji}
+     \mathcal{C}_{S}(S)=\frac{P(\bigwedge S)}{\prod_{i=1}^{\vert S \vert}\{P(S_i)\vert i \in S\}}
+\end{align}
+
+\item  \textit{Relative overlap} coming from \citep{olsson2001conducive} and \citep{glass2002}, is defined as the ratio  between the intersection of all propositions and their union (scaling from -1 to 1 with no clear neutral point):
+
+\begin{align}
+    \tag{Olsson}
+    \label{coh:Olsson}
+    \mathcal{C}_{O}(S)=\frac{P(\bigwedge S)}{P(\bigvee S)}
+\end{align}
+
+
+\end{itemize}
+
+Both of these approaches are susceptible to various objections and counterexamples \citep{Merricks1995,shogenji1999conducive, Akiba2000Shogenjis, Shogenji2001Reply, bovens2004bayesian,Siebel2004On-Fitelsons-me,siebel2006against,Shogenji2006Why,crupi2007BayesianMeasuresEvidential, koscholke2016evaluating, Schippers2019General}, To overcome them, more  recent works developed  a class of measures called
+\textit{average mutual support}. Let’s take a look at  the general recipe for such a measure.
 
 
 \begin{itemize}
@@ -239,11 +266,11 @@ Unfortunately, both of these approaches are susceptible to various objections an
   First, define a confirmation measure for the confirmation of a hypothesis \(H\) by evidence  \(E\): \(Conf(H,E)\).
 \item
   For each pair \(\langle X, Y \rangle \in P\), calculate
-  \(Conf(\bigwedge X, \bigwedge Y)\), where $\bigwedge X$ ($\bigwedge Y$) is the conjunction of all the elements of $X$ ($Y$).
+  \(Conf(\bigwedge X, \bigwedge Y)\), where $\bigwedge X$  is the conjunction of all the elements of $X$ (and $\bigwedge Y$ is to be understood analogously).
 \item
   Take the mean of all the results.
 \end{itemize}\begin{align*}
-    \mathcal{C}(P) & =
+    \mathcal{C}(S) & =
 mean\left(\left\{Conf(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i \rangle \in P\right\} \right)
 \end{align*}
 
@@ -254,7 +281,7 @@ negative). Here are the key candidates present in the literature:
 
 \begin{itemize}
 
-\item \citet{fitelson2003ProbabilisticTheoryCoherence}   uses the following confirmation function (ranging from -1 to 1 with neutral point at 0):
+\item \citet{fitelson2003ProbabilisticTheoryCoherence}   uses the following confirmation function (the resulting coherence measure ranges from -1 to 1 with neutral point at 0):
 
 \begin{align*}
     F(H,E) = \begin{cases}
@@ -263,10 +290,9 @@ negative). Here are the key candidates present in the literature:
     \frac{P(E|H)-P(E|\neg H)}{P(E|H)+P(E|\neg H)} & \mbox{o/w}
     \end{cases}
 \end{align*}
-
 \begin{align}
 \tag{Fitelson}  
-    \mathcal{C}_{F}(P) & =
+    \mathcal{C}_{F}(S) & =
 mean\left(\left\{F(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i\rangle \in P\right\} \right)
 \end{align}
 
@@ -284,17 +310,14 @@ mean\left(\left\{F(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i\rangle \in P
 
 %\subsection{Douven and Meij's}
 
-\item  \citet{Douven2007measuring}  use the \textit{difference} confirmation measure (also ranging from -1 to 1 with neutral point at 0):
+\item  \citet{Douven2007measuring}  use the \textit{difference} confirmation measure (with coherence ranging from -1 to 1 with neutral point at 0):
 
 \begin{align*}
     D(H,E) = P(H|E) - P(H)
 \end{align*}
-
-The resulting definition of coherence is:
-
 \begin{align}
 \tag{DM}  
-    \mathcal{C}_{DM}(P) & =
+    \mathcal{C}_{DM}(S) & =
 mean\left(\left\{D(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i\rangle \in P\right\} \right)
 \end{align}
 
@@ -310,8 +333,8 @@ mean\left(\left\{D(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i\rangle \in P
 
 %\noindent \textbf{neutral point:} 0 (not explicit)
 
-\item  \citet{Roche2013Coherence} starts with the
-absolute confirmation measure:
+\item  \citet{Roche2013Coherence} uses the
+absolute confirmation measure (the resulting coherence measure ranges from 0 to 1 with neutral point at $0.5$): 
 
 \begin{align*}
     A(H,E) = \begin{cases}
@@ -320,12 +343,9 @@ absolute confirmation measure:
     P(H|E) & \mbox{o/w} \\
     \end{cases}
 \end{align*}
-
-which results in the following coherence measure (ranging from 0 to 1 with neutral point at $0.5$):
-
 \begin{align}
 \tag{Roche}  
-    \mathcal{C}_{R}(P) & =
+    \mathcal{C}_{R}(S) & =
 mean\left(\left\{A(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i\rangle \in P\right\} \right) 
 \end{align}
 
@@ -340,35 +360,11 @@ mean\left(\left\{A(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i\rangle \in P
 \end{itemize}
 
 
-For comparison purposes, we will also bring up two coherence measures  based on average mutual support:
-
-\begin{itemize}
-    \item  Shogenji's 
-  \textit{deviation from independence} \citep{shogenji1999conducive}, defined as the ratio between the probability of the
-conjunction of all claims, and the probability that the conjunction
-would get if all its conjuncts were probabilistically independent (scaling from 0 to $\infty$ with neutral point 1):
-
-\begin{align}
-    \tag{Shogenji}
-    \label{coh:Shogenji}
-    C_s(A_1,\dots,A_n)=\frac{P(A_1 \& \dots \& A_n)}{P(A_1)\times\dots\times P(A_n)}
-\end{align}
-
-\item  \textit{Relative overlap} coming from \citep{olsson2001conducive} and \citep{glass2002}, defined as the ratio
-between the intersection of all propositions and their union (scaling from -1 to 1 with no clear neutral point):
-
-\begin{align}
-    \tag{Olsson}
-    \label{coh:Olsson}
-    C_o(A_1,\dots,A_n)=\frac{P(A_1 \& \dots \& A_n)}{P(A_1 \vee \dots \vee A_n)}
-\end{align}
 
 
 
 
 
-    
-\end{itemize}
 
 
 
@@ -376,16 +372,18 @@ between the intersection of all propositions and their union (scaling from -1 to
 \section{Scenarios and Bayesian Networks}\label{sec:senariosAndBns}
 
 
-Counterexamples to a coherence measure usually have the form of a few propositions formulated in natural language, such that intuitive judgments of coherence involved and the probabilistic calculations diverge. While such counterexamples are not in our focus in this paper, we will give a couple of examples. Due to space limitations we do not discuss other well-known examples, which we are aware of, but whose treatment is postponed to a different paper: Penguins \citep{bovens2004bayesian,Meijs2007Alleged},  Dunnit \citep{Merricks1995}, 
+One important way to evaluate coherence measures is to look at how they behave in test scenarios.\footnote{Another way present in the literature is to formulate abstract formal requirements for a coherence measure and to investigate whether a given coherence measure satisfies them. Since there is no agreement in the literature on what such requirements should be, we decided not to take this path in this paper.}
+ Some of those come from philosophical literature, and were put forward as counterexamples: they usually have the form of a few propositions formulated in natural language, such that intuitive judgments of coherence involved and the formal coherence calculations  diverge.  Due to space limitations we will only bring up a couple of them to illustrate what we think the key problems with the existing measures are. We are aware of other cases (Penguins \citep{bovens2004bayesian,Meijs2007Alleged},  Dunnit \citep{Merricks1995}, 
 Japanese swords \citep{Meijs2007Alleged}, 
 Robbers \citep{Siebel2004On-Fitelsons-me},
 and two similar ones: Depth and 
-Dice  \citep{Akiba2000Shogenjis,Shogenji2001Reply,Schippers2019General}. 
+Dice  \citep{Akiba2000Shogenjis,Shogenji2001Reply,Schippers2019General}), but their  treatment is postponed to a different paper.
+
+More importantly, we will also include a real-life example of the famous Sally Clark case. As we intend our measure to have practical applications, we need a sanity check of taking a look at how it behaves in a real-life scenario. 
+
+ In this section we introduce the scenarios we will use, describe how we capture them using Bayesian networks, and mention coherence-related intuitions that seem to accompany them. 
 
 
-
-
-However, later in this paper we will  provide calculations for these scenarios, just to briefly mention how various coherence measures  perform in those cases.  As a sanity check, we will also include a real-life example of the famous Sally Clark case. These examples will be used to explain how we represent various narrations as Bayesian networks. Later on we'll look at the results that  our coherence measure yields for these cases.
 
 
 
@@ -424,10 +422,10 @@ G & George is alive.\\
 
 
 We assume the prior probability of each individual band member being
-dead to 0.5 (as in the above table), and the CPT for \textsf{D} is
+dead to be 0.5 (as in the above table), and the conditional probability table (CPT) for node \textsf{D} is
 many-dimensional and so difficult to present concisely, but the method
-is straightforward: probability 1 is given to \textsf{D} in all
-combinations of the parents in which exactly one is true, and otherwise
+is straightforward: probability 1 is given to node \textsf{D} in all
+combinations of the parents in which exactly one is false, and otherwise
 \textsf{D} gets conditional probability 0. The BN with marginal probabilities looks as in Figure \ref{fig:BeatlesBN3}.
 
 
@@ -455,8 +453,8 @@ combinations of the parents in which exactly one is true, and otherwise
 
 \subsection{The Witnesses}
 
-\textbf{The scenario.}This one comes from \citep[391]{olsson2005}. Equally reliable witnesses try to identify a criminal. Consider the
-following reports (we extended the original scenario by adding \s{W5}). The problem might be seen as involving subsets of the following nodes:
+This scenario  comes from \citep[391]{olsson2005}. Equally reliable witnesses try to identify a criminal. Consider the
+ potential reports (we extended the original scenario by adding \s{W5}) listed in Table \ref{tab:witRep}. 
 
 \begin{table}[H]
 \centering
@@ -472,6 +470,8 @@ W4 & Witness no. 4: ‘‘Steve, John or James did it’’\\
 D & Who committed the deed (6  possible values)\\
 \bottomrule
 \end{tabular}
+\caption{Potential witnesses reports in the witness scenario.}
+\label{tab:witRep}
 \end{table}
 
 Note that  each proposition has the structure ``Witness no.
@@ -828,7 +828,7 @@ W1 & D & priorC & post &  priorN &  weightN & Z &  nZ\\
 \end{table}
 
 
- We only consider cases in which \textsf{W1} holds, so we have 1s everywhere in the first column. However, the agent is not supposed to know who committed the deed, so all possible instantiations of \textsf{D} are listed.   In our example the prior probability of \s{W1} is in column \textsf{priorC} (prior for the \textbf{child}, it is constant here), and the posterior probability of \textsf{W1} given different states of \textsf{D} is in column \s{post}.  We then  use these values to calculate the \s{Z} confirmation measures. In our example, these values are in column \s{Z}. 
+ We only consider cases in which \textsf{W1} holds, so we have 1s everywhere in the first column. However, the agent is not supposed to know who committed the deed, so all possible instantiations of \textsf{D} are listed.   In our example the prior probability of \s{W1} is in column \textsf{priorC} (prior for the \textbf{child}, it does not depend on the state of $D$, so it is constant, repeated to facilitate row-wise calculations), and the posterior probability of \textsf{W1} given different states of \textsf{D} is in column \s{post}.  We then  use these values to calculate the \s{Z} confirmation measures. In our example, these values are in column \s{Z}. 
  
  
  Now, to get from multiple \s{Z} scores to expected support levels we weight these scores by normalized  marginal probabilities of \(\mathsf{pa}_r\) \emph{as perceived from the perspective of the narration}. 
