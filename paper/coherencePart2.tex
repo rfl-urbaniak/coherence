@@ -2,6 +2,8 @@
 
 
 
+%polaczyc tableki sally clark, SC 
+
 
 
 
@@ -391,9 +393,8 @@ More importantly, we will also include a real-life example of the famous Sally C
 
 \subsection{The Beatles}
 
-\textbf{The scenario.} The challenge has been offered by \citet[339]{shogenji1999conducive} to criticize defining coherence in terms of pairwise
-coherence --- it shows there are jointly incoherent pairwise coherent
-sets. The scenario consists of the following claims:
+ The Beatles example has been offered by \citet[339]{shogenji1999conducive} to criticize defining coherence of a set in terms of 
+coherence of pairwise coherence.   The scenario consists of the following claims:
 
 \begin{table}[H]
 \centering
@@ -408,20 +409,13 @@ G & George is alive.\\
 \cellcolor{gray!6}{R} & \cellcolor{gray!6}{Ringo is alive.}\\
 \bottomrule
 \end{tabular}
+\caption{Nodes in the Beatles scenario.}
+\label{tab:beatles}
 \end{table}
 
+The key observation here is that each proper subset of the set is consistent, the whole set is not. So the coherence of the whole set should be lower than the coherence of each proper subset thereof.
 
-
-\begin{figure}[H]
-\hspace{25mm}
-\includegraphics[width =8cm]{BeatlesBN.png}
-\caption{Beatles BN with marginal probabilities.}
-\label{fig:BeatlesBN3}
-\end{figure}
-
-
-
-We assume the prior probability of each individual band member being
+In our representation of the scenario by means of a Bayesian network,  we assume the prior probability of each individual band member being
 dead to be 0.5 (as in the above table), and the conditional probability table (CPT) for node \textsf{D} is
 many-dimensional and so difficult to present concisely, but the method
 is straightforward: probability 1 is given to node \textsf{D} in all
@@ -429,31 +423,22 @@ combinations of the parents in which exactly one is false, and otherwise
 \textsf{D} gets conditional probability 0. The BN with marginal probabilities looks as in Figure \ref{fig:BeatlesBN3}.
 
 
-% \noindent  \textbf{Desiderata.} The set consisting of all of these
-% propositions is logically inconsistent (even though the propositions are
-% pairwise consistent), so it seems quite intuitive that it should be
-% incoherent. \vspace{2mm}
 
-% \begin{description}
-%     \item[(below neutral)] \{\s{D,J,P,G,R}\} should be incoherent.
-% \end{description}
 
-% \vspace{2mm} We can make this desideratum a bit stronger by requiring
-% that the coherence score for \{\s{D,J,P,G,R}\} should be minimal.
-% \vspace{2mm}
 
-% \begin{description}
-%     \item[(minimal)] \{\s{D,J,P,G,R}\} should get the lowest possible coherence value.
-% \end{description}
+\begin{figure}[H]
+\centering
+\includegraphics[width =10cm]{../images/BeatlesBN.png}
+\caption{Beatles BN with marginal probabilities.}
+\label{fig:BeatlesBN3}
+\end{figure}
 
-% \vspace{2mm} \noindent  One may argue that some coherence measures also
-% measure the degree of incoherence, therefore logically inconsistent sets
-% don't need to get the minimal score. We'll discuss this issue further in
-% Section \ref{sec:mean}.
+
+
 
 \subsection{The Witnesses}
 
-This scenario  comes from \citep[391]{olsson2005}. Equally reliable witnesses try to identify a criminal. Consider the
+The witnesses scenario  comes from \citep[391]{olsson2005}. Equally reliable witnesses try to identify a criminal. Consider the
  potential reports (we extended the original scenario by adding \s{W5}) listed in Table \ref{tab:witRep}. 
 
 \begin{table}[H]
@@ -470,23 +455,40 @@ W4 & Witness no. 4: ‘‘Steve, John or James did it’’\\
 D & Who committed the deed (6  possible values)\\
 \bottomrule
 \end{tabular}
-\caption{Potential witnesses reports in the witness scenario.}
+\caption{Potential witness reports in the witness scenario.}
 \label{tab:witRep}
 \end{table}
 
-Note that  each proposition has the structure ``Witness no.
+\noindent Note that  each proposition has the structure ``Witness no.
 \(X\) claims that \dots" instead of explicitly stating the witness'
 testimony.
 
 Two requirements are associated with this example: both
 \(\{\)\textsf{W1, W2}\(\}\) and \(\{\)\textsf{W4, W5}\(\}\) should be
-more coherent than \(\{\)\textsf{W3, W4}\(\}\).
+more coherent than \(\{\)\textsf{W3, W4}\(\}\).  The underlying intuition is the more suspects the witnesses agree on, the more coherent the evidence. 
 
-Each of these three sets is represented by a BN with three nodes: the root note \textsf{D} (who actually committed the deed), and its two binary children nodes corresponding to the propositions contained in a given set. In Figure \ref{fig:witnessw1w2} is the DAG for the first set, together with the marginal probabilities. The other two networks are analogous.
+
+In our BN representation, each of these three sets is represented by a network with three nodes: the root note \textsf{D} (who actually committed the deed), and its two binary children nodes corresponding to the propositions contained in a given set. Figure \ref{fig:witnessw1w2} illustrates the DAG for the first set, together with the marginal probabilities. The other two networks are analogous.
+
+
+The basic idea behind
+the CPTs we used is that for any particular witness we take the
+probability of them including the perpetrator in their list to be 0.8,
+and the probability of including an innocent to be .05.  
+The CPT for \textsf{D} is uniform. The table for \textsf{W1}  (Table \ref{tab:w1w2}) provides
+the conditional probability of \textsf{W1} listing (\textsf{W1}=1) or
+not listing (\textsf{W1}=0) a particular person given that the actual
+value of \textsf{D} is Steve/Martin/\dots.  In the
+Bayesian networks for other witness scenarios,  the CPT for \textsf{D} remains the same, and the CPTs for the witness nodes are analogous to the one for \textsf{W1}. 
+
+
+
+
+
 
 \begin{figure}[h]
-\hspace{10mm}
-\includegraphics[width =12cm]{w1w2BNv2.png}
+\centering
+\includegraphics[width =14cm]{../images/w1w2BNv2.png}
 \caption{BN for the witnesses example (W1W2) with marginal probabilities.}
 \label{fig:witnessw1w2}
 \end{figure}
@@ -494,43 +496,30 @@ Each of these three sets is represented by a BN with three nodes: the root note 
 
 
 
-The basic idea behind
-the CPTs we used is that for any particular witness we take the
-probability of them including the perpetrator in their list to be 0.8,
-and the probability of including an innocent to be .05.  
-The CPT for \textsf{D} is uniform. The table for \textsf{W1} provides
-the conditional probability of \textsf{W1} listing (\textsf{W1}=1) or
-not listing (\textsf{W1}=0) a particular person given that the actual
-value of \textsf{D} is Steve/Martin/\dots.  In the
-remaining  the CPT for \textsf{D} remains thesame, and the CPTs for the witness nodes are analogous to the one for \textsf{W1}. 
 
 
 
-
-
-\begin{figure}
+%\begin{figure}
 
 %\hspace{-15mm} 
-\begin{subfigure}[!ht]{0.3\textwidth}
+%\begin{subfigure}[!ht]{0.3\textwidth}
 \begin{table}[H]
-\centering
-\begin{tabular}{lr}
-\toprule
-D & Pr\\
-\midrule
-\cellcolor{gray!6}{Steve} & \cellcolor{gray!6}{0.167}\\
-Martin & 0.167\\
-\cellcolor{gray!6}{David} & \cellcolor{gray!6}{0.167}\\
-John & 0.167\\
-\cellcolor{gray!6}{James} & \cellcolor{gray!6}{0.167}\\
-Peter & 0.167\\
-\bottomrule
-\end{tabular}
-\end{table}
-\end{subfigure}
-\begin{subfigure}[!ht]{0.2\textwidth}
-\begin{table}[H]
-\centering\begin{table}[H]
+% \centering
+% \begin{tabular}{lr}
+% \toprule
+% D & Pr\\
+% \midrule
+% \cellcolor{gray!6}{Steve} & \cellcolor{gray!6}{0.167}\\
+% Martin & 0.167\\
+% \cellcolor{gray!6}{David} & \cellcolor{gray!6}{0.167}\\
+% John & 0.167\\
+% \cellcolor{gray!6}{James} & \cellcolor{gray!6}{0.167}\\
+% Peter & 0.167\\
+% \bottomrule
+% \end{tabular}
+% \end{table}
+% \end{subfigure}
+% \begin{subfigure}[!ht]{0.2\textwidth}
 \centering
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -541,12 +530,11 @@ Peter & 0.167\\
 0 & 0.2 & 0.95 & 0.95 & 0.95 & 0.95 & 0.95\\
 \bottomrule
 \end{tabular}
+% \end{table}
+% \end{subfigure}
+\caption{CPT for \textsf{W1} in the \textsf{W1W2} scenario. CPTs for other witnesses are  analogous.}
+\label{tab:w1w2}
 \end{table}
-\end{table}
-\end{subfigure}
-\caption{BN for the \textsf{W1W2} narration in the \textsf{Witness} problem. CPT for \textsf{W2} is identical to the one for \textsf{W1}.}
-\label{fig:w1w2}
-\end{figure}
 
 
 %This is our baseline BN for the scenario. In our measure, however, we will use as weights the probabilities that result from updating the BN with the scenario, as the coherence of a scenario is to be evaluated from its own perspective (we'll have a bit more say about this later on). 
@@ -586,14 +574,51 @@ Peter & 0.167\\
 
 
 
-Later on we take the existing coherence measures for a ride by testing them on a real-case based Bayesian network for the Sally Clark case. At this point, we introduce the case and the network.  R. v. Clark (EWCA Crim 54, 2000) is a classic  example of how the lack of probabilistic independence between events can be easily overlooked. Sally Clark's first son died in 1996 soon after birth, and her second son died in similar circumstances a few years later in 1998.  At trial, the paediatrician Roy Meadow testified that the probability that a child from such a  family would die of Sudden Infant Death Syndrome (SIDS) was 1 in 8,543.  Meadow calculated that therefore the probability of both children dying of SIDS was approximately 1 in  1 in 73 million. Sally Clark was convicted of murdering her  infant sons (the conviction was ultimately reversed on appeal). The calculation illegitimately assumes independence,  as the  environmental or genetic factors may predispose a family to SIDS. The winning appeal was based on new evidence: signs of a potentially lethal disease---contrary to what was assumed in the original case---were found in one of the bodies. 
+Later on we take the existing coherence measures for a ride by testing them on a real-case based Bayesian network for the Sally Clark case. At this point, we introduce the case and the network.  
 
-\citet{Fenton2018Risk} constructed a Bayesian Network to discuss the interaction of the key pieces of evidence in this case, and our Bayesian network is based on theirs.  The network structure is in Figure \ref{fig:sc}.
+R. v. Clark (EWCA Crim 54, 2000) is a classic  example of how the lack of probabilistic independence between events can be easily overlooked. Sally Clark's first son died in 1996 soon after birth, and her second son died in similar circumstances a few years later in 1998.  At trial, the paediatrician Roy Meadow testified that the probability that a child from such a  family would die of Sudden Infant Death Syndrome (SIDS) was 1 in 8,543.  Meadow calculated that therefore the probability of both children dying of SIDS was approximately  1 in 73 million. Sally Clark was convicted of murdering her  infant sons (the conviction was ultimately reversed on appeal). The calculation illegitimately assumes independence,  as the  environmental or genetic factors may predispose a family to SIDS. The winning appeal was based on new evidence: signs of a potentially lethal disease---contrary to what was assumed in the original case---were found in one of the bodies. 
+
+We will be interested in tracking probability and coherence in three stages of the case: 
+\begin{itemize} 
+\item In \textsf{Stage 0}, it is known that the children have died, but no evidence regarding bruising or traces of disease is available.
+
+\item In \textsf{Stage 1}, which corresponds to the original case, bruising is found in two children, but no trace of disease in either.
+
+\item In \textsf{Stage 2}, bruising was found in both sons, but signs of disease are also present in the first son. 
+\end{itemize}
+
+
+
+Here  are some intuitions one might have about the coherences involved. Let's call the scenario in which both children died of SIDS 00, the one in which both were murdered 11, the one in which only the first child was murdered 10, and the one in which only the second one was murdered 01.
+
+\begin{enumerate}
+    \item We would expect 11 and 00 to be more coherent than either 10 or 01. The intution is that the claim that both sons died in the same way sounds more coherent than the alternative scenarios.  %This condition is satisfied by all measures.
+    %This requirement fails for Douven-Meijs and Shogenji.
+    \item Perhaps, we would not expect 11 and 00 to be nearly maximally coherent. If we buy into this intuiton, we have reasons to dislike Fitelson, Roche and Olsson-Glass.
+    \item When moving from Stage 0 to Stage 1, the coherence of 11 should not decrease. After all, we include evidence in support of 11. This condition fails for Douven-Meijs, Shogenji and to a slight extent for Fitelson.
+    \item For similar reason, we would not expect the coherence of 11 to be much less than the coherence of 00 in Stage A. This condition fails for Douven-Meijs and Shogenji.
+    \item Given that in Stage B we include evidence supporting the claim that son A was not murdered, we would not expect the coherence of 01 to be smaller than the coherence of 10 in Stage B. This condition fails radically for Fitelson (01 becomes maximally incoherent, even though the evidence is not conclusive!), and to a small degree for Douven-Meijs.
+
+    \item  One might have the intuition that \textsf{Stage 0}expect the coherences of 11 and 00 to not be too far. While perhaps 00 should have lower prior probability than 11,  prior to obtaining evidence, mere coherence considerations don't seem to put one of these scenarios at a strong disadvantage.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+\citet{Fenton2018Risk} constructed a Bayesian network to discuss the interaction of the key pieces of evidence in this case, and our Bayesian network is based on theirs.  The network structure is in Figure \ref{fig:sc}.
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics{SC.png}
+    \includegraphics[width = 12cm]{SC.png}
     \caption{The directed acyclic graph for the Sally Clark BN}
     \label{fig:sc}
 \end{figure}

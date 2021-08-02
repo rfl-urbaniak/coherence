@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.7.16)  2 AUG 2021 11:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.7.16)  2 AUG 2021 11:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**coherencePart2.tex
-(/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.tex
+**coherencePaperRevised.tex
+(/home/rafal/UG/UGprojects/coherence3/paper/coherencePaperRevised.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
@@ -842,8 +842,8 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip59
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 43.
-Package hyperref Info: Option `breaklinks' set `true' on input line 43.
+Package hyperref Info: Option `colorlinks' set `true' on input line 33.
+Package hyperref Info: Option `breaklinks' set `true' on input line 33.
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
@@ -878,7 +878,7 @@ Class scrartcl Warning: Usage of package `parskip' together
 (scrartcl)              I'd suggest to use option
 (scrartcl)              `parskip' with one of it's several values.
 (scrartcl)              Nevertheless, using requested
-(scrartcl)              package `parskip' on input line 60.
+(scrartcl)              package `parskip' on input line 50.
 
 (/usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2001/04/09 non-zero parskip adjustments
@@ -961,7 +961,7 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \c@LT@chunks=\count122
 \LT@p@ftn=\toks26
 )
-Class scrartcl Info: longtable captions redefined on input line 90.
+Class scrartcl Info: longtable captions redefined on input line 80.
 
 (/usr/share/texlive/texmf-dist/tex/latex/ms/ragged2e.sty
 Package: ragged2e 2009/05/21 v2.1 ragged2e Package (MS)
@@ -1735,66 +1735,63 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks49
 \@floatcapt=\box47
 )
-(/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.aux
+(/home/rafal/UG/UGprojects/coherence3/paper/coherencePaperRevised.aux)
+\openout1 = `coherencePaperRevised.aux'.
 
-LaTeX Warning: Label `tab:beatles' multiply defined.
+LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 161.
+LaTeX Font Info:    Try loading font information for OML+jkp on input line 161.
 
-)
-\openout1 = `coherencePart2.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 162.
-LaTeX Font Info:    Try loading font information for OML+jkp on input line 162.
-
- (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omljkp.fd
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 162.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 162.
-LaTeX Font Info:    ... okay on input line 162.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 162.
-LaTeX Font Info:    ... okay on input line 162.
-LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 162.
-LaTeX Font Info:    Try loading font information for OMS+jkp on input line 162.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 161.
+LaTeX Font Info:    Try loading font information for OMS+jkp on input line 161.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omsjkp.fd
 File: omsjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 162.
-LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 162.
-LaTeX Font Info:    Try loading font information for OMX+jkp on input line 162.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 161.
+LaTeX Font Info:    Try loading font information for OMX+jkp on input line 161.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omxjkp.fd
 File: omxjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 162.
-LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 162.
-LaTeX Font Info:    Try loading font information for U+jkpexa on input line 162
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 161.
+LaTeX Font Info:    Try loading font information for U+jkpexa on input line 161
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpexa.fd
 File: ujkpexa.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 162.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 162.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 162.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 161.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 161.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 162.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 162.
-LaTeX Font Info:    ... okay on input line 162.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 162.
-LaTeX Font Info:    ... okay on input line 162.
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 162.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 161.
+LaTeX Font Info:    ... okay on input line 161.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 161.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
-LaTeX Info: Redefining \microtypecontext on input line 162.
+LaTeX Info: Redefining \microtypecontext on input line 161.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -1809,7 +1806,7 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 )
 \AtBeginShipoutBox=\box48
-Package hyperref Info: Link coloring ON on input line 162.
+Package hyperref Info: Link coloring ON on input line 161.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1819,14 +1816,14 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count158
 )
-LaTeX Info: Redefining \ref on input line 162.
-LaTeX Info: Redefining \pageref on input line 162.
-LaTeX Info: Redefining \nameref on input line 162.
+LaTeX Info: Redefining \ref on input line 161.
+LaTeX Info: Redefining \pageref on input line 161.
+LaTeX Info: Redefining \nameref on input line 161.
 
-(/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.out)
-(/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.out)
+(/home/rafal/UG/UGprojects/coherence3/paper/coherencePaperRevised.out)
+(/home/rafal/UG/UGprojects/coherence3/paper/coherencePaperRevised.out)
 \@outlinefile=\write4
-\openout4 = `coherencePart2.out'.
+\openout4 = `coherencePaperRevised.out'.
 
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -1860,12 +1857,12 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 162.
+LaTeX Info: Redefining \selectfont on input line 161.
  ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for T1+jkpss on input line 164
+LaTeX Font Info:    Try loading font information for T1+jkpss on input line 163
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/t1jkpss.fd
@@ -1876,132 +1873,90 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 16
-4.
+3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
 LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 16
-4.
+3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
 LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 16
-4.
+3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
 LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 16
-4.
+3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for U+jkpsya on input line 164
+LaTeX Font Info:    Try loading font information for U+jkpsya on input line 163
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsya.fd
 File: ujkpsya.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+jkpsyb on input line 164
+LaTeX Font Info:    Try loading font information for U+jkpsyb on input line 163
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsyb.fd
 File: ujkpsyb.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+jkpmia on input line 164
+LaTeX Font Info:    Try loading font information for U+jkpmia on input line 163
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpmia.fd
 File: ujkpmia.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 164
+LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 163
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsyc.fd
 File: ujkpsyc.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 164.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 163.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 164.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 163.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 164.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 163.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 164.
-Package tocbasic Info: character protrusion at toc deactivated on input line 16
-4.
-
-(/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.toc
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 4.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 4.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 4.
-)
-\tf@toc=\write5
-\openout5 = `coherencePart2.toc'.
-
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 174.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 163.
  [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for TS1+ptm on input line 236.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 203.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 203.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 203.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 203.
+ [2]
+LaTeX Font Info:    Try loading font information for TS1+ptm on input line 309.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [2] [3] [4]
-<../images/BeatlesBN.png, id=205, 433.62pt x 433.62pt>
-File: ../images/BeatlesBN.png Graphic file (type png)
-<use ../images/BeatlesBN.png>
-Package pdftex.def Info: ../images/BeatlesBN.png  used on input line 431.
-(pdftex.def)             Requested size: 284.54257pt x 284.54257pt.
- [5]
-[6 <../images/BeatlesBN.png>]
-<../images/w1w2BNv2.png, id=225, 433.62pt x 252.945pt>
-File: ../images/w1w2BNv2.png Graphic file (type png)
-<use ../images/w1w2BNv2.png>
-Package pdftex.def Info: ../images/w1w2BNv2.png  used on input line 491.
-(pdftex.def)             Requested size: 398.3596pt x 232.37643pt.
-
-Overfull \hbox (24.91714pt too wide) in paragraph at lines 491--492
- [][] 
- []
-
-[7 <../images/w1w2BNv2.png>]
-<SC.png, id=237, 433.62pt x 433.62pt>
-File: SC.png Graphic file (type png)
-<use SC.png>
-Package pdftex.def Info: SC.png  used on input line 601.
-(pdftex.def)             Requested size: 341.4511pt x 341.4511pt.
- [8]
-<SCBN.png, id=247, 433.62pt x 433.62pt>
-File: SCBN.png Graphic file (type png)
-<use SCBN.png>
-Package pdftex.def Info: SCBN.png  used on input line 614.
-(pdftex.def)             Requested size: 373.46172pt x 373.46172pt.
- [9 </home/rafal/UG/UGprojects/coherence3/paper/SC.png>]
-File: SCBN.png Graphic file (type png)
-<use SCBN.png>
-Package pdftex.def Info: SCBN.png  used on input line 630.
-(pdftex.def)             Requested size: 341.4511pt x 341.4511pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[10 </home/rafal/UG/UGprojects/coherence3/paper/SCBN.png>] [11] [12]
-LaTeX Font Info:    Try loading font information for OT1+jkpss on input line 77
-1.
+) [3] [4] [5] [6]
+[7] [8] [9] [10]
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
+ine 822.
+ [11] [12] [13] [14]
+LaTeX Font Info:    Try loading font information for OT1+jkpss on input line 10
+80.
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
 File: ot1jkpss.fd 2007/07/16 Fontinst v1.928 font definitions for OT1/jkpss.
@@ -2010,54 +1965,390 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `jkpss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [13] [14]
-[15] [16] [17]
-<cohPlots.png, id=342, 433.62pt x 433.62pt>
-File: cohPlots.png Graphic file (type png)
-<use cohPlots.png>
-Package pdftex.def Info: cohPlots.png  used on input line 1075.
-(pdftex.def)             Requested size: 373.46172pt x 373.46172pt.
- (/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.bbl
-[18] [19 </home/rafal/UG/UGprojects/coherence3/paper/cohPlots.png>] [20])
+ [15] [16]
+[17]
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-12-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1269 \end{subfigure}}
+                        \hfill
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[18]
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-14-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1324 \end{subfigure} }
+                        
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-16-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1361 \end{subfigure}}
+                        \hfill
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[19] [20]
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-19-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1439 \end{subfigure}}
+                       
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (8.53262pt too wide) in paragraph at lines 1455--1464
+ [][] 
+ []
+
+
+Overfull \hbox (1.31265pt too wide) in paragraph at lines 1469--1478
+ [][] 
+ []
+
+
+Overfull \hbox (15.7526pt too wide) in paragraph at lines 1482--1491
+ [][] 
+ []
+
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-22-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1502 \end{subfigure}}
+                       
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
 [21]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1168.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1168.
- (/home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1168.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1168.
 
-Package rerunfilecheck Info: File `coherencePart2.out' has not changed.
-(rerunfilecheck)             Checksum: 7D22C756915A6CED70A15A118B87E2CC;1815.
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-25-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1566 \end{subfigure}}
+                        \hfill
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: There were multiply-defined labels.
+Overfull \hbox (1.90001pt too wide) in paragraph at lines 1566--1648
+[]$  $[]$ 
+ []
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1168.
+[22] [23]
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-30-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1694 ...d_files/figure-latex/unnamed-chunk-30-1}
+                                                   \end{center}
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1700.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1700.
+
+Overfull \hbox (1.90001pt too wide) in paragraph at lines 1692--1742
+[]$[]$  $[]$ 
+ []
+
+[24]
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-33-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1784 \end{subfigure}}
+                        \hfill
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (20.83269pt too wide) in paragraph at lines 1784--1798
+[][]  $[]$ 
+ []
+
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-36-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1845 \end{subfigure}}
+                        \hfill
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[25]
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-39-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1923 \end{subfigure}}
+                        \hfill
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (123.56442pt too wide) in paragraph at lines 1946--1955
+ [][] 
+ []
+
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-42-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1978 \end{subfigure}}
+                       
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-43-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1983 \end{subfigure}}
+                       
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[26] [27]
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-46-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2074 \end{subfigure}}
+                       
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (57.07611pt too wide) in paragraph at lines 2132--2132
+ [][] 
+ []
+
+
+Overfull \hbox (57.07611pt too wide) in paragraph at lines 2132--2132
+ [][] 
+ []
+
+
+Overfull \hbox (57.07611pt too wide) in paragraph at lines 2132--2132
+ [][] 
+ []
+
+[28]
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-48-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2142 \end{subfigure}}
+                       
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (57.07611pt too wide) in paragraph at lines 2200--2200
+ [][] 
+ []
+
+
+Overfull \hbox (57.07611pt too wide) in paragraph at lines 2200--2200
+ [][] 
+ []
+
+
+Overfull \hbox (57.07611pt too wide) in paragraph at lines 2200--2200
+ [][] 
+ []
+
+[29] [30]
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-53-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2331 \end{subfigure} }
+                        \hfill
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-55-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2369 \end{subfigure}}
+                        \hfill
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[31] [32]
+
+! LaTeX Error: File `coherencePaperRevised_files/figure-latex/unnamed-chunk-58-
+1' not found.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.2447 \end{subfigure}}
+                       
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (26.74937pt too wide) in paragraph at lines 2494--2503
+ [][] 
+ []
+
+
+Overfull \hbox (32.30931pt too wide) in paragraph at lines 2507--2516
+ [][] 
+ []
+
+[33] [34] [35] [36] [37] [38] [39]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2877.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2877.
+
+(/home/rafal/UG/UGprojects/coherence3/paper/coherencePaperRevised.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2877.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2877.
+
+Package rerunfilecheck Info: File `coherencePaperRevised.out' has not changed.
+(rerunfilecheck)             Checksum: 0F1CFE119264AD5E2685057566C03063;4404.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2877.
  ) 
 Here is how much of TeX's memory you used:
- 28328 strings out of 492982
- 493785 string characters out of 6134896
- 641537 words of memory out of 5000000
- 30984 multiletter control sequences out of 15000+600000
- 122438 words of font info for 343 fonts, out of 8000000 for 9000
+ 28620 strings out of 492982
+ 497051 string characters out of 6134896
+ 667177 words of memory out of 5000000
+ 31058 multiletter control sequences out of 15000+600000
+ 155784 words of font info for 467 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,18n,106p,8846b,479s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 73i,18n,106p,8852b,712s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/kpfonts/jkpssbn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-kpfonts/jkpssmn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/rsfs/rs
-fs10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/urw/times/utmri8a.pfb>
-Output written on /home/rafal/UG/UGprojects/coherence3/paper/coherencePart2.pdf
- (21 pages, 488055 bytes).
+public/kpfonts/jkpmia.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpf
+onts/jkpssbn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jk
+pssmn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/t
+imes/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pf
+b>
+Output written on /home/rafal/UG/UGprojects/coherence3/paper/coherencePaperRevi
+sed.pdf (39 pages, 223698 bytes).
 PDF statistics:
- 425 PDF objects out of 1000 (max. 8388607)
- 377 compressed objects within 4 object streams
- 95 named destinations out of 1000 (max. 500000)
- 32910 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 557 PDF objects out of 1000 (max. 8388607)
+ 498 compressed objects within 5 object streams
+ 178 named destinations out of 1000 (max. 500000)
+ 49445 words of extra memory for PDF output out of 51595 (max. 10000000)
 

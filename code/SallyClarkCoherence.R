@@ -114,7 +114,8 @@ SCstates <- c("00", "11","01","10")
 
 BN <- SallyClarkBN
 
-structuredNoSD(SallyClarkBN,SCnodes,c("0","0"))$structuredNoSD
+
+structuredNoSD(SallyClarkBN,SCnodes,c("0","0"))
 
 structuredNoSD(SallyClarkBN,SCnodes,c("1","1"))
 
@@ -216,6 +217,14 @@ SCprobsStageAVector <- c(SCprobsStageA["0","0"],SCprobsStageA["1","1"],SCprobsSt
 #structured for Stage A
 BN <- SallyClarkBNstageA
 
+structuredNoSD(SallyClarkBNstageA,SCnodes,c("0","0"))
+structuredNoSD(SallyClarkBNstageA,SCnodes,c("1","1"))
+structuredNoSD(SallyClarkBNstageA,SCnodes,c("0","1"))
+structuredNoSD(SallyClarkBNstageA,SCnodes,c("1","0"))
+
+
+
+
 SCstructuredStageA <- round(c(structuredNoSD(SallyClarkBNstageA,SCnodes,c("0","0"))$structuredNoSD,
                             structuredNoSD(SallyClarkBNstageA,SCnodes,c("1","1"))$structuredNoSD,
                             structuredNoSD(SallyClarkBNstageA,SCnodes,c("0","1"))$structuredNoSD,
@@ -302,6 +311,12 @@ SCprobsStageBVector <- c(SCprobsStageB["0","0"],SCprobsStageB["1","1"],SCprobsSt
 
 
 BN <- SallyClarkBNstageB
+
+structuredNoSD(SallyClarkBNstageB,SCnodes,c("0","0"))
+structuredNoSD(SallyClarkBNstageB,SCnodes,c("1","1"))
+structuredNoSD(SallyClarkBNstageB,SCnodes,c("1","0"))
+structuredNoSD(SallyClarkBNstageB,SCnodes,c("0","1"))
+
 
 SCstructuredStageB <- round(c(structuredNoSD(SallyClarkBNstageB,SCnodes,c("0","0"))$structuredNoSD,
                               structuredNoSD(SallyClarkBNstageB,SCnodes,c("1","1"))$structuredNoSD,

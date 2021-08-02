@@ -363,13 +363,15 @@ png(file="../images/BeatlesDAG.png",
 graphviz.plot(BeatlesDAG)
 dev.off()
 
+?graphviz.chart
 png(file="../images/BeatlesBN.png", 
       units="in", 
       width=6, 
       height=6, 
       pointsize = 1,
       res=400)
-graphviz.chart(BeatlesBN,type="barprob", scale = c(0.7,1.3), main = "Priors in the Beatles example")
+graphviz.chart(BeatlesBN,type="barprob", scale = c(1.1,1.3) #, main = "Priors in the Beatles example")
+)
 dev.off()
 
 ```
@@ -1051,10 +1053,10 @@ dev.off()
 png(file="../images/w1w2BNv2.png", 
       units="in", 
       width=6, 
-      height=6, 
-      pointsize = 1,
+      height=3.5, 
+      pointsize = 2,
       res=400)
-graphviz.chart(W12BN,type="barprob", scale = c(0.7,1.3))
+graphviz.chart(W12BN,type="barprob", scale = c(1.2,1.4))
 dev.off()
 
 
