@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: coherencePart3.aux
+The style file: apalike.bst
+Database file #1: coherence.bib
+You've used 25 entries,
+            1935 wiz_defined-function locations,
+            633 strings with 7423 characters,
+and the built_in function-call counts, 10181 in all, are:
+= -- 1020
+> -- 329
+< -- 25
++ -- 113
+- -- 103
+* -- 828
+:= -- 1723
+add.period$ -- 80
+call.type$ -- 25
+change.case$ -- 168
+chr.to.int$ -- 25
+cite$ -- 25
+duplicate$ -- 410
+empty$ -- 778
+format.name$ -- 138
+if$ -- 2048
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 28
+newline$ -- 128
+num.names$ -- 81
+pop$ -- 142
+preamble$ -- 1
+purify$ -- 171
+quote$ -- 0
+skip$ -- 318
+stack$ -- 0
+substring$ -- 831
+swap$ -- 67
+text.length$ -- 6
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 144
+warning$ -- 0
+while$ -- 95
+width$ -- 0
+write$ -- 330

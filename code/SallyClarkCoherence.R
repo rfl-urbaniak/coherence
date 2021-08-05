@@ -94,13 +94,16 @@ SallyClarkCPT <- list(Amurder=AmurderProb,Adisease = AdiseaseProb,
 SallyClarkBN <- custom.fit(SallyClarkDAG,SallyClarkCPT)
 
 
+scJN <- 
+
+
 png(file="../images/SCBN.png", 
     units="in", 
     width=6, 
     height=6, 
     pointsize = 1,
     res=400)
-graphviz.chart(SallyClarkBN,type="barprob", scale = c(0.7,1.3), main = "Priors in the Sally Clark case")
+graphviz.chart(SallyClarkBN,type="barprob", scale = c(0.7,1.3))
 dev.off()
 
 
@@ -115,13 +118,6 @@ SCstates <- c("00", "11","01","10")
 BN <- SallyClarkBN
 
 
-structuredNoSD(SallyClarkBN,SCnodes,c("0","0"))
-
-structuredNoSD(SallyClarkBN,SCnodes,c("1","1"))
-
-structuredNoSD(SallyClarkBN,SCnodes,c("0","1"))
-
-structuredNoSD(SallyClarkBN,SCnodes,c("1","0"))
 
 
 SCstructuredNoSD <- round(c(structuredNoSD(SallyClarkBN,SCnodes,c("0","0"))$structuredNoSD,

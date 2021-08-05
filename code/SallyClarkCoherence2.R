@@ -354,11 +354,12 @@ sc2DM
 saveRDS(sc2DMn, file = "tables/sc2sc2DM.RDS")
 
 
+
 sc2Olsson <- round(c(OlssonCoherenceForBNs(scBN, 
               SCnodes,c("0","0","1","1","1","0"))$`Olsson coherence`,
               OlssonCoherenceForBNs(scBN, SCnodes,c("1","1","1","1","1","0"))$`Olsson coherence`,
               OlssonCoherenceForBNs(scBN, SCnodes,c("0","1","1","1","1","0"))$`Olsson coherence`,
-              OlssonCoherenceForBNs(scBN, SCnodes,c("1","0","1","1","1","0"))$`Olsson coherence`),4)
+              OlssonCoherenceForBNs(scBN, SCnodes,c("1","0","1","1","1","0"))$`Olsson coherence`),9)
 
 sc2Olsson
 
@@ -366,7 +367,7 @@ saveRDS(sc2Olsson, file = "tables/sc2Olsson.RDS")
 
 
 sc2shogenji<- round(c(ShogenjiCoherenceForBNs(scBN, 
-          SCnodes,c("0","0","1","1","1","0"))$structuredNoSD,
+          SCnodes,c("0","0","1","1","1","0"))$`Shogenji coherence`,
           ShogenjiCoherenceForBNs(scBN, SCnodes,c("1","1","1","1","1","0"))$`Shogenji coherence`,
           ShogenjiCoherenceForBNs(scBN, SCnodes,c("0","1","1","1","1","0"))$`Shogenji coherence`,
           ShogenjiCoherenceForBNs(scBN, SCnodes,c("1","0","1","1","1","0"))$`Shogenji coherence`),4)
@@ -480,16 +481,34 @@ colnames(scStage1Table) <- c("Stage","States","Structured","Fitelson","Douven-Me
 scStage1Table
 
 
-scStage2Table <- data.frame(rep("Stage 2",4),SCstates,sc2structured,sc2fitelson,sc2DM,sc2roche,sc2shogenji,sc2Olsson)
+scStage2Table <- data.frame(rep("Stage 2",4),SCstates,sc2structured,sc2fitelson,sc2DM,sc2roche,sc2shogenji,sc2Olsson,priorsStage2, scPosteriorsS2)
 
-colnames(scStage2Table) <- c("Stage","States","Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass", "Probability")
+colnames(scStage2Table) <- c("Stage","States","Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass", "Priors", "Posteriors")
 
-
+scStage2Table
 
 scJointTable <- rbind(scStage0Table, scStage1Table, scStage2Table)
 
 saveRDS(scJointTable, file = "tables/scJointTable.RDS")
 
+
+library(dplyr)
+scJointTableForPrinting <- scJointTable %>% dplyr::mutate_if(is.numeric, funs(as.character(signif(., 5)))) 
+
+scJointTableForPrinting
+
+
+scJointTableForPrinting %>%  kable(format = "latex",booktabs=T,
+           linesep = "",  escape = FALSE, 
+           caption = "Coherence scores in the Sally Clark scenarios in three stages, with priors and posteriors given evidence.") %>%  
+  kable_styling(latex_options=c("scale_down"))
+
+
+
+
+
+
+#OUTDATED
 
 
 SCFitelson <-round(c(FitelsonCoherenceForBNs(SallyClarkBN,SCnodes,c("0","0"))$`Fitelson coherence`,
@@ -743,83 +762,6 @@ SCstageB %>%  kable(format = "latex",booktabs=T,
 
 
 saveRDS(SCstageB, file = "tables/SCstageB.RDS")
-
-
-
-
-#now look at correlations with probability
-
-SCall <- rbind(SCnoEvidence,SCstageA,SCstageB)
-
-
-SCall
-colnames(SCall)
-
-#high coherence with various pr, low coherence, low pr
-strPlot <- ggplot(SCall)+geom_jitter(aes(y = Probability, x = Structured), size = 1, alpha = .5,
-                                     width = 0.05, height = 0.05)+
-  theme_tufte()+xlab("Coherence")+labs(color = "Coherence measure")+ggtitle("Structured")
-
-strPlot
-
-fitPlot <- ggplot(SCall) +
-  geom_jitter(aes(y = Probability, x = Fitelson), size = 1, alpha = .5,
-              width = 0.05, height = 0.05) +
-  theme_tufte()+xlab("Coherence")+ggtitle("Fitelson")
-
-fitPlot
-
-ogPlot <- ggplot(SCall) +
-  geom_jitter(aes(y = Probability, x = SCall$`Olsson-Glass`), size = 1, alpha = .5,
-              width = 0.05, height = 0.05)  +
-  theme_tufte()+xlab("Coherence")+labs(color = "Coherence measure")+ggtitle("Olsson-Glass")
-
-ogPlot
-
-rochPlot <-ggplot(SCall)+ geom_jitter(aes(y = Probability, x = Roche), size = 1, alpha = .5, 
-                                      width = 0.05, height = 0.05)+
-  theme_tufte()+xlab("Coherence")+labs(color = "Coherence measure")+ggtitle("Roche")
-
-rochPlot
-
-
-ogPlot
-
-#wow, coherence high, prob tends to be low!
-dmPlot <- ggplot(SCall) +
-  geom_jitter(aes(y = Probability, x = SCall$`Douven-Meijs`), size = 1, alpha = .5, width = .15, height = 0.05) +
-  theme_tufte()+xlab("Coherence")+labs(color = "Coherence measure")+ggtitle("Douven-Meijs")
-
-
-dmPlot
-
-shPlot <- ggplot(SCall)+geom_jitter(aes(y = Probability, x = Shogenji), size = 1, alpha = .7, width = 1, height = 0.05)+
-  theme_tufte()+xlab("Coherence")+labs(color = "Coherence measure")+ggtitle("Shogenji")
-
-
-
-shPlot
-
-png(file="../images/cohPlots.png", 
-    units="in", 
-    width=6, 
-    height=6, 
-    pointsize = 1,
-    res=400)
-grid.arrange(strPlot, fitPlot, ogPlot, rochPlot, dmPlot, shPlot, nrow = 3)
-
-dev.off()
-
-
-
-
-
-
-
-
-
-nrow(SCall)
-
 
 
 
