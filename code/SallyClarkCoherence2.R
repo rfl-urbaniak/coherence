@@ -222,9 +222,9 @@ sc0probsVector
 
 SCstates <- c("00", "11","01","10")
 
-scStage0Table <- data.frame(rep("Stage 0",4),SCstates,sc0structured,sc0fitelson,sc0DouvenMeijs,sc0Roche,sc0Shogenji,sc0Olsson,sc0probsVector)
+scStage0Table <- data.frame(rep("Stage 0",4),SCstates,sc0structured,sc0fitelson,sc0DouvenMeijs,sc0Roche,sc0Shogenji,sc0Olsson,sc0probsVector, rep(NA,4))
 
-colnames(scStage0Table) <- c("Stage", "States","Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass", "Probability")
+colnames(scStage0Table) <- c("Stage", "States","Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass", "Priors", "Posteriors")
 
 scStage0Table
 
@@ -402,7 +402,7 @@ probsS1
 str(probsS1)
 
 
-Abruising: chr [1:2] "1" "0"
+..$Abruising: chr [1:2] "1" "0"
 ..$ Amurder  : chr [1:2] "0" "1"
 ..$ Adisease : chr [1:2] "1" "0"
 ..$ Bmurder  : chr [1:2] "0" "1"
@@ -420,10 +420,25 @@ priorsStage1 <- c(scenario1,scenario2,scenario3,scenario4)
 
 
 
+str(probsS1)
+
+..$ Abruising: chr [1:2] "1" "0"
+..$ Amurder  : chr [1:2] "0" "1"
+..$ Adisease : chr [1:2] "1" "0"
+..$ Bmurder  : chr [1:2] "0" "1"
+..$ Bbruising: chr [1:2] "1" "0"
+..$ Bdisease : chr [1:2] "1" "0"
 
 
+scenario1s2 <- probsS1[1,1,1,1,1,2]    #scenario 1 c("0","0","1","1","1","0")
+scenario2s2 <- probsS1[1,2,1,2,1,2]    #scenario 2 c("1","1","1","1","1","0")
+scenario3s2 <- probsS1[1,1,1,2,1,2]    #scenario 3 c("0","1","1","1","1","0")
+scenario4s2 <- probsS1[1,2,1,1,1,2]   #scenario 4 c("1","0","1","1","1","0")
 
-#or, update BN first with evidence
+priorsStage2 <- c(scenario1s2,scenario2s2,scenario3s2,scenario4s2)
+
+
+#or, update BN first with evidence and get posteriors
 scJNstage1 <- setEvidence(scJN, nodes = c("Abruising","Bbruising","Adisease","Bdisease"), states = c("1","1","0","0"))
 
 scBNstage1 <- as.bn.fit(scJNstage1, including.evidence = TRUE)
@@ -433,9 +448,11 @@ graphviz.chart(scBNstage1,type="barprob", scale = c(0.7,1.3), main = "No disease
 
 scProbsStage1 <- round(querygrain(scJNstage1, nodes = scStage0nodes, type = "joint"),5)
 scProbsStage1
-scProbsStage1vector <- c(scProbsStage1["0","0"],scProbsStage1["1","1"],scProbsStage1["0","1"],scProbsStage1["1","0"])
+scPosteriorsS1 <- c(scProbsStage1["0","0"],scProbsStage1["1","1"],scProbsStage1["0","1"],scProbsStage1["1","0"])
 
-scProbsStage1vector
+scPosteriorsS1
+
+
 
 
 scJNstage2 <- setEvidence(scJN, nodes = c("Abruising","Bbruising","Adisease","Bdisease"), states = c("1","1","1","0"))
@@ -447,21 +464,23 @@ graphviz.chart(scBNstage2,type="barprob", scale = c(0.7,1.3), main = "No disease
 
 scProbsStage2 <- round(querygrain(scJNstage2, nodes = scStage0nodes, type = "joint"),6)
 scProbsStage2
-scProbsStage2vector <- c(scProbsStage2["0","0"],scProbsStage2["1","1"],scProbsStage2["0","1"],scProbsStage2["1","0"])
+scPosteriorsS2 <- c(scProbsStage2["0","0"],scProbsStage2["1","1"],scProbsStage2["0","1"],scProbsStage2["1","0"])
 
-scProbsStage2vector
-
-
+scPosteriorsS2
 
 
 
 
-scStage1Table <- data.frame(rep("Stage 1",4),SCstates,sc1structured,sc1fitelson,sc1DM,sc1roche,sc1shogenji,sc1Olsson,scProbsStage1vector)
-
-colnames(scStage1Table) <- c("Stage","States","Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass", "Probability")
 
 
-scStage2Table <- data.frame(rep("Stage 2",4),SCstates,sc2structured,sc2fitelson,sc2DM,sc2roche,sc2shogenji,sc2Olsson,scProbsStage2vector)
+scStage1Table <- data.frame(rep("Stage 1",4),SCstates,sc1structured,sc1fitelson,sc1DM,sc1roche,sc1shogenji,sc1Olsson,priorsStage1, scPosteriorsS1)
+
+colnames(scStage1Table) <- c("Stage","States","Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass", "Priors", "Posteriors")
+
+scStage1Table
+
+
+scStage2Table <- data.frame(rep("Stage 2",4),SCstates,sc2structured,sc2fitelson,sc2DM,sc2roche,sc2shogenji,sc2Olsson)
 
 colnames(scStage2Table) <- c("Stage","States","Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass", "Probability")
 
