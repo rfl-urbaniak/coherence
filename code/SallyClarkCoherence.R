@@ -94,16 +94,34 @@ SallyClarkCPT <- list(Amurder=AmurderProb,Adisease = AdiseaseProb,
 SallyClarkBN <- custom.fit(SallyClarkDAG,SallyClarkCPT)
 
 
-scJN <- 
+scJN <- compile(as.grain(SallyClarkBN))
+
+scJN1 <- setEvidence(scJN, nodes = c("Abruising","Bbruising","Adisease","Bdisease"), states = c("1", "1", "0", "0"))
+scJN2 <- setEvidence(scJN, nodes = c("Abruising","Bbruising","Adisease","Bdisease"), states = c("1", "1", "1", "0"))
+
+scBN1 <- as.bn.fit(scJN1, including.evidence = TRUE)
+scBN2 <- as.bn.fit(scJN2, including.evidence = TRUE)
 
 
-png(file="../images/SCBN.png", 
+
+
+png(file="../images/scBN1.png", 
     units="in", 
     width=6, 
     height=6, 
     pointsize = 1,
     res=400)
-graphviz.chart(SallyClarkBN,type="barprob", scale = c(0.7,1.3))
+graphviz.chart(scBN1,type="barprob", scale = c(0.7,1.3))
+dev.off()
+
+
+png(file="../images/scBN2.png", 
+    units="in", 
+    width=6, 
+    height=6, 
+    pointsize = 1,
+    res=400)
+graphviz.chart(scBN2,type="barprob", scale = c(0.7,1.3))
 dev.off()
 
 
