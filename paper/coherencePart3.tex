@@ -589,23 +589,33 @@ We will be interested in tracking probability and coherence in three stages of t
 
 
 
+
+
+
+
+
+
+
+
+
 Here  are some intuitions one might have about the coherences involved. Let's call the scenario in which both children died of SIDS 00, the one in which both were murdered 11, the one in which only the first child was murdered 10, and the one in which only the second one was murdered 01.
 
-\begin{enumerate}
-    \item We would expect 11 and 00 to be more coherent than either 10 or 01. The intution is that the claim that both sons died in the same way sounds more coherent than the alternative scenarios.  %This condition is satisfied by all measures.
-    %This requirement fails for Douven-Meijs and Shogenji.
+\begin{tabular}{lp{8cm}}
+ \textbf{11,00 $>$10,01} & In all stages, we would expect 11 and 00 to be more coherent than either 10 or 01. The intution is that the claim that both sons died in the same way sounds more coherent than the alternative scenarios.  \\ 
+\textbf{11 Stage 1 $>$ 11 Stage 0} & When moving from Stage 0 to Stage 1, the coherence of 11 should increase. After all, we include evidence in support of 11. \\
+\textbf{00 Stage 1 $<$ 00 Stage 0} &  For the same reason---we now consider evidence in support of 11---we would also expect the coherence of 00 to decrease in \textsf{Stage 1} as compared to \textsf{Stage 0}. \\
+\textbf{10 Stage 2 $<$ 01 Stage 2} &
+Given that in Stage 2 we include evidence supporting the claim that son A was not murdered, we would  expect the coherence of 01 to be larger than the coherence of 10 in Stage 2.
+\end{tabular}
+
     
-    \item When moving from Stage 0 to Stage 1, the coherence of 11 should not experience a large decrease. After all, we include evidence in support of 11. %This condition fails for Douven-Meijs, Shogenji and to a slight extent for Fitelson.
+%     \item Given that in Stage 2 we include evidence supporting the claim that son A was not murdered, we would not expect the coherence of 01 to be smaller than the coherence of 10 in Stage 2.
+% This condition fails radically for Fitelson (01 becomes maximally incoherent, even though the evidence is not conclusive!), and to a small degree for Douven-Meijs.
 
-    \item For the same reason---we now consider evidence in support of 11---we would also not expect the coherence of 00 to increase in \textsf{Stage 1} as compared to \textsf{Stage 0}. 
-    % This condition fails for Douven-Meijs and Shogenji.
-    
-    \item Given that in Stage B we include evidence supporting the claim that son A was not murdered, we would not expect the coherence of 01 to be smaller than the coherence of 10 in Stage B. This condition fails radically for Fitelson (01 becomes maximally incoherent, even though the evidence is not conclusive!), and to a small degree for Douven-Meijs.
-
-    \item  One might have the intuition that \textsf{Stage 0}expect the coherences of 11 and 00 to not be too far. While perhaps 00 should have lower prior probability than 11,  prior to obtaining evidence, mere coherence considerations don't seem to put one of these scenarios at a strong disadvantage.
-    \item Perhaps, we would not expect 11 and 00 to be nearly maximally coherent. The idea here is that these are just narrations with only two sentences, and certainly some more elaborate scenarios could in principle provide more coherence to the story. With the two-node scenarios being fairly maximally coherent, there is no room for better scenarios to do much better.  
-    %If we buy into this intuiton, we have reasons to dislike Fitelson, Roche and Olsson-Glass.
-\end{enumerate}
+%     \item  One might have the intuition that \textsf{Stage 0}expect the coherences of 11 and 00 to not be too far. While perhaps 00 should have lower prior probability than 11,  prior to obtaining evidence, mere coherence considerations don't seem to put one of these scenarios at a strong disadvantage.
+%     \item Perhaps, we would not expect 11 and 00 to be nearly maximally coherent. The idea here is that these are just narrations with only two sentences, and certainly some more elaborate scenarios could in principle provide more coherence to the story. With the two-node scenarios being fairly maximally coherent, there is no room for better scenarios to do much better.  
+%     %If we buy into this intuiton, we have reasons to dislike Fitelson, Roche and Olsson-Glass.
+% \end{description}
 
 
 
@@ -618,16 +628,17 @@ Here  are some intuitions one might have about the coherences involved. Let's ca
 
 
 
-\citet{Fenton2018Risk} constructed a Bayesian network to discuss the interaction of the key pieces of evidence in this case, and our Bayesian network is based on theirs. For Stage 0 the network we use does not contain evidence nodes, which appear at Stage 1 and 2.  The network structures are in Figure \ref{fig:sc}.
+\citet{Fenton2018Risk} constructed a Bayesian network to discuss the interaction of the key pieces of evidence in this case, and our Bayesian network is based on theirs.  The network structure is in Figure \ref{fig:sc}.
 
 
 \begin{figure}[H]
-\begin{minipage}{.4\textwidth} %
-    \includegraphics[width = 7cm]{../images/scStage0DAG.png}\end{minipage} %
-\begin{minipage}{.5\textwidth} %
-    \includegraphics[width = 7cm]{../images/scFullDAG.png}
-\end{minipage}
-    \caption{The directed acyclic graphs for the Sally Clark BNs. With (right) and without (left) evidence nodes.}
+% \begin{minipage}{.4\textwidth} %
+%     \includegraphics[width = 7cm]{../images/scStage0DAG.png}\end{minipage} %
+% \begin{minipage}{.5\textwidth} %
+\centering 
+    \includegraphics[width = 8cm]{../images/scFullDAG.png}
+% \end{minipage}
+    \caption{The directed acyclic graphs for the Sally Clark BNs. }
     \label{fig:sc}
 \end{figure}
 
@@ -635,21 +646,23 @@ Here  are some intuitions one might have about the coherences involved. Let's ca
 
 The  arrows  depict  relationships  of  influence  between  variables. \textsf{Amurder} and \textsf{Bmurder} are binary nodes corresponding to whether Sally  Clark’s  sons,   call  them A and B, were murdered. These  influence  whether  signs of disease (\textsf{Adisease} and \textsf{Bdisease}) and bruising (\textsf{Abruising} and \textsf{B.bruising}) were present. Also, since  son A died first, whether A was murdered casts some light on the probability of son B being murdered.
 
-We employ the same probability tables as \citet{Fenton2018Risk}, which incorporated Mr Meadow's statistical testimony. The prior probability of son A not being murdered is $0.921659$, the probability of bruising in a son if he wasn't murdered is set to 0.01 and to $0.05$ if he was. The probability of signs of a disease in a son if he wasn't murdered is set to $0.05$ and to $0.001$ if he was. Finally, the probability that the second son was murdered if the first was is set to $.9993604$ and to $1-0.9998538$ if he wasn't. If these look too specific for the reader, the reader is welcome to re-run the analysis with a wide range of options. The resulting marginal probabilities in Stage 1 and Stage 2 are illustrated in Figure \ref{fig:sc}.
+We employ the same probability tables as \citet{Fenton2018Risk}, which incorporated Mr Meadow's statistical testimony. The prior probability of son A not being murdered is $0.921659$, the probability of bruising in a son if he wasn't murdered is set to 0.01 and to $0.05$ if he was. The probability of signs of a disease in a son if he wasn't murdered is set to $0.05$ and to $0.001$ if he was. Finally, the probability that the second son was murdered if the first was is set to $.9993604$ and to $1-0.9998538$ if he wasn't. If these look too specific for the reader, the reader is welcome to re-run the analysis with a wide range of options. 
+
+% The resulting marginal probabilities in Stage 1 and Stage 2 are illustrated in Figure \ref{fig:sc}.
 
 
 
 
 
-\begin{figure}[H]
-\begin{minipage}{.5\textwidth} %
-    \includegraphics[width = 7cm]{../images/scBN1.png}\end{minipage} %
-\begin{minipage}{.5\textwidth} %
-    \includegraphics[width = 7cm]{../images/scBN2.png}
-\end{minipage}
-    \caption{BNs for the Sally Clark case including marginal probabilities, updated with evidence in Stage 1 (left) and Stage 2 (right).}
-    \label{fig:sc}
-\end{figure}
+% \begin{figure}[H]
+% \begin{minipage}{.5\textwidth} %
+%     \includegraphics[width = 7cm]{../images/scBN1.png}\end{minipage} %
+% \begin{minipage}{.5\textwidth} %
+%     \includegraphics[width = 7cm]{../images/scBN2.png}
+% \end{minipage}
+%     \caption{BNs for the Sally Clark case including marginal probabilities, updated with evidence in Stage 1 (left) and Stage 2 (right).}
+%     \label{fig:sc}
+% \end{figure}
 
 
 
@@ -820,13 +833,13 @@ Now, a very general picture of how the calculations of structured coherence  goe
 
 \begin{itemize}
     \item Build a Bayesian network representing the scenario.
-    \item For each child node which represents an element of the scenario, calculate the expected support it gets from its parent(s). 
+    \item For each child node, calculate the expected support it gets from its parent(s). 
     \item Aggregate such expected support scores.
 \end{itemize}
 
 
 So say we have a Bayesian Network. How do we calculate the expected support? For any state \(s\) of
-a child node \(C\) included in a narration, we are interested in the
+a child node \(C\), we are interested in the
 support provided to \(C=s\) by the combinations
 \(\mathsf{pa}_1, \cdots, \mathsf{pa}_n\) of possible states of its
 parents. We ignore \(\mathsf{pa}_i\) excluded by the narration (so, usually, if parents belong to narration as well, there is only one state to consider). For any
@@ -834,7 +847,7 @@ remaining combination \(\mathsf{pa}_r\), the pair
 \(\la C=s, \mathsf{pa}_r\ra\) is assigned  $Z$ score, where the prior is $\pr(C=s)$, and the posterior is $\pr(C=s \vert \mathsf{pa}_r)$.
 
 In our running example, two child nodes, \textsf{W1} and
-\textsf{W2} correspond to the two testimonies and these are the parented narration nodes.
+\textsf{W2} correspond to the two testimonies and these are the parented  nodes.
  The root node, \textsf{D},
  represents the agent's initial uncertainty about who
 committed the deed (the prior distribution is uniform) and is not
@@ -1032,22 +1045,22 @@ We are interested in the coherences assigned to different scenarios in the Sally
 \caption{Coherence scores in the Sally Clark scenarios in three stages, with priors and posteriors given evidence.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{llllllllll}
+\begin{tabular}[t]{lllllllllll}
 \toprule
-Stage & States & Structured & Fitelson & Douven-Meijs & Roche & Shogenji & Olsson-Glass & Priors & Posteriors\\
+Stage & States & Structured & Fitelson & Douven-Meijs & Roche & Shogenji & Olsson-Glass & Priors & Posteriors & Evaluation\\
 \midrule
-Stage 0 & 00 & 0.9919 & 0.9924 & 0.0783 & 0.9997 & 1.085 & 0.99935 & 0.9211 & NA\\
-Stage 0 & 11 & 0.9998 & 0.9993 & 0.9176 & 0.9962 & 12.669 & 0.99239 & 0.0783 & NA\\
-Stage 0 & 01 & -0.9919 & -0.9919 & -0.4996 & 1e-04 & 2e-04 & 1e-05 & 0 & NA\\
-Stage 0 & 10 & -0.9998 & -0.9998 & -0.4962 & 0.0041 & 0.0081 & 0.00059 & 6e-04 & NA\\
-Stage 1 & 00 & 0.0192 & -0.1243 & -0.0355 & 0.3491 & 0.2075 & 2.77e-05 & 8.3127e-05 & 0.29811\\
-Stage 1 & 11 & 0.6062 & 0.4974 & 0.1428 & 0.288 & 3.824 & 3.7e-06 & 0.00019543 & 0.70087\\
-Stage 1 & 01 & -0.9842 & -0.0442 & -0.0249 & 0.216 & 6.1757 & 7.06e-05 & 2.7973e-07 & 0.001\\
-Stage 1 & 10 & -0.9997 & -0.058 & -0.0221 & 0.2184 & 0.0247 & 3e-07 & 5.435e-09 & 2e-05\\
-Stage 2 & 00 & 0.0205 & -0.1243 & -0.0355 & 0.2324 & 0.2257 & 1.458e-06 & 4.3751e-06 & 0.95412\\
-Stage 2 & 11 & -0.9525 & 0.2443 & 0.0889 & 0.1591 & 4.1587 & 2.04e-07 & 1.9563e-07 & 0.042663\\
-Stage 2 & 01 & -0.9842 & -0.1213 & -0.0188 & 0.1175 & 6.7163 & 3.719e-06 & 1.4723e-08 & 0.003211\\
-Stage 2 & 10 & -0.9998 & -0.1564 & 0.0088 & 0.1463 & 0.0268 & 1.5e-08 & 5.4404e-12 & 1e-06\\
+Stage 0 & 00 & 0.1984 & 0.9924 & 0.0783 & 0.9997 & 1.085 & 0.9993 & 0.9211 & NA & 0.9211\\
+Stage 0 & 11 & 0.2 & 0.9993 & 0.9176 & 0.9962 & 12.67 & 0.9924 & 0.0783 & NA & 0.0783\\
+Stage 0 & 01 & -0.9855 & -0.9998 & -0.4996 & 1e-04 & 2e-04 & 0 & 0 & NA & 0\\
+Stage 0 & 10 & -0.9997 & -0.9919 & -0.4962 & 0.0041 & 0.0081 & 6e-04 & 6e-04 & NA & 6e-04\\
+Stage 1 & 00 & 0.0192 & -0.1243 & -0.0355 & 0.3491 & 0.2075 & 2.77e-05 & 8.313e-05 & 0.2981 & 0.2981\\
+Stage 1 & 11 & 0.6062 & 0.4974 & 0.1428 & 0.288 & 3.824 & 3.7e-06 & 0.0001954 & 0.7009 & 0.7009\\
+Stage 1 & 01 & -0.9842 & -0.0442 & -0.0249 & 0.216 & 6.176 & 7.06e-05 & 2.797e-07 & 0.001 & 0.001\\
+Stage 1 & 10 & -0.9997 & -0.058 & -0.0221 & 0.2184 & 0.0247 & 3e-07 & 5.435e-09 & 2e-05 & 2e-05\\
+Stage 2 & 00 & 0.0205 & -0.1243 & -0.0355 & 0.2324 & 0.2257 & 1.458e-06 & 4.375e-06 & 0.9541 & 0.9541\\
+Stage 2 & 11 & -0.9525 & 0.2443 & 0.0889 & 0.1591 & 4.159 & 2.04e-07 & 1.956e-07 & 0.04266 & 0.04266\\
+Stage 2 & 01 & -0.9842 & -0.1213 & -0.0188 & 0.1175 & 6.716 & 3.719e-06 & 1.472e-08 & 0.003211 & 0.003211\\
+Stage 2 & 10 & -0.9998 & -0.1564 & 0.0088 & 0.1463 & 0.0268 & 1.5e-08 & 5.44e-12 & 1e-06 & 1e-06\\
 \bottomrule
 \end{tabular}}
 \label{tab:SCcoherence}
@@ -1078,7 +1091,25 @@ Here  are some observations with respect to what we would intuitively expect.
 \end{itemize}
 
 
-Another interesting observation arises when we take all the table rows as data points and think about the truth-conduciveness of coherence.  Let's introduce another variable, \textsf{Evaluation}, which simply collects the priors for Stage 0 and the posteriors for Stages 1 and 2--- it corresponds to ``probabilities given the evidence'', where the evidence in Stage 0 is null. While scenarios with high coherence, presumably, can have various probabilities, we might have the intuition that coherence is at least a negative criterion: scenarios with very low coherence should tend to have low probability (i.e. \textsf{Evaluation}, in this context). What's the situation with the four scenarios in the three stages we discussed, with respect to all the measures we discussed? Well, this condition holds for all measures except for Douven-Meijs and Shogenji, where scenarios with higher coherence tend to have much lower probability than scenarios with relatively neutral coherence, it holds to a low extent for Olsson-Glass and Roche, and to a larger extent for Fitelson and Structured  (Figure \ref{fig:cohplot}). We also include the Spearman correlation test p-values in Table \ref{tab:spearmanP})
+Another interesting observation arises when we take all the table rows as data points and think about the truth-conduciveness of coherence.  Let's introduce another variable, \textsf{Evaluation}, which simply collects the priors for Stage 0 and the posteriors for Stages 1 and 2--- it corresponds to ``probabilities given the evidence'', where the evidence in Stage 0 is null. While scenarios with high coherence, presumably, can have various probabilities, we might have the intuition that coherence is at least a negative criterion: scenarios with very low coherence should tend to have low probability (i.e. \textsf{Evaluation}, in this context). What's the situation with the four scenarios in the three stages we discussed, with respect to all the measures we discussed? Well, this condition holds for all measures except for Douven-Meijs and Shogenji, where scenarios with higher coherence tend to have much lower probability than scenarios with relatively neutral coherence, it holds to a low extent for Olsson-Glass and Roche, and to a larger extent for Fitelson and Structured  (Figure \ref{fig:cohplot}).\footnote{The Spearman correlation test p-values are fairly low in most of the cases. Here is a table of rounded P-values for Spearman correlation tests for the Sally Clark scenarios:
+
+\resizebox{8cm}{!}{
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+  & Structured & Fitelson & Douven-Meijs & Roche & Shogenji & Olsson-Glass\\
+\midrule
+Structured & 0.000 & 0.010 & 0.081 & 0.004 & 0.044 & 0.136\\
+Fitelson & 0.010 & 0.000 & 0.001 & 0.006 & 0.004 & 0.097\\
+Douven-Meijs & 0.081 & 0.001 & 0.000 & 0.079 & 0.013 & 0.519\\
+Roche & 0.004 & 0.006 & 0.079 & 0.000 & 0.183 & 0.063\\
+Shogenji & 0.044 & 0.004 & 0.013 & 0.183 & 0.000 & 0.159\\
+Olsson-Glass & 0.136 & 0.097 & 0.519 & 0.063 & 0.159 & 0.000\\
+Priors & 0.014 & 0.060 & 0.291 & 0.014 & 0.265 & 0.000\\
+Evaluation & 0.000 & 0.060 & 0.249 & 0.003 & 0.118 & 0.106\\
+\bottomrule
+\end{tabular}}
+}
+
 
 
 
@@ -1089,27 +1120,6 @@ Another interesting observation arises when we take all the table rows as data p
 \end{figure}
 
 
-\begin{table}
-
-\caption{Rounded P-values for Spearman correlation tests for the Sally Clark scenarios.}
-\label{tab:spearmanP}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrr}
-\toprule
-  & Structured & Fitelson & Douven-Meijs & Roche & Shogenji & Olsson-Glass\\
-\midrule
-Structured & 0.000 & 0.003 & 0.063 & 0.001 & 0.031 & 0.198\\
-Fitelson & 0.003 & 0.000 & 0.001 & 0.007 & 0.005 & 0.442\\
-Douven-Meijs & 0.063 & 0.001 & 0.000 & 0.079 & 0.013 & 0.829\\
-Roche & 0.001 & 0.007 & 0.079 & 0.000 & 0.183 & 0.276\\
-Shogenji & 0.031 & 0.005 & 0.013 & 0.183 & 0.000 & 0.557\\
-Olsson-Glass & 0.198 & 0.442 & 0.829 & 0.276 & 0.557 & 0.000\\
-Priors & 0.018 & 0.103 & 0.291 & 0.014 & 0.265 & 0.010\\
-Evaluation & 0.000 & 0.073 & 0.249 & 0.003 & 0.118 & 0.430\\
-\bottomrule
-\end{tabular}}
-\end{table}
 
 
 
@@ -1139,25 +1149,12 @@ Another interesting perspective is gained by looking at Spearman correlations (t
   & Structured & Fitelson & Douven-Meijs & Roche & Shogenji & Olsson-Glass\\
 \midrule
 \cellcolor{gray!6}{Beatles: JPGRD 11111} & \cellcolor{gray!6}{-1} & \cellcolor{gray!6}{-0.0361} & \cellcolor{gray!6}{0.0247} & \cellcolor{gray!6}{0.3222} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0}\\
-\bottomrule
-\end{tabular}}    \caption{Coherence scores in the Beatles scenario.}
-    \label{tab:beatles}
-\end{table}
-
-
-
-
-\begin{table}[H]
-\resizebox{\linewidth}{!}{
-\begin{tabular}{lrrrrrr}
-\toprule
-  & Structured & Fitelson & Douven-Meijs & Roche & Shogenji & Olsson-Glass\\
-\midrule
+%\midrule
 \cellcolor{gray!6}{Witness: W1W2 11} & \cellcolor{gray!6}{0.7294} & \cellcolor{gray!6}{0.7711} & \cellcolor{gray!6}{0.4464} & \cellcolor{gray!6}{0.6214} & \cellcolor{gray!6}{3.5510} & \cellcolor{gray!6}{0.4508}\\
 Witness: W3W4 11 & 0.4944 & -0.2336 & -0.1103 & 0.3147 & 0.7405 & 0.1867\\
 \cellcolor{gray!6}{Witness: W4W5 11} & \cellcolor{gray!6}{0.6016} & \cellcolor{gray!6}{0.2183} & \cellcolor{gray!6}{0.1103} & \cellcolor{gray!6}{0.5353} & \cellcolor{gray!6}{1.2595} & \cellcolor{gray!6}{0.3655}\\
 \bottomrule
-\end{tabular}}    \caption{Coherence scores for the witness scenarios.}
+\end{tabular}}    \caption{Coherence scores for the Beatles and witness scenarios.}
     \label{tab:witnesses}
 \end{table}
 

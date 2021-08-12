@@ -194,8 +194,14 @@ RocheCoherenceForBNs(SallyClarkBN,SCnodes,c("0","1"))$`Roche coherence`),4)
 #add probabilities, build table
 SallyClarkJN <- compile(as.grain(SallyClarkBN))
 
+SallyClarkBN
+
+SCnodes = c("Amurder","Bmurder")
 
 SCprobs <- round(querygrain(SallyClarkJN, nodes = SCnodes, type = "joint"),4)
+
+
+SCprobs
 
 SCprobsVector <- c(SCprobs["0","0"],SCprobs["1","1"],SCprobs["1","0"],SCprobs["0","1"])
 
@@ -204,6 +210,11 @@ SCnoEvidence <- data.frame(SCstates,SCstructuredNoSD,SCFitelson,SCDouvenMeijs,SC
 colnames(SCnoEvidence) <- c("States","Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass", "Probability")
 
 saveRDS(SCnoEvidence, file = "tables/SCnoEvidence.RDS")
+
+
+noevi <- readRDS("tables/SCnoEvidence.RDS")
+
+noevi
 
 SCnoEvidence %>%  kable(format = "latex",booktabs=T,
                            linesep = "",  escape = FALSE, 
@@ -221,6 +232,7 @@ SallyClarkBNstageA <- as.bn.fit(SallyClarkJNstageA, including.evidence = TRUE)
 
 graphviz.chart(SallyClarkBNstageA,type="barprob", scale = c(0.7,1.3), main = "No disease in the Sally Clark case")
 
+SCnodes
 
 SCprobsStageA <- round(querygrain(SallyClarkJNstageA, nodes = SCnodes, type = "joint"),4)
 SCprobsStageAVector <- c(SCprobsStageA["0","0"],SCprobsStageA["1","1"],SCprobsStageA["1","0"],SCprobsStageA["0","1"])

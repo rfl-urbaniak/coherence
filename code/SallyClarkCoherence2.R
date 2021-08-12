@@ -96,6 +96,11 @@ BbruisingProb <- single.CPT("Bbruising","Bmurder","1","0","0","1",0.01,0.05)
 BdiseaseProb <- single.CPT("Bdisease","Bmurder","1","0","0","1",0.05,0.001)
 BmurderProb <- single.CPT("Bmurder","Amurder","0","1","0","1",0.9993604,1-0.9998538)
 
+AmurderProb
+
+BmurderProb
+AbruisingProb
+
 
 # Put CPTs together
 
@@ -226,7 +231,7 @@ scStage0Table <- data.frame(rep("Stage 0",4),SCstates,sc0structured,sc0fitelson,
 
 colnames(scStage0Table) <- c("Stage", "States","Structured","Fitelson","Douven-Meijs","Roche","Shogenji","Olsson-Glass", "Priors", "Posteriors")
 
-scStage0Table
+scStage0Table <- readRDS("tables/scStage0Table.RDS")
 
 saveRDS(scStage0Table, file = "tables/scStage0Table.RDS")
 
@@ -238,8 +243,30 @@ saveRDS(scStage0Table, file = "tables/scStage0Table.RDS")
 
 
 BN <- scBN 
+
+scJN <- compile(as.grain(scBN)) 
+
+scJNEvi  <- setEvidence(scJN, nodes = c("Abruising","Bbruising", "Adisease", "Bdisease"),
+                        states = c("1","1", "0", "0"))
+
+scBNEvi <- as.bn.fit(scJNEvi, including.evidence = TRUE)
+
+
+scBNEvi
+
+
+structuredNoSD(scBNEvi, SCnodes[1:2],c("1","1"))
+
+structuredNoSD(scBN, SCnodes[1:2],c("1","1"))
+
+structuredNoSD(scBN, SCnodes[1:2],c("1","1"))
+
+
+
 SCnodes <- c("Amurder","Bmurder", "Abruising", "Bbruising", "Adisease","Bdisease")
 
+
+structuredNoSD(scBN, SCnodes,c("1","1","1","1","0","0"))
 
 sc1structured <- round(c(structuredNoSD(scBN, SCnodes,c("0","0","1","1","0","0"))$structuredNoSD,
                          structuredNoSD(scBN, SCnodes,c("1","1","1","1","0","0"))$structuredNoSD,
@@ -491,9 +518,17 @@ scJointTable <- rbind(scStage0Table, scStage1Table, scStage2Table)
 
 saveRDS(scJointTable, file = "tables/scJointTable.RDS")
 
+scJointTable <- readRDS("tables/scJointTable.RDS")
+
+pairs(scJointTable[,c(-1,-2)])
+
 
 library(dplyr)
-scJointTableForPrinting <- scJointTable %>% dplyr::mutate_if(is.numeric, funs(as.character(signif(., 5)))) 
+scJointTableForPrinting <- scJointNew %>% dplyr::mutate_if(is.numeric,
+                                                             funs(as.character(signif(., 4)))) 
+
+scJointNew
+
 
 scJointTableForPrinting
 

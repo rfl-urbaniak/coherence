@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.7.16)  5 AUG 2021 08:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.7.16)  12 AUG 2021 12:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1735,20 +1735,14 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@everytoks=\toks49
 \@floatcapt=\box47
 )
-(/home/rafal/UG/UGprojects/coherence3/paper/coherencePart3.aux
-
-LaTeX Warning: Label `fig:sc' multiply defined.
-
-
-LaTeX Warning: Label `tab:beatles' multiply defined.
-
-)
+(/home/rafal/UG/UGprojects/coherence3/paper/coherencePart3.aux)
 \openout1 = `coherencePart3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 162.
 LaTeX Font Info:    Try loading font information for OML+jkp on input line 162.
 
- (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omljkp.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    ... okay on input line 162.
@@ -1982,55 +1976,14 @@ Overfull \hbox (24.91714pt too wide) in paragraph at lines 491--492
  []
 
 [7 <../images/w1w2BNv2.png>] [8]
-<../images/scStage0DAG.png, id=245, 433.62pt x 433.62pt>
-File: ../images/scStage0DAG.png Graphic file (type png)
-<use ../images/scStage0DAG.png>
-Package pdftex.def Info: ../images/scStage0DAG.png  used on input line 626.
-(pdftex.def)             Requested size: 199.16988pt x 199.16988pt.
-
-Overfull \hbox (49.79518pt too wide) in paragraph at lines 626--626
-[][] 
- []
-
-<../images/scFullDAG.png, id=246, 433.62pt x 433.62pt>
+<../images/scFullDAG.png, id=241, 433.62pt x 433.62pt>
 File: ../images/scFullDAG.png Graphic file (type png)
 <use ../images/scFullDAG.png>
-Package pdftex.def Info: ../images/scFullDAG.png  used on input line 628.
-(pdftex.def)             Requested size: 199.16988pt x 199.16988pt.
-
-Overfull \hbox (12.44865pt too wide) in paragraph at lines 628--629
-[][] 
- []
-
-[9 <../images/scStage0DAG.png> <../images/scFullDAG.png>]
-<../images/scBN1.png, id=261, 433.62pt x 433.62pt>
-File: ../images/scBN1.png Graphic file (type png)
-<use ../images/scBN1.png>
-Package pdftex.def Info: ../images/scBN1.png  used on input line 646.
-(pdftex.def)             Requested size: 199.16988pt x 199.16988pt.
-
-Overfull \hbox (12.44865pt too wide) in paragraph at lines 646--646
-[][] 
- []
-
-<../images/scBN2.png, id=262, 433.62pt x 433.62pt>
-File: ../images/scBN2.png Graphic file (type png)
-<use ../images/scBN2.png>
-Package pdftex.def Info: ../images/scBN2.png  used on input line 648.
-(pdftex.def)             Requested size: 199.16988pt x 199.16988pt.
-
-Overfull \hbox (12.44865pt too wide) in paragraph at lines 648--649
-[][] 
- []
-
-
-Overfull \hbox (1.90001pt too wide) in paragraph at lines 645--650
-[]$[]$ $[]$ 
- []
-
-[10 <../images/scBN1.png> <../images/scBN2.png>] [11]
-LaTeX Font Info:    Try loading font information for OT1+jkpss on input line 80
-2.
+Package pdftex.def Info: ../images/scFullDAG.png  used on input line 639.
+(pdftex.def)             Requested size: 227.62082pt x 227.62082pt.
+ [9 <../images/scFullDAG.png>] [10]
+LaTeX Font Info:    Try loading font information for OT1+jkpss on input line 81
+5.
 
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
 File: ot1jkpss.fd 2007/07/16 Fontinst v1.928 font definitions for OT1/jkpss.
@@ -2039,43 +1992,39 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `jkpss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [12] [13]
-[14] [15] [16]
-<../images/cohPlots.png, id=344, 433.62pt x 433.62pt>
+ [11] [12]
+[13] [14] [15]
+<../images/cohPlots.png, id=326, 433.62pt x 433.62pt>
 File: ../images/cohPlots.png Graphic file (type png)
 <use ../images/cohPlots.png>
-Package pdftex.def Info: ../images/cohPlots.png  used on input line 1086.
+Package pdftex.def Info: ../images/cohPlots.png  used on input line 1117.
 (pdftex.def)             Requested size: 373.46172pt x 373.46172pt.
-<../images/scSpearman.png, id=346, 433.62pt x 433.62pt>
+<../images/scSpearman.png, id=328, 433.62pt x 433.62pt>
 File: ../images/scSpearman.png Graphic file (type png)
 <use ../images/scSpearman.png>
-Package pdftex.def Info: ../images/scSpearman.png  used on input line 1123.
+Package pdftex.def Info: ../images/scSpearman.png  used on input line 1133.
 (pdftex.def)             Requested size: 373.46172pt x 373.46172pt.
- [17 <../images/cohPlots.png>] [18] [19 <../images/scSpearman.png (PNG copy)>] 
+ [16] [17 <../images/cohPlots.png>] [18 <../images/scSpearman.png (PNG copy)>] 
 (/home/rafal/UG/UGprojects/coherence3/paper/coherencePart3.bbl
-[20]) [21]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1217.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1217.
+[19]) [20]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1214.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1214.
  (/home/rafal/UG/UGprojects/coherence3/paper/coherencePart3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1217.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1217.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1214.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1214.
 
 Package rerunfilecheck Info: File `coherencePart3.out' has not changed.
 (rerunfilecheck)             Checksum: 7D22C756915A6CED70A15A118B87E2CC;1815.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1217.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1214.
  ) 
 Here is how much of TeX's memory you used:
- 28357 strings out of 492982
- 494407 string characters out of 6134896
- 640335 words of memory out of 5000000
- 30998 multiletter control sequences out of 15000+600000
- 123093 words of font info for 350 fonts, out of 8000000 for 9000
+ 28328 strings out of 492982
+ 493897 string characters out of 6134896
+ 645115 words of memory out of 5000000
+ 30981 multiletter control sequences out of 15000+600000
+ 122963 words of font info for 348 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,18n,106p,8846b,464s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 73i,18n,106p,8846b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
@@ -2088,10 +2037,10 @@ hare/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/urw/times/utmri8a.pfb>
 Output written on /home/rafal/UG/UGprojects/coherence3/paper/coherencePart3.pdf
- (21 pages, 744230 bytes).
+ (20 pages, 593816 bytes).
 PDF statistics:
- 436 PDF objects out of 1000 (max. 8388607)
- 383 compressed objects within 4 object streams
- 100 named destinations out of 1000 (max. 500000)
- 32925 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 416 PDF objects out of 1000 (max. 8388607)
+ 370 compressed objects within 4 object streams
+ 91 named destinations out of 1000 (max. 500000)
+ 32910 words of extra memory for PDF output out of 35830 (max. 10000000)
 
