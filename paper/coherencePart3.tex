@@ -117,8 +117,8 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 
-%\usepackage{geometry}
- %\geometry{a4paper,left=35mm,top=20mm,}
+\usepackage{geometry}
+ \geometry{a4paper,left=40mm, right = 40mm, top=20mm,}
 
 %abbreviations
 \newcommand{\ra}{\rangle}
@@ -157,12 +157,12 @@
 
 \begin{document}
 \maketitle
-\tableofcontents
+
 
 \section{Motivations \& introduction}
 
 
-When we talk about the coherence of a set of propositions or about the
+When we talk about the coherence of a set of propositions or about the 
 coherence of a story, we seem to refer to how well their individual
 pieces fit together. How are we to understand and apply this notion
 systematically, though?  As with beliefs, we can use both a binary and a graded notion of coherence. The binary notion is not very exciting: a set is incoherent
@@ -566,7 +566,7 @@ Bayesian networks for other witness scenarios,  the CPT for \textsf{D} remains t
 
 
 
-\subsection{Sally Clark}
+\subsection{Sally Clark} \label{subsec:sc}
 
 
 
@@ -597,11 +597,13 @@ We will be interested in tracking probability and coherence in three stages of t
 Here  are some intuitions one might have about the coherences involved. Let's call the scenario in which both children died of SIDS 00, the one in which both were murdered 11, the one in which only the first child was murdered 10, and the one in which only the second one was murdered 01.
 
 \begin{tabular}{lp{8cm}}
- \textbf{11,00 $>$10,01} & In all stages, we would expect 11 and 00 to be more coherent than either 10 or 01. The intution is that the claim that both sons died in the same way sounds more coherent than the alternative scenarios.  \\ 
+ \textbf{11 and 00 $>$  10 and 01} & In all stages, we would expect 11 and 00 to be more coherent than either 10 or 01. The intution is that the claim that both sons died in the same way sounds more coherent than the alternative scenarios.  \\ 
 \textbf{11 Stage 1 $>$ 11 Stage 0} & When moving from Stage 0 to Stage 1, the coherence of 11 should increase. After all, we include evidence in support of 11. \\
 \textbf{00 Stage 1 $<$ 00 Stage 0} &  For the same reason---we now consider evidence in support of 11---we would also expect the coherence of 00 to decrease in \textsf{Stage 1} as compared to \textsf{Stage 0}. \\
 \textbf{10 Stage 2 $<$ 01 Stage 2} &
-Given that in Stage 2 we include evidence supporting the claim that son A was not murdered, we would  expect the coherence of 01 to be larger than the coherence of 10 in Stage 2.
+Given that in Stage 2 we include evidence supporting the claim that son A was not murdered, we would  expect the coherence of 01 to be larger than the coherence of 10 in Stage 2.\\
+\textbf{00 Stage 2 $>$ 00 Stage 1} & Once evidence in support of innocence is obtained, we would expect the coherence of 00 to increase.\\
+\textbf{11 Stage 2 $<$ 11 Stage 1} & When evidence against 11 is obtained, the coherence of 11 is expected to decrease.
 \end{tabular}
 
     
@@ -624,7 +626,7 @@ Given that in Stage 2 we include evidence supporting the claim that son A was no
 \citet{Fenton2018Risk} constructed a Bayesian network to discuss the interaction of the key pieces of evidence in this case, and our Bayesian network is based on theirs.  The network structure is in Figure \ref{fig:sc}.
 
 
-\begin{figure}[H]
+\begin{figure}
 % \begin{minipage}{.4\textwidth} %
 %     \includegraphics[width = 7cm]{../images/scStage0DAG.png}\end{minipage} %
 % \begin{minipage}{.5\textwidth} %
@@ -639,7 +641,64 @@ Given that in Stage 2 we include evidence supporting the claim that son A was no
 
 The  arrows  depict  relationships  of  influence  between  variables. \textsf{Amurder} and \textsf{Bmurder} are binary nodes corresponding to whether Sally  Clark’s  sons,   call  them A and B, were murdered. These  influence  whether  signs of disease (\textsf{Adisease} and \textsf{Bdisease}) and bruising (\textsf{Abruising} and \textsf{B.bruising}) were present. Also, since  son A died first, whether A was murdered casts some light on the probability of son B being murdered.
 
-We employ the same probability tables as \citet{Fenton2018Risk}, which incorporated Mr Meadow's statistical testimony. The prior probability of son A not being murdered is $0.921659$, the probability of bruising in a son if he wasn't murdered is set to 0.01 and to $0.05$ if he was. The probability of signs of a disease in a son if he wasn't murdered is set to $0.05$ and to $0.001$ if he was. Finally, the probability that the second son was murdered if the first was is set to $.9993604$ and to $1-0.9998538$ if he wasn't. If these look too specific for the reader, the reader is welcome to re-run the analysis with a wide range of options. 
+We employ the same probability tables as \citet{Fenton2018Risk}. The CPTs for the key nodes are in Table \ref{tab:scCPT} (conditional probabilities for \textsf{Bbruising} and \textsf{Bdisease} are the same as for \textsf{Abruising} and \textsf{Adisease}).\footnote{Note that one might have somewhat different view on what these should be. For one thing, the probability that the second child has been killed if the first died of SIDS is extremely low. For another, the probability of  sings of bruising in case of murder increase from $.01$ to only $.05$. Moreover, the probabilities might look too specific for the reader.  Analysis with a range of alternative CPTs might indeed be worthwile.}
+\begin{table}[H]
+\hspace{20mm}\begin{minipage}{.4\textwidth}
+\begin{tabular}{lr}
+\toprule
+Amurder & Pr\\
+\midrule
+0 & 0.922\\
+1 & 0.078\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\begin{minipage}{.4\textwidth}
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{Bmurder} & \multicolumn{2}{c}{Amurder} \\
+  & 0 & 1\\
+\midrule
+0 & 0.999 & 0\\
+1 & 0.001 & 1\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+
+\vspace{5mm}
+
+
+\hspace{20mm} \begin{minipage}{.4\textwidth}
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{Abruising} & \multicolumn{2}{c}{Amurder} \\
+  & 0 & 1\\
+\midrule
+1 & 0.01 & 0.05\\
+0 & 0.99 & 0.95\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\begin{minipage}{.5\textwidth}
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{Adisease} & \multicolumn{2}{c}{Amurder} \\
+  & 0 & 1\\
+\midrule
+1 & 0.05 & 0.001\\
+0 & 0.95 & 0.999\\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\caption{CPTs for key nodes in the Sally Clark BN.}
+\label{tab:scCPT}
+\end{table}
+
+
+
+
+
+
 
 % The resulting marginal probabilities in Stage 1 and Stage 2 are illustrated in Figure \ref{fig:sc}.
 
@@ -676,7 +735,7 @@ We employ the same probability tables as \citet{Fenton2018Risk}, which incorpora
 \section{Challenges and ways out}\label{sec:challenges}
 
 
-The known challenges to the existing measures  consist in discrepancies with intuitions in various thought experiments \citep{Merricks1995,shogenji1999conducive, Akiba2000Shogenjis, Shogenji2001Reply, bovens2004bayesian,Siebel2004On-Fitelsons-me,siebel2006against,Shogenji2006Why,crupi2007BayesianMeasuresEvidential, koscholke2016evaluating, Schippers2019General}. We try a more principled approach,  making a few more general conceptual points that suggest a way forward. 
+The known challenges to the existing measures  consist in discrepancies with intuitions in various thought experiments \citep{Merricks1995,shogenji1999conducive, Akiba2000Shogenjis, Shogenji2001Reply, bovens2004bayesian,Siebel2004On-Fitelsons-me,siebel2006against,Shogenji2006Why,crupi2007BayesianMeasuresEvidential, koscholke2016evaluating, Schippers2019General}. We try a more principled approach,  making a few more general conceptual points that suggest a way forward. We will critize  taking the mean support in all possible directions between the elements of a narration and that attention needs to be paid to the structure of a narration.
 
 
 
@@ -696,7 +755,8 @@ The known challenges to the existing measures  consist in discrepancies with int
 \subsection{Mean}\label{sec:mean}
 
 % While the challenges have been discussed separately, considering some of them jointly also leads to an insight. Only one counterexample,
-One thing to observe is that \textsf{The Beatles} is a logically inconsistent scenario. However, each  measure considered so far gives it a higher score than to multiple  logically consistent scenarios, such as \textsf{W3}\& \textsf{W4} in  \textsf{The Witnesses}. This  disagrees with our fundamental
+
+To illustrate the problem with taking the mean of all confirmation levels, note the results in Table \ref{tab:beatles}.  \textsf{The Beatles} is a logically inconsistent scenario and yet  each  measure considered so far gives it a higher score than to multiple  logically consistent scenarios, such as \textsf{W3}\& \textsf{W4} in  \textsf{The Witnesses}. This  disagrees with our fundamental
 intuition that a coherence measure should keep track of logical
 consistency. 
 
@@ -713,17 +773,17 @@ Beatles (11111) & -0.0361 & 0.0247 & 0.3222\\
 \bottomrule
 \end{tabular}
 \caption{Three coherence measures applied to a consistent  (Witness, variant W3W4) and an inconsistent scenario (Beatles).}
+\label{tab:beatles}
 \end{table}
 
-Our hypothesis is that the cause of this issue is as follows. Each measure that faces this problem  uses subsets of a set (or pairs thereof) and then takes the average
+One source of the problems might be that each measure that faces this problem  uses subsets of a set (or pairs thereof) and then takes the average
 result calculated for these subsets or pairs of subsets. However, simply
 taking the mean of results so obtained might be misleading, because a
 few low values (for the inconsistent subsets), which indicate
-inconsistency, might be mixed with many positive values (especially if a
-set is large), and taking the mean of all such results might give a
-relatively high score, despite involving an inconsistency. Therefore, we
-believe that a candidate for a coherence measure shouldn't simply take
-mean mutual confirmation scores.
+inconsistency, might be masked by many positive values, and taking the mean of all such results might give a
+relatively high score, despite the set being inconsistent. Therefore, we
+believe that a candidate for a coherence measure shouldn't simply take the
+mean of all  confirmation scores. Which confirmation scores should count, we will argue, depends on the structure of a narration. 
 
 \subsection{Structure}
 
@@ -760,14 +820,13 @@ coherent. It is also quite clear that the difference between narrations
 lies in the explicitly stated direction of support. The approaches to
 coherence developed so far do not account for this difference.
 
-Moreover, it seems that when we present challenges and our intuitions
+It seems that when we present challenges and our intuitions
 about the desiderata, we implicitly assume the narration involved is the
 one that best fits with our background knowledge (so, Agent 1 rather
 Agent 2 in the case of penguins). However, coherence measures developed
-so far do not make such a fine-grained distinction between narrations,
-and so the scenario which states that \textit{Tweety is BGP} (bird,
-grounded, penguin) gets a lower score because, quite obviously, being a
-bird disconfirms being a grounded animal. In such a calculation it
+so far do not make such a fine-grained distinction between narrations. For this reason, from the perspective of these measures,  being a
+bird disconfirms being a grounded animal, and this will decrease the coherence of  the scenario that \textit{Tweety is  a bird,
+grounded, and a penguin}. In such a calculation it
 doesn't matter that no one even suggested this causal relationship. To
 illustrate this intuition, think about a picture puzzle. Just because a
 piece from the top right corner doesn't match a piece from the bottom
@@ -888,17 +947,15 @@ W1 & D & priorC & post &  priorN &  weightN & Z &  nZ\\
 
 
 
- In our example (Table \ref{t:w1}), \textsf{priorN} gives the distribution of \textsf{D} that we would obtain if we updated the BN with \textsf{W1} = \textsf{W2} = 1, that is, with the narration in question.  \textsf{weightN} is the result of normalizing \textsf{priorN} (in this case, the probabilities already add up to 1, so this move don't change anything). Now, weight the Z score by the normalized probability, and sum these weighted Z scores, obtaining what we call the \emph{Expected Connection Strength} of the parented node under consideration.   In our example, the last column weights \textsf{Z} using  \textsf{weightN}. The \textsf{ECS} for \textsf{W1} is the sum of \textsf{nZ}, $0.728$.
+ In our example (Table \ref{t:w1}), \textsf{priorN} gives the distribution of \textsf{D} that we would obtain if we updated the BN with \textsf{W1} = \textsf{W2} = 1, that is, with the narration in question.  \textsf{weightN} is the result of normalizing \textsf{priorN} (in this case, the probabilities already add up to 1, so this move doesn't change anything). Now, weight the Z score by the normalized probability, and sum these weighted Z scores, obtaining what we call the \emph{Expected Connection Strength} of the parented node under consideration.   In our example, the last column weights \textsf{Z} using  \textsf{weightN}. The \textsf{ECS} for \textsf{W1} is the sum of \textsf{nZ}, $0.728$.
 
 
 
- As the result of applying this procedure to all  nodes that belong to a narration, we get a list of \textit{expected connection strengths}. What do we do with the list of \textsf{ECS} scores thus obtained? For
-the reasons already discussed, we don't want to simply take the mean.\footnote{The problem is a particular case of a common problem in statistics: how
+ As the result of applying this procedure to all  nodes that belong to a narration, we get a list of \textit{expected connection strengths}. What do we do with the list of \textsf{ECS} scores thus obtained? Our discussion of logical inconsistency suggests that special attention should be paid to weakest links in a narration, and so our measure will  not only average the ECS scores, but also take the minimum into consideration.\footnote{The problem is a particular case of a common problem in statistics: how
 to represent a set of different values in a simple way without
 distorting the information too much? One easy and accurate solution is
 to plot all values. The problem is, it gives us no unambiguous way to
-compare different sets. For such tasks, a single score is desirable.} We
-should pay special attention to \s{mean}  and \s{minimum}. The
+compare different sets. For such tasks, a single score is desirable.} The
 mean gives us an idea of how strong the average support between the
 elements is.\footnote{This might seem  in line with the average mutual support
 measures. However, on our approach we only care about specific directions of support.}  We also look at the minimum, because special attention should be paid to weaker links: the
@@ -930,8 +987,6 @@ goal may we worth pursuing.
 \item If, however, some values are negative, we need to be more careful. We still look at  $\s{mean}$, but  the lower the minimum, the less attention we should pay to it, and the more attention we should pay to the minimum. If the minimum is -1, we want to give it full weight, $1 = \vert \s{min}\vert = - \s{min}$ and ignore (weight by 0) $\s{mean}$. In general, we propose to use $\vert \s{min}\vert$  as the weight assigned to the minimum, and  $1-\vert \s{min}\vert$  to weight $\s{mean}$.  For instance, if the minimum is -0.8, the weight of  $\s{mean}$ should be $-0.8+1 = 0.2$, while if it is $-0.2$, this weight is $0.8$.\footnote{Again, there are other ways to mathematically capture the intuition that the lower minimum, the more attention is to be paid to it, but we decided to take the most straightforward way of doing so for a ride.}  Note that  $1-\vert \s{min}\vert =  1-\vert \s{min}\vert = 1 - (- \s{min}) = 1+\s{min}$, and so the  formula is:
 \end{itemize}
 
-Thus, the full formula is as follows:
-
 \footnotesize
 
 \begin{align*}
@@ -946,24 +1001,19 @@ Thus, the full formula is as follows:
 
 
 
-This function has a desired property which was missing in most of the
-other coherence measures. Whenever we encounter a logically inconsistent
+This function has a desired property which was missing in average mutual support measures. Whenever we encounter a logically inconsistent
 story, i.e.~a story with the lowest possible minimum (in our measure it
 is -1), we'll end up with -1 also as the final score. The achieved
 results are also plausible if the minimum is close to the lowest
 possible value.
 
 
-
-Thus, our coherence measure is be a function of a series of expected  confirmation scores. This is somewhat in line with average mutual
-support measures which took the coherence of a set to be a function of
-confirmation scores. One key difference, however, is that average mutual
-support measures used confirmation scores for all disjoint pairs of
-non-empty subsets of a given set, and our measure will only rely on the
-confirmation scores for the support relations indicated by the BN
+Our measure might resemble average mutual support measures in being a fuction of confirmation scores. However, there are at least two key differences.
+One is that while the latter  take simply confirmation scores, we take their \emph{expected values} from the perspective of a given narration. Another is that, the latter use confirmation scores for all disjoint pairs of non-empty subsets of a given set, and our measure only relies on the
+(expected) confirmation scores for the support relations indicated by the BN
 representing a narration. This is because we don't think a narration
 should be punished for the lack of confirmation between elements that
-were never intended to be related. Another difference is that while average mutual support measure take simply confirmation levels, we take them as expected from the perspective of a given narration.
+were never intended to be related. 
 
 
 
@@ -975,36 +1025,20 @@ were never intended to be related. Another difference is that while average mutu
 \subsection{Updated weights?}
 
 
+One insight that we would like to propose is that we should really carefully think about whose cognitive perspective is taken when we represent a narration using a BN, focusing on whether the BN involves nodes which are not part of the narration whose coherence is to be
+evaluated. For instance, in \textsf{The Witnesses}, the probabilistic information about the
+uniform distribution of guilt probability is not part of any of the three involved narrations, but rather a part of a third-person set-up prior to obtaining any evidence.
 
-We think that what this example illustrates is that we should really
-carefully think about whose cognitive perspective is taken when we
-represent a narration using a BN, focusing on whether the BN involves
-nodes which are not part of the narration whose coherence is to be
-evaluated. In particular, the probabilistic information about the
-uniform distribution of guilt probability is not part of any of the
-three involved narrations, but rather a part of a third-person set-up
-prior to obtaining any evidence.
-
-To evaluate the coherence of a narration, at least for unmentioned
-assumptions that one doesn't have strong independent reasons to keep,
-one should think counterfactually, granting the consequences of the
+To evaluate the coherence of a narration,  one should think counterfactually: granting the consequences of the
 narration and asking what would happen if it indeed was true. 
-
-
-
-In our
-case, a judge who evaluates the coherence of witness testimonies once
-she has heard them, no longer thinks that the distribution of \textsf{D}
-is uniform. And this agrees with the counterfactual strategy we just
-described: it is a consequence of the probabilistic set-up and the
-content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and
+In \textsf{The Witnesses}, a judge who evaluates the coherence of witness testimonies once she has heard them, no longer thinks that the distribution of \textsf{D} is uniform. And this agrees with the counterfactual strategy we just
+described: it is a consequence of the probabilistic set-up and the content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and
 \textsf{W2} were true, the distribution for \textsf{D} no longer would
 be uniform, and so it is unfair to judge the coherence of this scenario
 without giving up this assumption and updating one's assumptions about
 \textsf{D}.
 
-In such a case, we think, we should update \textsf{D} to what it would
-be had \textsf{W1} and \textsf{W2} be instantiated with 1s:
+In such a case, we think, we should consider an updated conditional probability table for node \textsf{D} to what it would be had \textsf{W1} and \textsf{W2} be instantiated with 1s:
 
 \begin{table}[H]
 \centering
@@ -1017,18 +1051,41 @@ be had \textsf{W1} and \textsf{W2} be instantiated with 1s:
 \end{tabular}
 \end{table}
 
-\noindent and use these updated probabilities to build the weights used
-in our coherence calculations for this narration (and proceed
-accordingly, instead updating on another set of narration nodes in the
-coherence evaluation of other
-narrations).\footnote{Note  however that  you should not simply instantiate the BN with \textsf{W1} and \textsf{W2}, propagate and run the coherence calculations on the updated BN. Then both these nodes would get 1s in their respective CPTs and coherence calculations would make   all  confirmation measures involved in such calculations  based on posterior probability equal 1. If narration members have probability one, no other information will be able to confirm it.}
-Once this strategy is taken, the problem turns out to be not that
+\noindent and use these updated probabilities to build the weights used in our coherence calculations for this narration.\footnote{Note  however that  you should not simply instantiate the BN with \textsf{W1} and \textsf{W2}, propagate and run the coherence calculations on the updated BN. Then both these nodes would get 1s in their respective CPTs and coherence calculations would make   all  confirmation measures involved in such calculations  based on posterior probability equal 1. If narration members have probability one, no other information will be able to confirm it.}
+
+
+
+
+\section{Results}\label{sec:Sally}
+
+Now, let's see what results the structured coherence calculations give for the examples and requirements discussed earlier. We start with \textsf{The Beatles} and \textsf{The Witnesses} (Table \ref{tab:witnesses}).
+
+
+
+\begin{table}
+    \resizebox{\linewidth}{!}{
+\begin{tabular}{lrrrrrr}
+\toprule
+  & Structured & Fitelson & Douven-Meijs & Roche & Shogenji & Olsson-Glass\\
+\midrule
+\cellcolor{gray!6}{Beatles: JPGRD 11111} & \cellcolor{gray!6}{-1} & \cellcolor{gray!6}{-0.0361} & \cellcolor{gray!6}{0.0247} & \cellcolor{gray!6}{0.3222} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0}\\
+%\midrule
+\cellcolor{gray!6}{Witness: W1W2 11} & \cellcolor{gray!6}{0.7294} & \cellcolor{gray!6}{0.7711} & \cellcolor{gray!6}{0.4464} & \cellcolor{gray!6}{0.6214} & \cellcolor{gray!6}{3.5510} & \cellcolor{gray!6}{0.4508}\\
+Witness: W3W4 11 & 0.4944 & -0.2336 & -0.1103 & 0.3147 & 0.7405 & 0.1867\\
+\cellcolor{gray!6}{Witness: W4W5 11} & \cellcolor{gray!6}{0.6016} & \cellcolor{gray!6}{0.2183} & \cellcolor{gray!6}{0.1103} & \cellcolor{gray!6}{0.5353} & \cellcolor{gray!6}{1.2595} & \cellcolor{gray!6}{0.3655}\\
+\bottomrule
+\end{tabular}}    \caption{Coherence scores for the Beatles and witness scenarios.}
+    \label{tab:witnesses}
+\end{table}
+
+
+First, note that once the updating strategy we discussed is taken, the desiderata in \textsf{The Witnesses} turn out to be not that
 challenging for any of the coherence measures under discussion.
 
+Second,  our measure assigns the minimal coherence to \textsf{The Beatles} scenario, which is as desidred. The only two other measures that do so are Shogenji and Olsson-Glass, but they are problematic for other reasons  \citep{Merricks1995, Akiba2000Shogenjis, Shogenji2001Reply, Siebel2004On-Fitelsons-me,siebel2006against,Shogenji2006Why,koscholke2016evaluating, Schippers2019General}. Moreover, they are also problematic when it comes to the Sally Clark case, to which we now turn.
 
 
 
-\section{Coherence in Sally Clark}\label{sec:Sally}
 
 
 We are interested in the coherences assigned to different scenarios in the Sally Clark case  in the three stages, together with the prior probability of a given combination of node values (we include combinations of evidence nodes in Stage 1 and Stage 2). The results of the calculations for the coherence measures mentioned in the paper are as in Table \ref{tab:SCcoherence}.
@@ -1070,19 +1127,38 @@ Stage 2 & 10 & -0.9998 & -0.1564 & 0.0088 & 0.1463 & 0.0268 & 1.5e-08 & 5.44e-12
 
 
 
-Here  are some observations with respect to what we would intuitively expect.
+Table \ref{tab:scDesiderata}  contains the results that the coherence measures yield for the intuitions we discussed in Subsection \ref{subsec:sc}. Structured coherence is the only measures that satisfies all of them. 
+
+\begin{table}[H]
+
+\caption{Satisfaction of intuitions about the Sally Clark problem.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lllllll}
+\toprule
+  & Structured & Fitelson & Douven-Meijs & Roche & Shogenji & Olsson-Glass\\
+\midrule
+11 and 00 > 10 and 01 & TRUE & FALSE & FALSE & TRUE & FALSE & FALSE\\
+11 Stage 1 > 11 Stage 0 & TRUE & FALSE & FALSE & FALSE & FALSE & FALSE\\
+00 Stage 1 < 00 Stage 0 & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
+10 Stage 2 < 01 Stage 2 & TRUE & TRUE & FALSE & FALSE & TRUE & TRUE\\
+00 Stage 2 > 00 Stage 1 & TRUE & FALSE & FALSE & FALSE & TRUE & FALSE\\
+11 Stage 2 < 11 Stage 1 & TRUE & TRUE & TRUE & TRUE & FALSE & TRUE\\
+\bottomrule
+\end{tabular}}
+\label{tab:scDesiderata}
+\end{table}
 
 
 
-\begin{itemize}
-    \item We would expect both 01 and 10 to have much lower coherence than 11 or 00. This condition is satisfied by all measures.
-    \item  In Stage 0 we would expect the coherences of 00 and 11 to be close. This requirement fails for Douven-Meijs and Shogenji.
-    \item Perhaps, we would not expect 11 and 00 to be nearly maximally coherent. If we buy into this intuiton, we have reasons to dislike Fitelson, Roche and Olsson-Glass.
-    \item When moving from Stage 0 to Stage 1, the coherence of 11 should not decrease. After all, we include evidence in support of 11. This condition fails for Douven-Meijs, Shogenji and to a slight extent for Fitelson.
-    \item For similar reason, we would not expect the coherence of 11 to be much less than the coherence of 00 in Stage A. This condition fails for Douven-Meijs and Shogenji.
-    \item Given that in Stage B we include evidence supporting the claim that son A was not murdered, we would not expect the coherence of 01 to be smaller than the coherence of 10 in Stage B. This condition fails radically for Fitelson (01 becomes maximally incoherent, even though the evidence is not conclusive!), and to a small degree for Douven-Meijs.
-\end{itemize}
 
+
+
+
+
+
+    
+    
 
 Another interesting observation arises when we take all the table rows as data points and think about the truth-conduciveness of coherence.  Let's introduce another variable, \textsf{Evaluation}, which simply collects the priors for Stage 0 and the posteriors for Stages 1 and 2--- it corresponds to ``probabilities given the evidence'', where the evidence in Stage 0 is null. While scenarios with high coherence, presumably, can have various probabilities, we might have the intuition that coherence is at least a negative criterion: scenarios with very low coherence should tend to have low probability (i.e. \textsf{Evaluation}, in this context). What's the situation with the four scenarios in the three stages we discussed, with respect to all the measures we discussed? Well, this condition holds for all measures except for Douven-Meijs and Shogenji, where scenarios with higher coherence tend to have much lower probability than scenarios with relatively neutral coherence, it holds to a low extent for Olsson-Glass and Roche, and to a larger extent for Fitelson and Structured  (Figure \ref{fig:cohplot}).\footnote{The Spearman correlation test p-values are fairly low in most of the cases. Here is a table of rounded P-values for Spearman correlation tests for the Sally Clark scenarios:
 
@@ -1106,7 +1182,8 @@ Evaluation & 0.000 & 0.060 & 0.249 & 0.003 & 0.118 & 0.106\\
 
 
 
-\begin{figure}
+
+\begin{figure}[H]\centering
     \includegraphics{../images/cohPlots.png}
     \caption{Probability vs. coherence by coherence measure. Note the unusal patterns for Douven-Meijs and Shogenji, and agreement in patterns for the other measures.}
     \label{fig:cohplot}
@@ -1118,61 +1195,40 @@ Evaluation & 0.000 & 0.060 & 0.249 & 0.003 & 0.118 & 0.106\\
 
 
 
-Another interesting perspective is gained by looking at Spearman correlations (the connection is not linear, so Pearson correlation would be misleading). On one hand, between various coehrence measures to see to what extent they are order-equivalent, and on the other hand, with the prior probabilities and the Evaluation variable (Figure \ref{fig:spearman}).  Note that structured coherence and Roche's measure are the only ones which have correlation coefficients above .5 with both priors and posteriors. 
+Another interesting perspective is gained by looking at Spearman correlations.\footnote{Spearman correlation is simply Pearson correlation run on ranks instead of raw values. The connection is not linear, so Pearson correlation would be misleading in this context.} On the one hand, we look at  pairwise correlation between various coherence measures to see to what extent they are order-equivalent. On the other hand, we inspect correlation  with both the prior probability and the Evaluation variable (Figure \ref{fig:spearman}), tentatively thinking of it as a measure of the extent to which coherence is truth-conducive for the scenarios at hand.  Note that structured coherence, Fitelson and Roche's measure are the only ones which have correlation coefficients above .5 with both priors and posteriors, and that the correlation with posteriors is significantly higher for structured coherence.  
 
 
 
-\begin{figure}[H]
-    \includegraphics{../images/scSpearman.png}
+\begin{figure}[H]\centering
+    \includegraphics[width = 8cm]{../images/scSpearman.png}
     \caption{Spearman correlations for the Sally Clark coherence measures and probabilities.}
     \label{fig:spearman}
 \end{figure}
 
 
 
-
-
-
 \section{Some results \& discussion}\label{sec:discussion}
 
-\begin{table}[H]
-    \resizebox{\linewidth}{!}{
-\begin{tabular}{lrrrrrr}
-\toprule
-  & Structured & Fitelson & Douven-Meijs & Roche & Shogenji & Olsson-Glass\\
-\midrule
-\cellcolor{gray!6}{Beatles: JPGRD 11111} & \cellcolor{gray!6}{-1} & \cellcolor{gray!6}{-0.0361} & \cellcolor{gray!6}{0.0247} & \cellcolor{gray!6}{0.3222} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0}\\
-%\midrule
-\cellcolor{gray!6}{Witness: W1W2 11} & \cellcolor{gray!6}{0.7294} & \cellcolor{gray!6}{0.7711} & \cellcolor{gray!6}{0.4464} & \cellcolor{gray!6}{0.6214} & \cellcolor{gray!6}{3.5510} & \cellcolor{gray!6}{0.4508}\\
-Witness: W3W4 11 & 0.4944 & -0.2336 & -0.1103 & 0.3147 & 0.7405 & 0.1867\\
-\cellcolor{gray!6}{Witness: W4W5 11} & \cellcolor{gray!6}{0.6016} & \cellcolor{gray!6}{0.2183} & \cellcolor{gray!6}{0.1103} & \cellcolor{gray!6}{0.5353} & \cellcolor{gray!6}{1.2595} & \cellcolor{gray!6}{0.3655}\\
-\bottomrule
-\end{tabular}}    \caption{Coherence scores for the Beatles and witness scenarios.}
-    \label{tab:witnesses}
-\end{table}
+
+
+
+Having compared the performance of structured coherence with that of the other measures, let's wrap it up with a quick summary and a discussion of further research directions. 
 
 
 
 
 
+In light of conceptual problems with the existing coherence measures we have developed a Bayesian-network based coherence measure that relies not only on the probability measure, but also on the underlying network structure.   We illustrated  and investigated its pefromance in relation to a list of scenarios and evidential stages involved in the Sally Clark case. This opens a path to further research.
 
 
+For one thing, a potential, more practice-oriented  application of structured coherence is to investigate coherence in other Bayesian networks based on real-life legal cases. Our treatment of the Sally Clark case is only a small step in this direction. This remains a project for the future.
 
 
+Another further question we did not discuss is whether the measure handles all the philosophical counterexamples present in the literature. The answer is, it does, but these issues will be covered in a different paper, as this discussion is quite extensive. 
 
-
-
-
-
-In light of conceptual problems with the existing coherence measures we have developed a Bayesian-network based coherence measure that relies not only on the probability measure, but also on the underlying network structure. 
-
-One question is whether it handles the philosophical counterexamples present in the literature. The answer is, it does, but these issues will be covered in a different paper, as this discussion is quite extensive. 
-
-A potential, more practice-oriented  application of this tool is to investigate coherence in  Bayesian networks based on real-life legal cases--- our treatment of the Sally Clark case is only a small step in this direction. This remains a project for the future.
 
 Another line of investigation concerns
-the potential use of coherence to    estimate model priors for Bayesian model averaging, which might be useful in legal contexts might be more fair  than using equal or fixed priors or unprincipled intuitive assessment of priors. 
-
+the potential use of coherence to   estimate model priors for Bayesian model averaging, which might be useful in legal contexts might be more fair  than using equal or fixed priors or unprincipled intuitive assessment of priors. 
 
 
 

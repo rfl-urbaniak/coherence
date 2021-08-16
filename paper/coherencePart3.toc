@@ -6,8 +6,8 @@
 \contentsline {subsection}{\numberline {3.3}Sally Clark}{8}{subsection.3.3}
 \contentsline {section}{\numberline {4}Challenges and ways out}{10}{section.4}
 \contentsline {subsection}{\numberline {4.1}Mean}{10}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Structure}{10}{subsection.4.2}
-\contentsline {section}{\numberline {5}Structured coherence}{11}{section.5}
-\contentsline {subsection}{\numberline {5.1}Updated weights?}{14}{subsection.5.1}
+\contentsline {subsection}{\numberline {4.2}Structure}{11}{subsection.4.2}
+\contentsline {section}{\numberline {5}Structured coherence}{12}{section.5}
+\contentsline {subsection}{\numberline {5.1}Updated weights?}{15}{subsection.5.1}
 \contentsline {section}{\numberline {6}Coherence in Sally Clark}{15}{section.6}
-\contentsline {section}{\numberline {7}Some results \& discussion}{18}{section.7}
+\contentsline {section}{\numberline {7}Some results \& discussion}{19}{section.7}

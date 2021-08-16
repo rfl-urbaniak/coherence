@@ -253,6 +253,8 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amscls/amsthm.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/float/float.sty
@@ -353,8 +355,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssbn8t.tfm
-INPUT /home/rafal/UG/UGprojects/coherence3/paper/coherencePart3.toc
-INPUT /home/rafal/UG/UGprojects/coherence3/paper/coherencePart3.toc
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/zptmcm7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/zptmcm7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/zptmcm7t.tfm
@@ -388,7 +388,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
-OUTPUT /home/rafal/UG/UGprojects/coherence3/paper/coherencePart3.toc
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/zptmcm7t.tfm
@@ -403,6 +402,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpexa.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/kpfonts/jkpssbn8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssbn8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssbne.tfm
@@ -410,9 +410,6 @@ INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/kpfonts/jkpssbn8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssbn8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssbne.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/kpfonts/jkpssbn8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssbn8r.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssbne.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
@@ -421,7 +418,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8c.tfm
@@ -469,6 +465,13 @@ INPUT ../images/scFullDAG.png
 INPUT ../images/scFullDAG.png
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/zptmcm7m.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/psyro.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/zptmcm7t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssmn7t.tfm
@@ -477,10 +480,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssmn7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/kpfonts/jkpssmn7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssmn7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssmn7t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/zptmcm7m.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/psyro.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssmn8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssmn8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
@@ -488,9 +487,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssmn8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/kpfonts/jkpssmn7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssmne.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssmn8r.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/zptmcm7t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/zptmcm7v.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
