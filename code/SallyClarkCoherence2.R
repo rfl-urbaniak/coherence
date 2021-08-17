@@ -120,6 +120,14 @@ scStage0BN <- custom.fit(scStage0DAG, scStage0CPT)
 scBN <- custom.fit(scDAG,scCPT)
 
 
+
+#print CPTs
+CPkable0(bn = "scBN", node = "Amurder")
+
+CPkable1(bn = "scBN", node = "Adisease")
+
+
+
 png(file="../images/scBN.png", 
     units="in", 
     width=6, 
