@@ -407,6 +407,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/kpfonts/jkpssbn8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssbn8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/kpfonts/jkpssbne.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/kpfonts/jkpssbn8t.vf
@@ -478,8 +480,6 @@ INPUT ../images/scFullDAG.png
 INPUT ../images/scFullDAG.png
 INPUT ../images/scFullDAG.png
 INPUT ../images/scFullDAG.png
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/zptmcm7m.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/psyro.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
