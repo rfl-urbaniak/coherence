@@ -1,0 +1,67 @@
+parented <- vector of non-root nodes
+
+FOR child in parented
+
+  IF child in narration nodes
+        consequentStates <- the unique state of child as reported in the narration
+  ELSE
+        consequentStates <- all possible states of child
+  ENDIF
+
+  FOR parent in parents(child)
+    
+    IF parent in narration nodes
+       antecedentStates <- the unique state of parent as reported in the narration
+    ELSE
+       antecedentStates <- all possible states of parent
+    ENDIF
+  
+    #table of all states of (child, parent), not excluded by the narration
+    variants[parent,child] <- expand.grid(consequentStates,antecedentStates)
+  
+    FOR variant in variants[parent,child]
+        priorCons[variant] <-marginal probability of consequent state in variant
+        postCons[variant] <- marginal probability of consequent state in variant,
+                             calculated in BN obtained by updating on antecendent state
+                             from this variant
+        priorAnte[variant] <- marginal probability of the antecedent state in variant
+        
+        #use the probabilities to calculate Z confirmation measure
+        IF priorCons == postCons
+            Z[variant] <- 0
+        ELSE IF postCons > priorCons 
+            Z[variant] <- (postCons - priorCons)/(1-priorCons)
+        ELSE
+            Z[variant] <- (postCons - priorCons)/priorCons
+        ENDIF  
+    ENDFOR
+  
+    #use Z to build weights and weighted Z scores
+    FOR variant in variants[parent, child]
+          IF PriorAnte[variant] > 0
+            WeightAnte[variant] <- PriorAnte[variant] / sum(PriorAnte)
+          ELSE
+            WeightAnte[variant] <-  1/nrow(variants)
+          ENDIF
+          
+          Zscaled[variant] <- Z[variant] * WeightAnte[variant]
+    ENDFOR
+      
+    #expected confirmation score for an edge
+    ECS[variants[parent,child]] <- sum(Zscaled)
+  ENDFOR  
+ENDFOR
+  
+IF min(ECS <= 0)
+  structured <- (mean(ECS)) * (min(ECS) +1) - min(ECS)^2
+ELSE  
+  structured <- mean(ECS)
+ENDIF  
+  
+
+  
+  
+  
+  
+  
+  

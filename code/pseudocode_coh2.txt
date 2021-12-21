@@ -1,0 +1,51 @@
+# returns a list of all states of (child, parent), not excluded by the narration
+FUNCTION parent_child_possible_states(parent,child)
+    IF child included in narration THEN
+        consequentStates <- the unique state of child as reported in the narration
+    ELSE
+        consequentStates <- all possible states of child
+    IF parent included in narration THEN
+        antecedentStates <- the unique state of parent as reported in the narration
+    ELSE
+        antecedentStates <- all possible states of parent
+    variants <- list of all possible pairs of consequentStates and antecedentStates
+    RETURN variants
+
+FUNCTION z_confirmation_measure(priorCons, postCons)
+    IF priorCons == postCons THEN
+        z <- 0
+    ELSE IF postCons > priorCons THEN
+        z <- (postCons - priorCons)/(1-priorCons)
+    ELSE
+        z <- (postCons - priorCons)/priorCons
+    RETURN z
+
+FUNCTION structured(ecs)
+    IF min(ecs) <= 0 THEN
+        RETURN mean(ecs) * (min(ecs)+1) - min(ecs)^2
+    ELSE
+        RETURN mean(ecs)
+
+parentedNodes <- vector of non-root nodes
+FOR EACH parentedNode IN parentedNodes
+    FOR EACH parent of parentedNode
+        variants <- parent_child_possible_states(parent,parentedNoded)
+        variants_count <- length(variants)
+        ecs <- 0
+        sumPriorAnte <- 0
+        FOR EACH variant IN variants
+            priorCons <- marginal probability of consequent state in variant
+            postCons <- marginal probability of consequent state in variant, calculated in BN
+                        obtained by updating on antecendent state from this variant
+            priorAnte[variant] <- marginal probability of the antecedent state in variant
+            sumPriorAnte <- sumPriorAnte +  priorAnte[variant]
+            z[variant] <- z_confirmation_measure(priorCons, postCons)
+        FOR EACH variant IN variants
+            IF priorAnte[variant] > 0 THEN
+                weightAnte <- priorAnte[variant]/sumPriorAnte
+            ELSE
+                weightAnte <- 1/variants_count
+            zScaledVariant <- z[variant] * weightAnte
+            ecs <- ecs + zScaledVariant
+        ecsList.add(ecs)
+structured(ecsList)

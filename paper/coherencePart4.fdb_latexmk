@@ -1,20 +1,20 @@
 # Fdb version 3
-["bibtex coherencePart4"] 1629197652 "coherencePart4.aux" "coherencePart4.bbl" "coherencePart4" 1629351862
+["bibtex coherencePart4"] 1629197652 "coherencePart4.aux" "coherencePart4.bbl" "coherencePart4" 1635401007
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/apalike.bst" 1480098433 24635 604dafcc79f521a11ea73e506e1fbd98 ""
   "coherence.bib" 1626930782 1920042 1e3fe5436f18902a14efd5410aff02f4 ""
-  "coherencePart4.aux" 1629351862 9941 3108bdf59423f2baf2dba0338263fbe4 ""
+  "coherencePart4.aux" 1635401007 9941 3108bdf59423f2baf2dba0338263fbe4 ""
   "coherencePart4.bcf" 0 -1 0 ""
   (generated)
-  "coherencePart4.bbl"
   "coherencePart4.blg"
-["pdflatex"] 1629351861 "coherencePart4.tex" "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart4.pdf" "coherencePart4" 1629351862
+  "coherencePart4.bbl"
+["pdflatex"] 1635401006 "coherencePart4.tex" "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart4.pdf" "coherencePart4" 1635401007
   "../images/BeatlesBN.png" 1627893998 79977 a8e174414c39c2eaf0b52892fb163b8d ""
   "../images/cohPlots.png" 1628763114 97215 cd1e8a607389881645046fffcd883eb7 ""
   "../images/scFullDAG.png" 1628760063 84504 b1a4c520959783d11d5c5a1b570d8f3d ""
   "../images/scSpearman.png" 1628762701 174098 2e0cc78abaa5cbaa2600675e3e0641b2 ""
   "../images/w1w2BNv2.png" 1627894707 44921 14da5e018754da24d96ec28da30562e3 ""
   "/etc/texmf/web2c/texmf.cnf" 1594364599 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart4.aux" 1629351862 9941 3108bdf59423f2baf2dba0338263fbe4 ""
+  "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart4.aux" 1635401007 9941 3108bdf59423f2baf2dba0338263fbe4 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm" 1480098689 1408 5937f58aa508ea2cea4901c07d10f5fe ""
@@ -243,14 +243,14 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1520210507 32485 c64754543d8ac501bea6e75e209ea521 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1594878449 2700761 ac0584cc9514ab21918550a6948c4ee2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1594878469 4127133 e9e93a6b3e10f8c21cf240e54f4fca08 ""
-  "coherencePart4.aux" 1629351862 9941 3108bdf59423f2baf2dba0338263fbe4 ""
+  "coherencePart4.aux" 1635401007 9941 3108bdf59423f2baf2dba0338263fbe4 ""
   "coherencePart4.bbl" 1629197652 5442 9f0ae9a11046dc7c42fdf4fb8e2e8c5b "bibtex coherencePart4"
-  "coherencePart4.out" 1629351862 1703 854c79a696f3767b2918107db4cc87a2 ""
-  "coherencePart4.tex" 1629351860 60294 48f8622ae64ccdc767e7c4bf6deb34fa ""
+  "coherencePart4.out" 1635401007 1703 854c79a696f3767b2918107db4cc87a2 ""
+  "coherencePart4.tex" 1635401005 60343 fde28fcd6f73e2c9de4499da2571a464 ""
   (generated)
-  "coherencePart4.out"
-  "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart4.log"
-  "coherencePart4.aux"
-  "coherencePart4.log"
-  "coherencePart4.pdf"
   "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart4.pdf"
+  "coherencePart4.log"
+  "/home/rafal/UG/UGprojects/coherence3/paper/coherencePart4.log"
+  "coherencePart4.pdf"
+  "coherencePart4.out"
+  "coherencePart4.aux"

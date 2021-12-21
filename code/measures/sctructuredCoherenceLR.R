@@ -1,0 +1,256 @@
+library(bnlearn)
+library(gRain)
+source("code/utils/CptCreate.R")
+source("code/utils/CombinationsBN.R")
+source("code/utils/LogicAndBNs.R")
+source("code/bns/Penguins.R")
+
+
+
+
+Z <- function(posterior,prior){
+  d <- posterior - prior
+  ifelse(prior == posterior, 0, ifelse(posterior > prior, d/(1-prior), d/prior))
+}
+
+
+
+
+# BN <- BirdBN
+# narrationNodes <- c("P")
+# states <- c("1")
+
+BN <- ehBN
+narrationNodes <- c("E")
+states <- c("1")
+graphviz.plot(BN)
+
+
+
+structuredLR <- function(BN, narrationNodes, states){
+  startTime <- proc.time() #start measuring computation time
+  
+  
+  JN <- compile(as.grain(BN))
+  
+  #find non-root nodes
+  parented <- unique(arcs(BN)[,2])
+  
+  
+  #assign parents to parented
+  parentList <- list()
+  for(node in 1:length(parented)){
+    parentList[[node]] <- bnlearn::parents(BN,parented[node])  
+  }
+  
+  
+  
+  #initiate lists of results
+  expConfFull <- list()
+  ECSanteS <- numeric(length(parented))
+  ECSanteLR <-numeric(length(parented))
+  
+ 
+  
+  for (i in 1:length(parented)){
+   i <- 1
+      consequent <- parented[i]
+    
+      
+    consequentStates <- if (consequent %in% narrationNodes){
+      stateOfNode(node = consequent, narrationNodes = narrationNodes, states = states)    
+    } else {
+      findStates(consequent)
+    }
+    
+   
+    antecedents  <- parentList[i]
+    
+    
+    antecedentStates <- list()
+    for(a in 1:length(antecedents[[1]])){
+      antecedentStates[[a]] <- if (antecedents[[1]][a] %in% narrationNodes){
+        stateOfNode(node = antecedents[[1]][a], narrationNodes = narrationNodes, 
+                    states = states)    
+      } else if (!(antecedents[[1]][a] %in% parented)){
+        eval(parse(text = paste('dimnames(BN$',antecedents[[1]][a],'$prob)', 
+                                sep= "")))[[1]]
+      } else {
+        findStates(antecedents[[1]][a])
+      }
+    }
+    
+   
+    
+    #start the outcome table
+    variants <-  expand.grid(c(list(consequentStates),antecedentStates))
+    colnames(variants) <- c(consequent,antecedents[[1]])
+    
+    
+    variants
+    
+    #add the prior of consequent, to be used for Z calculation
+    pr <- numeric(nrow(variants))
+    for (s in 1:nrow(variants)){
+      pr[s] <- as.numeric(querygrain(JN, nodes = consequent)[[1]][as.character(eval(parse(text = paste("variants$",consequent,"[s]",sep=""))))])
+    }
+    variants <- cbind(variants, priorCons = pr)
+    
+   
+    
+    #posteriors 
+    posteriors <- numeric(nrow(variants))
+    for (row in 1:nrow(variants)){
+      JNtemp <- setEvidence(JN, nodes = antecedents[[1]], states = as.vector(unlist(variants[row,antecedents[[1]],drop= FALSE]))  )
+      posteriors[row]   <-   querygrain(JNtemp, nodes = consequent)[[1]][as.character(eval(parse(text = paste("variants$",consequent,"[row]",sep=""))))]
+    }
+    variants <- cbind(variants,posteriors)
+    
+    
+    
+    posteriorsNEG <- numeric(nrow(variants))
+    for (row in 1:nrow(variants)){
+    rowNodes <- as.vector(unlist(c(antecedents)))
+    rowNodes
+    rowStates <- as.vector(unlist(variants[row,2:(length(antecedents[[1]])+1)]))
+    rowStates
+    JNAntIfH <- setEvidence(JN, nodes = consequent, states = as.vector(unlist(variants[row,consequent,drop= FALSE])))
+    JointAntIfH <- querygrain(JNAntIfH, nodes = antecedents[[1]], type = "joint" )
+    JointAntIfH <- aperm(JointAntIfH, rowNodes)
+    steps <- numeric(length(rowNodes))
+    for(rn in 1:length(rowNodes)){
+      steps[rn] <- paste(rowNodes[rn], "=", "\"",rowStates[rn],"\"")
+    }
+    steps<- gsub(" ", "", steps, fixed = TRUE)
+    final <- paste("JointAntIfH[",paste(steps,collapse=","),"]",sep="")
+    pAntIfH <- eval(parse(text=final))
+    
+    JointAnt <- querygrain(JN, nodes = antecedents[[1]], type = "joint" )
+    JointAnt <- aperm(JointAnt, rowNodes)
+    steps <- numeric(length(rowNodes))
+    for(rn in 1:length(rowNodes)){
+      steps[rn] <- paste(rowNodes[rn], "=", "\"",rowStates[rn],"\"")
+    }
+    steps<- gsub(" ", "", steps, fixed = TRUE)
+    final <- paste("JointAnt[",paste(steps,collapse=","),"]",sep="")
+    pAnt <- eval(parse(text=final))
+    posteriorsNEG[row] <- ((1 - pAntIfH) * variants$priorCons[row])/ (1 - pAnt)
+    }
+    variants <- cbind(variants, posteriorsNEG = posteriorsNEG)
+    
+    
+    #variants
+    #priors for conjunctions
+    #priorJoint <- numeric(nrow(variants))
+    # 
+    # for (row in 1:nrow(variants)){
+    #   rowNodes <- as.vector(unlist(c(consequent,antecedents)))
+    #   rowStates <- as.vector(unlist(variants[row,1:(length(antecedents[[1]])+1)]))
+    #   PriorJoints <- querygrain(JN,nodes=rowNodes,type="joint")
+    #   PriorJoints <- aperm(PriorJoints, rowNodes)
+    #   steps <- numeric(length(rowNodes))
+    #   for(rn in 1:length(rowNodes)){
+    #     steps[rn] <- paste(rowNodes[rn], "=", "\"",rowStates[rn],"\"")
+    #   }
+    #   steps<- gsub(" ", "", steps, fixed = TRUE)
+    #   final <- paste("PriorJoints[",paste(steps,collapse=","),"]",sep="")
+    #   prior <- eval(parse(text=final))
+    #   priorJoint[row] <- prior
+    # }
+    # 
+    # variants$PriorJoint <- priorJoint
+    # 
+    #priors for the antecedents
+    
+    
+    priorAnte <- numeric(nrow(variants))
+    
+    for (row in 1:nrow(variants)){
+      rowNodes <- as.vector(unlist(c(antecedents)))
+      rowStates <- as.vector(unlist(variants[row,2:(length(antecedents[[1]])+1)]))
+      PriorJoints <- querygrain(JN,nodes=rowNodes,type="joint")
+      PriorJoints <- aperm(PriorJoints, rowNodes)
+      steps <- numeric(length(rowNodes))
+      for(rn in 1:length(rowNodes)){
+        steps[rn] <- paste(rowNodes[rn], "=", "\"",rowStates[rn],"\"")
+      }
+      steps<- gsub(" ", "", steps, fixed = TRUE)
+      final <- paste("PriorJoints[",paste(steps,collapse=","),"]",sep="")
+      noquote(final)
+      prior <- eval(parse(text=final))
+      priorAnte[row] <- prior
+    }
+    variants$PriorAnte <- priorAnte
+    
+    
+    
+    #scaled weights for antecedent
+    if(sum(variants$PriorAnte) > 0){
+      variants$WeightsAnte <-  variants$PriorAnte / sum(variants$PriorAnte)
+    } else {
+      variants$WeightsAnte <-  1/nrow(variants)
+    }
+    
+    
+    #Z measures
+    variants$Z <- Z(posterior = variants$posteriors, prior = variants$priorCons)
+    variants$LR <- variants$posteriors / variants$posteriorsNEG
+    #variants$Zweighted <- variants$Z * variants$Weights
+    #variants$ZweightedCon <- variants$Z * variants$PriorJoint
+    #variants$ZweightedAnte <- variants$Z * variants$PriorAnte
+    #variants$ZscaledCon <- variants$Z * variants$WeightsCon
+    variants$ZscaledAnte <- variants$Z * variants$WeightsAnte
+    variants$LRscaledAnte <- variants$LR * variants$WeightsAnte
+    
+    
+    
+    expConfFull[[i]] <- list( "Consequent node" = consequent,
+                              "Options & calculations" = variants,
+                              "ECSanteZ scaled" = sum(variants$ZscaledAnte),
+                              "ECSanteLR scaled" = sum(variants$LRscaledAnte))
+    
+    ECSanteS[i] <- sum(variants$ZscaledAnte)
+    ECSanteLR[i] <- sum(variants$LRscaledAnte)
+  }
+  
+  
+  populationSD <- function( vector ){
+    sqrt(sum((vector - mean(vector))^2)/(length(vector)))
+  }
+  
+  structuredScore <- function(expConf)  if (min(expConf) <= 0) {
+    (mean(expConf) - populationSD(expConf)) * (min(expConf) +1) - min(expConf)^2
+  } else {
+    (mean(expConf) - populationSD(expConf))
+  }
+  
+  structuredScoreSquared <- function(ECS)  if (min(ECS) <= 0) {
+    (mean(ECS) - populationSD(ECS)^2) * (min(ECS) +1) - min(ECS)^2
+  } else {
+    (mean(ECS) - populationSD(ECS)^2)
+  }
+  
+  
+  structuredScoreNoSD <- function(ECS)  if (min(ECS) <= 0) {
+    (mean(ECS)) * (min(ECS) +1) - min(ECS)^2
+  } else {
+    (mean(ECS))
+  }
+  
+  
+  
+  stopTime <- proc.time()
+  elapsedTime <- stopTime - startTime
+  
+  return(list("Full calculations" = expConfFull, 
+              "ECSanteZ" = ECSanteS,
+              "ECSanteLR" = ECSanteLR,
+              "structuredZ" = structuredScoreNoSD(ECSanteS),
+              "structuredLR" = structuredScoreNoSD(ECSanteLR),
+              
+              "Computation time" = elapsedTime))
+}
+
+
+
+             
