@@ -1,0 +1,269 @@
+\begin{thebibliography}{}
+
+\bibitem[Akiba, 2000]{Akiba2000Shogenjis}
+Akiba, K. (2000).
+\newblock Shogenji's probabilistic measure of coherence is incoherent.
+\newblock {\em Analysis}, 60(4):356--359.
+
+\bibitem[Allen, 2010]{allen2010no}
+Allen, R. (2010).
+\newblock No plausible alternative to a plausible story of guilt as the rule of
+  decision in criminal cases.
+\newblock In Cruz, J. and Laudan, L., editors, {\em Proof and standards of
+  proof in the law}, pages 10--27. Northwestern University School of Law.
+
+\bibitem[Anderson, 2007]{anderson2007visualization}
+Anderson, T.~J. (2007).
+\newblock Visualization tools and argument schemes: a question of standpoint.
+\newblock {\em Law, Probability and Risk}.
+
+\bibitem[Bex et~al., 2003]{bex2003towards}
+Bex, F., Prakken, H., Reed, C., and Walton, D. (2003).
+\newblock Towards a formal account of reasoning about evidence: argumentation
+  schemes and generalisations.
+\newblock {\em Artificial Intelligence and Law}, 11:125--165.
+
+\bibitem[Bex et~al., 2010]{bex2010hybrid}
+Bex, F., Van~Koppen, P., Prakken, H., and Verheij, B. (2010).
+\newblock A hybrid formal theory of arguments, stories and criminal evidence.
+\newblock {\em Artificial Intelligence and Law}, 18:123--152.
+
+\bibitem[Bex and Verheij, 2013]{bex2013legal}
+Bex, F. and Verheij, B. (2013).
+\newblock Legal stories and the process of proof.
+\newblock {\em Artificial Intelligence and Law}, 21:253--278.
+
+\bibitem[Bovens and Hartmann, 2004]{bovens2004bayesian}
+Bovens, L. and Hartmann, S. (2004).
+\newblock {\em Bayesian epistemology}.
+\newblock Oxford University Press.
+
+\bibitem[Crupi et~al., 2007]{crupi2007BayesianMeasuresEvidential}
+Crupi, V., Tentori, K., and Gonzalez, M. (2007).
+\newblock On {{Bayesian measures}} of {{evidential Support}}: {{theoretical}}
+  and {{empirical Issues}}.
+\newblock {\em Philosophy of Science}, 74(2):229--252.
+
+\bibitem[Di~Bello, 2013]{di2013statistics}
+Di~Bello, M. (2013).
+\newblock {\em Statistics and Probability in Criminal Trials}.
+\newblock PhD thesis, University of Stanford.
+
+\bibitem[Douven and Meijs, 2007]{Douven2007measuring}
+Douven, I. and Meijs, W. (2007).
+\newblock Measuring coherence.
+\newblock {\em Synthese}, 156(3):405--425.
+
+\bibitem[Fenton and Neil, 2011]{fenton2011avoiding}
+Fenton, N. and Neil, M. (2011).
+\newblock Avoiding probabilistic reasoning fallacies in legal practice using
+  bayesian networks.
+\newblock {\em Austl. J. Leg. Phil.}, 36:114.
+
+\bibitem[Fenton and Neil, 2012]{fenton2012limiting}
+Fenton, N. and Neil, M. (2012).
+\newblock On limiting the use of bayes in presenting forensic evidence.
+
+\bibitem[Fenton and Neil, 2018]{Fenton2018Risk}
+Fenton, N. and Neil, M. (2018).
+\newblock {\em Risk Assessment and Decision Analysis with Bayesian Networks}.
+\newblock Chapman and Hall.
+
+\bibitem[Fenton et~al., 2014]{fenton2014calculating}
+Fenton, N., Neil, M., and Hsu, A. (2014).
+\newblock Calculating and understanding the value of any type of match evidence
+  when there are potential testing errors.
+\newblock {\em Artificial Intelligence and Law}, 22:1--28.
+
+\bibitem[Fenton et~al., 2013]{fenton2013general}
+Fenton, N., Neil, M., and Lagnado, D. (2013).
+\newblock A general structure for legal arguments about evidence using bayesian
+  networks.
+\newblock {\em Cognitive science}, 37(1):61--102.
+
+\bibitem[Fitelson, 2003]{fitelson2003ProbabilisticTheoryCoherence}
+Fitelson, B. (2003).
+\newblock A {{Probabilistic Theory}} of {{Coherence}}.
+\newblock {\em Analysis}, 63(3):194--199.
+
+\bibitem[Gittelson et~al., 2013]{gittelson2013modeling}
+Gittelson, S., Biedermann, A., Bozza, S., and Taroni, F. (2013).
+\newblock Modeling the forensic two-trace problem with bayesian networks.
+\newblock {\em Artificial intelligence and law}, 21:221--252.
+
+\bibitem[Glass, 2002]{glass2002}
+Glass, D.~H. (2002).
+\newblock Coherence, {{Explanation}}, and {{Bayesian Networks}}.
+\newblock In Goos, G., Hartmanis, J., {van Leeuwen}, J., O'Neill, M.,
+  Sutcliffe, R. F.~E., Ryan, C., Eaton, M., and Griffith, N. J.~L., editors,
+  {\em Artificial {{Intelligence}} and {{Cognitive Science}}}, volume 2464,
+  pages 177--182. {Springer Berlin Heidelberg}, {Berlin, Heidelberg}.
+
+\bibitem[Keppens, 2012]{keppens2012argument}
+Keppens, J. (2012).
+\newblock Argument diagram extraction from evidential bayesian networks.
+\newblock {\em Artificial Intelligence and Law}, 20(2):109--143.
+
+\bibitem[Koscholke, 2016]{koscholke2016evaluating}
+Koscholke, J. (2016).
+\newblock Evaluating {{Test Cases}} for {{Probabilistic Measures}} of
+  {{Coherence}}.
+\newblock {\em Erkenntnis}, 81(1):155--181.
+
+\bibitem[Lagnado et~al., 2013]{lagnado2013legal}
+Lagnado, D.~A., Fenton, N., and Neil, M. (2013).
+\newblock Legal idioms: a framework for evidential reasoning.
+\newblock {\em Argument \& Computation}, 4(1):46--63.
+
+\bibitem[Meijs and Douven, 2007]{Meijs2007Alleged}
+Meijs, W. and Douven, I. (2007).
+\newblock On the alleged impossibility of coherence.
+\newblock {\em Synthese}, 157(3):347--360.
+
+\bibitem[Merricks, 1995]{Merricks1995}
+Merricks, T. (1995).
+\newblock Warrant entails truth.
+\newblock {\em Philosophy and Phenomenological Research}, 55:841--855.
+
+\bibitem[Olsson, 2001]{olsson2001conducive}
+Olsson, E.~J. (2001).
+\newblock Why {{Coherence Is Not Truth}}-{{Conducive}}.
+\newblock {\em Analysis}, 61(3):236--241.
+
+\bibitem[Olsson, 2005]{olsson2005}
+Olsson, E.~J. (2005).
+\newblock The {{Impossibility}} of {{Coherence}}.
+\newblock {\em Erkenntnis}, 63(3):387--412.
+
+\bibitem[Pennington and Hastie, 1991]{pennington1991cognitive}
+Pennington, N. and Hastie, R. (1991).
+\newblock A cognitive theory of juror decision making: The story model.
+\newblock {\em Cardozo Law Review}, 13:519--557.
+
+\bibitem[Pennington and Hastie, 1992]{pennington1992explaining}
+Pennington, N. and Hastie, R. (1992).
+\newblock Explaining the evidence: Tests of the story model for juror decision
+  making.
+\newblock {\em Journal of personality and social psychology}, 62(2):189--204.
+
+\bibitem[Pennington and Hastie, 1993]{pennington1993story}
+Pennington, N. and Hastie, R. (1993).
+\newblock {\em The story model for juror decision making}.
+\newblock Cambridge University Press Cambridge.
+
+\bibitem[Riesen and Serpen, 2008]{riesen2008validation}
+Riesen, M. and Serpen, G. (2008).
+\newblock Validation of a bayesian belief network representation for posterior
+  probability calculations on national crime victimization survey.
+\newblock {\em Artificial Intelligence and Law}, 16:245--276.
+
+\bibitem[Roche, 2013]{Roche2013Coherence}
+Roche, W. (2013).
+\newblock Coherence and probability: A probabilistic account of coherence.
+\newblock In Araszkiewicz, M. and Savelka, J., editors, {\em Coherence:
+  Insights from philosophy, jurisprudence and artificial intelligence}, pages
+  59--91. Dordrecht: Springer.
+
+\bibitem[Schippers and Koscholke, 2019]{Schippers2019General}
+Schippers, M. and Koscholke, J. (2019).
+\newblock A {{General Framework}} for {{Probabilistic Measures}} of
+  {{Coherence}}.
+\newblock {\em Studia Logica}.
+
+\bibitem[Shen et~al., 2006]{shen2006scenario}
+Shen, Q., Keppens, J., Aitken, C., Schafer, B., and Lee, M. (2006).
+\newblock A scenario-driven decision support system for serious crime
+  investigation.
+\newblock {\em Law, Probability and Risk}, 5(2):87--117.
+
+\bibitem[Shogenji, 1999]{shogenji1999conducive}
+Shogenji, T. (1999).
+\newblock Is {{Coherence Truth Conducive}}?
+\newblock {\em Analysis}, 59(4):338--345.
+
+\bibitem[Shogenji, 2001]{Shogenji2001Reply}
+Shogenji, T. (2001).
+\newblock Reply to akiba on the probabilistic measure of coherence.
+\newblock {\em Analysis}, 61(2):147--150.
+
+\bibitem[Shogenji, 2006]{Shogenji2006Why}
+Shogenji, T. (2006).
+\newblock Why does coherence appear truth-conducive?
+\newblock {\em Synthese}, 157(3):361--372.
+
+\bibitem[Siebel, 2004]{Siebel2004On-Fitelsons-me}
+Siebel, M. (2004).
+\newblock On {F}itelson's measure of coherence.
+\newblock {\em Analysis}, 64:189--190.
+
+\bibitem[Siebel, 2006]{siebel2006against}
+Siebel, M. (2006).
+\newblock Against probabilistic measures of coherence.
+\newblock In {\em Coherence, Truth and Testimony}, pages 43--68. Springer.
+
+\bibitem[Spottswood, 2013]{spottswood2013bridging}
+Spottswood, M. (2013).
+\newblock Bridging the gap between bayesian and story-comparison models of
+  juridical inference.
+\newblock {\em Law, Probability and Risk}, page mgt010.
+
+\bibitem[Verheij, 2007]{verheij2007argumentation}
+Verheij, B. (2007).
+\newblock Argumentation support software: boxes-and-arrows and beyond.
+\newblock {\em Law, Probability and Risk}, 6(1-4):187--208.
+
+\bibitem[Verheij, 2014]{verheij2014catch}
+Verheij, B. (2014).
+\newblock To catch a thief with and without numbers: arguments, scenarios and
+  probabilities in evidential reasoning.
+\newblock {\em Law, Probability and Risk}, 13(3-4):307--325.
+
+\bibitem[Verheij, 2017]{verheijproof2017}
+Verheij, B. (2017).
+\newblock Proof with and without probabilities. correct evidential reasoning
+  with presumptive arguments, coherent hypotheses and degrees of uncertainty.
+\newblock {\em Artificial Intelligence and Law}, pages 1--28.
+
+\bibitem[Verheij et~al., 2016]{verheij2015arguments}
+Verheij, B., Bex, F., Timmer, S.~T., Meyer, J., Renooij, S., Prakken, H.,
+  et~al. (2016).
+\newblock Arguments, scenarios and probabilities: connections between three
+  normative frameworks for evidential reasoning.
+\newblock {\em Law, Probability \& Risk}, 15:35--70.
+
+\bibitem[Vlek, 2016]{vlek2016stories}
+Vlek, C. (2016).
+\newblock {\em When Stories and Numbers Meet in Court: Constructing and
+  Explaining Bayesian Networks for Criminal Cases with Scenarios}.
+\newblock Rijksuniversiteit Groningen.
+
+\bibitem[Vlek et~al., 2013]{vlek2013modeling}
+Vlek, C., Prakken, H., Renooij, S., and Verheij, B. (2013).
+\newblock Modeling crime scenarios in a bayesian network.
+\newblock In {\em Proceedings of the Fourteenth International Conference on
+  Artificial Intelligence and Law}, pages 150--159. ACM.
+
+\bibitem[Vlek et~al., 2014]{vlek2014building}
+Vlek, C., Prakken, H., Renooij, S., and Verheij, B. (2014).
+\newblock Building bayesian networks for legal evidence with narratives: a case
+  study evaluation.
+\newblock {\em Artificial Intelligence and Law}, 22:375--421.
+
+\bibitem[Vlek et~al., 2015]{vlek2015}
+Vlek, C., Prakken, H., Renooij, S., and Verheij, B. (2015).
+\newblock Representing the quality of crime scenarios in a bayesian network.
+\newblock In Rotolo, A., editor, {\em Legal Knowledge and Information Systems},
+  pages 133--140. IOS Press.
+
+\bibitem[Vlek et~al., 2016]{vlek2016method}
+Vlek, C., Prakken, H., Renooij, S., and Verheij, B. (2016).
+\newblock A method for explaining {B}ayesian networks for legal evidence with
+  scenarios.
+\newblock {\em Artificial Intelligence and Law}, 24:285--324.
+
+\bibitem[Wigmore, 2012]{wigmore2012principles}
+Wigmore, J.~H. (2012).
+\newblock {\em Principles of judicial proof}.
+\newblock JSTOR.
+
+\end{thebibliography}

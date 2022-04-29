@@ -1,0 +1,45 @@
+\begin{table}
+
+\caption{Structured coherence scores in the Sally Clark scenarios for a selection of confirmation mesures,
+           with priors and posteriors given evidence.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lllllll}
+\toprule
+stage & scenario & Z & LR & L & priors & probs\\
+\midrule
+0 & 00 & 0.1984 & 27.59 & 0.197 & 0.9211 & 0.9211\\
+0 & 11 & 0.2 & 15970 & 0.2 & 0.07833 & 0.07833\\
+0 & 01 & -0.9855 & 5.664 & -0.9735 & 0.0005895 & 0.0005895\\
+0 & 10 & -0.9997 & 5.666 & -1 & 1.145e-05 & 1.145e-05\\
+1 & 00 & 0.01924 & 27.45 & 0.08894 & 0.9211 & 0.2981\\
+1 & 11 & 0.6062 & 15980 & 0.8222 & 0.07833 & 0.7009\\
+1 & 01 & -0.9842 & 10.79 & -0.9694 & 0.0005895 & 0.001003\\
+1 & 10 & -0.9997 & 10.8 & -0.9999 & 1.145e-05 & 1.949e-05\\
+2 & 00 & 0.02047 & 27.48 & 0.1034 & 0.9211 & 0.9541\\
+2 & 11 & -0.9525 & 15980 & -0.9028 & 0.07833 & 0.04266\\
+2 & 01 & -0.9842 & 10.82 & -0.9692 & 0.0005895 & 0.003211\\
+2 & 10 & -0.9998 & 1.13 & -1 & 1.145e-05 & 1.186e-06\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+
+\begin{table}
+
+\caption{Satisfaction of intuitions about the Sally Clark problem.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{llll}
+\toprule
+  & Z & LR & L\\
+\midrule
+00,11>01,10 & TRUE & TRUE & TRUE\\
+S1:11>S0:11 & TRUE & TRUE & TRUE\\
+S1:00<S0:00 & TRUE & TRUE & TRUE\\
+S2:10<S2:01 & TRUE & TRUE & TRUE\\
+S2:00>S1:00 & TRUE & TRUE & TRUE\\
+S2:11<S1:11 & TRUE & TRUE & TRUE\\
+\bottomrule
+\end{tabular}}
+\end{table}

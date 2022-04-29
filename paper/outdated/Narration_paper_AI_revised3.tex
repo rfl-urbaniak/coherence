@@ -1,0 +1,1253 @@
+\documentclass[10pt,leqno]{article}
+
+
+\usepackage{natbib}
+
+
+
+%This is for comments on margins
+\usepackage[textsize=tiny]{todonotes}
+
+
+
+%These are AMS packages:
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+
+%this prints keys for drafts
+%\usepackage[notcite,notref]{showkeys}
+
+%sectioning
+\usepackage{sectsty}
+	\sectionfont{\normalsize \sc}
+	\subsectionfont{\normalsize \sc}
+	\subsubsectionfont{\normalsize \sc}
+
+
+
+
+
+%abbreviations
+	%Boolean connectives; learn the abbs and use them
+	\newcommand{\jt}{\rightarrow}
+	\newcommand{\n}{\neg}
+	\newcommand{\et}{\wedge}
+	\newcommand{\ro}{\leftrightarrow}
+
+	%quantifiers; 
+	\newcommand{\exi}[1]{\exists {#1}\,\, }
+	\newcommand{\ko}[1]{\forall {#1}\,\,}
+
+
+	%angled brackets (for sequences and such)
+	\newcommand{\la}{\langle}	
+	\newcommand{\ra}{\rangle}
+
+	%probability
+	\newcommand{\pr}[1]{\mbox{$\mathtt{P}(#1)$}}
+	\newcommand{\prt}[1]{\mbox{$\mathtt{P_t}(#1)$}}
+	\newcommand{\pru}[1]{\mbox{$\mathtt{P_u}(#1)$}}
+	\newcommand{\pri}[1]{\mbox{$\mathtt{P}^i(#1)$}}
+	\newcommand{\pra}[1]{\mbox{$\mathtt{P}^a(#1)$}}
+	\newcommand{\ppri}[1]{\mbox{$\mathtt{P}^i(#1)$}}
+ 	\newcommand{\df}[1]{\mbox{$\pr{#1}\downarrow$}}
+ 	\newcommand{\ndf}[1]{\mbox{$\pr{#1}\uparrow$}}
+ 	\newcommand{\prr}{\mbox{$\mathtt{P}$}}
+	\newcommand{\prcon}[3]{\mbox{$\mathtt{P}^{#3}(\mathtt{#1}\vert \mathtt{#2})$}}
+	\newcommand{\prtext}[2]{\mbox{$\mathtt{P}^{#2}(\mathtt{#1})$}}
+
+
+
+
+
+\begin{document}
+
+%now for title-related stuff
+
+
+
+\title{Narration in judiciary fact-finding:\\ a probabilistic explication}
+
+%\author{Rafal Urbaniak}
+\date{}
+
+
+\maketitle
+
+
+
+\begin{abstract}
+Legal probabilism  is the view that juridical fact-finding should be modeled using Bayesian methods. One of the alternatives to it  is the narration view, according to which instead we should conceptualize the process in terms of competing narrations of what (allegedly) happened. The goal of this paper is to develop a reconciliatory account, on which the narration view is construed from the Bayesian perspective within the framework of formal Bayesian epistemology. 
+\end{abstract}
+
+
+
+
+\section{Legal probabilism and narrations}\label{sec:CLPandissues}
+
+
+\emph{Legal Probabilism} (LP)  is the view that the legal notion of probability is to be governed by the 
+ma\-the\-ma\-ti\-cal principles of standard probability theory, and that the decision process in juridical fact-finding is to be modeled by means of probabilistic tools.
+
+LP comes in various shapes. It is one thing to say that the standards of juridical proof are to be explicated in probabilistic terms, it is another to provide such an explication. For instance, of such explications is the  \emph{Classical Legal Probabilism} (CLP) \citep{Bernoulli1713Ars-conjectandi},  according to which  the decision rule  given a certain probability of guilt threshold $t$ is:\footnote{Four remarks. First, normally, the assumption that $t$ is constant between cases is unnecessary. It definitely changes between the civil and the criminal cases, and might change depending on what's at stake at a given case. Second, for somewhat different explications which lie beyond the scope of this paper see for instance \citep{cheng2012reconceptualizing} or \citep{kaplow2014likelihood}. Third, note also that the view is called \emph{classical} deservedly. Nowadays, many scholars who embrace the use of probabilistic methods in court and the requirement that uncertain reasoning in court should be probabilistically coherent, do not claim that there is a guilt probability threshold. Fourth, in what follows I'll speak as if I was talking about the criminal standard only. What will be said, though, applies, \emph{mutatis mutandis}, to civil cases as well.}
+
+ 
+ \begin{center}
+\begin{tabular}{lp{7.5cm}}
+{(CLP)} &If the probability of guilt conditional on all the evidence is above $t$, convict; otherwise acquit.\end{tabular}
+ \end{center}
+
+The debate about LP started in the sixties\footnote{See   \citep{ball1960moment,kaplan1968decision,cullison1969probability,simon1970quantifying,lempert1977modeling,kaye1979paradox}.}   
+and continued for quite a few years,\footnote{See for instance \citep{tillers1988probability}.} leading to a careful level of acceptance of some probabilistic methods in court of law.\footnote{\citep{Stein2005Foundations-of-,ho2008philosophy,aitken2010fundamentals}} In the process, however, many arguments have been put forward to the effect that the models offered by LP are either inadequate or unhelpful.\footnote{See for example \citep{tribe1970further,tribe1971trial,Cohen1977The-probable-an,Underwood1977The-thumb-on-th,Nesson1979Reasonable-doub,cohen1981subjective,dant1988gambling,wells1992naked,Stein2005Foundations-of-,allen2007problematic,ho2008philosophy,haack2011legal}.} Some, such as those put forward by Cohen, consisted in raising conceptual difficulties and paradoxes related to  the application of probability theory in legal contexts. Quite a few objections raised by Cohen have not been successfully answered.\footnote{A detailed discussion of Cohen's objections is beyond the scope of the paper. My goal now is to put forward a positive proposal; a discussion of how it relates to Cohen's arguments is postponed to another paper.} Some arguments focused on the fact that LP is blind  to various phenomena that an adequate philosophical  account of legal fact-finding should explain. Some of them pertain to   procedural issues \citep{Stein2005Foundations-of-} --- proceedings are back-and-forth between opposing parties, cross-examination is crucial, and yet CLP seems to take no notice of this dynamics. Some have to do with reasoning methods which are not only evidence-to-hypothesis, but also hypotheses-to-evidence \citep{wells1992naked,allen2007problematic}  and involve  inference to the best explanation \citep{dant1988gambling}. 
+
+A seemingly competing account, which, arguably, is not blind to those aspects of fact-finding, and is not susceptible to Cohen-style paradoxes, has been put forward.   It is the \emph{No Plausible Alternative Story} (NPAS) theory \citep{allen2010no}, according to which  the courtroom is a confrontation of competing narrations offered by the defendant and by the prosecutor and  the theory to be selected\footnote{Throughout the paper I use \emph{narration}, \emph{story} and \emph{theory} interchangeably.} should be the most plausible one. On the narrative approach
+ the fact-finding proceedings are seen as  an interplay of evidence and various stories of crime presented by opposing parties and the assessment of their  relative plausibility plays a crucial role in the court's decision \citep{ho2008philosophy}. That is, NPAS   offers the following rule of decision: 
+
+
+ \begin{center}
+\begin{tabular}{lp{7.5cm}}
+(NPAS)&Once all the plausible alternative narrations have been ruled out by the evidence presented, pick the one remaining narration, and if it entails guilt, convict, or else acquit.\end{tabular}
+\end{center}
+
+%TODO discuss Pennington and Hastie
+One advantage of this view is that it is suggested by psychological evidence \citep{pennington1991cognitive,pennington1992explaining,pennington1993story}. Fact-finders in court indeed construct their own crime narratives from the evidence. Second, the approach is better at capturing the already listed  phenomena that CLP is claimed to be blind to. Third, 
+ given that evidence is often somewhat scattered, it seems conceptually adequate to try to put it together by means of a narration.\footnote{``\dots  the prosecutor is expected to offer a coherent and reasonably well-specified narrative of the crime. Constructing a narrative, after all, is precisely a way of drawing inferences from a body of evidence and weaving those inferences together'' \citep[24]{di2013statistics}.}
+Fourth, NPAS seems to be able to handle the Cohen-style paradoxes put forward against LP.
+
+
+
+NPAS, it seems, is quite opposite to LP in spirit. Allen, the main proponent of the view, explicitly says:
+\begin{quote}
+I have been asked to elaborate on the meaning of “plausibility” in this theoretical structure. The difficulty in doing so is that the relative plausibility theory is a positive rather than a normative theory. For reasons I will elaborate below, “plausibility” can serve as a primitive theoretical term the meaning of which is determined by its context in the explanation of trials.
+\citep[10]{allen2010no}
+\end{quote}
+So, NPAS completely abandons the use of probabilistic tools in the explication it puts forward. While the advantages of NPAS are clearly visible when it comes to aspects of fact-finding that LP is allegedly blind to, this success comes at a price.
+ There is something theoretically unsatisfactory about the  refusal to explicate the notion of relative plausibility any further. And focusing on which narrative wins without explicating what in objective reality makes a narration successful carries the threat of subjectivism: \emph{it's not about truth, it's about who tells a better story!} \citep[see ][for a discussion]{griffin2012narrative}.
+
+   Come to think of it, the use of probabilistic tools in epistemology in general has been quite successful and led to the development of a fruitful field of Bayesian epistemology.    Is there  something highly specific to juridical fact-finding which makes probabilistic tools useless? Perhaps. But in this paper I intend to work under a different hypothesis, at least to see how far the probabilist can get without giving up on LP.
+
+  My working hypothesis is that the issues raised by the critics of LP apply not so much to LP, as to its particular realizations such as CLP. The goal of the paper is to argue that the probabilist can use probabilistic tools to understand the narrative approach better and to incorporate insights of its proponents into a probabilistic model of judiciary fact-finding. Thus, I will argue, ultimately there is no deep opposition between the probabilistic and the narrative approach. It's just that the probabilistic models put forward so far have been too simplistic.  The goal of the paper is to develop a probabilistic model rich enough to capture the aspects of judiciary fact-finding that the proponents of the narrative view find essential.
+
+
+
+
+
+
+In Section \ref{sec:NLP} I start with describing the source of philosophical inspiration for the framework, Di Bello's \emph{New Legal Probabilism} (NLP). In Section \ref{sec:framework_for_narratives} I introduce the formal framework. In Section \ref{sec:formal_conditions} I explicate the conditions which all narrations have to satisfy. In Section \ref{sec:Evaluating_narrations} I use the framework to explicate the evaluation criteria on various narrations. Section \ref{sec:an_example} provides an example of thinking about a judiciary fact-finding process from this perspective. Section \ref{sec:looking_back_at_NLP_and_NPAS} looks back at  the informal narrative approaches from the perspective of the formal framework. Section \ref{sec:comparison_to_existing} compares the framework to other existing formal approaches to judiciary fact-finding.
+
+
+
+
+\section{New Legal Probabilism (NLP)} \label{sec:NLP}
+
+
+ \citet{di2013statistics}  proposes that what's  missing in CLP on top of meeting a probability threshold is a well-specified narrative  which describes what happened in a coherent way and is supported by the evidence available (the factual propositions that need to be established follow from it and background knowledge): 
+ \begin{quote}
+ In establishing a defendant's guilt for a crime (murder, rape, theft, etc.), the prosecutor should prove a number of factual propositions from which guilt follows in accordance with the substantive law governing the case. To prove the factual propositions of interest, the prosecutor typically advances a well-specified narrative (a story, a theory) of the crime which describes what happened in  a coherent way. The narrative should be supported by the evidence available, and the factual propositions that need to be established should follow from the narrative as a matter of logic and commonsense. The narrative should be well-specified in the sense that it should offer a sufficiently specific and detailed reconstruction of what happened.  \citep[24]{di2013statistics}
+ \end{quote}
+ Thus, while narrations play a crucial role in the account, their relation to evidence and their factual support is also in the focus, hopefully susceptible to a more precise probabilistic  analysis.\footnote{``But the probabilists can use narratives more directly. They can think of relevant evidence as evidence that increases the probability of a narrative which the prosecution or the defense are proposing. Instead of looking at whether an evidential item increases the probability of isolated propositions (which, in turn, are material for guilt or innocence), the probabilists can directly consider the probability of an entire narrative. The switch from isolated propositions to narratives is not in contradiction with a probability-based account of relevant evidence. Both isolated propositions and entire narratives, after all, can be more or less probable on the evidence.'' \citep[192]{di2013statistics}}
+
+ 
+ On this approach, a warranted conviction beyond reasonable doubt has to satisfy a selection of conditions.  First of all, the criminal justice system would be deeply flawed if the prevailing party was simple the one who can tell the better story, with no regard for evidential support. While in some cases one might have the impression that it was the poetic skills of a party that helped them to prevail, it is a sign of failure rather than an ideal to aspire to. Criminal trials, despite appearances, aren't merely competitions in creative story-telling. The relation of a narrative to the evidence  is to be understood quite widely, so that ``the relationship between evidence and narrative goes both ways: from the evidence to the narrative  and from the narrative to the evidence.'' \citep[208]{di2013statistics}
+ 
+ 
+   Hence the  requirement, tying narrations to evidence:
+ 
+ \begin{center}
+\begin{tabular}{lp{8cm}}
+ (Evidential support) &The  probability of defendant's guilt, given  the evidence should be sufficiently high, and a successful accusing narration should explain the relevant evidence. 
+\end{tabular}
+\end{center}
+
+
+%TODO discuss later on
+% If the perpetrator used a knife to kill the victim (narrative), this explains why the victim had a cut on her throat (evidence), and vice versa, the cut on the victim’s throat (evidence) supports the conclusion that the perpetrator used a knife to kill (narrative). \citep[208]{di2013statistics}
+
+However, not only the presence of evidence, but also the absence of it can be quite telling. For instance, in a drunk driving  case one would strongly expect the breathalyser test result  and consider case incomplete without it. In some other case, one would expect either DNA evidence, or an explanation as to why it isn't available. What evidence is missing depends on the content of a given narration, on the evidence available, and on the background knowledge of fact-finders. If the persecution presents a certain narration, the fact-finders, relying on their background knowledge, decide which traces the crime as described would most likely leave, and which of them the criminal investigators would be likely to discover. Lack of such evidence, if not sensibly explained by the narration, is itself taken as a reason to doubt the narration.
+
+
+
+ \begin{center}
+\begin{tabular}{lp{7cm}}
+(Evidential completeness) &  The evidence available at trial should be complete as far as a reasonable fact-finders' expectations are concerned.
+\end{tabular}\end{center}
+
+
+
+\citet[209]{di2013statistics} talks also  about \emph{type two gaps}, which occur when a part of narration is proposed which is not supported by any available evidence. I take this type of gap to be subsumed under (Evidential support) --- if part of the narration is not supported by the available evidence, the whole narration is not sufficiently supported by the available evidence.
+
+
+
+Another condition, resiliency, is also taken by \citet[210]{di2013statistics} to be two-fold. On one hand, the burden of the proof is on the prosecutor and the defense should be given an opportunity to challenge the prosecutor's case. On the other,  there shouldn't be a non-negligible potential evidence which could undermine the narration.
+
+
+ \begin{center}
+\begin{tabular}{lp{8.5cm}}
+(Resiliency)&  The prosecutor's narrative, based on the available evidence, should not be susceptible to revision given reasonably possible future arguments and evidence.
+\end{tabular}\end{center}
+
+Finally, it is quite difficult to establish guilt without offering a narrative  of it. A crime involves  the occurrence of the \emph{actus reus} and the \emph{mens rea}, and it's hard to establish both as isolated propositions. Ideally, the prosecution  should answer natural questions such as `\emph{who did it? why? how? when? where?}', and as prosecution's answers to these questions develop, new questions naturally arise, given background knowledge and evidence.
+
+
+
+ \begin{center}
+\begin{tabular}{lp{8.5cm}}
+(Narrativity) & The narrative offered by the prosecutor should answer all 
+the natural or reasonable questions one may have about what happened, given the content of the prosecutor's narration and the available evidence.
+\end{tabular}\end{center}
+
+
+
+
+What is the relation between NPAS  and NLP? Strictly speaking, the criteria described by Di Bello are too rich to suggest that NLP is an attempt at an explication of NPAS. NLP seems more like an attempt to strike a balance between NPAS and LP. On one hand, NLP and NPAS are both narration-based and emphasize the crucial role stories (understood as theories of what happened) play in fact-finding. NLP, just as NPAS, suggests that the decision to convict relies on  factors that go beyond mere guilt probability threshold. On the other hand, NLP attempts to be more specific about the criteria that are to be used in choosing the right narration, and in the pursuit of this goal doesn't hesitate to rely on resources that LP relied on: objectivist approach, relation to evidence, and various notions that, hopefully, can be formulated within the framework of Bayesian epistemology. Moreover, NLP goes beyond both NPAS and CLP in elaborating on how various fairly complicated factors interact in juridical decision-making.
+
+
+
+
+Unfortunately, it is not quite clear whether the resources that NLP helps herself to  indeed fall into the realm of Bayesian methodology. So far, the key  requirements have not been explicated formally, and so it is not clear to what extent NLP  abandons the classical optimism about probabilistic methods in judiciary contexts. 
+
+\begin{quote}  
+The probabilists can enrich their framework by adding probability-based accounts of evidential completeness, resiliency, and narrativity. To my knowledge, no legal probabilist has undertaken the task in any systematic way. \citep[75]{di2013statistics}
+\end{quote}
+
+This situation is rather unfortunate. The legal notion of a narrative, as one used to decide human fate, is too important to be left to poetical musings of literary studies.  A deeper understanding of how such narratives relate to evidence and  differ from fairy tales. An account of how they can be used rationally in a decision process is needed.  To improve on the situation, the remainder of this  paper is an attempt  to develop a formal approach inspired by NLP to  the way legal  narratives are rationally used in court. 
+
+
+\section{Framework for narratives \& probability}\label{sec:framework_for_narratives}
+
+
+The next step towards explicating the relevant notion is to describe the  formal language and mathematical tools that will be used. 
+
+\subsection{The language and its interpretation}
+
+No formal account of fact-finding related to guilt and  of proceedings based on narrations and evidence can be given unless the formal apparatus can actually distinguish between pieces of evidence,  parts of different narrative and the content of the accusation.  To even be able to reason explicitly about such things in a formal framework we need to be able to express them in the formal language to start with.
+
+  Accordingly,  the \textbf{object language} is a standard propositional language 
+$\mathcal{L}$ (I assume $\et$ and $\neg$ are the primitive connectives, nothing serious hinges on the choice) extended to a language $\mathcal{L}^{+}$ with primitive unary operators $E, N^A_1, \dots, N^A_k$, $N^D_1, \dots, N^D_l$, and the guilt statement constant $G$. 
+
+The content of the guilt statement is given in terms of a list of conditions in the background language that need to be established for a conviction to be justified. This is modeled by conditioning on the definition of guilt  $\mathtt{G}$ which has the form of 
+\[ G\equiv g_1\et \cdots \et g_l\] 
+\noindent  for appropriate $g_1, \dots, g _l\in \mathcal{L}$. Deciding on the content $G$ depends on legal considerations, and it is such considerations that set the goal for the fact-finding process. While there indeed is a difference between deciding on facts and deciding on the legal qualification thereof, details of this aspect of the process lie beyond the scope of this paper. In a sense, I  set the legal issues aside, and simply think of $G$ as an abbreviation for the conjunction of the factual claims that the persecution endeavors to establish. 
+
+
+
+ 
+
+The intended interpretation of $Ep$  is \emph{$p$ is part of evidence}. The idea is that 
+after all the evidence and all the arguments have been presented in court, the background knowledge is to be  enriched by the  pieces of evidence presented, thoght of as sentences of $\mathcal{L}$:   $\mathtt{E} = \{e_1,\dots, e_j\}\subset \mathcal{L}$. However, we are not only to extend our beliefs by $e_1,\dots, e_j$, but also by the corresponding claims about these sentences being parts of evidence: $Ee_1, \dots, E e_j$. The goal here is to make it possible to be able to model dependencies between statements of the form $Ep$, so that one can sensibly consider the probability that something should be a piece of evidence given that something else is, or given the content of a narration. For instance, in a drunk driving case, we might expect the breathalyser results to be part of evidence. 
+
+
+%  The current approach construes evidence as a set of sentences, which might seem unusual to practitioners not used to tools used by logicians. A practitioner might be worried that this approach misses a lot. They might argue that evidence is contextual, that it  is always a relation between two propositions, that it is always evidence given a narrative etc. 
+
+% The worry is quite legitimate, but  I see no sensible alternative to taking pieces of evidence to ultimately be sentences  (e.g. ``the breathalyzer test result was X'', or ``the DNA material on the knife matches that of the defendant'', ``the witness testified that the accused was present in the room''). Of course, the issues pertaining to admitting, evaluating and interpreting evidence  are  much more complicated and require much more than mere logic.  Yet, many factors mentioned in such objections can be accommodated within the approach, and  are more  related to the evaluation of evidence (understood as sentences relied on) and the evaluation of its impact on a particular narration. So, for instance, the claim that evidence is contextual can be interpreted as the claim that a given fact can be relevant for the case (or not) depending on the narration (and thus, not all pieces of evidence used in a trial are evidence relevant for all narrations), and that the same fact can be used in support of various narrations --- all of which can be expressed in terms of pieces of evidence being sentences. Similarly, when one says that evidence is a relation between two propositions (between two sets of propositions, perhaps), this can be  construed  as the claim that evidence is always brought up and evaluated in the context of defending a narration. The task of representing  various claims containing the word "evidence" in its various meanings, while important, however, lies beyond the scope of this paper. 
+
+
+
+ $N^A_ip$ means \emph{$p$ is part of an accusing narration $\mathtt{N}^A_i$} and
+ $N^D_ip$ means \emph{$p$ is part of a defending narration $\mathtt{N}^D_i$}.  A few remarks are in order. 
+ \begin{itemize}
+ \item First of all, accusing and defending narrations are kept apart, because the requirements put on them are somewhat different. For instance, while the accusation is supposed to make sense of (hopefully) all the evidence, the defense has to explain away only those parts of evidence which seem to undermine the defense's line in light of the accusing narration(s). 
+ \item Secondly,  it might seem unusual that I require for there to even \emph{be} a defending narration. Isn't it up to the persecution to come up with a narration as to who did what and why, and isn't it up to the defense to only rebut the persecution's accusations? In a sense, yes --- but the notion of narration at play in this formal approach is \emph{very wide}. The set of sentences put forward by the defense (or by persecution) is considered a narration, even though it might not resemble a full causal story of who did what and why. It is enough that it is a set of sentences about  what happened (or, perhaps, emphatically, of what did \emph{not} happen, taking a stance on the guilt claim). It might help to think of the notion of narration here as akin to that of a theory (=a set of sentences). From this perspective, causal connections, relation to the evidence etc., while important, are  involved when one assesses the conditional probability of the narration given background knowledge and the evidence, but aren't built into a narration by mere definition.
+ 
+ \item Third, one might be surprised to see the admissibility of multiple accusing and multiple defense narrations. Isn't the persecution to offer a single line of offense, and the defense to make up its mind on the way to rebut it? Perhaps, ultimately, yes. But in the process of developing these, often multiple scenarios are considered both by the persecution and  by the defense.  The framework to be developed should allow for comparison of not only the ultimately offered narrations, but also potential versions of events. If one is attached to the one-attack-one-defense model, it still falls within the scope of the framework.
+ 
+\end{itemize}
+
+Each narration $\mathtt{N}_i$ (in contexts in which it is irrelevant whether a narration is  an accusing one or not, I will suppress the superscripts) is taken to be  a finite set of sentences $n_{i1}, n_{i2}, \dots, n_{ik_{i}}$ of $\mathcal{L}^+$ (the funny double subscript is there to indicate that the numbers of sentences can differ between narrations). Notice also that the language of narrations is richer than the language of evidence. This is because while evidence is \emph{not} supposed to be about narrations, narrations themselves can refer to each other and use claims about other narrations, for instance when one, in a narration, argues that another narration is incoherent.
+
+Before we leave this section, let's go over some abbreviations that will be used further on. 
+
+\begin{itemize}
+\item $\mathtt{E}$ stands ambiguously for the set of all sentences constituting evidence,  for the list of all such sentences, and for the conjunction thereof, so that it not only makes sense to say $p \in \mathtt{E}$, but also to talk about the probability of a hypothesis $h$ given the whole evidence $\pr{h\vert \mathtt{E}}$. Which reading is meant will always be clear from the context (this convention for ambiguity applies to all finite sets of sentences considered in this paper).
+\item $\mathtt{E}^d$ stands for (the set of) sentences obtained by preceding every piece of evidence with the $E$ operator: $\mathtt{E}^d=\{E\varphi \vert \varphi \in \mathtt{E}\}$. This is needed to be able to express the difference between accepting the evidence itself (and conditioning on it) and accepting the description thereof, which only states what the content of $\mathtt{E}$ is.
+\item $\mathtt{E}^-$ is the set  of sentences stating of whatever is \emph{not} part of evidence, that it is not part of evidence: $\mathtt{E}^-=\{\n E\varphi \vert \varphi \not \in \mathtt{E}\}$. This is needed, because there is a difference between knowing that certain  sentences are pieces of evidence, and knowing that no  other sentence is.\footnote{This will come relevant for a potential objection quite soon, when we turn to Bayesian conditioning. For now, bear with me.}$^,$\footnote{One might observe that $\mathtt{E}^-$ will normally come out infinite. This doesn't put too heavy epistemic burden on the cognitive agent. Just as I can easily know of each natural number that it is a natural number, I can fairly easily know of each sentence that isn't part of evidence that it isn't part of evidence.}
+\item For any narration $\mathtt{N}_i$,  symbols $\mathtt{N}_i$, $\mathtt{N}_i^d$, and $\mathtt{N}_i^-$  are to be understood analogously to $\mathtt{E}$, $\mathtt{E}^d$ and $\mathtt{E}^-$. 
+\item  $\mathtt{N}^d$ is the (positive) \emph{description} of all the narrations, $\bigcup_i\mathtt{N}_i^d$,  and $\mathtt{N}^-$= $\bigcup_i  \mathtt{N}^-_i$ adds that this description is complete. To see that it does, notice that $\mathtt{N}^-$ for each claim which is not part of evidence includes the information that it isn't. In other words, $\mathtt{N}^-$ explicitly ensures that no part of a narration goes on unmentioned in $\mathtt{N}^d$.
+
+
+\end{itemize}
+
+
+\subsection{Standard Bayesianism}\label{sec:standard_bayesianism}
+
+
+For the sake of the paper being fairly self-contained, this section introduces the standard Bayesian epistemology and Bayesian conditionalization, before I explain in the next section in what respect the current approach diverges from it, and how it uses conditionalization. A reader familiar with the basics of Bayesian epistemology can safely skip this section. 
+
+
+
+%\todo{Check Finetti - Kyburg}
+Standard Bayesian epistemology \citep{DeFinetti1937,Ramsey1978,bradley2015critical} represents  degrees of beliefs (also known as \emph{credences}) by real numbers.\footnote{If you're worried about using exact real numbers for such vague things as degrees of belief, the worry can be mitigated by various representation theorems, according to which even if we have no exact numerical values for degrees of beliefs, and our  ordering of degrees of belief satisfies only certain fairly natural formal constraints, the whole thing behaves as if there were real numbers associated with degrees of beliefs, and so we can  go ahead and play around with real numbers.}  Degrees of belief of an ideally rational agent, on the standard view, should satisfy the standard axioms of probability: probability should take values between 0 and 1 inclusive, logically impossible events get probability 0, logically certain events have probability 1, and the probability of the union of finitely many disjoint events is the sum of their individual probabilities (in the context of this paper, whether this holds also for infinite unions will not come up).\footnote{Discussing all the reasons for and against Bayesian epistemology lie beyond the scope of this paper. Good places to start are \citep{bradley2015critical} and \citep{earman1992bayes}. In this paper I assume that Bayesian epistemology is more or less correct, and  develop a way a Bayesian epistemologist can think about  narratives in juridical contexts.}
+
+ If the agent's credence in given evidence $\mathtt{E}$ is greater than 0, we can talk about the conditional probability of a given hypothesis $h$ given this evidence, $\pr{h\vert  \mathtt{E}}$, which is defined by:
+\[\pr{h\vert \mathtt{E}}=\frac{\pr{\mathtt{E}\et h}}{\pr{\mathtt{E}}}.\] 
+
+Together with probabilism, the standard axioms of probability entail that an ideal agent's credences satisfy the (synchronic) Bayes' Theorem, which tells us how the conditional credence in the evidence given the hypothesis $\prt{\mathtt{E}\vert h}$  at a certain time $t$ is related to the conditional credence in the hypotheses given the evidence at time  $t$,   $\prt{h\vert \mathtt{E}}$.
+ \begin{align}\tag{Bayes}\label{Bayes}\prt{h\vert \mathtt{E}} =\frac{\prt{\mathtt{E}\vert h}\prt{h}}
+ {\prt{\mathtt{E}}}\end{align}
+
+
+Bayes' theorem, which is \emph{synchronic} and only tells us something about the relation between various credences in one and the same moment in time, should be distinguished from \emph{Bayes' updating rule}, which is a diachronic rule that tells us how our credences should be revised in time as we learn new evidence. Assuming that we begin with some prior credences at time $t$: $\prt{\mathtt{E}\vert h}$, $\prt{h}$, $\prt{\mathtt{E}}$,   Bayes' theorem alone will tell us that at that time our credence $\prt{h\vert \mathtt{E}}$ should be $\frac{\prt{\mathtt{E}\vert h}\prt{h}}{\prt{\mathtt{E}}}$. What Bayesian updating does on top of that, is  it tells us that once at a later time $u$ we acquire full belief in evidence $\mathtt{E}$, thus obtaining $\pru{\mathtt{E}}=1$, if nothing else changes, we should update our unconditional $\pru{h}$ to what we previously thought the conditional credence in $h$ given $\mathtt{E}$ was, that is to $\prt{h\vert \mathtt{E}}$.\footnote{ Bayesian updating doesn't follow from probabilistic axioms alone, but with some bells and whistles the arguments for probabilism work also for Bayesian updating. Also, the Bayesian toolbox contains a method of updating upon uncertain evidence, Jeffrey conditionalization. Since this move doesn't bring anything unexpected, I  decided to ignore this complication and focus on presenting the already somewhat complicated framework in as simple set-up as possible.}
+
+
+
+
+
+
+
+
+\subsection{Partial probability distributions}\label{subsec:partial_probability}
+
+
+
+There is one important aspect in which the current framework diverges from the standard Bayesian.  The fact-finders, on one hand, are supposed to rely on their background knowledge when assessing the plausibility of a given narration, but on the other hand, they  clearly cannot rely on all biases and assumptions that they have.\footnote{
+ ``\dots jurors will draw upon their own backgrounds to construct and evaluate explanations for the evidence.  When stories conflict and jurors must privilege one to reach a verdict, they do not rely only on ``case-specific information acquired during the trial,'' but also on their experience and values and on ``generic expectations about what makes a complete story.'' Triers of fact look for a story that both ``has all of its parts'' and corresponds to their ``knowledge about what typically happens in the world.''   \citep[294]{griffin2012narrative}} The question of which part of background knowledge can be used and which beliefs should be suspended is rather delicate, but answering it lies beyond the scope of this paper (and, indeed, lies beyond the scope of logic or formal methods in general).  
+ 
+ Quite clearly, suspending our conviction about $p$ cannot be easily modeled in the standard Bayesian framework, since even the most sensible candidate, $1/2$, doesn't do the job. Just to give a simple example, there is a difference between knowing that a given coin is fair, and assigning probability of $1/2$ to heads, and not knowing how fair a coin is at all. 
+ %TODO assumption of innocence as low prior, discuss
+ 
+ I submit, a more sensible way to model the admissible \emph{partial} background knowledge is by means of  \textbf{a partial conditional credence function} $\mathtt{P}$, which (partially) maps  $\mathcal{L^+}\times \mathcal{P}(\mathcal{L^+})$ to  $[0,1]$.\footnote{Partial credence functions for conditional probabilities have been introduced by \citep{lepage2003probabilistic,lepage2012partial}; my definition differs from that account in a few inessential aspects.} This means that $\mathtt{P}$ takes a pair composed of a formula (though of as a conclusion), and a set of formulas (though of as conditions, or premises), and assigns a degree of credence, pretty much just as a standard \emph{conditional} probability distribution does. This description of the arguments might seem cumbersome, but this is just a simple mathematical way of capturing the idea  that a partial probability distribution is  a conditional probability distribution (and this justifies writing $\pr{h\vert \mathtt{E}}$ instead of $\pr{\la h, \mathtt{E}\ra}$).\footnote{For a more general approach defending the use of partial conditional probability functions in epistemology see \citep{van1995fine}.}    
+ 
+ So one difference between this approach and the standard Bayesian one is that  probability  is partial --- it doesn't have to be defined for all possible sentences.   The second difference is that  classically, conditional probability is defined in terms of unconditional probability (for cases where the condition doesn't have probability 0), whereas here  conditional probability is taken as a  primitive (thus allowing for there to be conditional probabilities even if the condition has probability 0). Unconditional probability is \emph{defined} as the conditional probability given a purely logical truth  ($\top$ is any logical truth,  $\bot$ is any logical falsehood):
+ \[ \pr{\varphi}= \pr{\varphi \vert \top}\] 
+ This feature, I submit, makes the model better fit to modeling situations in which a fact-finder prior to the process suspends their belief in guilt or the evidence, but still can have sensible conditional credences about how the evidence is related to guilt.  
+ 
+ 
+ 
+ What makes it still a probability distribution? The satisfaction of the following requirements. 
+  $\downarrow$ and $\uparrow$ stand for \emph{being defined} and \emph{being undefined} respectively. 
+ A partial probability distribution has to have  an extension to a total conditional probability distribution over $\mathcal{L^+}$  satisfying the standard axioms of conditional probability,  Moreover, it  additionally has to satisfy  the following conditions  for any $\Gamma \subseteq \mathcal{L}^+$, and any $\varphi, \psi\in \mathcal{L^+}$ (first I present the formulas, informal glosses follow):
+ \begin{align}
+ \tag{Part-1} \label{partpr1} \pr{\top\vert \Gamma}=1 & & \pr{\bot\vert \Gamma}=0\\
+ \tag{Part-2} \label{partpr2} \varphi \in \Gamma \Rightarrow \df{\varphi\vert \Gamma} \\
+  \tag{Part-3} \label{partpr3} \df{\varphi\vert \Gamma} \Leftrightarrow \df{\n \varphi\vert \Gamma}  & &  \df{\varphi \et \psi\vert \Gamma} \Leftrightarrow \df{\psi \et \varphi\vert \Gamma}  \\
+  \tag{Part-4}\label{partpr4}\pr{\varphi \et \psi\vert \Gamma}>0 \Rightarrow \df{\varphi\vert \Gamma}, \df{\psi, \vert \Gamma} & & \pr{\varphi\vert \Gamma}=0 \Rightarrow \df{\varphi \et \psi\vert \Gamma}\\
+ \tag{Part-5}\label{partpr5} \ndf{\varphi\vert \Gamma} \Rightarrow \ndf{\varphi \et \psi\vert \Gamma} & & \mbox{ unless } \pr{\psi\vert \Gamma}=0 %\\
+% \tag{Part-6}\label{partpr6} \mbox{If  } \pr{\varphi\vert \Gamma}>0, \pr{\varphi \et \psi\vert \Gamma}=0, & & \mbox{then }\pr{\psi\vert \Gamma}=0 
+ \end{align}
+ \eqref{partpr1} requires that logical truths  have probability 1 and logical contradictions always have probability 0. \eqref{partpr2} requires that the probability of a claim given a set of premises that includes it is always defined. \eqref{partpr3} states that the conditional probability of a claim is defined just in case the conditional probability of its negation is, and that the order of conjuncts has no impact on whether the conditional probability of a conjunction is defined. According to \eqref{partpr4}, the conditional non-zero probability of a conjunction is defined  only if the conditional probability of both conjuncts is. Moreover, if the conditional probability of a conjunct is 0, the conditional probability of the conjunction is defined (and by the fact that the credence has an extension to a total conditional probability satisfying the standard axioms, we also know that it will be 0 as well). \eqref{partpr5} says that, unless this unusual circumstance occurs, the conditional probability of a conjunction is undefined if the conditional probability of at least one conjunct is.  %Finally, \eqref{partpr6} demands that if a conjunct has a conditional probability $>0$, then the conjunction has conditional probability 0 only if the other conjunct does.
+ 
+ 
+ 
+ 
+ 
+   Since the fact-finders are supposed not to be biased and aren't informed about the trial yet, we additionally assume that the priors of guilt, of what the evidence and what the narrations are, are undefined: $\ndf{G}$, $\ndf{g_1\et \cdots \et g_l}$, $\ndf{E\varphi}, \ndf{N_i\varphi}$ for any $\varphi\in \mathcal{L}^+$, and any $1<i<k$.\footnote{Remember, in this context whenever we talk about unconditional credences, we take them to be conditional on $\top$, a logically necessary sentence. This way we stick to the idea that conditional probability is primitive.}
+
+ Of course, in practice, it's not that any prior partial credence would do. It has to be a credence developed in touch with reality --- that's why various procedures (such as the requirement of  multiple jury members agreeing on the correctness of a certain inference)  ensuring that no one uses arbitrary assumptions in the process of fact-finding are in place. Formal explication of  what the objectivity requirement boils down to is  notoriously difficult and lies beyond the scope of purely formal methods. In what follows I simply assume that the partial credence used expresses sensible and admissible background assumptions about the world.
+
+
+
+
+
+\subsection{Information and updates}
+
+
+
+After all the evidence and all the arguments have been presented in court, the background knowledge obtained now consists of  the  pieces of evidence presented, $\mathtt{E}$,  information about what is not part of evidence,  
+ the content of the guilt statement $\mathtt{G}$, and the positive and negative description of the content of a certain finite assembly of finite theories meant to defend or accuse the defendant, also known as ``narratives'', $\mathtt{N}^D_1,\dots, \mathtt{N}^D_k, \mathtt{N}^A_1, \mathtt{N} ^A_m$.
+ 
+ 
+ When making various assessments in the fact-finding process, at various stages one needs to conditionalize on various parts of the available information, depending on what is being assessed. Before giving more details on this, I first need to briefly introduce the main choices of conditions at play. The following are introduced for any $\varphi\in L^+$ and any $\Gamma \subseteq \mathcal{L}^+$:
+ 
+ %TODO check which one is really used afterwards
+ \begin{center}
+ \begin{tabular}{|p{3.2cm}|l|l|}
+ \hline \hline
+ \textbf{name} & \textbf{notation} & \textbf{meaning}\\ \hline 
+ \footnotesize full &
+  \footnotesize  $\mathtt{P}^f(\varphi \vert \Gamma)$ &
+   \footnotesize $\mathtt{P}(\varphi\vert  \mathtt{E}, \mathtt{E}^d, \mathtt{E}^-,\mathtt{N}^d, \mathtt{N}^-, \mathtt{G}, \Gamma)$\\ 
+   \footnotesize n-full &
+     \footnotesize  $\mathtt{P}^{nf}(\varphi \vert \Gamma)$ &
+      \footnotesize $\mathtt{P}(\varphi\vert  \mathtt{E}, \mathtt{E}^d,\mathtt{N}^d, \mathtt{N}^-, \mathtt{G}, \Gamma)$\\ 
+ \footnotesize informed &
+  \footnotesize $\mathtt{P}^i(\varphi \vert \Gamma)$ &  \footnotesize $\mathtt{P}(\varphi\vert  \mathtt{E}, \mathtt{E}^d, \mathtt{N}^d, \mathtt{G}, \Gamma)$\\ 
+  \footnotesize evidential & 
+   \footnotesize $\mathtt{P}^e(\varphi \vert \Gamma)$ &  \footnotesize $\mathtt{P}(\varphi\vert   \mathtt{E}, \mathtt{E}^d, \mathtt{E}^-, \mathtt{G}, \Gamma)$\\ 
+ \footnotesize argued & 
+  \footnotesize $\mathtt{P}^a(\varphi \vert \Gamma)$ &  \footnotesize $\mathtt{P}(\varphi\vert   \mathtt{N}^d, \mathtt{G}, \Gamma)$\\ 
+   \footnotesize play-along &
+    \footnotesize  $\mathtt{P}^{N_j}(\varphi \vert \Gamma)$ &  \footnotesize $\mathtt{P}(\varphi\vert  \mathtt{N}_j, \mathtt{N}^d, \mathtt{N}^-, \mathtt{G}, \Gamma)$\\ 
+   \footnotesize n-extended play-along &  \footnotesize $\mathtt{P}^{nN_j}(\varphi \vert \Gamma)$ &  \footnotesize $\mathtt{P}(\varphi\vert  \mathtt{N}_j, \mathtt{E}, \mathtt{E}^d, \mathtt{N}^d, \mathtt{N}^-, \mathtt{G}, \Gamma)$\\ 
+  \footnotesize e-extended play-along &  \footnotesize $\mathtt{P}^{eN_j}(\varphi \vert \Gamma)$ &  \footnotesize $\mathtt{P}(\varphi\vert  \mathtt{N}_j, \mathtt{E}, \mathtt{E}^d, \mathtt{E}^-, \mathtt{N}^d,  \mathtt{G}, \Gamma)$\\ 
+    \footnotesize f-extended play-along &  \footnotesize $\mathtt{P}^{fN_j}(\varphi \vert \Gamma)$ &  \footnotesize $\mathtt{P}(\varphi\vert  \mathtt{N}_j, \mathtt{E}, \mathtt{E}^d, \mathtt{E}^-, \mathtt{N}^d,  \mathtt{N}^-, \mathtt{G}, \Gamma)$\\ 
+\hline \hline
+ \end{tabular}
+  \end{center}
+ 
+ 
+ The names are somewhat arbitrary but the idea is quite simple. The full credence function results from the update on all the information available: on the evidence, description of the evidence, description of what is not part of evidence, description of all narrations and what is not part of them, and the definition of the guilt statement.  The n-full credence results from the full credence by eliminating $\mathtt{E}^-$ from the background information. Informed credence function drops the negative description of what is not part of evidence and what is not part of narration. Argued credence updates only on the definition of guilt, and the whole family of play-along credences work as if a particular narration was true, given that we know what arguments all sides have (or have not) given (and thus conditioning on $\mathtt{N}^d$ and $\mathtt{N}^-$ as well).  Finally, sometimes we'll need to update on the content of a narration together with full information that we have (f-extended play-along), or with almost full information, but  either without assuming that we know exactly what has not been presented as evidence  (n-extended play-along), or without assuming that we know what narrations haven't said (e-extended play-along).  The reasons why we need so many types of updates will become clear quite soon.
+
+%TODO rewrite as more /less updates become needed
+
+
+
+
+
+
+
+
+
+\subsection{Thresholds}
+
+
+There seem to be  at least four types of stances that a fact-finder might take towards a claim. First, a fact-finder might consider a claim completely uncontroversial, and accept it without any further argument. This holds for various obvious claims that all sides in court agree about, such as ``the accused is a human being''. Such stance will be modeled by the credence in a given claim reaching the \emph{uncontroversial acceptability threshold}, $\mathtt{a}$. 
+
+On the opposite side of the spectrum we have claims that all fact-finders uncontroversially reject, such as ``the crime has been committed by an alien pretending to be the accused''. Sentences which are not uncontroversially rejected in this sense will be said to reach the  \emph{non-negligibility threshold}, $\mathtt{n}$. The relation between $\mathtt{a}$ and $\mathtt{n}$ seems straightforward. A claim is non-negligible just in case its negation isn't uncontroversially acceptable:
+\begin{align}
+\tag{Negligible} \label{Negligible} \mathtt{P}(\varphi \vert \Gamma) \geq \mathtt{n} \Leftrightarrow \mathtt{P}(\n \varphi \vert \Gamma) \not \geq \mathtt{a}
+\end{align}
+\noindent This condition is achieved by taking $\mathtt{n}$ to be as far from 0 as $\mathtt{a}$ is from one. So given $\mathtt{a}$,  $\mathtt{n}$ can be introduced by $\mathtt{n}=_{df} 1-\mathtt{a}$.  
+
+Notice that $\mathtt{a}$ and $\mathtt{n}$ shouldn't be equal to 1 and 0 respectively (let's focus on $\mathtt{a}=1$, the reasoning for $\mathtt{n}=0$ is analogous). 1 is reserved for complete certainty, so that  if  a claim has credence 1, no new information can lead to the change of this credence. This is definitely not a necessary feature of uncontroversially accepted claims. They're often uncontroversially accepted without them being accepted with absolute certainty akin to that of truths of mathematics. Analogously, some uncontroversially rejected claims can become more sensible in light of new evidence or new arguments.
+
+One more type of stance needs to be incorporated into the framework -- that of \emph{strong plausibility}. Usually there are claims that are strongly supported while not being as close to certainty as the uncontroversially acceptable ones. For instance, further evidence of a false positive lacking, it is strongly plausible that a person with positive breathalyzer test was intoxicated at the time of the test. Think of deciding whether a claim reaches the threshold of strong plausibility (given some evidence) as answering the question: \emph{would you to accept the claim, given the evidence?}   This  kind of credence that we would normally find sufficient for acting upon in our uncertain world will be denoted by $\mathtt{s}$. 
+ 
+ In analogy to the previous case,  we can also talk of (strong) rejectability, $\mathtt{r}$, defined by $1-\mathtt{s}$, so that:
+ \begin{align}
+ \tag{Strong} \label{Strong}
+ \mathtt{P}(\varphi \vert \Gamma) \geq \mathtt{r} \Leftrightarrow \mathtt{P}(\n \varphi \vert \Gamma) \not \geq \mathtt{s}
+ \end{align}
+  to the effect that we would be willing to reject (although the rejection might be not as uncontroversial as with claims with credences below $\mathtt{n}$) any claim with credence below $\mathtt{r}$.  In what follows, since no notion of weak rejectability is used, the adjective ``strong'' will be dropped.  Clearly $\mathtt{a}>\mathtt{s}> \mathtt{r}>\mathtt{n}$.
+
+Before we move on, two more remarks. Where the thresholds exactly lie is  a context-dependent issue, and there is no independent way of specifying their values prior to the consideration of the issues at hand. Having said this, however, we do in practice decide that some things are uncontroversially accepted or rejected, or that they're very plausible --- and the thresholds are just formal counterparts of these distinctions that we in fact often draw in real life.
+
+
+Another remark is that as far as the framework of partial probability is involved, it is in principle possible that when we move from a defined credence $\mathtt{P}(\varphi\vert  \Gamma)$ to another credence by extending the set of conditions to a larger set, $\mathtt{P}(\varphi\vert \Gamma, \Sigma)$, the result might be undefined. As far as the purely formal constraints on credences are involved, this is a possibility.  In the applications, however, this phenomenon is rather undesirable: ideally we would like the conditional credences of various claims given the evidence presented in court to be defined. It would, however, be wrong to enforce this by some a priori conditions put on the framework. That  fact-finders using their background knowledge can work out how likely various claims are, is a material and context-dependent issue that shouldn't be decided by \emph{fiat}, and can be only hoped for.
+
+
+
+
+
+\section{``Formal'' conditions on narrations to be considered}
+\label{sec:formal_conditions}
+
+
+Think of $\mathtt{N}$ as the set of attacking and defending narrations that are being seriously considered in the fact-finding process. A narration $\mathtt{N_k}$  has to satisfy various conditions to belong to the group. Let's start with conditions that should be satisfied by both attacking and defending narrations.  
+
+\subsection{Exclusion}
+
+
+The requirement is that  narrations under consideration should pairwise exclude each other  given \emph{all} that we know about the case (hence the use of full conditional conditionalization $\mathtt{P}^f$). If in light of anything that is known the accusing narration doesn't exclude a defense one there is something wrong with the positions. If, on the other hand, two accusing (or two defending) narrations didn't exclude each other in light of what is known, there wouldn't be a good reason to treat them as different narrations and one should perhaps be part of another. Moreover, whether they exclude each other should be uncontroversial, and hence the use of $\mathtt{a}$ as a threshold.
+\begin{align}
+\tag{Exclusion} \label{Exclusion} \mathtt{P}^f(\n( \mathtt{N}_i \wedge \mathtt{N}_j))\geq \mathtt{a},  \mbox{ for }  i\neq j
+\end{align}
+
+
+\subsection{Decision}
+
+A defense narration should clearly state that, given all that is known, the accused is not guilty, and an accusing narration should clearly state that, given all that is known, they are:
+\begin{align}
+\tag{Decision} \label{Decision} \mathtt{P}^{f\mathtt{N}^A_i}(G)\geq \mathtt{a} \et \mathtt{P}^{f\mathtt{N}^D_k}(\n G)\geq \mathtt{a}  
+\end{align}
+
+
+\subsection{Initial plausibility}
+
+
+
+First of all, we shouldn't consider narrations that are uncontroversially excluded by sensible background knowledge or by evidence. Not seriously considering scenarios in which the crime is committed by a third party who can become invisible  is an example of the former, and not seriously considering scenarios in which the victim died of led poisoning exactly one second before being shot when the autopsy showed no trace of led poisoning and there is no reason to suspect it is an example of the latter. This condition is formally expressed by:
+\begin{align}
+\tag{Initial plausibility} \label{Initial plausibility} \mathtt{P}^e(\mathtt{N}_k)\geq \mathtt{n} 
+\end{align}
+
+
+A few words on the choice of the right type of update. Using a play-along credence instead of $\mathtt{P}^e$ is a clear no-go. We shouldn't evaluate narrations merely in light of narrations. One might be inclined to simply use the prior credence $\mathtt{P}$ instead of $\mathtt{P}^e$. I find it more efficient to filter out narrations with prior credence $\geq \mathtt{n}$ but uncontroversially excluded by evidence already at this stage (this also applies to choosing $\mathtt{P}^e$ over $\mathtt{P}^a$). Using $\mathtt{P}$ instead of $\mathtt{P}^e$ won't change anything in the ultimate choice of the deciding narration, anyway. One might also feel inclined to use the full  credence $\mathtt{P}^f$ instead of $\mathtt{P}^e$. I find it more useful to initially assess narrations without paying attention to which side said what, and looking only at the evidence. Ultimately, who said what will be factored  in in  further assessment of competing narrations, anyway.
+
+\subsection{Exhaustion}
+
+The next  that it should be strongly plausible that at least one of the narrations hold, given all that we know about the case:
+\begin{align}
+\tag{Exhaustion} \label{Exhaustion} \mathtt{P}^f( \mathtt{N}_1\vee \cdots \vee  \mathtt{N_k}) \geq s 
+\end{align}
+\noindent where $\mathtt{N}_1, \dots, \mathtt{N}_k$ is the complete list of all (defensive and accusing)  narrations  under consideration.
+
+The reason why the relevant credence is the full one is that in considering whether there are any other possible scenarios that we might've ignored it's best to rely on all that we know (as contrasted with looking at the evidence only when we evaluate the initial plausibility of a narration).
+
+The reason why the threshold used is $\mathtt{s}$ rather than $\mathtt{a}$ is that sometimes the search for further alternative narrations ceases even if the fact-finders don't have absolutely uncontroversial certainty that all options have been considered, but rather because no one came up with a new one, despite the best efforts of both sides. In such a case a decision will have to be made despite the annoying lack of uncontroversial conviction about the matter.
+
+
+We need to be careful to  avoid reading into the condition more than it requires, though. \emph{Prima facie}, one might argue against the requirement as follows:
+\begin{quote}
+ The set of narratives does not have to be jointly exhaustive. For instance, if there are three possible suspects, $x,y$ and $z$, for defending $x$ it suffices to argue that $y$ is as likely as $x$ to have done it. Nobody needs to mention $z$ and his possible authorship.\footnote{I thank an anonymous referee of LORI VI conference for raising this objection and motivating me to clarify the issue.}
+\end{quote}
+
+
+The worry stems from thinking of narrations only as accusing stories of who did what. Indeed, if the three options were that one of the three subjects is guilty (abbreviated as $G_x\vee G_y \vee G_z$) then it is possible that the only accusing narration is $G_x$, and the defense doesn't have to say anything about $z$ as long as they manage to undermine this narration. 
+
+But \eqref{Exhaustion} doesn't require that the set of \emph{accusing} narrations be exhaustive. We need to keep in mind that the understanding of narrations in this framework is quite wide and that any set of claims made by the defense to undermine an accusing narration counts as a narration itself. Thus, the requirement is weaker than it may seem. For if the accusing narration is $\mathtt{N}^A=G_x$, the defense narration might simply be (or include) its negation $\mathtt{N}^D=\n G_x$ --- this would be sufficient for the satisfaction of \eqref{Exhaustion}, since clearly  $\mathtt{P}^f(G_x\vee \n G_x) \geq \mathtt{s}$, and no mention of $z$ has to be made. 
+
+On the other hand, one could indeed try to impose a stronger requirement:
+\begin{align}
+\tag{Strong exhaustion} \label{Strong exhaustion} \mathtt{P}^f( \mathtt{N}^A_1\vee \cdots \vee  \mathtt{N^A_k}) \geq s 
+\end{align}
+\noindent where $\mathtt{N}^A_1, \dots, \mathtt{N}^A_k$ is the complete list of all \emph{accusing} narrations  under consideration. Now the question is: is the objection lethal to the sensibility of requiring \eqref{Strong exhaustion}? It seems not. For if indeed, there are at least three initially plausible candidates for the perpetrator, the prosecution should in fact seriously  consider at least three different narrations, each indicating a different perpetrator. Of course, the defense of $x$ is not obliged to prove which of the accusing narrations not blaming $x$ is true. The defense can fail to do so while succeeding at defending $x$  without violating \eqref{Strong exhaustion}, since it might be the case that $\mathtt{P}^f(G_x\vee G_y \vee G_z)\geq \mathtt{s}$ despite $\mathtt{P}^f(G_x)<\mathtt{s}$ and despite $\mathtt{P}^f(G_y\vert \n G_x)$ and $\mathtt{P}^f(G_z\vert \n G_x)$ both being below $\mathtt{s}$ as well.
+
+There is, however, a better reason not to require \eqref{Strong exhaustion}. The framework is built to also model cases where the persecution's case isn't very strong. Where the accusations aren't even strong enough to ensure that it is strongly plausible that at least one of the accusing narrations holds. For this reason, I will stick with \eqref{Exhaustion} instead.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Evaluating narrations}\label{sec:Evaluating_narrations}
+
+In section \ref{sec:framework_for_narratives} I introduced the formal framework for capturing more precisely the intuitions underlying NPL. In Section \ref{sec:formal_conditions} we discussed conditions that the set of narrations to be subjected to serious consideration has to satisfy. Now it's time to move on  to  more elaborate conditions involved in the assessment and relative assessment of narrations, a process that hopefully leads to a justified decision.
+
+
+\subsection{Explaining evidence}
+
+This one is a bit more tricky, for here the distinction between the accusing and the defending narrations becomes crucial. Let's start with accusing narrations. After all the narrations have been presented and deployed, an accusing narration $\mathtt{N}^A_i$ should ``make sense'' of evidence in the following sense. For any item of evidence presented, $e$, if,  according to
+ $\mathtt{N}^A_i$,  it is not excluded  as evidence,   it  should be strongly plausible given $\mathtt{N}^A_i$.
+\begin{align}
+\tag{Explaining evidence A}
+\label{Explaining evidence A}
+ \mbox{For any } e\in \mathtt{E}, [  \n  \mathtt{P}^{\mathtt{N}^A_i}(\n E e) \geq \mathtt{s} \Rightarrow \mathtt{P}^{\mathtt{N}^A_i}(e) \geq \mathtt{s}  ] 
+\end{align}
+
+Notice that the relevant credence function is the play-along one. We're wondering what to think of a piece of evidence assuming the narration is true, and so $N^A_i$ has to be among the conditions. Notice also that including the  description of the evidence in the condition would be pointless. Once we know what the evidence is (and what it isn't), evaluating how likely it is that something is a piece of evidence is trivial: either we know it is, and the credence is 1, or we know it isn't, and the credence is 0. We avoid this difficulty by   suspending our convictions about what the evidence is when we evaluate what the evidence according to the narration should be. Moreover, it  would also be pointless to include evidence itself among the conditions. Trivially, any evidence explains itself, in the sense that the conditional credence in any $e\in \mathtt{E}$ given any set of conditions containing $e$  is 1.
+
+
+The sense in which a defending narration is supposed to explain evidence is somewhat different. After all, if the defense story is rather minimal and mostly constitutes in rebutting the accusations, it isn't reasonable to expect the defense to explain all pieces of evidence, as long as they aren't really used to support the opposing accusing narration. It is also not reasonable to expect the defense to provide a story explaining how each piece of evidence came into existence. For instance, suppose that blood of type matching the defendant's  blood type was found on a piece of clothing. It is not up to the defense to explain how it got there. For if it isn't the defendant's blood, the defense most likely has no way of knowing how it did. Rather, the defense should argue that the possibility of the evidence being as it is while the defense's narration is true hasn't been rejected. Thus, we put the condition on a defending narration $\mathtt{N}^D_k$ as follows:
+
+\begin{align*}
+\tag{Explaining evidence D}\label{Explaining evidence D} 
+\mbox{For any } e\in \mathtt{E}, \mbox{ if there is } N^A_i \\
+\nonumber
+\mbox{such that } \mathtt{P}(\mathtt{N}^A_i\vert e)> \mathtt{P}(\mathtt{N}^A_i),
+\\
+\nonumber
+\mbox{then } \mathtt{P}^{\mathtt{N}^D_k}(e)\geq \mathtt{r}.
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Missing evidence}
+
+Let's start with saying when a narration
+  $\mathtt{N}_i$ \textbf{misses some evidence} ($\mathbf{ME}(\mathtt{N_i})$). The intuition here is that sometimes, given the  narration and whatever evidence we already have, certain evidence should be available, but it isn't. For instance, in a drunk driving case  the fact-finders would naturally expect a breathalyzer result, and in a murder case evidence as to how the victim was killed is needed. A  defending narration can also have this flaw. For instance, it might claim that the defendant was absent from the scene of the crime at the time of the crime, without evidence to that effect.
+    \begin{align}
+  \tag{Missing evidence}
+  \label{Missing evidence}
+\mathbf{ME}(\mathtt{N}_i)  \Leftrightarrow & \mbox{ for some } \varphi_1, \dots, \varphi_u  \not \in \mathtt{E}: \\ \nonumber
+&  [\mathtt{P}^{nN_i}(E\varphi_1\vee \cdots \vee E \varphi_u) \geq \mathtt{s}  ]  \end{align}
+
+The disjunction above is there to ensure generality. It might be the case that some evidence from among a group of possible pieces of evidence would be needed, without any particular piece of evidence being expected. This format applies also to the case in which $\varphi_1, \dots, \varphi_u$ is simply $\varphi, \n \varphi$ --- in such a case, the evidence is simply expected to decide a claim one way or the other, without any particular way being expected.
+
+Notice also that $\mathtt{E}^-$ isn't included in the conditions (although we preserve information about which narration said, or didn't say, what). Otherwise, for every $\varphi\not \in \mathtt{E}$, $E\varphi$ would already be decided with credence 0. What we are assessing, is rather what should be included in evidence given the narration and what we already know is among evidence; and this is a completely sensible question.
+
+We might consider the opposite problem: situations in which some evidence is available, but assuming a given narration, there shouldn't be such evidence. This flaw, however, doesn't deserve a separate requirement. After all, the presence of such a piece of evidence lowers the evidential support that the narration has, and so the requirement will be incorporated in the condition of evidential support which will be introduced soon. 
+
+
+
+
+
+\subsection{Gaps}
+
+
+Sometimes a narration should be more specific, given what it says and what we already know. For instance, an accusing narration might be required to specify how the victim was attacked, or a defending narration should specify where the defendant was at the time of the crime. 
+
+ Accordingly, we say that $\mathtt{N}_i$ is \textbf{gappy}  ($\mathbf{G}(\mathtt{N}_i)$)  just in case there are claims that the narration should choose from and yet it doesn't:
+\begin{align}
+\tag{Gap} \label{Gap}
+\mathbf{G}(\mathtt{N}_i)  \Leftrightarrow & \mbox{ for some } \varphi_1, \dots, \varphi_u \not \in \mathtt{N}_i\\ \nonumber
+ &  \mathtt{P}^{f\mathtt{N}_i}(\varphi_1 \vee\cdots \vee \varphi_u)\geq \mathtt{s} \wedge\\ \nonumber
+& \mathtt{P}^{eN_i}(N_i\varphi_1\vee \cdots \vee N_i\varphi_u)\geq \mathtt{s} 
+\end{align}
+
+$\mathtt{N_i}$ is gappy just in case if there are claims $\varphi_1,\dots, \varphi_u$ not in $\mathtt{N_i}$ such that:
+
+\begin{itemize}
+\item[(i)] Given \emph{all that we know and the narration}, it's strongly plausible that one of them holds. For instance, given all that we know, the victim was murdered using \emph{some} tool, and the defendant had to be \emph{somewhere}, if not at the crime scene.
+\item[(ii)] Moreover, assuming  the narration  and what we already know (minus $\mathtt{N}^-$, information about what narrations didn't say), it is strongly plausible that one of the options considered should be part of the narration.\footnote{The reason why we can't rely on $\mathtt{N}^-$ in the assessment here is the usual. If we did, for any claim not in $\mathtt{N}_i$  the credence would be 0.} For instance, the accusing narration might be required to specify what tool was used, and the defending narration might be expected to specify where the defendant was if not at the crime scene.
+\end{itemize}
+
+
+
+
+
+\subsection{Dominating accusing narration}
+
+An accusing narration $\mathtt{N}^A_i$ \emph{dominates} the set of all accusing narrations $\mathbb{N}^A$ just in case it doesn't miss any evidence, it doesn't contain any gap, and in light of all available information and evidence  it is at least as likely any  other accusing narration, and is strongly plausible:
+\begin{align}
+\tag{Domination}
+\label{Domination}
+\mathbf{D}(\mathtt{N}^A_i) \Leftrightarrow  & \n \mathbf{ME}(\mathtt{N}^A_i) \et \n \mathbf{G}(\mathtt{N}^A_i) \et \\ \nonumber
+& \mathtt{P}^f( \mathtt{N}^A_i)\geq \mathtt{P}^f( \mathtt{N}^A_j ) \mbox{ for all } j \neq i \et\\  \nonumber 
+& \mathtt{P}^f(\mathtt{N}^A_i) \geq \mathtt{s}
+\end{align} 
+
+
+Let's see how the right-hand side expresses the required condition. The first two conjuncts use terms introduced beforehand and simply say that $\mathtt{N}^A_i$ doesn't miss any evidence and contains no gaps. The third conjunct says that given all that is known $\mathtt{N}^A_i$ is more likely than any other narration $\mathtt{N}^A_j$. The last conjunct requires that given all that is known, the probability of $\mathtt{N}^A_i$ is at least $s$.
+
+
+
+
+
+
+
+\subsection{Resiliency} \label{sec:resiliency_formal}
+
+Recall that the resiliency requirement was that a narrative should not be easily susceptible to revision given reasonably possible future arguments and evidence.  The first part: being subjected to possible reasonable arguments is handled by the framework in admitting a whole array of possible narrations. Narrations, let me emphasize again, are understood here quite widely, and so aren't simply causal stories of what happened, but rather sets of sentences that can be put forward by a side in the case. A narration in this sense might also contain comments, arguments and criticism of other narrations. This was partially the point of introducing object-language operators corresponding to narrations. Thus, given that a properly wide array of narrations has been considered (and answering the question whether it has surpasses the reach of what can sensibly expected of purely formal methods), the first part of the resiliency requirement is satisfied. 
+
+  The second part, however, can be further explicated.  A dominating narration $\mathtt{N}^A_i$ is \emph{resilient} ($\mathbf{R}(\mathtt{N}^A_i)$) just in case there is no non-negligible potential evidence that might undermine it, at least in  light of all we know (minus the negative description of the evidence, to avoid triviality)  ---  that is, no $\varphi$ with $\mathtt{P}^{nf}(E\varphi)\geq \mathtt{n}$ -- such that if $\mathtt{E}$ was modified to $\mathtt{E}\cup\{\varphi\}$, $\mathtt{N}^A_i$ would no longer dominate.
+    
+  
+
+  Here is an interesting objection to the requirement of resiliency:\footnote{It's due to Aleksandra Samonek.}
+  \begin{quote}
+Here is a counterexample. Imagine that you have a proof in the form of a video recording -- a plaintiff committing a crime. However, the plaintiff refuses to talk about it and no witnesses are to be found, the motive is unknown whatsoever. Do we have enough basis for conviction? Yes. Moreover, imagine the same case being revisited some time after the conviction. New evidence, previously unobtainable, comes into play. Someone makes a confession saying that he threatened the plaintiff saying that he will harm him and his family unless the plaintiff commits a crime caught on the video tape. It becomes obvious that the plaintiff would never have done what he did if it was not for the threat. Resiliency is down, as we did have enough evidence to convict and we do have enough evidence later to scrape the conviction.
+  \end{quote}
+
+  Now, is this a counterexample to the requirement? I'm not inclined to say yes. If indeed best efforts have been made to discover the reason why the plaintiff refuses to explain, the best that can be done, perhaps, is a conviction. But resiliency is satisfied: all potentially available evidence that we might reasonably expected, given that the plaintiff won't budge and there is no other evidence available that we can try to obtain has been obtained. If, on the other hand, no best efforts to that purpose have been made, the accusing narration isn't resilient. But let's play along, suppose that it is, as in the former scenario. What happens if after some time it turns out that more evidence does become available, leading to acquittal? Well, if it couldn't be reasonably expected before, the prior decision was resilient, but, sadly, mistaken. If it could, the prior decision wasn't resilient and the conviction wasn't justified. The bottom line is that justified convictions based on resilient narrations also can be mistaken, and the example is underspecified. It either is one of a mistaken resilient conviction, or one of a non-resilient conviction, depending on whether best efforts to investigate further has been made.
+  
+  
+  \subsection{Conviction beyond reasonable doubt}
+  
+  
+  A defense narration $\mathtt{N}^D_k$ \emph{raises reasonable doubt} ($\mathbf{RD}(\mathtt{N}^D_k)$) if it  has no gaps, and hasn't been rejected given all that we know:
+  
+  \begin{align}
+  \tag{Reasonable doubt} \label{Reasonable doubt} 
+  \mathbf{RD}(\mathtt{N}^D_k) \Leftrightarrow & \n \mathbf{G}((\mathtt{N}^D_k) )   \et \mathtt{P}^f(\mathtt{N}^D_k) \geq \mathtt{r}
+  \end{align}
+  
+  The intuition here is that not only it is the task of the prosecution to argue for the accusing narration, but also to argue against any sensible narration that the defense could conjure. As long as there is one that hasn't been rejected, conviction beyond reasonable doubt is unjustified.  Ideally, a defense narration raising reasonable doubt would also not miss any evidence, but this shouldn't be a necessary condition. Whether certain evidence has been collected or is available depends on multiple factors beyond the control of the defense, some of which have nothing to do with the plausibility of the defending narration.
+  
+  
+  
+Accordingly,  we say that a conviction is \emph{beyond reasonable doubt} if it is justified by a resilient dominating narration and no defense narration raises reasonable doubt.
+
+
+\section{An example}\label{sec:an_example}
+
+
+Let's use the framework to model the development of two narrations in a fairly simple case of an alleged burglary, discussed in \citep{bex2007sense}.
+Since providing full formalization would be lengthy and tiring and wouldn't contribute to clarity, I'll only comment informally how various aspects of the case should be captured within the framework.
+ The accusing narration is as follows:
+
+\begin{quote}
+On the 18th of November, Andrew King climbs over the fence of the backyard of the Zomerdijk family with the intention to look if there is something interesting for him in the family's house. Through this yard he walks to the door that offers entry into the bedroom of the 5-year-old son of the family. The door is not closed, so King opens it and enters the bedroom to see if there is anything of interest in the house. Because it is dark, King does not see the toy lying on the  floor. King hits the toy, causing it to make a sound which causes the dog to give tongue. King hears the dog and runs outside, closing the door behind him. Mr. Zomerdijk hears the toy and the dog. He goes to the bedroom and sees King running away, through the closed garden door. He shouts ‘there is a burglar, come and help me!’ and runs into the garden after King. King, who wants to pretend he is lost, does not run away. In spite of this, Zomerdijk jumps on King and, aided by his brother, who is visiting the Zomerdijk family, molests King.
+\end{quote}
+
+Let's first identify the items that would count as evidence (the elements of $\mathtt{E})$ --- I'll use simple abbreviations instead of meaningless variables:\footnote{Strictly speaking, $\mathtt{toy}$ and $\mathtt{dog}$ are due to witness' testimonies, and so if I wanted the description to be complete, I should rather say things such as ``witnesses 1, 2,  and 3 testified that the toy made a sound'', but for uncontested claims of witnesses for the sake of simplicity I include claims themselves as evidence.}
+
+\begin{center}
+\begin{tabular}{lp{8cm}}
+$\mathtt{fence} $ & King climbed the fence and was in the backyard. \\
+$\mathtt{toy}$ &  Toy made a sound.\\
+$\mathtt{dog}$ & Dog started barking at that time.\\
+$\mathtt{w\underline{\,\,}bang} $ & Witnesses 1, 2 and 3 testify there was no loud bang. 
+\end{tabular}\end{center}
+
+
+Now, the essential parts of the  persecution's narration, $\mathtt{N}^A$ are:
+
+\begin{center}
+\begin{tabular}{lp{8cm}}
+$\mathtt{intentions}$ & King had bad intentions.\\
+$\mathtt{enter} $  & King climbed the fence and entered the house.\\
+$\mathtt{noise\underline{\,\,}King}$ & King caused $\mathtt{toy}$ and $\mathtt{dog}$.\\
+$\mathtt{closed} $ & There was no bang because King closed the door.\\
+$G$ & King attempted to commit burglary and entered the house with that intention.
+\end{tabular}\end{center}
+
+
+The essential parts of the defense story ($\mathtt{N}^D$) are:
+
+\begin{center}
+\begin{tabular}{lp{8cm}}
+$\mathtt{lost}$ & King was simply lost and didn't enter the house. \\
+$ \mathtt{noise\underline{\,\,}wind} $  & $\mathtt{dog}$ and $\mathtt{toy}$ were caused by wind, which opened and shut the door. \\
+\end{tabular}\end{center}
+
+Let's see which conditions  are satisfied by the narrations, given sensible background knowledge.  First, \eqref{Exclusion}. Indeed, the narrations exclude each other, since 
+$\prcon{intentions}{lost}{f}<\mathtt{r}$, and definitely \prcon{enter}{lost}{f}=0. Equally clearly, both narrations make a claim about the suspect's guilt   and so \eqref{Decision} is satisfied.
+
+The accusing narration is clearly a non-negligible scenario given the evidence, and  the defending narration might sound suspicious, but not negligible and should be given some consideration. So \eqref{Initial plausibility} is also satisfied.
+
+Now, are there other possible scenarios of what have happened? In principle, yes. King could've been thrown over the fence by a group of drunk strangers (or simply dropped in the backyard by aliens), but given that the defense didn't propose these  ways out, there is no reason to consider these  options. Also, he might have  entered the house with the intention to murder the inhabitants, but given that he had no weapon and no motive to do that, this accusing narration would be easily dominated by the actual one. Overall, there are strong reasons to think that either the persecution's or the defendant's story is true, and so \eqref{Exhaustion} is satisfied. If there was a good reason to think another scenario is viable, it should've been put forward by one of the sides.
+
+
+
+It is quite clear that the facts described would have happened if the accusing narration was true, so: \begin{align*}\prcon{fence,toy,dog,w\underline{\,\,}bang}{intentions,enter,noise\underline{\,\,}King,closed}{} = \\ = \prtext{fence,toy,dog,w\underline{\,\,}bang}{\mathtt{N}^A} \geq \mathtt{s}
+\end{align*} which means that  the accusing narration satisfies \eqref{Explaining evidence A}.
+ It is also quite clear that the defending narration fails to explain evidence in the sense of \eqref{Explaining evidence A}, mainly because  $\prcon{w\underline{\,\,}bang}{noise\underline{\,\,}wind}{}=\prtext{w\underline{\,\,}bang}{\mathtt{N}^D}$ is rather low. It doesn't seem, however, to be low enough to be below $\mathtt{r}$. After all, with a toy playing music in the background, dog barking, and startled inhabitants rushing toward the backyard, there is a decent chance that no one was paying attention to the sound of the door, or that the bang wasn't as loud as the persecution would suggest.
+ 
+ For this reason, failing to satisfy \eqref{Explaining evidence A}, which is not required of a defending narration anyway, isn't lethal to $\mathtt{N}^D$. Moreover,  $\mathtt{N}^D$ satisfies \eqref{Explaining evidence D}, because that condition requires only that those pieces of evidence that are used to support the accusing narration aren't false according to the accusing narration (that is, ``aren't below $\mathtt{r}$''). And indeed, all the pieces of evidence  could be true given the narration, so at least at this stage of evaluation we can still see $\mathtt{N}^D$ as a potential source of reasonable doubt.
+
+
+Now we come to the issue of missing evidence. Clearly, $\mathtt{N}^D$ misses some evidence. Given that it says the wind shut the door, a loud bang is expected, and a loud bang is expected to have been heard by the witnesses, but it hasn't been heard. While not missing evidence is not  necessary for a defense narration to raise reasonable doubt, this will definitely come into play when assessing overall probability of the narration given all information available.
+
+  Whether $\mathtt{N}^A$ misses evidence is more subtle and depends on the details of the circumstances. Perhaps, King didn't wear gloves and the police should check for further evidence of him entering the building, such as fingerprints on the door; perhaps it was raining and the police should have checked footprints in the bedroom near the entrance. But for the sake of example let us assume there is  no circumstance resulting in the accusing narration missing evidence and proceed with our evaluation. 
+
+The accusing narration doesn't seem gappy.  The defense narration, as it stands, is. If indeed King was lost, he should be  able to explain why in the evening  he was in an unfamiliar neighborhood, why he thought that jumping a fence to somebody's backyard was a good approach to solving the problem, and why he first started running. In the absence of such explanations, the narration indeed is gappy, and so the only source of reasonable doubt fails. But to continue our example, let's assume that King did provide some explanation of that sort, $\mathtt{explanations}$, which weren't however too convincing.
+
+
+
+Given all that we already said and lack of competition, the last thing we need to do  in order to decide whether the accusing narration  is a dominating one, is to evaluate whether $\mathtt{P}^f(\mathtt{N}^A)>\mathtt{s}$. And indeed this seems to hold. It also seems  that the accusing narration is resilient: no potential  evidence that acquitting King is in sight.
+
+Thus, ultimately, assuming King tried to fill the gaps, and the accusing narration doesn't miss any evidence,  the conviction now depends on whether we're convinced that $\mathtt{P}^f(\mathtt{N}^D)<\mathtt{r}$, that is, whether King's story is bad enough to be rejected. This will certainly depend on how he tried to fill the gaps and on what evidence he will put forward to support $\mathtt{explanations}$. Let's leave him to this challenging task.
+
+
+
+
+
+
+
+\section{Looking back at NLP and NPAS}
+\label{sec:looking_back_at_NLP_and_NPAS}
+
+
+To what extent does  the framework presented capture the intuitions underlying NPAS and NLP? As far as NPAS is concerned, the key claim was that for the conviction to be justified there has to be a plausible accusing narration and all sources of reasonable doubt have to be excluded. This is captured by requiring the existence of a dominating accusing narration and lack of a defense narration raising reasonable doubt. How do the formalized requirements square with those put forward by NLP, though?
+
+(Evidential support)  is modeled  on  one hand by requiring that the accusing narration should explain the evidence, and on the other hand by requiring that the credence in the narration, given all background information including evidence, be at least strong. 
+
+
+
+(Evidential completeness), which requires that the evidence presented in court should be as complete, as it can reasonably expected to be, is incorporated by requiring that the accusing narration shouldn't miss any evidence.
+
+
+
+
+
+(Resiliency), as already discussed in section \ref{sec:resiliency_formal}, is built in by means of two devices. Being subjected to possible reasonable arguments is handled by requiring that   a whole array of possible narrations should be considered and as much freedom in formulating candidate narrations be allowed. Resistance to revision under potential future evidence is pretty much explicitly required in the framework.\footnote{One comment is in order. \citet[77]{di2013statistics} inspired by  \citet{Skyrms1977Resiliency-prop} 
+ proposed the following explication (I'll refer to it as DB):
+\begin{quote}
+The {\sc Legal Resiliency} of a conditional probability statement \linebreak $P(G\vert E) = r$, relative to a set of propositions $\Sigma$, is given by 1 minus its downward variability, i.e. $1 - max\{\vert r - P (A\vert E \et \pi_i)\vert\}$ restricted to only the $\pi_i$’s such that $r \geq P (A\vert E \et \pi_i)$.
+\end{quote}
+This explication, I submit, is less fit for Di Bello's own purpose than the one proposed here.  DB explicates the notion of the resiliency of a conditional probability statement, while the informal requirement of resiliency is that of a narrative. It's not clear which conditional statement we should assess in terms of   DB-resiliency  to obtain  the resiliency of a given narrative.   Perhaps one could try to say that it's the conditional probability of the verdict conditional on the narration, but that wouldn't capture the intuition that it is  possible objections against the narration that  should be considered, and so the narration itself shouldn't be kept fixed as a condition with respect to which conditional probability of new evidence is assessed.
+
+
+ DB-resiliency is relative to a set of propositions $\Sigma$ containing challenges, objections, and counter-evidence. One difficulty is that even if we knew how to interpret the resiliency of a narration in terms of the resiliency of a conditional statement, we'd need to be more specific about which $\Sigma$ to pick as the background for our resiliency assessment. It can't be the currently available challenges, objections and counter-evidence, because they were considered already in our assessment of a narration. It can't be all possible challenges, objections and counter-evidence, because in practice no one considers all possible ones, and the notion would definitely fail to be operational. Presumably, it's the non-negligible ones that can change the verdict --- but the explication given in the paper is much clearer about this and builds this into the formal definition instead of leaving this in a commentary at a meta-level. A related difficulty is that using $\Sigma$ as a catch-all set containing possible evidence and challenges puts together factors that should be kept apart.  The explication proposed in this paper is clearer on this distinction.} 
+ 
+ Finally, (Narrativity) is represented by the requirement that the accusing narration have no gaps --- that there are no claims that the narration should choose from but doesn't.  
+ 
+
+
+
+
+
+Having said this, at least one aspect of the explication might be considered disturbing.  Often,  the statements within a narration are arranged with some structure, causal or otherwise, while I simply represent narrations as sets of sentences.  One might complain that this  view of narrations is a serious impoverishment. 
+
+ I don't deny that narrations indeed do come with some structure, and it is mostly in virtue of the causal  story that they tell that they explain the evidence  and are supported by it. However, restricting the connections between claims in a narration (as understood in this paper) to causal ones is too restrictive. A narration, while perhaps containing a causal core, might also contain arguments about other narrations, counter-arguments to arguments contained in other narrations, and so on, so that it is quite impossible to find a finite collection of causal schemata that a narration of a crime should fit. 
+ 
+ % Moreover, there are limits to what one can sensibly expect a formal framework to explicate. It's a division-of-labor view:  some of the heavy lifting such as the assessment of the plausibility of a narration given the evidence (which, I take it, incorporates the appreciation of the  causal core  of the narration and material knowledge about the world), is here pushed in the background and modeled by the interaction of legitimate priors with evidence and narrations. While, of course, it would be great to have a more detailed account of these aspects as well, the purpose of this paper is to focus on the more general structure of the decision process. It's important to note, however, that these aspects aren't ignored -- in the framework they're present in the background at the level of how priors and posteriors are formed --- a phenomenon that deserves a long, but separate, story.
+
+
+
+
+\section{Comparison to existing approaches}\label{sec:comparison_to_existing}
+
+Now that the framework has been presented, I can briefly relate it to the existing approaches. I  rely on the distinction present in \citep{verheij2015arguments}, with the addition of the fourth element. Roughly, we can distinguish the following formal normative approaches to fact-finding in the court of law:
+
+\begin{description}
+  \item[Probabilistic approaches,] which have   already been discussed in this paper. What I haven't discussed is the increase in the use of Bayesian networks in the modeling of evidence evaluation \citep[see e.g.][]{riesen2008validation,keppens2012argument,gittelson2013modeling,vlek2014building,vlek2016method}.  While there is no tension between representing probabilistic reasoning by a Bayesian network and thinking of the decision process in terms of the framework developed in this paper, a full discussion of the issue lies beyond the scope of the paper. 
+
+\item[Argumentative approaches,]  which focus on arguments based on evidence, meant to support or attack conclusions. The approach is inspired by \citet{wigmore2012principles}, and heavily relies on diagrams of the structure of arguments \citep{anderson2007visualization,bex2003towards}, nowadays used in argument mapping software tools \citep{verheij2007argumentation}.
+
+\item[Narrative approaches,] which also have been  discussed in this paper. What I haven't mentioned is that recently the approach has been subjected to computational research \citep{bex2013legal} .
+
+\item[Mixed approaches,] which draw from resources of any type to develop a more unified framework in the conviction that there is no real disagreement between the approaches  \citep{spottswood2013bridging} --- rather they focus on different aspects of a rather complicated process \citep{shen2006scenario,bex2010hybrid,vlek2014building,verheij2014catch,verheij2015arguments,verheijproof2017}. 
+\end{description}
+
+
+%PROBABILISTIC APPROACHES
+ Bayesian networks have proven  useful, both in the evaluation of evidence and in the presentation thereof, especially in situations when multiple pieces of evidence need to be taken under consideration \citep{fenton2011avoiding,fenton2012limiting,lagnado2013legal,fenton2013general,gittelson2013modeling,fenton2014calculating}. However, the main motivations   for introducing narrations into the picture  still hold, and indeed progress in this direction has been made \citep{vlek2014building,vlek2016stories,vlek2016method}. My conjecture is that the current framework is susceptible to Bayesian network analysis, and so can be seen as a contribution towards increasing the power of the Bayesian paradigm and defending the paradigm against those objections.
+
+ The probabilistic approach has been criticized for the disparity between the probabilistic predictions of the result of evidence evaluation, and the actual results of such evaluation by real agents. Seemingly, the results of Bayesian conditionalization upon all pieces of evidence are not the same as the results of real agents getting acquainted with the evidence, developing various narratives of what happened, and evaluating a hypothesis in light of such developments \citep{pennington1991cognitive,pennington1992explaining}. While this quite hastily has been interpreted as indicating that real agents aren't even approximately Bayesian agents, the framework developed in this paper indicates a more sensible interpretation of the apparent disparity. For indeed, from the perspective of this paper, the ultimate evaluation of a hypothesis is not merely the result of conditioning on all pieces of evidence. It is the result of conditioning on all pieces of evidence \emph{and} on other factors: what arguments have been given, what narrations have been presented, what potential explanations are available, what conditions narrations under consideration have etc. Thus, even from the Bayesian perspective, there is no surprise that mere conditioning on pieces of evidence is not the same as final evaluation.
+ %TODO REF P&H
+
+
+%ARGUMENTATIVE APPROACHES
+
+
+Argumentative approaches employ the toolbox of defeasible logics \citep{prakken1997logical,prakken2001logics} to formalize evidence evaluation and fact-finding from purely qualitative perspective. Instead of using numerical values to evaluate strength of support of a conclusion by evidence, one rather asks whether a conclusion follows from the evidence by means of a defeasible argument scheme, and whether it is not opposed by other arguments.\footnote{Strictly speaking, when opposing an argument $a$, there is a distinction between a \emph{rebutting} argument for the negation of the conclusion of $a$, and an \emph{undercutting} argument, against the entailment relation of $a$ holding.} For instance, reasoning from expert opinion is said to use the following scheme:
+
+\vspace{-2mm}
+\begin{center}
+\footnotesize \begin{tabular}{p{7cm}}
+Source $E$ is an expert in domain $D$.\\
+$E$ asserts that the proposition $A$ is to be known.\\
+$A$ is within $D$.\\
+\hline 
+Therefore, $A$ may plausibly be taken to be true.
+\end{tabular}
+\end{center}
+\vspace{-2mm}
+
+\noindent and with each argumentation scheme comes a selection of critical questions that need to be considered for the scheme to be applicable (e.g. ``How credible is $E$ as an expert?'', ``Is $A$ consistent with what other experts say?'').
+
+The computational outcome of the approach is the development of sense-making software systems \citep{bex2007sense}, which unlike knowledge bases do not require background database, but rather assist the user in arranging arguments and evaluating how they relate to each other, and force the users themselves to explicate all background assumptions needed for the inference.
+
+
+The approach allows for a quick-and-dirty analysis of the arguments involved  and their interplay, and is quite helpful in modeling uncontroversial cases of argument comparisons without getting bogged down with numbers. The purely qualitative approach and this level of abstraction, however, have their price. The approach doesn't handle different modalities of support \citep[140]{bex2007sense} and it doesn't handle various comparisons of strength  very well.\footnote{For instance, \citep[154]{bex2007sense} suggest that the extent to which hypotheses explain evidence should be compared   in terms of subset relation between sets of pieces of evidence explained by the compared hypotheses (a similar idea is present in \citep[16]{verheij2015arguments}). This is quite crude. Some pieces of evidence might be more important than others, and simply counting items of evidence won't do the job. Moreover, the method highly susceptible to syntactic manipulation: is a DNA match a single piece of evidence or is it composed of multiple sentences describing various facts that together constitute a match? See also \citep[414]{vlek2014building} for a similar criticism.}$^{,}$\footnote{To give another example, \citep[87]{bex2009did} represent agents' motivations  to act by having a set of motivations for each agent, so that every transition between two states is either promoted, demoted, or is neutral with respect to each motivation. It seems unlikely that  the complexity of human decisions and the interplay of motivations humans have can be captured by such ternary structures.}
+It's also not clear if sufficient extent of applicability of the approach can be achieved by hand-picking a selection of very concrete argument schemata; this is even less obvious when it comes to attempts to list causal stories schemata \citep{bex2009did}.\footnote{For instance one schema discussed by \citep[82]{bex2009did} informs us that certain circumstances $S$ are explained by the performance of an action $A$ in some previous circumstances $R$ with motivation $M$. This, while perhaps true, is too generic to be helpful in guiding our pursuit of truth. On the other hand, finding all sensible and useful instantiations that could be informatively applied in fact-finding in court, might be a tricky endeavor, given the complexity and non-uniformity of human affairs. People do all kinds of stuff for all kinds of reasons, and these dependencies are not obviously to be completely described by a finite list of schemata anytime soon.}
+
+
+%NARRATIVE APPROACHES
+
+
+
+%MIXED APPROACHES
+
+
+
+
+Arguments and narrations are combined in a hybrid theory \citep{bex2010hybrid,bex2013legal} --- this, however, isn't too related to narrations as conceived in this paper. The narrative aspect in the hybrid approach is understood mainly to consist in the availability of causal rules of inference and causal story schemata in an argumentative framework, and no general epistemic conditions of the sort of the ones discussed in this paper are brought up.\footnote{This is also another example of how qualitative approach comes at a price. The extent to which the evidence supports or contradicts a  story is measured by the size of the set of evidence supporting or contradicting it \citep[145]{bex2010hybrid}. Another aspect in which the approach might be a bit too crude is that the notion of the completeness of  a story is defined relative to  a  factual story scheme, such as  ``$x$ is at place $p$, $x$ has motive $m$ to kill $y$, shoots $y$, $x$ shoots $y$ $\Rightarrow_C$ $y$ dies, $y$ dies'' \citep[261]{bex2013legal}. No real narration would be considered complete simply in virtue of  filling in the blanks in such a simple schema, and no general recipe of identifying the right schema to evaluate a narration is given --- quite likely, real life surpasses whatever finite amount of causal schemata one can come up with.\label{fn:causal_schemata}} While it is mentioned that a consideration of alternative stories is desirable, the  formal framework developed is capable of  modeling the development within a narration, not of selecting the convicting narration from among many.
+
+Probabilistic aspects and argumentation schemata are brought together in \citep{keppens2014modelling}, where the idea is to use argumentation schemata together with natural questions associated with them to evaluate and direct the development of a probabilistic argument. In contrast with the current approach, as in the works of Bex, the focus of \citep{keppens2014modelling} is on the developments within a certain explanation or narration, rather than on a more abstract general epistemological framework explicating how competing narrations are compared and evaluated.   The point also holds for the  work of \citep{shen2006scenario}, where Bayesian networks are used to represent a scenario, and entropy minimization is used to guide further search for evidence. 
+
+The approach which is most similar to the one developed in this paper is by Verheij \citep{verheij2014catch,verheij2015arguments,verheijproof2017}, whose goal is to develop an integrated perspective on all three approaches. In \citep{verheij2014catch}, a robbery case is described in terms of the procession of probabilistically evaluated assemblies of hypotheses, so that from eight initially equally likely hypotheses, after updating on evidence, only one remains standing. From this perspective scenarios are competing hypotheses supported to various degrees by arguments based on evidence, and leading to expectations of further pieces of evidence, hopefully leading to the singling out of one hypothesis that is left standing.  The framework of the present paper is very much in the spirit of this approach. I'll just briefly mention key differences:
+
+\begin{itemize}
+\item  \citep{verheij2014catch} discusses the competition of various single-sentence hypotheses; the current framework investigates the competition of various explanations, seen as theories composed of multiple claims.
+\item Verheij is very generous in his use of extreme probabilities of 1 and 0. For instance, once it is seen in surveillance camera that a suspect has a tattoo, the probability of a suspect having this tattoo is taken to be 1. Similarly, for two hypotheses to exclude each other, their joint probability on evidence has to be 0. And, crucially, conviction requires that the hypothesis relied in conviction should have probability 1 given the evidence, and any probability less than 1 is a reason for doubt. In contrast, my approach uses somewhat underspecified thresholds which are not 1 or 0.  I don't find Verheij's generosity advisable for the following reasons. First,  credences of 0 or 1 are not revisable. Once your credence in $A$ is 1 (or 0), no amount of evidence will ever lead you to abandoning this position, if you're to update using Bayesian methods. In contrast, most court decisions are revisable; otherwise the institution of appeal wouldn't make sense. Second, this generosity might be epistemologically too optimistic. Suppose you want to obey the following restriction: if you're more certain of $A$ than of $B$, your subjective probability of $A$ should be higher than that of $B$. Now, my intuition is that I am more certain that 2+2=4 than I am that the White House is in Washington. After all, I might have fallen prey to some educational conspiracy or mistake regarding the location of the White House. So, my subjective probability of \emph{the White House is in Washington} should be less than 1. The argument generalizes to the distinction between mathematical and empirical truths in general. The latter seem less certain than the former, and so, one might want to attach subjective probability of less than 1 to them.   With regard to human affairs and mundane facts we never have justification and evidence comparable to that of mathematical truths, so assigning 1 to a claim about a crime and putting it on a par with $2+2=4$ might conflate importantly different levels of conviction (note also many past convictions based on DNA matches where the ultimate guilt probability was less than 1).
+\item Scenarios, as considered in Verheij's hybrid theory \citep{verheij2015arguments} are more specifically circumscribed. They are causal stories whose elements are connected by causal rules of inference (as conceived in purely argumentative approaches). In contrast, narratives in this paper are conceived as theories --- sets of sentences, which may contain causal claims, but also many other claims, including information about what other narrations are. 
+\item Given how Verheij's approach is inspired by the argumentative and the narrower notion of a story, an important role in it is played by evidential or causal rules of inference. One advantage of this approach is that the possession of an explicit list of sensible defeasible rules of inference together with questions that should be posed when they are applied might be of high practical utility. On the other hand, this piecemeal approach faces the practical challenge of actually providing a useful and fairly complete collection of such rules. The approach developed in this paper, in contrast, abstracts from rules of inference --- the job that they're supposed to perform, is performed by prior conditional credences. Of course, this is a clear trade-off between theoretical unity and practical utility. 
+\end{itemize}
+
+
+One more issue deserves a brief discussion: the extent to which other formal approaches have incorporated anything resembling the requirements introduced in this paper. Conditions on narrations other than related to evidential support have only recently been discussed in a formalized manner. As far as I am aware, all existing formal approaches are inspired not by \citep{di2013statistics}, but by much more vague and less detailed \citep{pennington1991cognitive,pennington1993story}, who somewhat in passing mention their criteria in opposition to the Bayesian approach: conclusiveness (plausibility), coherence and completeness.
+
+Conclusiveness in \citep{verheijproof2017} is identified with maximal plausibility understood as having probability 1. I already discussed why this might not be the best strategy --- let me just add that in the present approach conclusiveness is   rather captured jointly by quite a number of different requirements, high (but not =1) probability given background knowledge and evidence being only one of them.
+
+ \citet{verheijproof2017} identifies coherence of a narration with its logical consistency. In the present approach, the requirement is replaced by (Initial plausibility), which is stronger (no contradictory narration can have prior greater than 0 anyway), and improves the cognitive efficiency of competing narration evaluation --- there is no point in considering merely consistent narrations which, given what we know and evidence, are too improbable to be taken seriously. 
+
+ Completeness of a case in \citep{verheijproof2017}  is identified as being-logically-most-specific case in the class of cases under consideration given the evidence. This, it seems, has the undesirable feature that a case might be considered complete simply because no more complete case has been presented; in contrast, on the present approach, the notion of incompleteness of a narration, as explicated by (Gaps), is not so constrained by the list of available narrations, but rather driven by natural expectations given the content of a narration, legitimate priors, and the evidence available. 
+
+ A somewhat different approach to completeness, more akin to that developed from the argumentative perspective, has been developed in \citep{vlek2016method} by means of the framework of Bayesian networks. The key element of the approach is called a scenario idiom, which is a specific fragment of a Bayesian network. For instance, \citep[293]{vlek2016method} a murder scenario idiom is composed of four sub-nodes: $\mathtt{X \,\,had\,\, motive, X\,\, killed\,\, Y, X \,\, had\,\, opportunity,}$ and $\mathtt{Death \,\,of\,\, Y}$. A scenario is said to be complete if it fits and completes a scenario scheme idiom (that is, for every node in the scenario scheme idiom, there is some corresponding proposition in the scenario). 
+
+ While scenario idioms might be useful for guiding the development of a Bayesian network, it's rather unlikely that a scenario of a murder will become intuitively complete merely in virtue of being composed of four sentences corresponding to these nodes, and in general the concerns from footnote \ref{fn:causal_schemata} apply. In contrast, the current approach puts the effort of finding gaps in  asking if there are natural questions that a narration should answer, given legitimate priors and the evidence. Clearly, no finite list of natural questions fitting all possible cases is forthcoming, but if human affairs are too complicated for one to become available, so be it.
+ %\footnote{Having said this, the enterprise of finding list of questions that have to be answered, without any claim of completeness, might be of high practical utility. What I have doubts about is the completeness claim.}  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{thebibliography}{}
+
+\bibitem[Aitken et~al., 2010]{aitken2010fundamentals}
+Aitken, C., Roberts, P., and Jackson, G. (2010).
+\newblock Fundamentals of {P}robability and {S}tatistical {E}vidence in
+  {C}riminal {P}roceedings ({P}ractitioner {G}uide {N}o. 1), {G}uidance for
+  {J}udges, {L}awyers, {F}orensic {S}cientists and {E}xpert {W}itnesses.
+\newblock {\em Royal Statistical Society's Working Group on Statistics and the
+  Law}.
+
+\bibitem[Allen, 2010]{allen2010no}
+Allen, R.~J. (2010).
+\newblock No plausible alternative to a plausible story of guilt as the rule of
+  decision in criminal cases.
+\newblock In Juan~Cruz, L.~L., editor, {\em Proof and standards of proof in the
+  law}, pages 10--27. Northwestern University School of Law.
+
+\bibitem[Allen and Pardo, 2007]{allen2007problematic}
+Allen, R.~J. and Pardo, M.~S. (2007).
+\newblock The problematic value of mathematical models of evidence.
+\newblock {\em The Journal of Legal Studies}, 36(1):107--140.
+
+\bibitem[Anderson, 2007]{anderson2007visualization}
+Anderson, T.~J. (2007).
+\newblock Visualization tools and argument schemes: a question of standpoint.
+\newblock {\em Law, Probability and Risk}.
+
+\bibitem[Ball, 1960]{ball1960moment}
+Ball, V.~C. (1960).
+\newblock The moment of truth: probability theory and standards of proof.
+\newblock {\em Vanderbilt Law Review}, 14:807--830.
+
+\bibitem[Bernoulli, 1713]{Bernoulli1713Ars-conjectandi}
+Bernoulli, J. (1713).
+\newblock {\em Ars conjectandi}.
+
+\bibitem[Bex et~al., 2009]{bex2009did}
+Bex, F., Bench-Capon, T., and Atkinson, K. (2009).
+\newblock Did he jump or was he pushed?
+\newblock {\em Artificial Intelligence and Law}, 17:79--99.
+
+\bibitem[Bex et~al., 2003]{bex2003towards}
+Bex, F., Prakken, H., Reed, C., and Walton, D. (2003).
+\newblock Towards a formal account of reasoning about evidence: argumentation
+  schemes and generalisations.
+\newblock {\em Artificial Intelligence and Law}, 11:125--165.
+
+\bibitem[Bex et~al., 2007]{bex2007sense}
+Bex, F., Van~den Braak, S., Van~Oostendorp, H., Prakken, H., Verheij, B., and
+  Vreeswijk, G. (2007).
+\newblock Sense-making software for crime investigation: how to combine stories
+  and arguments?
+\newblock {\em Law, Probability and Risk}, 6(1-4):145--168.
+
+\bibitem[Bex and Verheij, 2013]{bex2013legal}
+Bex, F. and Verheij, B. (2013).
+\newblock Legal stories and the process of proof.
+\newblock {\em Artificial Intelligence and Law}, 21:253--278.
+
+\bibitem[Bex et~al., 2010]{bex2010hybrid}
+Bex, F.~J., Van~Koppen, P.~J., Prakken, H., and Verheij, B. (2010).
+\newblock A hybrid formal theory of arguments, stories and criminal evidence.
+\newblock {\em Artificial Intelligence and Law}, 18:123--152.
+
+\bibitem[Bradley, 2015]{bradley2015critical}
+Bradley, D. (2015).
+\newblock {\em A Critical Introduction to Formal Epistemology}.
+\newblock Bloomsbury Publishing.
+
+\bibitem[Cheng, 2012]{cheng2012reconceptualizing}
+Cheng, E.~K. (2012).
+\newblock Reconceptualizing the burden of proof.
+\newblock {\em Yale LJ}, 122:1254.
+
+\bibitem[Cohen, 1977]{Cohen1977The-probable-an}
+Cohen, J. (1977).
+\newblock {\em The probable and the provable}.
+\newblock Oxford University Press.
+
+\bibitem[Cohen, 1981]{cohen1981subjective}
+Cohen, L.~J. (1981).
+\newblock Subjective probability and the paradox of the gatecrasher.
+\newblock {\em Arizona State Law Journal}, pages 627--634.
+
+\bibitem[Cullison, 1969]{cullison1969probability}
+Cullison, A.~D. (1969).
+\newblock Probability analysis of judicial fact-finding: A preliminary outline
+  of the subjective approach.
+\newblock {\em Toledo Law Review}, 1:538--598.
+
+\bibitem[Dant, 1988]{dant1988gambling}
+Dant, M. (1988).
+\newblock Gambling on the truth: the use of purely statistical evidence as a
+  basis for civil liability.
+\newblock {\em Columbia Journal of Law and Social Problems}, 22:31--70.
+
+\bibitem[{De Finetti}, 1937]{DeFinetti1937}
+{De Finetti}, B. (1937).
+\newblock La pr{\'e}vision: ses lois logiques, ses sources subjectives.
+\newblock {\em Annales de {l}'Institut {H}enri {P}oincar{\'e}}, 7:1--68.
+\newblock (translated as ``Foresight: Its Logical Laws, Its Subjective
+  Sources'' in \citep{Kyburg1964studies}).
+
+\bibitem[Di~Bello, 2013]{di2013statistics}
+Di~Bello, M. (2013).
+\newblock {\em Statistics and Probability in Criminal Trials}.
+\newblock PhD thesis, University of Stanford.
+
+\bibitem[Earman, 1992]{earman1992bayes}
+Earman, J. (1992).
+\newblock {\em Bayes or bust? A critical examination of Bayesian confirmation
+  theory}.
+\newblock Cambridge, ma: MIT Press.
+
+\bibitem[Fenton and Neil, 2011]{fenton2011avoiding}
+Fenton, N. and Neil, M. (2011).
+\newblock Avoiding probabilistic reasoning fallacies in legal practice using
+  bayesian networks.
+\newblock {\em Austl. J. Leg. Phil.}, 36:114.
+
+\bibitem[Fenton and Neil, 2012]{fenton2012limiting}
+Fenton, N. and Neil, M. (2012).
+\newblock On limiting the use of bayes in presenting forensic evidence.
+
+\bibitem[Fenton et~al., 2014]{fenton2014calculating}
+Fenton, N., Neil, M., and Hsu, A. (2014).
+\newblock Calculating and understanding the value of any type of match evidence
+  when there are potential testing errors.
+\newblock {\em Artificial Intelligence and Law}, 22:1--28.
+
+\bibitem[Fenton et~al., 2013]{fenton2013general}
+Fenton, N., Neil, M., and Lagnado, D.~A. (2013).
+\newblock A general structure for legal arguments about evidence using bayesian
+  networks.
+\newblock {\em Cognitive science}, 37(1):61--102.
+
+\bibitem[Gittelson et~al., 2013]{gittelson2013modeling}
+Gittelson, S., Biedermann, A., Bozza, S., and Taroni, F. (2013).
+\newblock Modeling the forensic two-trace problem with bayesian networks.
+\newblock {\em Artificial intelligence and law}, 21:221--252.
+
+\bibitem[Griffin, 2012]{griffin2012narrative}
+Griffin, L.~K. (2012).
+\newblock Narrative, truth \& trial.
+\newblock {\em Georgetown Law Journal}, 101:281--335.
+
+\bibitem[Haack, 2014a]{Haack2014-HAAEMS}
+Haack, S. (2014a).
+\newblock {\em Evidence Matters: Science, Proof, and Truth in the Law}.
+\newblock Cambridge University Press.
+
+\bibitem[Haack, 2014b]{haack2011legal}
+Haack, S. (2014b).
+\newblock Legal probabilism: an epistemological dissent.
+\newblock In {\em \cite{Haack2014-HAAEMS}}, pages 47--77. Cambridge University
+  Press.
+
+\bibitem[Ho, 2008]{ho2008philosophy}
+Ho, H.~L. (2008).
+\newblock {\em A philosophy of evidence law: Justice in the search for truth}.
+\newblock Oxford University Press.
+
+\bibitem[Kaplan, 1968]{kaplan1968decision}
+Kaplan, J. (1968).
+\newblock Decision theory and the factfinding process.
+\newblock {\em Stanford Law Review}, 20:1065--1092.
+
+\bibitem[Kaplow, 2014]{kaplow2014likelihood}
+Kaplow, L. (2014).
+\newblock Likelihood ratio tests and legal decision rules.
+\newblock {\em American Law and Economics Review}, 16(1):1--39.
+
+\bibitem[Kaye, 1979]{kaye1979paradox}
+Kaye, D. (1979).
+\newblock The paradox of the gatecrasher and other stories.
+\newblock {\em Arizona State Law Journal}, pages 101--110.
+
+\bibitem[Keppens, 2012]{keppens2012argument}
+Keppens, J. (2012).
+\newblock Argument diagram extraction from evidential bayesian networks.
+\newblock {\em Artificial Intelligence and Law}, 20(2):109--143.
+
+\bibitem[Keppens, 2014]{keppens2014modelling}
+Keppens, J. (2014).
+\newblock On modelling non-probabilistic uncertainty in the likelihood ratio
+  approach to evidential reasoning.
+\newblock {\em Artificial Intelligence and Law}, 22:239--290.
+
+\bibitem[Kyburg, 1964]{Kyburg1964studies}
+Kyburg, H.~E. (1964).
+\newblock Studies in subjective probability.
+
+\bibitem[Lagnado et~al., 2013]{lagnado2013legal}
+Lagnado, D.~A., Fenton, N., and Neil, M. (2013).
+\newblock Legal idioms: a framework for evidential reasoning.
+\newblock {\em Argument \& Computation}, 4(1):46--63.
+
+\bibitem[Lempert, 1977]{lempert1977modeling}
+Lempert, R.~O. (1977).
+\newblock Modeling relevance.
+\newblock {\em Michigan Law Review}, 75:1021--1057.
+
+\bibitem[Lepage, 2012]{lepage2012partial}
+Lepage, F. (2012).
+\newblock Partial probability functions and intuitionistic logic.
+\newblock {\em Bulletin of the Section of Logic}, 41(3/4):173--184.
+
+\bibitem[Lepage and Morgan, 2003]{lepage2003probabilistic}
+Lepage, F. and Morgan, C. (2003).
+\newblock Probabilistic canonical models for partial logics.
+\newblock {\em Notre Dame Journal of Formal Logic}, 44(3):125--138.
+
+\bibitem[Nesson, 1979]{Nesson1979Reasonable-doub}
+Nesson, C.~R. (1979).
+\newblock Reasonable doubt and permissive inferences: The value of complexity.
+\newblock {\em Harvard Law Review}, 92(6):1187--1225.
+
+\bibitem[Pennington and Hastie, 1991]{pennington1991cognitive}
+Pennington, N. and Hastie, R. (1991).
+\newblock A cognitive theory of juror decision making: The story model.
+\newblock {\em Cardozo Law Review}, 13:519--557.
+
+\bibitem[Pennington and Hastie, 1992]{pennington1992explaining}
+Pennington, N. and Hastie, R. (1992).
+\newblock Explaining the evidence: Tests of the story model for juror decision
+  making.
+\newblock {\em Journal of personality and social psychology}, 62(2):189--204.
+
+\bibitem[Pennington and Hastie, 1993]{pennington1993story}
+Pennington, N. and Hastie, R. (1993).
+\newblock {\em The story model for juror decision making}.
+\newblock Cambridge University Press Cambridge.
+
+\bibitem[Prakken, 1997]{prakken1997logical}
+Prakken, H. (1997).
+\newblock {\em Logical Tools for Modelling Legal Argument: A Study of
+  Defeasible Reasoning in Law}.
+\newblock Springer.
+
+\bibitem[Prakken and Vreeswijk, 2001]{prakken2001logics}
+Prakken, H. and Vreeswijk, G. (2001).
+\newblock Logics for defeasible argumentation.
+\newblock In {\em Handbook of philosophical logic}, pages 219--318. Springer.
+
+\bibitem[Ramsey, 1978]{Ramsey1978}
+Ramsey, F. (1978).
+\newblock Truth and probability.
+\newblock In Mellor, D.~H., editor, {\em Foundations: Essays in Philosophy,
+  Logic, Mathematics and Economics}, pages 58--100. Routledge.
+\newblock [originally published in 1926].
+
+\bibitem[Riesen and Serpen, 2008]{riesen2008validation}
+Riesen, M. and Serpen, G. (2008).
+\newblock Validation of a bayesian belief network representation for posterior
+  probability calculations on national crime victimization survey.
+\newblock {\em Artificial Intelligence and Law}, 16:245--276.
+
+\bibitem[Shen et~al., 2006]{shen2006scenario}
+Shen, Q., Keppens, J., Aitken, C., Schafer, B., and Lee, M. (2006).
+\newblock A scenario-driven decision support system for serious crime
+  investigation.
+\newblock {\em Law, Probability and Risk}, 5(2):87--117.
+
+\bibitem[Simon and Mahan, 1970]{simon1970quantifying}
+Simon, R.~J. and Mahan, L. (1970).
+\newblock Quantifying burdens of proof-a view from the bench, the jury, and the
+  classroom.
+\newblock {\em Law and Society Review}, 5(3):319--330.
+
+\bibitem[Skyrms, 1977]{Skyrms1977Resiliency-prop}
+Skyrms, B. (1977).
+\newblock Resiliency, propensity, and causal necessity.
+\newblock {\em Journal of Philosophy}, 74:704--713.
+
+\bibitem[Spottswood, 2013]{spottswood2013bridging}
+Spottswood, M. (2013).
+\newblock Bridging the gap between bayesian and story-comparison models of
+  juridical inference.
+\newblock {\em Law, Probability and Risk}, page mgt010.
+
+\bibitem[Stein, 2005]{Stein2005Foundations-of-}
+Stein, A. (2005).
+\newblock {\em Foundations of Evidence Law}.
+\newblock Oxford University Press.
+
+\bibitem[Tillers and Green, 1988]{tillers1988probability}
+Tillers, P. and Green, E.~D., editors (1988).
+\newblock {\em Probability and Inference in the Law of Evidence. The Uses and
+  Limits of Bayesianism}, volume 109 of {\em Boston studies in the philosophy
+  of science}.
+\newblock Springer.
+
+\bibitem[Tribe, 1971a]{tribe1970further}
+Tribe, L.~H. (1971a).
+\newblock A further critique of mathematical proof.
+\newblock {\em Harvard Law Review}, 84:1810--1820.
+
+\bibitem[Tribe, 1971b]{tribe1971trial}
+Tribe, L.~H. (1971b).
+\newblock Trial by mathematics: Precision and ritual in the legal process.
+\newblock {\em Harvard Law Review}, 84(6):1329--1393.
+
+\bibitem[Underwood, 1977]{Underwood1977The-thumb-on-th}
+Underwood, B.~D. (1977).
+\newblock The thumb on the scale of justice: Burdens of persuasion in criminal
+  cases.
+\newblock {\em Yale Law Journal}, 86(7):1299--1348.
+
+\bibitem[Van~Fraassen, 1995]{van1995fine}
+Van~Fraassen, B.~C. (1995).
+\newblock Fine-grained opinion, probability, and the logic of full belief.
+\newblock {\em Journal of Philosophical logic}, 24(4):349--377.
+
+\bibitem[Verheij, 2007]{verheij2007argumentation}
+Verheij, B. (2007).
+\newblock Argumentation support software: boxes-and-arrows and beyond.
+\newblock {\em Law, Probability and Risk}, 6(1-4):187--208.
+
+\bibitem[Verheij, 2014]{verheij2014catch}
+Verheij, B. (2014).
+\newblock To catch a thief with and without numbers: arguments, scenarios and
+  probabilities in evidential reasoning.
+\newblock {\em Law, Probability and Risk}, 13(3-4):307--325.
+
+\bibitem[Verheij, 2017]{verheijproof2017}
+Verheij, B. (2017).
+\newblock Proof with and without probabilities. correct evidential reasoning
+  with presumptive arguments, coherent hypotheses and degrees of uncertainty.
+\newblock {\em Artificial Intelligence and Law}, pages 1--28.
+\newblock http://dx.doi.org/10.1007/s10506-017-9199-4.
+
+\bibitem[Verheij et~al., 2016]{verheij2015arguments}
+Verheij, B., Bex, F., Timmer, S.~T., Meyer, J., Renooij, S., Prakken, H.,
+  et~al. (2016).
+\newblock Arguments, scenarios and probabilities: connections between three
+  normative frameworks for evidential reasoning.
+\newblock {\em Law, Probability \& Risk}, 15:35--70.
+
+\bibitem[Vlek, 2016]{vlek2016stories}
+Vlek, C.~S. (2016).
+\newblock {\em When Stories and Numbers Meet in Court: Constructing and
+  Explaining Bayesian Networks for Criminal Cases with Scenarios}.
+\newblock Rijksuniversiteit Groningen.
+
+\bibitem[Vlek et~al., 2014]{vlek2014building}
+Vlek, C.~S., Prakken, H., Renooij, S., and Verheij, B. (2014).
+\newblock Building bayesian networks for legal evidence with narratives: a case
+  study evaluation.
+\newblock {\em Artificial Intelligence and Law}, 22:375--421.
+
+\bibitem[Vlek et~al., 2016]{vlek2016method}
+Vlek, C.~S., Prakken, H., Renooij, S., and Verheij, B. (2016).
+\newblock A method for explaining {B}ayesian networks for legal evidence with
+  scenarios.
+\newblock {\em Artificial Intelligence and Law}, 24:285--324.
+
+\bibitem[Wells, 1992]{wells1992naked}
+Wells, G.~L. (1992).
+\newblock Naked statistical evidence of liability: Is subjective probability
+  enough?
+\newblock {\em Journal of Personality and Social Psychology}, 62(5):739--752.
+
+\bibitem[Wigmore, 2012]{wigmore2012principles}
+Wigmore, J.~H. (2012).
+\newblock {\em Principles of judicial proof}.
+\newblock JSTOR.
+
+\end{thebibliography}
+
+
+
+
+%\bibliography{/home/rafal/GoogleDrive/Papers/papers11}
+%/Users/rafal/GoogleDrive/Papers/Papers11,
+%\bibliographystyle{apalike}
+
+
+\end{document}

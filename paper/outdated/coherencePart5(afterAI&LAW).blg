@@ -1,0 +1,161 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: coherencePart5(afterAI&LAW).aux
+The style file: apalike.bst
+Database file #1: coherence.bib
+Database file #2: papers11ERC.bib
+Repeated entry---line 579 of file papers11ERC.bib
+ : @article{anderson2007visualization
+ :                                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1193 of file papers11ERC.bib
+ : @article{bex2003towards
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1224 of file papers11ERC.bib
+ : @article{bex2010hybrid
+ :                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1239 of file papers11ERC.bib
+ : @article{bex2013legal
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1375 of file papers11ERC.bib
+ : @book{bovens2004bayesian
+ :                         ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2981 of file papers11ERC.bib
+ : @phdthesis{di2013statistics
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3418 of file papers11ERC.bib
+ : @article{fenton2012limiting
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3429 of file papers11ERC.bib
+ : @article{fenton2011avoiding
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3442 of file papers11ERC.bib
+ : @article{fenton2014calculating
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 3457 of file papers11ERC.bib
+ : @article{fenton2013general
+ :                           ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 4124 of file papers11ERC.bib
+ : @article{gittelson2013modeling
+ :                               ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 5946 of file papers11ERC.bib
+ : @article{keppens2012argument
+ :                             ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 6257 of file papers11ERC.bib
+ : @article{lagnado2013legal
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7938 of file papers11ERC.bib
+ : @book{pennington1993story
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7948 of file papers11ERC.bib
+ : @article{pennington1992explaining
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 7965 of file papers11ERC.bib
+ : @article{pennington1991cognitive
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 8763 of file papers11ERC.bib
+ : @article{riesen2008validation
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9396 of file papers11ERC.bib
+ : @article{shen2006scenario
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 9796 of file papers11ERC.bib
+ : @article{spottswood2013bridging
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11635 of file papers11ERC.bib
+ : @article{verheijproof2017
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11650 of file papers11ERC.bib
+ : @article{verheij2014catch
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11666 of file papers11ERC.bib
+ : @article{verheij2007argumentation
+ :                                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11697 of file papers11ERC.bib
+ : @article{verheij2015arguments
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11711 of file papers11ERC.bib
+ : @book{vlek2016stories
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11721 of file papers11ERC.bib
+ : @article{vlek2014building
+ :                          ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11736 of file papers11ERC.bib
+ : @inproceedings{vlek2013modeling
+ :                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 11748 of file papers11ERC.bib
+ : @article{vlek2016method
+ :                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 12183 of file papers11ERC.bib
+ : @book{wigmore2012principles
+ :                            ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in fenton2012limiting
+You've used 48 entries,
+            1935 wiz_defined-function locations,
+            753 strings with 10973 characters,
+and the built_in function-call counts, 19150 in all, are:
+= -- 1919
+> -- 662
+< -- 44
++ -- 229
+- -- 211
+* -- 1565
+:= -- 3280
+add.period$ -- 149
+call.type$ -- 48
+change.case$ -- 332
+chr.to.int$ -- 48
+cite$ -- 49
+duplicate$ -- 757
+empty$ -- 1411
+format.name$ -- 283
+if$ -- 3800
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 52
+newline$ -- 242
+num.names$ -- 152
+pop$ -- 274
+preamble$ -- 1
+purify$ -- 338
+quote$ -- 0
+skip$ -- 594
+stack$ -- 0
+substring$ -- 1505
+swap$ -- 114
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 278
+warning$ -- 1
+while$ -- 178
+width$ -- 0
+write$ -- 624
+(There were 28 error messages)
