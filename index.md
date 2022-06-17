@@ -69,7 +69,7 @@ source("measures//Shogenji.R")
 source("measures//Roche.R")
 ```
 
-Define also to Z confirmation measure
+Define also the Z confirmation measure
 
 ``` r
 Z <- function(posterior,prior){
@@ -83,7 +83,7 @@ Z <- function(posterior,prior){
 
 ### Building BNs
 
-Let's work through the example of the Sally Clark BN
+Let's work through the example of the Sally Clark BN.
 
 First, build the DAGs.
 
@@ -94,7 +94,7 @@ graphviz.plot(scStage0DAG)
 graphviz.plot(scDAG)
 ```
 
-Now build CPTs and put them together with the DAGs
+Now build CPTs and put them together with the DAGs.
 
 ``` r
 AmurderProb <-prior.CPT("Amurder","0","1",0.921659)
@@ -133,7 +133,7 @@ structuredNoSD(scStage0BN,scStage0nodes,c("0","0"))
 (structuredNoSD(scBN, SCnodes,c("0","0","1","1","0","0"))
 ```
 
-The output should be self-explanatory given the paper. If you just care about the final scores of all possible scenarios, do this:
+The output should be self-explanatory given the content of the paper. If you just care about the final scores of all possible scenarios, do this:
 
 ``` r
 #calculate structured coherence of all st
@@ -143,7 +143,7 @@ sc0structured <- round(c(structuredNoSD(scStage0BN,scStage0nodes,c("0","0"))$str
                          structuredNoSD(scStage0BN,scStage0nodes,c("1","0"))$structuredNoSD),4)
 ```
 
-Similarly, you can calculate other coherence score:
+Similarly, you can calculate other coherence scores:
 
 ``` r
 FitelsonCoherenceForBNs(scStage0BN,scStage0nodes,c("0","0"))
