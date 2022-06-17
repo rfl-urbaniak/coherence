@@ -13,14 +13,7 @@ output:
 
 
 - scripts containing definitions of functions calculating various coherence measures are in the folder [measures](https://github.com/rfl-urbaniak/coherence/tree/master/code/measures).
-
-
-### Recommended readings
-
-
-Our code requires the use of `bnlearn` package, which can be read about in ["Bayesian Networks
-With Examples in R"](https://www.routledge.com/Bayesian-Networks-With-Examples-in-R/Scutari-Denis/p/book/9781482225587) by Marco Scutari and  Jean-Baptiste Denis.
-
+- a bunch of wrappers we use are defined in scripts to be found in the [utils](https://github.com/rfl-urbaniak/coherence/tree/master/code/utils) folder.
 
 
 
@@ -29,11 +22,10 @@ With Examples in R"](https://www.routledge.com/Bayesian-Networks-With-Examples-i
 {:toc}
 
 
+### Installing and loading packages
 
-### Set-up
 
-
-First, you need to install the relevant R libraries. The crucial one is `bnlearn` [by Marco Scutari](https://www.bnlearn.com/about/) (who was also kind enough to include some functionalities when I inquired about them). This is a bit
+First, you need to install the relevant R libraries. The only tricky package to install is `bnlearn`. This is a bit
 tricky, because some of them have to be installed through BiocManager.
 One way to go is this:
 
@@ -53,4 +45,114 @@ Then load the libraries we use (you need to have them installed first):
 ``` r
 library(bnlearn)
 library(Rgraphviz)
+library(gRain)
 ```
+### Loading scripts and setup
+
+Supposing you have the working directory and the folders in it, load the functions:
+
+``` r
+source("utils//CombinationsBN.R")
+source("utils//CptCreate.R")
+source("utils//LogicAndBNs.R")
+source("utils//kableCPTs.R")
+source("measures//structuredCoherence.R")
+source("utils//CoherenceTables.R")
+source("measures//Fitelson.R")
+source("measures//DouvenMeijs.R")
+source("measures//generalizedOlsson.R")
+source("measures//Olsson.R")
+source("measures//generalizedShogenji.R")
+source("measures//Shogenji.R")
+source("measures//Roche.R")
+```
+
+Define also to Z confirmation measure
+
+``` r
+Z <- function(posterior,prior){
+  d <- posterior - prior
+  ifelse(prior == posterior, 0, ifelse(posterior > prior, d/(1-prior), d/prior))
+}
+```
+
+
+
+
+### Building BNs
+
+Let's work through the example of the Sally Clark BN
+
+First, build the DAGs.
+
+``` r
+scStage0DAG <- model2network("[Amurder][Bmurder|Amurder]")
+scDAG <- model2network("[Abruising|Amurder][Adisease|Amurder][Bbruising|Bmurder][Bdisease|Bmurder][Amurder][Bmurder|Amurder]")
+graphviz.plot(scStage0DAG)
+graphviz.plot(scDAG)
+```
+
+Now build CPTs and put them together with the DAGs
+
+``` r
+AmurderProb <-prior.CPT("Amurder","0","1",0.921659)
+AbruisingProb <- single.CPT("Abruising","Amurder","1","0","0","1",0.01,0.05)
+AdiseaseProb <- single.CPT("Adisease","Amurder","1","0","0","1",0.05,0.001)
+BbruisingProb <- single.CPT("Bbruising","Bmurder","1","0","0","1",0.01,0.05)
+BdiseaseProb <- single.CPT("Bdisease","Bmurder","1","0","0","1",0.05,0.001)
+BmurderProb <- single.CPT("Bmurder","Amurder","0","1","0","1",0.9993604,1-0.9998538)
+
+scStage0CPT <-  list(Amurder=AmurderProb,
+                     Bmurder = BmurderProb)
+
+scCPT <- list(Amurder=AmurderProb,Adisease = AdiseaseProb,
+                      Bmurder = BmurderProb,Bdisease=BdiseaseProb,
+                      Abruising = AbruisingProb,Bbruising = BbruisingProb)
+              
+scStage0BN <- custom.fit(scStage0DAG, scStage0CPT)
+scBN <- custom.fit(scDAG,scCPT)
+```
+
+
+
+### Coherence calculations
+
+As arguments to coherence-calculating functions we need to indicate not only the BN, but also which nodes are the narration nodes, and what states of those nodes are part of the narration. Like this:
+
+
+``` r
+scStage0nodes <- c("Amurder","Bmurder")
+scNodes <- c("Amurder","Bmurder", "Abruising", "Bbruising","Adisease","Bdisease")
+
+BN <- scStage0BN
+
+structuredNoSD(scStage0BN,scStage0nodes,c("0","0"))
+#or
+(structuredNoSD(scBN, SCnodes,c("0","0","1","1","0","0"))
+```
+
+The output should be self-explanatory given the paper. If you just care about the final scores of all possible scenarios, do this:
+
+``` r
+#calculate structured coherence of all st
+sc0structured <- round(c(structuredNoSD(scStage0BN,scStage0nodes,c("0","0"))$structuredNoSD,
+                         structuredNoSD(scStage0BN,scStage0nodes,c("1","1"))$structuredNoSD,
+                         structuredNoSD(scStage0BN,scStage0nodes,c("0","1"))$structuredNoSD,
+                         structuredNoSD(scStage0BN,scStage0nodes,c("1","0"))$structuredNoSD),4)
+```
+
+Similarly, you can calculate other coherence score:
+
+``` r
+FitelsonCoherenceForBNs(scStage0BN,scStage0nodes,c("0","0"))
+DouvenMeijsCoherenceForBNs(scStage0BN,scStage0nodes,c("0","1"))
+OlssonCoherenceForBNs(scStage0BN,scStage0nodes,c("0","0"))
+ShogenjiCoherenceForBNs(scStage0BN,scStage0nodes,c("0","1"))
+RocheCoherenceForBNs(scStage0BN,scStage0nodes,c("0","1"))
+```
+
+
+
+
+
+
