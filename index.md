@@ -11,6 +11,8 @@ output:
 
 ### Brief description
 
+This is a short manual for the coherence calculations of various measures of coherence discussed in our paper with [Alicja Kowalewska](https://www.cmu.edu/dietrich/philosophy/people/phd/alicja-kowalewska.html), published in *AI & Law*.
+
 
 - scripts containing definitions of functions calculating various coherence measures are in the folder [measures](https://github.com/rfl-urbaniak/coherence/tree/master/code/measures).
 - a bunch of wrappers we use are defined in scripts to be found in the [utils](https://github.com/rfl-urbaniak/coherence/tree/master/code/utils) folder.
