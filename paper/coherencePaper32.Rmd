@@ -59,6 +59,15 @@ source("../code/utils//CombinationsBN.R")
 source("../code/utils//CptCreate.R")
 source("../code/utils//LogicAndBNs.R")
 source("../code/utils//kableCPTs.R")
+source("../code/utils//CoherenceTables.R")
+source("../code/measures/Fitelson.R")
+source("../code/measures/DouvenMeijs.R")
+source("../code/measures/generalizedOlsson.R")
+source("../code/measures/generalizedShogenji.R")
+source("../code/measures/Olsson.R")
+source("../code/measures/Roche.R")
+source("../code/measures/Shogenji.R")
+source("../code/measures/structuredCoherenceLR.R")
 ```
 
 
@@ -294,6 +303,8 @@ structured(ecsList)
 ```
 \normalsize 
 
+
+\todo{Add high level and motivations}
 \noindent Having introduced the coherence measures at play, let us now move to the key counterexamples discussed in the literature.
 
 
@@ -336,78 +347,79 @@ It seems that the set \{\s{B},\s{G}\}, which doesn't contain the information abo
     \item[(\s{BG}$<$\s{BGP})] \{\s{B},\s{G}\}  should be less coherent than \{\s{B},\s{G},\s{P}\}. 
 \end{description}\vspace{2mm}
 
-Another intuition about this scenario [@Schippers2019General] is that when you consider a set which says that Tweety is both a bird and a penguin: \{\s{B},\s{P}\}, adding proposition about not flying (\s{G}) shouldn't really increase the coherence of the set.  It's a well-known fact that penguins don’t fly, and so one can deduce \s{G} from \s{P}. Therefore by adding \s{G} explicitly to the set, one wouldn't gain any new information -- so if a set expresses the same information, its coherence shouldn't be different. 
-However, as \s{G} is not a logical consequence of \s{P}, it can be argued that \{\s{B},\s{P}\} and \{\s{B},\s{P},\s{G}\} represent different information sets, and a slight difference in their coherence is also acceptable.
+Another intuition about this scenario [@Schippers2019General] is that when you consider a set which says that Tweety is both a bird and a penguin: \{\s{B},\s{P}\}, adding proposition about not flying (\s{G}) shouldn't  increase the coherence of the set as much as moving from \{\s{B},\s{G}\} to \{\s{B},\s{G}, \s{P}\}.  It's a well-known fact that penguins don’t fly and by adding \s{G} explicitly to the set, one wouldn't gain as much information. 
+However, as \s{G} is not a logical consequence of \s{P}, it can be argued that \{\s{B},\s{P}\} and \{\s{B},\s{P},\s{G}\} represent different information sets, and so some  difference in their coherence is  to be expected.
 
 \vspace{2mm}\begin{description}
-    \item[(\s{BP}$\approx$\s{BGP})]  \{\s{B},\s{P}\} should have similar coherence to \{\s{B},\s{P},\s{G}\}.  
+    \item[(\s{BG} $\ll$ \s{BP}$\leq$\s{BGP})]  \{\s{B},\s{P}\} should be notably above  \{\s{B},\s{G}\}, and less than \{\s{B},\s{P},\s{G}\}.
 \end{description}\vspace{2mm}
 
+\noindent Formally, we'll require that the absolute difference between \s{BG} and \s{BP} be greater than $.1$ (the exact placement of the threshold doesn't make a huge difference, unless it's at an unintuitive value below  $.01$) and that \{\s{B},\s{G}\} $\leq$  \{\s{B},\s{P},\s{G}\}.
 
 
-\textbf{Bayesian networks.} We used the distribution used in the original formulation to build three BNs corresponding to the narrations at play (Fig. \ref{fig:BGP}-\ref{fig:BP}).\footnote{Not without concerns. There are around 18 000 species of birds, and around 60 of them are flightless. We  couldn't find information about counts, but it seems the probability of being a penguin if one is grounded is overestimated by philosophers.  Also, there are many things that are not grounded but are not birds, mostly insects, and there's plenty of them. We did spend some time coming up with plausible ranges of probabilities to correct for such factors, and none of them actually makes a difference to the main point. So, for the sake of simplicity, we leave the original unrealistic distribution in our discussion.}
+\noindent \textbf{Bayesian network.} We used the distribution used in the original formulation to build a BN corresponding to the narrations at play (Fig. \ref{fig:BGP}).\footnote{Not without concerns. There are around 18 000 species of birds, and around 60 of them are flightless. We  couldn't find information about counts, but it seems the probability of being a penguin if one is grounded is overestimated by philosophers.  Also, there are many things that are not grounded but are not birds, mostly insects, and there's plenty of them. We did spend some time coming up with plausible ranges of probabilities to correct for such factors, and none of them actually makes a difference to the main point. So, for the sake of simplicity, we leave the original unrealistic distribution in our discussion.}
 
 
 
 \begin{figure}[H]
-\hspace{2cm}\scalebox{0.8}{\begin{subfigure}[!ht]{0.4\textwidth}
+\hspace{2cm}\scalebox{0.7}{\begin{subfigure}[!ht]{0.4\textwidth}
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "100%", dpi = 300}
 source("../code/bns//Penguins.R")
  
 graphviz.plot(BirdDAGbgp)
 ```
 \end{subfigure}} \hfill
-\hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth}
+\hspace{-3cm}\scalebox{0.8}{\begin{subfigure}[!ht]{0.4\textwidth}
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
 source("../code/utils//kableCPTs.R")
 CPkable0("BirdBNbgp","B")
 CPkable1("BirdBNbgp","P")
 CPkable2("BirdBNbgp","G")
 ```
-\end{subfigure}
-\caption{Bayesian network for the \textsf{BGP} scenario.}
+\end{subfigure}}
+\caption{Bayesian network for the Penuins problem.}
 \label{fig:BGP}
 \end{figure}
 
 
 
 
-\begin{figure}[H]
-\hspace{2cm}\scalebox{0.6}{
-\begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%",  dpi = 300, fig.height=2.5, fig.width=2}
-graphviz.plot(BirdDAGbg)
-```
-\end{subfigure} }
-\hfill
-\hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
-CPkable0("BirdBNbg","B")
-CPkable1("BirdBNbg","G")
-```
-\end{subfigure}
-\label{fig-BG}
-\caption{Bayesian network for the \textsf{BG} scenario.}
-\end{figure}
+<!-- \begin{figure}[H] -->
+<!-- \hspace{2cm}\scalebox{0.6}{ -->
+<!-- \begin{subfigure}[!ht]{0.4\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%",  dpi = 300, fig.height=2.5, fig.width=2} -->
+<!-- graphviz.plot(BirdDAGbg) -->
+<!-- ``` -->
+<!-- \end{subfigure} } -->
+<!-- \hfill -->
+<!-- \hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- CPkable0("BirdBNbg","B") -->
+<!-- CPkable1("BirdBNbg","G") -->
+<!-- ``` -->
+<!-- \end{subfigure} -->
+<!-- \label{fig-BG} -->
+<!-- \caption{Bayesian network for the \textsf{BG} scenario.} -->
+<!-- \end{figure} -->
 
 
 
-\begin{figure}[H]
-\scalebox{0.6}{
-\hspace{4cm}\begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", dpi = 300, fig.width=2, fig.height= 2.5}
-graphviz.plot(BirdDAGbp)
-```
-\end{subfigure}} \hfill
-\hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
-CPkable0("BirdBNbp","B")
-CPkable1("BirdBNbp","P")
-```
-\end{subfigure}
-\caption{Bayesian network for the \textsf{BP} scenario.}
-\label{fig:BP}
-\end{figure}
+<!-- \begin{figure}[H] -->
+<!-- \scalebox{0.6}{ -->
+<!-- \hspace{4cm}\begin{subfigure}[!ht]{0.4\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", dpi = 300, fig.width=2, fig.height= 2.5} -->
+<!-- graphviz.plot(BirdDAGbp) -->
+<!-- ``` -->
+<!-- \end{subfigure}} \hfill -->
+<!-- \hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- CPkable0("BirdBNbp","B") -->
+<!-- CPkable1("BirdBNbp","P") -->
+<!-- ``` -->
+<!-- \end{subfigure} -->
+<!-- \caption{Bayesian network for the \textsf{BP} scenario.} -->
+<!-- \label{fig:BP} -->
+<!-- \end{figure} -->
 
 
 
@@ -415,33 +427,81 @@ CPkable1("BirdBNbp","P")
 
 
 
-\textbf{Results.} Now, let's calculate the coherence scores (Table \@ref(tab:penguinsCoherence)) and see if the desiderata are satisfied (Table \@ref(tab:penguinsDesiderata)). The abbreviations are straightforward and correspond, respectively, to: Olsson-Glass, generalized Olsson, Shogenji, generalized Shogenji, FItelson, Douven-Meijs, and our  Structured coherence measure.
+\noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \@ref(tab:penguinsCoherence)) and see if the desiderata are satisfied (Table \@ref(tab:penguinsDesiderata)).  The measures are: Olsson-Glass, generalized Olsson-Glass, Shogenji, generalized Shogenji, Douven-Meijs, Roche, Fitelson, Structured with Z, LR, and L used as a confirmation measure.
 
 
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
-library(dplyr)
-load("../calculations/RdataObjects/penguinsTablePaper.Rda")
-load("../calculations/RdataObjects/penguinsResultsPaper.Rda")
+BGP <- c("B","G","P")
+BG <- c("B","G")
+BP <- c("B","P")
 
-colnames(penguinsTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-colnames(penguinsResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-penguinsTable <- penguinsTable[,-7]
-penguinsResults <- penguinsResults[,-7]
+BN <- BirdBNbgp
+penguinsTable <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP, BG, BP), statesList   = list(c("1","1","1"), c("1","1"), c("1","1")),exampleName = "Penguins")
+
+# penguinsTableBGP <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP), statesList   = list(c("1","1","1")),exampleName = "Penguins")
+# 
+# penguinsTableBG <- CoherencesTable(BirdBNbg, scenariosList = list(BG), statesList   = list(c("1","1")),exampleName = "Penguins")
+# 
+# penguinsTableBP <- CoherencesTable(BirdBNbp, scenariosList = list(BP), statesList   = list(c("1","1")),exampleName = "Penguins")
+
+#penguinsTable <- rbind(penguinsTableBGP,penguinsTableBG,penguinsTableBP)
 ```
 
-```{r penguinsCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", warning = FALSE, message = FALSE}
-library(dplyr)
-library(kableExtra)
+
+
+```{r penguinsCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+library(tidyverse)
 round(penguinsTable,3) %>%  kable(format = "latex",booktabs=T,
-  linesep = "",  escape = FALSE, caption = "Coherence scores for the Penguins scenario (rounded).") %>%   
+  linesep = "",  escape = FALSE, caption = "Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1 at an arrow used in the calculations is involved.") %>%   
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
-```{r penguinsDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"}
-penguinsResults %>%  kable(format = "latex",booktabs=T,
-    linesep = "",  escape = FALSE, caption = "Desiderata satisfaction for the Penguins scenario.") %>%  
-  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+
+
+
+```{r ,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"}
+BGlessBGP <- penguinsTable[1,] > penguinsTable[2,] 
+#BPatleastBGP <- round(penguinsTable[3,],4) >= round(penguinsTable[1,],4)
+BPbetweenBGandBGP <-  abs(penguinsTable[3,] - penguinsTable[2,]) >.1 & abs(penguinsTable[1,] - penguinsTable[3,]) >=0
+
+penguinsResults <- as.data.frame(rbind(BGlessBGP,BPbetweenBGandBGP))
+rownames(penguinsResults) <- c("Penguins: BG$<$BGP","Penguins: BG$<<$ BP$<$ BGP")
 ```
+
+```{r penguinsDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+library(tidyverse)
+library(kableExtra)
+penguinsResults %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Desiderata satisfaction for the Penguins scenario.") %>%   
+   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- library(dplyr) -->
+<!-- load("../calculations/RdataObjects/penguinsTablePaper.Rda") -->
+<!-- load("../calculations/RdataObjects/penguinsResultsPaper.Rda") -->
+
+<!-- colnames(penguinsTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- colnames(penguinsResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- penguinsTable <- penguinsTable[,-7] -->
+<!-- penguinsResults <- penguinsResults[,-7] -->
+<!-- ``` -->
+
+
+
+<!-- ```{r penguinsCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", warning = FALSE, message = FALSE} -->
+<!-- library(dplyr) -->
+<!-- library(kableExtra) -->
+<!-- round(penguinsTable,3) %>%  kable(format = "latex",booktabs=T, -->
+<!--   linesep = "",  escape = FALSE, caption = "Coherence scores for the Penguins scenario (rounded).") %>%    -->
+<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
+<!-- ``` -->
+
+<!-- ```{r penguinsDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"} -->
+<!-- penguinsResults %>%  kable(format = "latex",booktabs=T, -->
+<!--     linesep = "",  escape = FALSE, caption = "Desiderata satisfaction for the Penguins scenario.") %>%   -->
+<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
+<!-- ``` -->
 
 
 
@@ -590,16 +650,19 @@ DunnitResultsSeparate <- DunnitResultsSeparate[,-7]
 
 
 ```{r dunnitCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+library(tidyverse)
 round(DunnitTableSeparate,3) %>%  kable(format = "latex",booktabs=T,
                         linesep = "",  escape = FALSE, caption = "Coherence scores for the Dunnit scenario (rounded).") %>%  
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
-```{r dunnitDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE,  fig.show = "hold", out.width = "70%", dpi = 300}
-DunnitResultsSeparate %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Desideratum satisfaction for the Dunnit scenario.") %>%
-  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
-```
+<!-- ```{r dunnitDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- library(tidyverse) -->
+<!-- library(knitr) -->
+<!-- DunnitResultsSeparate %>%  kable(format = "latex",booktabs=T, -->
+<!--                         linesep = "",  escape = FALSE, caption = "Desideratum satisfaction for the Dunnit scenario.") %>% -->
+<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
+<!-- ``` -->
 
 
 
@@ -782,6 +845,7 @@ According to @Siebel2004On-Fitelsons-me[336]  committing both crimes by the murd
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
 library(bnlearn)
 library(gRain)
+library(kableExtra)
 source("../code/bns/Robbers.R")
 
 robTable0 <- round(whoMurderedProb,3)  %>%   kable(format = "latex",booktabs=T,

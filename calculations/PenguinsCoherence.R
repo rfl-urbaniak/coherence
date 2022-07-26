@@ -1,15 +1,31 @@
+source("code/measures/Fitelson.R")
+source("code/measures/DouvenMeijs.R")
+source("code/measures/generalizedOlsson.R")
+source("code/measures/generalizedShogenji.R")
+source("code/measures/Olsson.R")
+source("code/measures/Roche.R")
+source("code/measures/Shogenji.R")
+source("code/measures/structuredCoherenceLR.R")
+
 BGP <- c("B","G","P")
 BG <- c("B","G")
 BP <- c("B","P")
 
 #Coherences
-penguinsTableBGP <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP), statesList   = list(c("1","1","1")),exampleName = "Penguins")
 
-penguinsTableBG <- CoherencesTable(BirdBNbg, scenariosList = list(BG), statesList   = list(c("1","1")),exampleName = "Penguins")
+BN <- BirdBNbgp
+penguinsTable <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP, BG, BP), statesList   = list(c("1","1","1"), c("1","1"), c("1","1")),exampleName = "Penguins")
 
-penguinsTableBP <- CoherencesTable(BirdBNbp, scenariosList = list(BP), statesList   = list(c("1","1")),exampleName = "Penguins")
 
-penguinsTable <- rbind(penguinsTableBGP,penguinsTableBG,penguinsTableBP)
+# penguinsTableBGP <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP), statesList   = list(c("1","1","1")),exampleName = "Penguins")
+# 
+# penguinsTableBGP <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP), statesList   = list(c("1","1","1")),exampleName = "Penguins")
+# 
+# penguinsTableBG <- CoherencesTable(BirdBNbg, scenariosList = list(BG), statesList   = list(c("1","1")),exampleName = "Penguins")
+# 
+# penguinsTableBP <- CoherencesTable(BirdBNbp, scenariosList = list(BP), statesList   = list(c("1","1")),exampleName = "Penguins")
+# 
+# penguinsTable <- rbind(penguinsTableBGP,penguinsTableBG,penguinsTableBP)
 
 
 penguinsTable
@@ -25,10 +41,12 @@ penguinsTable
 
 BGlessBGP <- penguinsTable[1,] > penguinsTable[2,] 
 #BPatleastBGP <- round(penguinsTable[3,],4) >= round(penguinsTable[1,],4)
-BPapproxBGP <- abs(penguinsTable[3,] - penguinsTable[1,]) <= 0.05
+BPbetweenBGandBGP <-  abs(penguinsTable[3,] - penguinsTable[2,]) >.1 & abs(penguinsTable[1,] - penguinsTable[3,]) >=0
 
-penguinsResults <- as.data.frame(rbind(BGlessBGP,BPapproxBGP))
-rownames(penguinsResults) <- c("Penguins: BG$<$BGP","Penguins: BP$\\approx$ BGP")
+
+
+penguinsResults <- as.data.frame(rbind(BGlessBGP,BPbetweenBGandBGP))
+rownames(penguinsResults) <- c("Penguins: BG$<$BGP","Penguins: BG$<<$ BP$<$ BGP")
 
 penguinsResults
 

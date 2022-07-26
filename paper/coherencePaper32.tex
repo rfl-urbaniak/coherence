@@ -514,6 +514,8 @@ structured(ecsList)
 
 \normalsize
 
+\todo{Add high level and motivations}
+
 \noindent Having introduced the coherence measures at play, let us now move to the key counterexamples discussed in the literature.
 
 \hypertarget{challenges-and-their-treatment}{%
@@ -549,21 +551,23 @@ It seems that the set \{\s{B},\s{G}\}, which doesn't contain the information abo
     \item[(\s{BG}$<$\s{BGP})] \{\s{B},\s{G}\}  should be less coherent than \{\s{B},\s{G},\s{P}\}. 
 \end{description}\vspace{2mm}
 
-Another intuition about this scenario (Schippers \& Koscholke, 2019) is that when you consider a set which says that Tweety is both a bird and a penguin: \{\s{B},\s{P}\}, adding proposition about not flying (\s{G}) shouldn't really increase the coherence of the set. It's a well-known fact that penguins don't fly, and so one can deduce \s{G} from \s{P}. Therefore by adding \s{G} explicitly to the set, one wouldn't gain any new information -- so if a set expresses the same information, its coherence shouldn't be different.
-However, as \s{G} is not a logical consequence of \s{P}, it can be argued that \{\s{B},\s{P}\} and \{\s{B},\s{P},\s{G}\} represent different information sets, and a slight difference in their coherence is also acceptable.
+Another intuition about this scenario (Schippers \& Koscholke, 2019) is that when you consider a set which says that Tweety is both a bird and a penguin: \{\s{B},\s{P}\}, adding proposition about not flying (\s{G}) shouldn't increase the coherence of the set as much as moving from \{\s{B},\s{G}\} to \{\s{B},\s{G}, \s{P}\}. It's a well-known fact that penguins don't fly and by adding \s{G} explicitly to the set, one wouldn't gain as much information.
+However, as \s{G} is not a logical consequence of \s{P}, it can be argued that \{\s{B},\s{P}\} and \{\s{B},\s{P},\s{G}\} represent different information sets, and so some difference in their coherence is to be expected.
 
 \vspace{2mm}\begin{description}
-    \item[(\s{BP}$\approx$\s{BGP})]  \{\s{B},\s{P}\} should have similar coherence to \{\s{B},\s{P},\s{G}\}.  
+    \item[(\s{BG} $\ll$ \s{BP}$\leq$\s{BGP})]  \{\s{B},\s{P}\} should be notably above  \{\s{B},\s{G}\}, and less than \{\s{B},\s{P},\s{G}\}.
 \end{description}\vspace{2mm}
 
-\textbf{Bayesian networks.} We used the distribution used in the original formulation to build three BNs corresponding to the narrations at play (Fig. \ref{fig:BGP}-\ref{fig:BP}).\footnote{Not without concerns. There are around 18 000 species of birds, and around 60 of them are flightless. We  couldn't find information about counts, but it seems the probability of being a penguin if one is grounded is overestimated by philosophers.  Also, there are many things that are not grounded but are not birds, mostly insects, and there's plenty of them. We did spend some time coming up with plausible ranges of probabilities to correct for such factors, and none of them actually makes a difference to the main point. So, for the sake of simplicity, we leave the original unrealistic distribution in our discussion.}
+\noindent Formally, we'll require that the absolute difference between \s{BG} and \s{BP} be greater than \(.1\) (the exact placement of the threshold doesn't make a huge difference, unless it's at an unintuitive value below \(.01\)) and that \{\s{B},\s{G}\} \(\leq\) \{\s{B},\s{P},\s{G}\}.
+
+\noindent \textbf{Bayesian network.} We used the distribution used in the original formulation to build a BN corresponding to the narrations at play (Fig. \ref{fig:BGP}).\footnote{Not without concerns. There are around 18 000 species of birds, and around 60 of them are flightless. We  couldn't find information about counts, but it seems the probability of being a penguin if one is grounded is overestimated by philosophers.  Also, there are many things that are not grounded but are not birds, mostly insects, and there's plenty of them. We did spend some time coming up with plausible ranges of probabilities to correct for such factors, and none of them actually makes a difference to the main point. So, for the sake of simplicity, we leave the original unrealistic distribution in our discussion.}
 
 \begin{figure}[H]
-\hspace{2cm}\scalebox{0.8}{\begin{subfigure}[!ht]{0.4\textwidth}
+\hspace{2cm}\scalebox{0.7}{\begin{subfigure}[!ht]{0.4\textwidth}
 
 \begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-2-1} \end{center}
 \end{subfigure}} \hfill
-\hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth}
+\hspace{-3cm}\scalebox{0.8}{\begin{subfigure}[!ht]{0.4\textwidth}
 
 \begin{tabular}{lr}
 \toprule
@@ -601,90 +605,25 @@ G &  &  & Pr\\
 0 & 0 & 0 & 0.02\\
 \bottomrule
 \end{tabular}
-\end{subfigure}
-\caption{Bayesian network for the \textsf{BGP} scenario.}
+\end{subfigure}}
+\caption{Bayesian network for the Penuins problem.}
 \label{fig:BGP}
 \end{figure}
 
-\begin{figure}[H]
-\hspace{2cm}\scalebox{0.6}{
-\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-4-1} \end{center}
-\end{subfigure} }
-\hfill
-\hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{tabular}{lr}
-\toprule
-B & Pr\\
-\midrule
-1 & 0.5\\
-0 & 0.5\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrr}
-\toprule
-\multicolumn{1}{c}{G} & \multicolumn{2}{c}{B} \\
-  & 1 & 0\\
-\midrule
-1 & 0.02 & 0.98\\
-0 & 0.98 & 0.02\\
-\bottomrule
-\end{tabular}
-\end{subfigure}
-\label{fig-BG}
-\caption{Bayesian network for the \textsf{BG} scenario.}
-\end{figure}
-
-\begin{figure}[H]
-\scalebox{0.6}{
-\hspace{4cm}\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{center}\includegraphics{coherencePaper32_files/figure-latex/unnamed-chunk-6-1} \end{center}
-\end{subfigure}} \hfill
-\hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{tabular}{lr}
-\toprule
-B & Pr\\
-\midrule
-1 & 0.5\\
-0 & 0.5\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrr}
-\toprule
-\multicolumn{1}{c}{P} & \multicolumn{2}{c}{B} \\
-  & 1 & 0\\
-\midrule
-1 & 0.02 & 0\\
-0 & 0.98 & 1\\
-\bottomrule
-\end{tabular}
-\end{subfigure}
-\caption{Bayesian network for the \textsf{BP} scenario.}
-\label{fig:BP}
-\end{figure}
-
-\textbf{Results.} Now, let's calculate the coherence scores (Table \ref{tab:penguinsCoherence}) and see if the desiderata are satisfied (Table \ref{tab:penguinsDesiderata}). The abbreviations are straightforward and correspond, respectively, to: Olsson-Glass, generalized Olsson, Shogenji, generalized Shogenji, FItelson, Douven-Meijs, and our Structured coherence measure.
+\noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \ref{tab:penguinsCoherence}) and see if the desiderata are satisfied (Table \ref{tab:penguinsDesiderata}). The measures are: Olsson-Glass, generalized Olsson-Glass, Shogenji, generalized Shogenji, Douven-Meijs, Roche, Fitelson, Structured with Z, LR, and L used as a confirmation measure.
 
 \begin{table}[H]
 
-\caption{\label{tab:penguinsCoherence}Coherence scores for the Penguins scenario (rounded).}
+\caption{\label{tab:penguinsCoherence}Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1 at an arrow used in the calculations is involved.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrr}
+\begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & S\\
+  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Penguins: BGP 111} & \cellcolor{gray!6}{0.01} & \cellcolor{gray!6}{0.015} & \cellcolor{gray!6}{4.00} & \cellcolor{gray!6}{2.01} & \cellcolor{gray!6}{0.453} & \cellcolor{gray!6}{0.255} & \cellcolor{gray!6}{0.01}\\
-Penguins: BG 11 & 0.01 & 0.010 & 0.04 & 0.04 & -0.960 & -0.480 & -0.96\\
-\cellcolor{gray!6}{Penguins: BP 11} & \cellcolor{gray!6}{0.02} & \cellcolor{gray!6}{0.020} & \cellcolor{gray!6}{2.00} & \cellcolor{gray!6}{2.00} & \cellcolor{gray!6}{0.669} & \cellcolor{gray!6}{0.255} & \cellcolor{gray!6}{0.01}\\
+\cellcolor{gray!6}{Penguins: BGP 111} & \cellcolor{gray!6}{0.01} & \cellcolor{gray!6}{0.015} & \cellcolor{gray!6}{4.00} & \cellcolor{gray!6}{2.01} & \cellcolor{gray!6}{0.255} & \cellcolor{gray!6}{0.51} & \cellcolor{gray!6}{0.453} & \cellcolor{gray!6}{0.505} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{0.669}\\
+Penguins: BG 11 & 0.01 & 0.010 & 0.04 & 0.04 & -0.480 & 0.02 & -0.960 & -0.960 & 0.02 & -0.960\\
+\cellcolor{gray!6}{Penguins: BP 11} & \cellcolor{gray!6}{0.02} & \cellcolor{gray!6}{0.020} & \cellcolor{gray!6}{2.00} & \cellcolor{gray!6}{2.00} & \cellcolor{gray!6}{0.255} & \cellcolor{gray!6}{0.51} & \cellcolor{gray!6}{0.669} & \cellcolor{gray!6}{0.010} & \cellcolor{gray!6}{2.02} & \cellcolor{gray!6}{0.338}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -694,12 +633,12 @@ Penguins: BG 11 & 0.01 & 0.010 & 0.04 & 0.04 & -0.960 & -0.480 & -0.96\\
 \caption{\label{tab:penguinsDesiderata}Desiderata satisfaction for the Penguins scenario.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{llllllll}
+\begin{tabular}[t]{lllllllllll}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & S\\
+  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Penguins: BG$<$BGP} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
-Penguins: BP$\approx$ BGP & TRUE & TRUE & FALSE & TRUE & FALSE & TRUE & TRUE\\
+\cellcolor{gray!6}{Penguins: BG$<$BGP} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE}\\
+Penguins: BG$<<$ BP$<$ BGP & FALSE & FALSE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & NA & TRUE\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -768,7 +707,7 @@ node & content\\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-6-1} \end{center}
 \end{subfigure}} 
 \hspace{-0.8cm}\begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -823,7 +762,7 @@ M & Pr\\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-9-1} \end{center}
 \end{subfigure}} 
 \hspace{-1cm}\begin{subfigure}[!ht]{0.3\textwidth}
 
@@ -861,20 +800,6 @@ Coherence calculations result in Table \ref{tab:dunnitCoherence} and how they fa
 \midrule
 \cellcolor{gray!6}{Dunnit: MGWI 1111} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0.087} & \cellcolor{gray!6}{4.294} & \cellcolor{gray!6}{11.012} & \cellcolor{gray!6}{0.169} & \cellcolor{gray!6}{0.167} & \cellcolor{gray!6}{-0.932}\\
 Dunnit: MTGWI 11111 & 0 & 0.042 & 73.836 & 13.669 & 0.385 & 0.150 & -0.100\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:dunnitDesiderata}Desideratum satisfaction for the Dunnit scenario.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{llllllll}
-\toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & S\\
-\midrule
-\cellcolor{gray!6}{Dunnit: Dunnit$<$Twin} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -927,7 +852,7 @@ However, bigger overlap, supposedly, doesn't have to indicate higher coherence. 
 \scalebox{0.5}{
 \hspace{2.5cm}\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-15-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-12-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -1087,7 +1012,7 @@ According to M. Siebel (2004, p. 336) committing both crimes by the murderer sho
 \begin{figure}[H]
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics{coherencePaper32_files/figure-latex/unnamed-chunk-21-1} \end{center}
+\begin{center}\includegraphics{coherencePaper32_files/figure-latex/unnamed-chunk-18-1} \end{center}
 \end{subfigure} \hfill
 \begin{subfigure}[!ht]{0.4\textwidth}
 
@@ -1213,7 +1138,7 @@ For the sake of example, we assume the prior probability of each individual band
 \scalebox{1.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-23-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-20-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -1310,7 +1235,7 @@ Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} an
 \scalebox{1.2}{
 \hspace{1cm}\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-27-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-24-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.3\textwidth}
 \begin{tabular}{lr}
@@ -1349,12 +1274,12 @@ The CPT for \textsf{D} is uniform. The table for \textsf{W1} provides the condit
 \scalebox{1.2}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-28-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-25-1} \end{center}
 \end{subfigure}}
 
 \scalebox{1.2}{\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-29-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-26-1} \end{center}
 \end{subfigure}}
 \caption{Two remaining DAGs for the \textsf{Witness} problem.}
 \label{fig:witness}
@@ -1434,7 +1359,7 @@ Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-31-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-28-1} \end{center}
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth}
 
@@ -1494,7 +1419,7 @@ C & Pr\\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-33-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-30-1} \end{center}
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth}
 
@@ -1640,7 +1565,7 @@ Let's further illustrate our point about the requirement that the BN should repr
 \hspace{2cm}\scalebox{0.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-38-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-35-1} \end{center}
 \end{subfigure} }\hfill
 \begin{subfigure}[!ht]{0.6\textwidth}
 \centering\begingroup\fontsize{9}{11}\selectfont
@@ -1663,7 +1588,7 @@ Let's further illustrate our point about the requirement that the BN should repr
 \begin{subfigure}[!ht]{0.3\textwidth}
 
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-39-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-36-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.6\textwidth}
 \centering\begingroup\fontsize{9}{11}\selectfont
@@ -1730,7 +1655,7 @@ DepthB: T123T145 11 & 0.331 & 0.331 & 0.996 & 0.996 & -0.047 & -0.003 & -0.003 &
 \begin{figure}[H]
 \scalebox{1.3}{\begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-41-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-38-1} \end{center}
 \end{subfigure}}  
 \hspace{0.2cm}\begin{subfigure}[!ht]{0.25\textwidth}
 

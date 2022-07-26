@@ -12,26 +12,28 @@ CoherencesRow <- function (BN, narrationNodes, states,
   SH <- ShogenjiCoherenceForBNs(BN,narrationNodes,states)[[3]]
   SHg <- ShogenjiGeneralizedCoherence(BN, narrationNodes, states)[[1]]
   RO <- RocheCoherenceForBNs(BN,narrationNodes,states)[[3]]
-  RA <- RAcoherenceForBNs(BN,narrationNodes,states)[[3]]
-  
-  result <- structuredNoSD(BN,narrationNodes,states)
-  Structured <- result$`structured Coherence Ante scaled`
-  StructuredSquared <- result$`structuredSquared` 
-  StructuredNoSD <- result$`structuredNoSD`
+  S <-   structuredL(BN,narrationNodes,states)$structuredZ
+  LR <-   structuredL(BN,narrationNodes,states)$structuredLR
+  L <-   structuredL(BN,narrationNodes,states)$structuredL
+  #RA <- RAcoherenceForBNs(BN,narrationNodes,states)[[3]]
+  #result <- structuredNoSD(BN,narrationNodes,states)
+  #Structured <- result$`structured Coherence Ante scaled`
+  #StructuredSquared <- result$`structuredSquared` 
+  #StructuredNoSD <- result$`structuredNoSD`
   
   
   row <- data.frame( 
-    OlssonGlass = OL,
-    OlssonGlassGen = OLg,
-    Shogenji = SH,
-    ShogenjiGen = SHg,
-    Fitelson = FI,
-    "DouvenMeijs" = DM,
-    Roche = RO,
-    #RA = RA,
-    Structured = Structured,
-    StructuredSquared = StructuredSquared,
-    StructuredNoSD = StructuredNoSD)
+    OG = OL,
+    OGGen = OLg,
+    Sh = SH,
+    ShGen = SHg,
+    DM = DM,
+    R = RO,
+    Fi = FI,
+    SZ= S,
+    SLR = LR,
+    SL  = L
+    )
   
   rownames(row) <- paste(paste(exampleName, ":", sep = ""), paste(narrationNodes, sep = "", collapse=""), paste(states, sep = "", collapse=""), sep = " ")
   
