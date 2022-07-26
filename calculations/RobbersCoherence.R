@@ -72,6 +72,8 @@ robbersTable3LaTeX <- tableLaTeX(robbersTable3)
 # # # 
  rownames(robbersResults3) <- c("Robbers: PR$>$P$\\neg$R","Robbers: PR$>$neutral")
 # # # 
+ 
+ robbersResults3
 # # # 
  save(robbersResults3,file="calculations/RdataObjects/robbersResults3.Rda")
 

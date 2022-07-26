@@ -2,50 +2,53 @@ X1 <- c("T123","T124","T134")
 X2 <- c("T123","T145","T167")
 # # #
 BN <- DepthBN
+
 #graphviz.plot(BN)
 
 
 ##Separate three-node BNs
 
-graphviz.plot(DX1BN)
+#graphviz.plot(DX1BN)
 
-graphviz.plot(DX2BN)
+#graphviz.plot(DX2BN)
 
-depthTableNarrX1 <- CoherencesTable(DX1BN,
+depthTableX1 <- CoherencesTable(DX1BN,
                                scenariosList = list(X1),
                                statesList   = list(c("1","1","1")),
                                exampleName = "Depth"
 )
 
 
-depthTableNarrX2 <- CoherencesTable(DX2BN,
+depthTableX2 <- CoherencesTable(DX2BN,
                                         scenariosList = list(X2),
                                         statesList   = list(c("1","1","1")),
                                         exampleName = "Depth"
 )
 
 
-depthTableNarr <- rbind(depthTableNarrX1,depthTableNarrX2)
+depthTable <- rbind(depthTableX1,depthTableX2)
 
 
 
 
-depthTableNarr
+depthTable
 
-save(depthTableNarr, file  = "calculations/RdataObjects/depthTableNarr.Rda")
+#save(depthTableNarr, file  = "calculations/RdataObjects/depthTableNarr.Rda")
 
 
 
 #  
-X1greaterX2<- depthTableNarr[1,] > depthTableNarr[2,]
+X1greaterX2<- depthTable[1,] > depthTable[2,]
 # X1greaterX2
 # 
-depthResultsNarr <- as.data.frame(rbind(X1greaterX2))
+depthResults <- as.data.frame(rbind(X1greaterX2))
 # 
 # 
-rownames(depthResultsNarr) <- c("Depth: X$_1>$X$_2$")
+rownames(depthResults) <- c("Depth: X$_1>$X$_2$")
 # 
 # 
+depthResults
+
 # 
 save(depthResultsNarr,file="calculations/RdataObjects/depthResultsNarr.Rda")
 
@@ -57,7 +60,7 @@ save(depthResultsNarr,file="calculations/RdataObjects/depthResultsNarr.Rda")
 
 
 
-structuredCoherence(BN = DepthBN,narrationNodes = X1, states = c("1","1","1"))
+#structuredCoherence(BN = DepthBN,narrationNodes = X1, states = c("1","1","1"))
 
 # # 
 depthTable2 <- CoherencesTable(DepthBN,

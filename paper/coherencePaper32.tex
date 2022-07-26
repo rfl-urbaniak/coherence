@@ -709,7 +709,7 @@ node & content\\
 
 \begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-6-1} \end{center}
 \end{subfigure}} 
-\hspace{-0.8cm}\begin{subfigure}[!ht]{0.2\textwidth}
+\hspace{-0.8cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
 
 \begin{tabular}{lr}
 \toprule
@@ -730,8 +730,8 @@ M & Pr\\
 0 & 0.95 & 0.995\\
 \bottomrule
 \end{tabular}
-\end{subfigure}  
- \hspace{0.5cm}\begin{subfigure}[!ht]{0.2\textwidth}
+\end{subfigure}  }
+ \hspace{0.5cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
 
 \begin{tabular}{lrr}
 \toprule
@@ -753,7 +753,7 @@ M & Pr\\
 0 & 0.988 & 0.793\\
 \bottomrule
 \end{tabular}
-\end{subfigure}
+\end{subfigure}}
 \caption{Twin-less BN for the \textsf{Dunnit} problem.}
 \label{fig:twinless}
 \end{figure}
@@ -764,7 +764,7 @@ M & Pr\\
 
 \begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-9-1} \end{center}
 \end{subfigure}} 
-\hspace{-1cm}\begin{subfigure}[!ht]{0.3\textwidth}
+\hspace{-1cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.3\textwidth}
 
 \begin{tabular}{lllr}
 \toprule
@@ -781,7 +781,7 @@ W &  &  & Pr\\
 0 & 0 & 0 & 0.800\\
 \bottomrule
 \end{tabular}
-\end{subfigure}
+\end{subfigure}}
 \caption{BN for the \textsf{Dunnit} problem. The key difference for the twin version lies in the construction of the CPT for \textsf{W}. The table gives conditional probabilities for \textsf{W} given various joint states of \textsf{Tw} and \textsf{G}.}
 \label{fig:twin}
 \end{figure}
@@ -794,12 +794,26 @@ Coherence calculations result in Table \ref{tab:dunnitCoherence} and how they fa
 \caption{\label{tab:dunnitCoherence}Coherence scores for the Dunnit scenario (rounded).}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrr}
+\begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & S\\
+  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Dunnit: MGWI 1111} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0.087} & \cellcolor{gray!6}{4.294} & \cellcolor{gray!6}{11.012} & \cellcolor{gray!6}{0.169} & \cellcolor{gray!6}{0.167} & \cellcolor{gray!6}{-0.932}\\
-Dunnit: MTGWI 11111 & 0 & 0.042 & 73.836 & 13.669 & 0.385 & 0.150 & -0.100\\
+\cellcolor{gray!6}{Dunnit: MGWI 1111} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0.087} & \cellcolor{gray!6}{4.294} & \cellcolor{gray!6}{11.012} & \cellcolor{gray!6}{0.167} & \cellcolor{gray!6}{0.266} & \cellcolor{gray!6}{0.169} & \cellcolor{gray!6}{-0.891} & \cellcolor{gray!6}{56.689} & \cellcolor{gray!6}{-0.817}\\
+Dunnit: MTwGWI 11111 & 0 & 0.042 & 73.836 & 13.669 & 0.150 & 0.214 & 0.385 & 0.267 & 57.002 & 0.451\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]
+
+\caption{\label{tab:dunnitDesiderata}Desideratum satisfaction for the Dunnit scenario.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lllllllllll}
+\toprule
+  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
+\midrule
+\cellcolor{gray!6}{Dunnit: Dunnit$<$Twin} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -852,7 +866,7 @@ However, bigger overlap, supposedly, doesn't have to indicate higher coherence. 
 \scalebox{0.5}{
 \hspace{2.5cm}\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-13-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -934,13 +948,13 @@ J & Pr\\
 \caption{\label{tab:japaneseCoherence}Coherence scores in the Japanese swords scenarios (rounded).}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrr}
+\begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & S\\
+  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Japanese Swords 1: JO 11} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{80.251} & \cellcolor{gray!6}{80.251} & \cellcolor{gray!6}{0.976} & \cellcolor{gray!6}{0.008} & \cellcolor{gray!6}{0.008}\\
-Japanese Swords 2: JO 11 & 0.818 & 0.818 & 9.000 & 9.000 & 0.976 & 0.800 & 0.889\\
-\cellcolor{gray!6}{Japanese Swords 3: JO 11} & \cellcolor{gray!6}{0.818} & \cellcolor{gray!6}{0.818} & \cellcolor{gray!6}{1.080} & \cellcolor{gray!6}{1.080} & \cellcolor{gray!6}{0.286} & \cellcolor{gray!6}{0.067} & \cellcolor{gray!6}{0.400}\\
+\cellcolor{gray!6}{Japanese Swords 1: JO 11} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{80.251} & \cellcolor{gray!6}{80.251} & \cellcolor{gray!6}{0.008} & \cellcolor{gray!6}{0.008} & \cellcolor{gray!6}{0.976} & \cellcolor{gray!6}{0.008} & \cellcolor{gray!6}{80.93} & \cellcolor{gray!6}{0.976}\\
+Japanese Swords 2: JO 11 & 0.818 & 0.818 & 9.000 & 9.000 & 0.800 & 0.900 & 0.976 & 0.889 & 81.00 & 0.976\\
+\cellcolor{gray!6}{Japanese Swords 3: JO 11} & \cellcolor{gray!6}{0.818} & \cellcolor{gray!6}{0.818} & \cellcolor{gray!6}{1.080} & \cellcolor{gray!6}{1.080} & \cellcolor{gray!6}{0.067} & \cellcolor{gray!6}{0.900} & \cellcolor{gray!6}{0.286} & \cellcolor{gray!6}{0.400} & \cellcolor{gray!6}{1.80} & \cellcolor{gray!6}{0.286}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -950,12 +964,12 @@ Japanese Swords 2: JO 11 & 0.818 & 0.818 & 9.000 & 9.000 & 0.976 & 0.800 & 0.889
 \caption{\label{tab:japaneseDesiderata}Desiderata satisfaction in the Japanese swords scenarios.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{llllllll}
+\begin{tabular}[t]{lllllllllll}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & S\\
+  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Swords: JO2$>$JO1} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
-Swords: JO2$>$JO3 & FALSE & FALSE & TRUE & TRUE & TRUE & TRUE & TRUE\\
+\cellcolor{gray!6}{Swords: JO2$>$JO1} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
+Swords: JO2$>$JO3 & FALSE & FALSE & TRUE & TRUE & TRUE & FALSE & TRUE & TRUE & TRUE & TRUE\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1012,7 +1026,7 @@ According to M. Siebel (2004, p. 336) committing both crimes by the murderer sho
 \begin{figure}[H]
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics{coherencePaper32_files/figure-latex/unnamed-chunk-18-1} \end{center}
+\begin{center}\includegraphics{coherencePaper32_files/figure-latex/unnamed-chunk-20-1} \end{center}
 \end{subfigure} \hfill
 \begin{subfigure}[!ht]{0.4\textwidth}
 
@@ -1066,13 +1080,13 @@ OnlyR & 0.2\\
 \caption{\label{tab:robbersCoherence}Coherence scores in the Robbers scenario (rounded).}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrr}
+\begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & R & S\\
+  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-Robbers: MIsPMIsR 11 & 0.60 & 0.60 & 0.937 & 0.937 & -0.143 & -0.050 & -0.050 & 0.6\\
-Robbers: MIsPMIsR 10 & 0.25 & 0.25 & 1.250 & 1.250 & 0.571 & 0.125 & 0.125 & -0.6\\
-Robbers: MIsPMIsR 01 & 0.25 & 0.25 & 1.250 & 1.250 & 0.571 & 0.125 & 0.125 & -0.6\\
+Robbers: MIsPMIsR 11 & 0.60 & 0.60 & 0.937 & 0.937 & -0.050 & 0.750 & -0.143 & 0.60 & Inf & 0.60\\
+Robbers: MIsPMIsR 10 & 0.25 & 0.25 & 1.250 & 1.250 & 0.125 & 0.625 & 0.571 & -0.36 & Inf & -0.36\\
+Robbers: MIsPMIsR 01 & 0.25 & 0.25 & 1.250 & 1.250 & 0.125 & 0.625 & 0.571 & -0.36 & Inf & -0.36\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1082,12 +1096,12 @@ Robbers: MIsPMIsR 01 & 0.25 & 0.25 & 1.250 & 1.250 & 0.571 & 0.125 & 0.125 & -0.
 \caption{\label{tab:robbersDesiderata}Desiderata satisfaction in the Robbers problem.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{lllllllllll}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & R & S\\
+  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-Robbers: PR$>$P$\neg$R & TRUE & TRUE & FALSE & FALSE & FALSE & FALSE & FALSE & TRUE\\
-Robbers: PR$>$neutral & NA & NA & FALSE & FALSE & FALSE & FALSE & FALSE & TRUE\\
+Robbers: PR$>$P$\neg$R & TRUE & TRUE & FALSE & FALSE & FALSE & TRUE & FALSE & TRUE & FALSE & TRUE\\
+Robbers: PR$>$neutral & NA & NA & FALSE & FALSE & FALSE & TRUE & FALSE & TRUE & TRUE & TRUE\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1138,7 +1152,7 @@ For the sake of example, we assume the prior probability of each individual band
 \scalebox{1.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-20-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-23-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -1154,18 +1168,18 @@ G & Pr\\
 \caption{Bayesian network for the \textsf{Beatles} scenario.}
 \end{figure}
 
-Coherence calculations give the results from Table \ref{tab:beatlesCoherence}, and the satisfaction of the desiderata involved can be inspected by looking at Table \ref{tab:beatlesDesiderata}.
+\textbf{Results.} Coherence calculations give the results from Table \ref{tab:beatlesCoherence}, and the satisfaction of the desiderata involved can be inspected by looking at Table \ref{tab:beatlesDesiderata}.
 
 \begin{table}[H]
 
 \caption{\label{tab:beatlesCoherence}Coherence scores in the Beatles scenario (rounded).}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrr}
+\begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & S\\
+  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Beatles: JPGRD 11111} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0.202} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1.423} & \cellcolor{gray!6}{-0.036} & \cellcolor{gray!6}{0.025} & \cellcolor{gray!6}{-1}\\
+\cellcolor{gray!6}{Beatles: JPGRD 11111} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0.202} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1.423} & \cellcolor{gray!6}{0.025} & \cellcolor{gray!6}{0.322} & \cellcolor{gray!6}{-0.036} & \cellcolor{gray!6}{-1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{-1}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1175,12 +1189,12 @@ Coherence calculations give the results from Table \ref{tab:beatlesCoherence}, a
 \caption{\label{tab:beatlesDesiderata}Desiderata satisfaction in the Beatles scenario.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{llllllll}
+\begin{tabular}[t]{lllllllllll}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & S\\
+  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Beatles: below neutral} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE}\\
-Beatles: minimal & TRUE & FALSE & TRUE & FALSE & FALSE & FALSE & TRUE\\
+\cellcolor{gray!6}{Beatles: below neutral} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
+Beatles: minimal & TRUE & FALSE & TRUE & FALSE & FALSE & FALSE & FALSE & TRUE & TRUE & TRUE\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1235,7 +1249,7 @@ Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} an
 \scalebox{1.2}{
 \hspace{1cm}\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-24-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-28-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.3\textwidth}
 \begin{tabular}{lr}
@@ -1274,12 +1288,12 @@ The CPT for \textsf{D} is uniform. The table for \textsf{W1} provides the condit
 \scalebox{1.2}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-25-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-29-1} \end{center}
 \end{subfigure}}
 
 \scalebox{1.2}{\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-26-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-30-1} \end{center}
 \end{subfigure}}
 \caption{Two remaining DAGs for the \textsf{Witness} problem.}
 \label{fig:witness}
@@ -1304,20 +1318,20 @@ In such a case, we think, we should update \textsf{D} to what it would be had \t
 \end{tabular}
 \end{table}
 
-Once this strategy is taken, the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \ref{tab:witnessesCoherence} and the status of the desiderata is in Table \ref{tab:witnessesDesiderata}.
+Once this strategy is taken, the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \ref{tab:witnessesCoherence} and the status of the desiderata is in Table \ref{tab:witnessesDesiderata}. Now all the weights come from Bayesian networks updated from the perspertive of a given narration, which is emphasized by our use of abbreviations SZnarr, SLRnarr, and SLnarr.
 
 \begin{table}[H]
 
 \caption{\label{tab:witnessesCoherence}Coherence scores in the Witnesses scenario (rounded).}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrr}
+\begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & S\\
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZnarr & SLRnarr & SLnarr\\
 \midrule
-\cellcolor{gray!6}{Witness: W1W2 11} & \cellcolor{gray!6}{0.451} & \cellcolor{gray!6}{0.451} & \cellcolor{gray!6}{3.551} & \cellcolor{gray!6}{3.551} & \cellcolor{gray!6}{0.771} & \cellcolor{gray!6}{0.446} & \cellcolor{gray!6}{0.729}\\
-Witness: W3W4 11 & 0.187 & 0.187 & 0.740 & 0.740 & -0.234 & -0.110 & 0.494\\
-\cellcolor{gray!6}{Witness: W4W5 11} & \cellcolor{gray!6}{0.365} & \cellcolor{gray!6}{0.365} & \cellcolor{gray!6}{1.260} & \cellcolor{gray!6}{1.260} & \cellcolor{gray!6}{0.218} & \cellcolor{gray!6}{0.110} & \cellcolor{gray!6}{0.602}\\
+\cellcolor{gray!6}{Witness: W1W2 11} & \cellcolor{gray!6}{0.451} & \cellcolor{gray!6}{0.451} & \cellcolor{gray!6}{3.551} & \cellcolor{gray!6}{3.551} & \cellcolor{gray!6}{0.446} & \cellcolor{gray!6}{0.621} & \cellcolor{gray!6}{0.771} & \cellcolor{gray!6}{0.729} & \cellcolor{gray!6}{18.501} & \cellcolor{gray!6}{0.871}\\
+Witness: W3W4 11 & 0.187 & 0.187 & 0.740 & 0.740 & -0.110 & 0.315 & -0.234 & 0.494 & 4.863 & 0.528\\
+\cellcolor{gray!6}{Witness: W4W5 11} & \cellcolor{gray!6}{0.365} & \cellcolor{gray!6}{0.365} & \cellcolor{gray!6}{1.260} & \cellcolor{gray!6}{1.260} & \cellcolor{gray!6}{0.110} & \cellcolor{gray!6}{0.535} & \cellcolor{gray!6}{0.218} & \cellcolor{gray!6}{0.602} & \cellcolor{gray!6}{5.236} & \cellcolor{gray!6}{0.637}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1327,12 +1341,12 @@ Witness: W3W4 11 & 0.187 & 0.187 & 0.740 & 0.740 & -0.234 & -0.110 & 0.494\\
 \caption{\label{tab:witnessesDesiderata}Desiderata satisfaction in the Witnesses scenario.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{llllllll}
+\begin{tabular}[t]{lllllllllll}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & S\\
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZnarr & SLRnarr & SLnarr\\
 \midrule
-\cellcolor{gray!6}{Witness: W$_1$W$_2>$W$_3$W$_4$} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
-Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
+\cellcolor{gray!6}{Witness: W$_1$W$_2>$W$_3$W$_4$} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
+Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1359,7 +1373,7 @@ Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-28-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-33-1} \end{center}
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth}
 
@@ -1419,7 +1433,7 @@ C & Pr\\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-30-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-35-1} \end{center}
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth}
 
@@ -1482,12 +1496,12 @@ C & Pr\\
 \caption{\label{tab:depthCoherence}Coherence scores for the Depth problem (rounded).}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrr}
+\begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & R & S1 & S2\\
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Depth: T123T124T134 111} & \cellcolor{gray!6}{0.250} & \cellcolor{gray!6}{0.438} & \cellcolor{gray!6}{2.37} & \cellcolor{gray!6}{1.926} & \cellcolor{gray!6}{0.382} & \cellcolor{gray!6}{0.198} & \cellcolor{gray!6}{0.198} & \cellcolor{gray!6}{-0.25} & \cellcolor{gray!6}{1}\\
-Depth: T123T145T167 111 & 0.143 & 0.186 & 2.37 & 1.259 & 0.343 & 0.188 & 0.188 & -0.25 & 1\\
+\cellcolor{gray!6}{Depth: T123T124T134 111} & \cellcolor{gray!6}{0.250} & \cellcolor{gray!6}{0.438} & \cellcolor{gray!6}{2.37} & \cellcolor{gray!6}{1.926} & \cellcolor{gray!6}{0.198} & \cellcolor{gray!6}{0.542} & \cellcolor{gray!6}{0.382} & \cellcolor{gray!6}{-0.25} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{-0.25}\\
+Depth: T123T145T167 111 & 0.143 & 0.186 & 2.37 & 1.259 & 0.188 & 0.500 & 0.343 & -0.25 & Inf & -0.25\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1497,14 +1511,16 @@ Depth: T123T145T167 111 & 0.143 & 0.186 & 2.37 & 1.259 & 0.343 & 0.188 & 0.188 &
 \caption{\label{tab:depthDesiderata}Desiderata satisfaction for the Depth problem.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{llllllllll}
+\begin{tabular}[t]{lllllllllll}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & R & S1 & S2\\
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Depth: X$_1>$X$_2$} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE}\\
+\cellcolor{gray!6}{Depth: X$_1>$X$_2$} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE}\\
 \bottomrule
 \end{tabular}}
 \end{table}
+
+\todo{need to revise this}
 
 Note that this time we listed two values for our measure. \textsf{Structured 1} shows the values obtained if we do not update the weighting of the node not included in the narration, and \textsf{Structured 2} is the result of such an updated weighing (analogous to the updating involved in the \textsf{Witness} problem). Now, what are we to make of this?
 
@@ -1565,7 +1581,7 @@ Let's further illustrate our point about the requirement that the BN should repr
 \hspace{2cm}\scalebox{0.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-35-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-41-1} \end{center}
 \end{subfigure} }\hfill
 \begin{subfigure}[!ht]{0.6\textwidth}
 \centering\begingroup\fontsize{9}{11}\selectfont
@@ -1588,7 +1604,7 @@ Let's further illustrate our point about the requirement that the BN should repr
 \begin{subfigure}[!ht]{0.3\textwidth}
 
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-36-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-42-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.6\textwidth}
 \centering\begingroup\fontsize{9}{11}\selectfont
@@ -1614,12 +1630,12 @@ Let's further illustrate our point about the requirement that the BN should repr
 \caption{\label{tab:depthFurtherCoherence}Coherence scores in a single agent version of the Depth scenario (rounded).}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrr}
+\begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & R & S\\
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{DepthA: T123T124 11} & \cellcolor{gray!6}{0.664} & \cellcolor{gray!6}{0.664} & \cellcolor{gray!6}{1.014} & \cellcolor{gray!6}{1.014} & \cellcolor{gray!6}{0.280} & \cellcolor{gray!6}{0.012} & \cellcolor{gray!6}{0.012} & \cellcolor{gray!6}{0.027}\\
-DepthB: T123T145 11 & 0.331 & 0.331 & 0.996 & 0.996 & -0.047 & -0.003 & -0.003 & -0.004\\
+\cellcolor{gray!6}{WitnessA: T123T124 11} & \cellcolor{gray!6}{0.664} & \cellcolor{gray!6}{0.664} & \cellcolor{gray!6}{1.014} & \cellcolor{gray!6}{1.014} & \cellcolor{gray!6}{0.012} & \cellcolor{gray!6}{0.830} & \cellcolor{gray!6}{0.280} & \cellcolor{gray!6}{0.027} & \cellcolor{gray!6}{1.043} & \cellcolor{gray!6}{0.021}\\
+WitnessB: T123T145 11 & 0.331 & 0.331 & 0.996 & 0.996 & -0.003 & 0.655 & -0.047 & -0.004 & 0.994 & -0.003\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1629,11 +1645,11 @@ DepthB: T123T145 11 & 0.331 & 0.331 & 0.996 & 0.996 & -0.047 & -0.003 & -0.003 &
 \caption{\label{tab:depthFurtherDesiderata}Desideratum satisfaction in the single agent version of the Depth scenario.}
 \centering
 \resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllll}
+\begin{tabular}[t]{lllllllllll}
 \toprule
-  & OG & OGen & Sh & ShGen & Fit & DM & R & S\\
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Depth: X$_1>$X$_2$} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
+\cellcolor{gray!6}{Depth: X$_1>$X$_2$} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1655,7 +1671,7 @@ DepthB: T123T145 11 & 0.331 & 0.331 & 0.996 & 0.996 & -0.047 & -0.003 & -0.003 &
 \begin{figure}[H]
 \scalebox{1.3}{\begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-38-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-45-1} \end{center}
 \end{subfigure}}  
 \hspace{0.2cm}\begin{subfigure}[!ht]{0.25\textwidth}
 

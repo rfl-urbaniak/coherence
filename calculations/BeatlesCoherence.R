@@ -25,8 +25,8 @@ BeatlesTable3
 # BeatlesTable2
 # 
 # 
- minima <-  c(0, 0 ,0, 0, -1, -1, 0, -1, -1, -1, -1, -1)
- neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 0, 0, 0, 0)
+ minima <-  c(0, 0 ,0, 0, -1, -1, 0, -1, 0, -1)
+ neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 1, 0)
 # # 
 # # # 
   BeatlesMinimal <- BeatlesTable3[1,] == minima

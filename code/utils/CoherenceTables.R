@@ -72,29 +72,23 @@ CoherencesRowNarr <- function (BN, narrationNodes, states,
   SH <- ShogenjiCoherenceForBNs(BN,narrationNodes,states)[[3]]
   SHg <- ShogenjiGeneralizedCoherence(BN, narrationNodes, states)[[1]]
   RO <- RocheCoherenceForBNs(BN,narrationNodes,states)[[3]]
-
-  structuredCoherenceNarration(BN,narrationNodes,states)
-  
-  Narrated <- structuredCoherenceNarration(BN,narrationNodes,states)$structuredNarrated
-  
-  NarratedSquared <- structuredCoherenceNarration(BN,narrationNodes,states)$structuredSquared
-  
-  NarratedNoSD <- structuredCoherenceNarration(BN,narrationNodes,states)$structuredNoSD
+  Znarr <- structuredCoherenceNarration(BN, narrationNodes,states)$structuredZnarr
+  LRnarr <- structuredCoherenceNarration(BN, narrationNodes,states)$structuredLRnarr
+  Lnarr <- structuredCoherenceNarration(BN, narrationNodes,states)$structuredLnarr
   
   
   row <- data.frame( 
-    OlssonGlass = OL,
-    OlssonGlassGen = OLg,
-    Shogenji = SH,
-    ShogenjiGen = SHg,
-    Fitelson = FI,
-    "DouvenMeijs" = DM,
-    Roche = RO,
-    #RA = RA,
-    #Structured = Structured,
-    Narrated = Narrated,
-    NarratedSquared = NarratedSquared,
-    NarratedNoSD = NarratedNoSD)
+    OG = OL,
+    OGGen = OLg,
+    Sh = SH,
+    ShGen = SHg,
+    DM = DM,
+    R = RO,
+    Fi = FI,
+    SZnarr= Znarr,
+    SLRnarr = LRnarr,
+    SLnarr  = Lnarr
+  )
 #  exampleName <- "W1W2"
   
   rownames(row) <- paste(paste(exampleName, ":", sep = ""), paste(narrationNodes, sep = "", collapse=""), paste(states, sep = "", collapse=""), sep = " ")

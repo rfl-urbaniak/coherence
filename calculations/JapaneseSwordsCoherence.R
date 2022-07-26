@@ -66,6 +66,7 @@ J <- c("J","O")
 # #  #
 # #  #
 JapaneseSwordsSeparateTable <- rbind(JapaneseSwordsTableA,JapaneseSwordsTableB,JapaneseSwordsTableC)
+JapaneseSwordsSeparateTable 
 # #  #
 # #  #
 save(JapaneseSwordsSeparateTable,file="calculations/RdataObjects/JapaneseSwordsSeparateTable.Rda")
@@ -91,7 +92,7 @@ save(JapaneseSwordsSeparateTable,file="calculations/RdataObjects/JapaneseSwordsS
 # # # 
 # # 
 # 
-# JapaneseSwordsSeparateResults
+JapaneseSwordsSeparateResults
 # 
  save(JapaneseSwordsSeparateResults,file="calculations/RdataObjects/JapaneseSwordsSeparateResults.Rda")
 

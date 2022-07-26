@@ -68,6 +68,7 @@ source("../code/measures/Olsson.R")
 source("../code/measures/Roche.R")
 source("../code/measures/Shogenji.R")
 source("../code/measures/structuredCoherenceLR.R")
+source("../code/measures/structuredCoherenceNarr.R")
 ```
 
 
@@ -476,34 +477,6 @@ penguinsResults %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = 
 ```
 
 
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
-<!-- library(dplyr) -->
-<!-- load("../calculations/RdataObjects/penguinsTablePaper.Rda") -->
-<!-- load("../calculations/RdataObjects/penguinsResultsPaper.Rda") -->
-
-<!-- colnames(penguinsTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
-<!-- colnames(penguinsResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
-<!-- penguinsTable <- penguinsTable[,-7] -->
-<!-- penguinsResults <- penguinsResults[,-7] -->
-<!-- ``` -->
-
-
-
-<!-- ```{r penguinsCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", warning = FALSE, message = FALSE} -->
-<!-- library(dplyr) -->
-<!-- library(kableExtra) -->
-<!-- round(penguinsTable,3) %>%  kable(format = "latex",booktabs=T, -->
-<!--   linesep = "",  escape = FALSE, caption = "Coherence scores for the Penguins scenario (rounded).") %>%    -->
-<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
-<!-- ``` -->
-
-<!-- ```{r penguinsDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"} -->
-<!-- penguinsResults %>%  kable(format = "latex",booktabs=T, -->
-<!--     linesep = "",  escape = FALSE, caption = "Desiderata satisfaction for the Penguins scenario.") %>%   -->
-<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
-<!-- ``` -->
-
-
 
 
 
@@ -596,19 +569,19 @@ dunnit %>%  kable(format = "latex",booktabs=T,
 graphviz.plot(DunnitNoTwinDAG, layout = "twopi")
 ```
 \end{subfigure}} 
-\hspace{-0.8cm}\begin{subfigure}[!ht]{0.2\textwidth}
+\hspace{-0.8cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 CPkable0("DunnitNoTwinBN","M")
 CPkable1("DunnitNoTwinBN","G")
 ```
-\end{subfigure}  
- \hspace{0.5cm}\begin{subfigure}[!ht]{0.2\textwidth}
+\end{subfigure}  }
+ \hspace{0.5cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
 
 CPkable1("DunnitNoTwinBN","I")
 CPkable1("DunnitNoTwinBN","W")
 ```
-\end{subfigure}
+\end{subfigure}}
 \caption{Twin-less BN for the \textsf{Dunnit} problem.}
 \label{fig:twinless}
 \end{figure}
@@ -622,11 +595,11 @@ CPkable1("DunnitNoTwinBN","W")
 graphviz.plot(DunnitDAG, layout = "twopi")
 ```
 \end{subfigure}} 
-\hspace{-1cm}\begin{subfigure}[!ht]{0.3\textwidth}
+\hspace{-1cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.3\textwidth}
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
 CPkable2("DunnitBN","W")
 ```
-\end{subfigure}
+\end{subfigure}}
 \caption{BN for the \textsf{Dunnit} problem. The key difference for the twin version lies in the construction of the CPT for \textsf{W}. The table gives conditional probabilities for \textsf{W} given various joint states of \textsf{Tw} and \textsf{G}.}
 \label{fig:twin}
 \end{figure}
@@ -637,32 +610,71 @@ CPkable2("DunnitBN","W")
 \textbf{Results.} 
 Coherence calculations result in Table \@ref(tab:dunnitCoherence) and how they fare with respect to the desideratum is displayed in Table \@ref(tab:dunnitDesiderata). 
 
-```{r, echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE,  fig.show = "hold", out.width = "70%", dpi = 300}
-load("../calculations/RdataObjects/DunnitTableSeparate.Rda")
-load("../calculations/RdataObjects/DunnitResultsSeparate.Rda")
+```{r, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, message = FALSE, warning = FALSE}
+library(gRain)
+library(bnlearn)
+library(rje)
+library(useful)
+source("../code/utils/CombinationsBN.R")
+Dunnit <- c("M","G","W","I")
+DunnitTwin<- c("M","Tw","G","W","I")
+# #
 
+DunnitNoTwinTable <- CoherencesTable(DunnitNoTwinBN,
+  scenariosList = list(Dunnit),
+  statesList   = list(c("1","1","1","1")),
+  exampleName = "Dunnit"
+)
+  
+  
 
-colnames(DunnitTableSeparate) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-colnames(DunnitResultsSeparate) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-DunnitTableSeparate <- DunnitTableSeparate[,-7]
-DunnitResultsSeparate <- DunnitResultsSeparate[,-7]
+DunnitTwinTable <- CoherencesTable(DunnitBN,
+  scenariosList = list(DunnitTwin),
+  statesList   = list(c("1","1","1","1","1")),
+  exampleName = "Dunnit"
+)
+
+DunnitTableSeparate <- rbind(DunnitNoTwinTable,DunnitTwinTable)
 ```
+
+
+
+
+<!-- ```{r, echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- load("../calculations/RdataObjects/DunnitTableSeparate.Rda") -->
+<!-- load("../calculations/RdataObjects/DunnitResultsSeparate.Rda") -->
+
+
+<!-- colnames(DunnitTableSeparate) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- colnames(DunnitResultsSeparate) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- DunnitTableSeparate <- DunnitTableSeparate[,-7] -->
+<!-- DunnitResultsSeparate <- DunnitResultsSeparate[,-7] -->
+<!-- ``` -->
 
 
 ```{r dunnitCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 library(tidyverse)
 round(DunnitTableSeparate,3) %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Coherence scores for the Dunnit scenario (rounded).") %>%  
+                        linesep = "",  escape = FALSE, caption = "Coherence scores for the Dunnit scenario (rounded).") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
-<!-- ```{r dunnitDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- library(tidyverse) -->
-<!-- library(knitr) -->
-<!-- DunnitResultsSeparate %>%  kable(format = "latex",booktabs=T, -->
-<!--                         linesep = "",  escape = FALSE, caption = "Desideratum satisfaction for the Dunnit scenario.") %>% -->
-<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
-<!-- ``` -->
+```{r, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, message = FALSE, warning = FALSE}
+DunnitLessTwin <- DunnitTableSeparate[1,] < DunnitTableSeparate[2,] 
+DunnitResultsSeparate <- as.data.frame(DunnitLessTwin)
+rownames(DunnitResultsSeparate) <- c("Dunnit: Dunnit$<$Twin")
+```
+
+
+
+
+```{r dunnitDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE,  fig.show = "hold", out.width = "70%", dpi = 300}
+library(tidyverse)
+library(knitr)
+DunnitResultsSeparate %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Desideratum satisfaction for the Dunnit scenario.") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
 
 
 
@@ -762,27 +774,59 @@ CPkable1("Jap3BN","O")
 \textbf{Results.} Coherence calculations are in Table \@ref(tab:japaneseCoherence) and the status of the desiderata involved is displayed in Table \@ref(tab:japaneseDesiderata).
 
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
-load("../calculations/RdataObjects/JapaneseSwordsSeparateTable.Rda")
-load("../calculations/RdataObjects/JapaneseSwordsSeparateResults.Rda")
+J <- c("J","O")
 
-colnames(JapaneseSwordsSeparateTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-colnames(JapaneseSwordsSeparateResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-
-JapaneseSwordsSeparateTable <- JapaneseSwordsSeparateTable[,-7]
-JapaneseSwordsSeparateResults <- JapaneseSwordsSeparateResults[,-7]
+BN <- Jap1BN
+JapaneseSwordsTableA <- CoherencesTable(Jap1BN,
+                                  scenariosList = list(J),
+                                  statesList   = list(c("1","1")),
+                                 exampleName = "Japanese Swords 1")
+BN <- Jap2BN
+JapaneseSwordsTableB <- CoherencesTable(Jap2BN,
+                                         scenariosList = list(J),
+                                         statesList   = list(c("1","1")),
+                                         exampleName = "Japanese Swords 2")
+BN <- Jap3BN
+JapaneseSwordsTableC <- CoherencesTable(Jap3BN,
+                                         scenariosList = list(J),
+                                         statesList   = list(c("1","1")),
+                                         exampleName = "Japanese Swords 3")
+JapaneseSwordsSeparateTable <- rbind(JapaneseSwordsTableA,JapaneseSwordsTableB,JapaneseSwordsTableC)
 ```
+
+
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- load("../calculations/RdataObjects/JapaneseSwordsSeparateTable.Rda") -->
+<!-- load("../calculations/RdataObjects/JapaneseSwordsSeparateResults.Rda") -->
+
+<!-- colnames(JapaneseSwordsSeparateTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- colnames(JapaneseSwordsSeparateResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+
+<!-- JapaneseSwordsSeparateTable <- JapaneseSwordsSeparateTable[,-7] -->
+<!-- JapaneseSwordsSeparateResults <- JapaneseSwordsSeparateResults[,-7] -->
+<!-- ``` -->
 
 
 ```{r japaneseCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 round(JapaneseSwordsSeparateTable,3) %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Japanese swords scenarios (rounded).") %>% 
+                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Japanese swords scenarios (rounded).") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+JO2greaterJO1 <- JapaneseSwordsSeparateTable[2,] > JapaneseSwordsSeparateTable[1,]
+JO2greaterJO3 <- JapaneseSwordsSeparateTable[2,] > JapaneseSwordsSeparateTable[3,]
+JapaneseSwordsSeparateResults <- as.data.frame(rbind(JO2greaterJO1,JO2greaterJO3))
+rownames(JapaneseSwordsSeparateResults) <- c("Swords: JO2$>$JO1","Swords: JO2$>$JO3")
 ```
 
 
 ```{r japaneseDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 JapaneseSwordsSeparateResults %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Japanese swords scenarios.") %>% 
+                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Japanese swords scenarios.") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
@@ -924,36 +968,50 @@ OnlyR & 0.2\\
 \textbf{Results.} Coherence calculations yield the  results in Table \@ref(tab:robbersCoherence), and the performance of the coherence measures with respect to the desiderata is illustrated in Table \@ref(tab:robbersDesiderata).
 
 
-
-
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
-load("../calculations/RdataObjects/robbersTable3.Rda")
-load("../calculations/RdataObjects/robbersResults3.Rda")
-
-colnames(robbersTable3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-colnames(robbersResults3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-
+robbersTable3 <- CoherencesTable(robbersBN,
+        scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
+        statesList   = list(c("1","1"),c("1","0"),c("0","1")),
+        exampleName = "Robbers"
+)
 ```
+
+
+<!-- robbersTable3 -->
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"} -->
+<!-- load("../calculations/RdataObjects/robbersTable3.Rda") -->
+<!-- load("../calculations/RdataObjects/robbersResults3.Rda") -->
+
+<!-- colnames(robbersTable3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- colnames(robbersResults3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+
+<!-- ``` -->
 
 
 ```{r robbersCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
 round(robbersTable3,3) %>% kable(format = "latex",booktabs=T,
                         #col.names = c(node, "1", "0"),
-                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Robbers scenario (rounded).") %>% 
+                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Robbers scenario (rounded).") %>%
   kable_styling(latex_options=c("scale_down", "HOLD_position"))
 ```
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
+neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 0, 0, 0, 0)
+PRgreaterPnR <- robbersTable3[1,] > robbersTable3[2,] 
+PRgreaterNeutral <- robbersTable3[1,] > neutralPoints
+robbersResults3 <- as.data.frame(rbind(PRgreaterPnR,PRgreaterNeutral))
+rownames(robbersResults3) <- c("Robbers: PR$>$P$\\neg$R","Robbers: PR$>$neutral")
+```
+
 
 ```{r robbersDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
 robbersResults3 %>% kable(format = "latex",booktabs=T,
                         #col.names = c(node, "1", "0"),
-                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Robbers problem.") %>% 
+                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Robbers problem.") %>%
   kable_styling(latex_options=c("scale_down", "HOLD_position"))
 ```
-
-
-
-
-
 
 
 
@@ -1025,32 +1083,59 @@ CPkable0("BeatlesBN","G")
 \end{figure}
 
 
-Coherence calculations give the results from Table \@ref(tab:beatlesCoherence), and the satisfaction of the desiderata involved can be inspected by looking at Table \@ref(tab:beatlesDesiderata).
+\textbf{Results.} Coherence calculations give the results from Table \@ref(tab:beatlesCoherence), and the satisfaction of the desiderata involved can be inspected by looking at Table \@ref(tab:beatlesDesiderata).
 
 
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
-load("../calculations/RdataObjects/BeatlesTable3.Rda")
-load("../calculations/RdataObjects/BeatlesResults3.Rda")
-
-colnames(BeatlesTable3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-colnames(BeatlesResults3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-
-
-BeatlesTable3 <- BeatlesTable3[,-7]
-BeatlesResults3 <- BeatlesResults3[,-7]
+B <- c("J","P","G","R","D")
+BN <- BeatlesBN
+# 
+BeatlesTable3 <- CoherencesTable(BeatlesBN,
+                                        scenariosList = list(B),
+                                        statesList   = list(c("1","1","1","1","1")),
+                                        exampleName = "Beatles"
+)
 ```
+
+
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- load("../calculations/RdataObjects/BeatlesTable3.Rda") -->
+<!-- load("../calculations/RdataObjects/BeatlesResults3.Rda") -->
+
+<!-- colnames(BeatlesTable3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- colnames(BeatlesResults3) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+
+
+<!-- BeatlesTable3 <- BeatlesTable3[,-7] -->
+<!-- BeatlesResults3 <- BeatlesResults3[,-7] -->
+<!-- ``` -->
 
 
 
 ```{r beatlesCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 round(BeatlesTable3,3) %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Beatles scenario (rounded).") %>% 
+                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Beatles scenario (rounded).") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+B <- c("J","P","G","R","D")
+minima <-  c(0, 0 ,0, 0, -1, -1, 0, -1, 0, -1)
+neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 1, 0)
+BeatlesMinimal <- BeatlesTable3[1,] == minima
+BeatlesBelowNeutral <- BeatlesTable3[1,] < neutralPoints 
+BeatlesResults3 <- as.data.frame(rbind(BeatlesBelowNeutral, BeatlesMinimal))
+rownames(BeatlesResults3) <- c("Beatles: below neutral", "Beatles: minimal")
+```
+
+
+
 ```{r beatlesDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 BeatlesResults3 %>%  kable(format = "latex",booktabs=T,
-        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Beatles scenario.") %>%  
+        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Beatles scenario.") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
@@ -1201,33 +1286,79 @@ t(D12cpt) %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE,
 ```
 
 
-Once this strategy is taken,  the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \@ref(tab:witnessesCoherence) and the status of the desiderata is in Table \@ref(tab:witnessesDesiderata).
+Once this strategy is taken,  the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \@ref(tab:witnessesCoherence) and the status of the desiderata is in Table \@ref(tab:witnessesDesiderata). Now all the weights come from Bayesian networks updated from the perspertive of a given narration, which is emphasized by our use of abbreviations SZnarr, SLRnarr, and SLnarr. 
 
 
 
 
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
-load("../calculations/RdataObjects/WNarrTable.Rda")
-load("../calculations/RdataObjects/WNarrResults.Rda")
+source("../code/measures/structuredCoherenceNarr.R")
+A <- c("W1","W2")
+B <- c("W3","W4")
+C <- c("W4","W5")
+W12Table <- CoherencesTableNarr(W12BN,
+                           scenariosList = list(A),
+                           statesList   = list(c("1","1")),
+                           exampleName = "Witness"
+)
 
+W34Table <- CoherencesTableNarr(W34BN,
+                                scenariosList = list(B),
+                                statesList   = list(c("1","1")),
+                                exampleName = "Witness"
+)
 
-colnames(WNarrTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1", "S")
-colnames(WNarrResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1","S")
+W45Table <- CoherencesTableNarr(W45BN,
+                                scenariosList = list(C),
+                                statesList   = list(c("1","1")),
+                                exampleName = "Witness"
+)
 
-WNarrTable <- WNarrTable[,-c(7,8)]
-WNarrResults <- WNarrResults[,-c(7,8)]
+WNarrTable <- as.data.frame(rbind(W12Table, 
+                                      W34Table,
+                                      W45Table
+))
+
 ```
+
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- load("../calculations/RdataObjects/WNarrTable.Rda") -->
+<!-- load("../calculations/RdataObjects/WNarrResults.Rda") -->
+
+
+<!-- colnames(WNarrTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1", "S") -->
+<!-- colnames(WNarrResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1","S") -->
+
+<!-- WNarrTable <- WNarrTable[,-c(7,8)] -->
+<!-- WNarrResults <- WNarrResults[,-c(7,8)] -->
+<!-- ``` -->
+
+
+
+
 
 ```{r witnessesCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 round(WNarrTable,3) %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Witnesses scenario (rounded).") %>%  
+                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Witnesses scenario (rounded).") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
 
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+
+W1W2greaterW3W4 <- WNarrTable[1,] > WNarrTable[2,] 
+W4W5greaterW3W4 <- WNarrTable[3,] > WNarrTable[2,] 
+WNarrResults <- as.data.frame(rbind(W1W2greaterW3W4,W4W5greaterW3W4))
+rownames(WNarrResults) <- c("Witness: W$_1$W$_2>$W$_3$W$_4$","Witness: W$_4$W$_5>$W$_3$W$_4$")
+```
+
+
+
 ```{r witnessesDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 WNarrResults %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Witnesses scenario.") %>%  
+                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Witnesses scenario.") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
@@ -1323,27 +1454,58 @@ CPkable1("DX2BN","T167")
 \textbf{Results.} One effect of dropping the "the witness testified that" and using the testimony contents themselves is that the CPTs for the narration nodes are deterministically connected with the root node. In result, the coherence calculations give the results in Table \@ref(tab:depthCoherence), and the status of the desiderata is pictured in Table \@ref(tab:depthDesiderata).
 
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
-load("../calculations/RdataObjects/depthTableNarr.Rda")
-load("../calculations/RdataObjects/depthResultsNarr.Rda")
-load("../calculations/RdataObjects/WNarrTable.Rda")
 
-colnames(depthTableNarr) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1", "S2")
-colnames(depthResultsNarr) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1","S2")
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+X1 <- c("T123","T124","T134")
+X2 <- c("T123","T145","T167")
+BN <- DepthBN
+
+depthTableX1 <- CoherencesTable(DX1BN,
+                               scenariosList = list(X1),
+                               statesList   = list(c("1","1","1")),
+                               exampleName = "Depth"
+)
+
+depthTableX2 <- CoherencesTable(DX2BN,
+                                        scenariosList = list(X2),
+                                        statesList   = list(c("1","1","1")),
+                                        exampleName = "Depth"
+)
+
+depthTable <- rbind(depthTableX1,depthTableX2)
 ```
 
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- load("../calculations/RdataObjects/depthTableNarr.Rda") -->
+<!-- load("../calculations/RdataObjects/depthResultsNarr.Rda") -->
+<!-- load("../calculations/RdataObjects/WNarrTable.Rda") -->
+
+<!-- colnames(depthTableNarr) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1", "S2") -->
+<!-- colnames(depthResultsNarr) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1","S2") -->
 
 ```{r depthCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
-round(depthTableNarr,3) %>% 
+round(depthTable,3) %>%
   kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Coherence scores for the Depth problem (rounded).") %>%   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+X1greaterX2<- depthTable[1,] > depthTable[2,]
+depthResults <- as.data.frame(rbind(X1greaterX2))
+rownames(depthResults) <- c("Depth: X$_1>$X$_2$")
+```
+
+
+
+
 ```{r depthDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
-depthResultsNarr %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction for the Depth problem.") %>%  
+depthResults %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction for the Depth problem.") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
+
+\todo{need to revise this}
 Note that this time we listed two values for our measure. \textsf{Structured 1} shows the values obtained if we do not update the weighting of the node not included in the narration, and \textsf{Structured 2} is the result of such an updated weighing (analogous to the updating involved in the \textsf{Witness} problem). Now, what are we to make of this?
 
 \textsf{Structured 1} is negative. This isn't too surprising: after all, this is the coherence of the narration with the probabilistic assumption that the distribution for \textsf{C} is uniform, and this probabilistic assumption undermines the narration. Why, however, does \textsf{Structured 2} equal 1, and why are the results identical for both narrations?  This, upon reflection, isn't too suprising either. If the BN and the narration is supposed to represent a single agent's credal state, there is only one state of \textsf{C} in which the whole narration $X_1$ is true -- trivially, it is the one in which suspect 1 is guilty, and it is the same unique state of \textsf{C} in which the whole narration $X_2$ is true.  Since seen as narrations these sets have exactly the same truth conditions, there is no surprise in them being equally coherent. 
@@ -1461,24 +1623,57 @@ graphviz.plot(T123DAG2)
 \noindent Now, the resulting calculations and outcomes are in Tables \@ref(tab:depthFurtherCoherence) and \@ref(tab:depthFurtherDesiderata), and the situation is no longer problematic for any of the measures.
 
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
-load("../calculations/RdataObjects/depthPerspectiveTable.Rda")
-load("../calculations/RdataObjects/depthPerspectiveResults.Rda")
 
-colnames(depthPerspectiveTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
-colnames(depthPerspectiveResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+witnessA1 <- CoherencesTable(T123BN,
+                                 scenariosList = list(c("T123","T124")),
+                                 statesList   = list(c("1","1")),
+                                 exampleName = "WitnessA"
+)
+
+witnessB1 <- CoherencesTable(T123BN2,
+                             scenariosList = list(c("T123","T145")),
+                             statesList   = list(c("1","1")),
+                             exampleName = "WitnessB"
+)
+
+
+depthPerspectiveTable <- rbind(witnessA1,witnessB1)
 ```
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- load("../calculations/RdataObjects/depthPerspectiveTable.Rda") -->
+<!-- load("../calculations/RdataObjects/depthPerspectiveResults.Rda") -->
+
+<!-- colnames(depthPerspectiveTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- colnames(depthPerspectiveResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- ``` -->
 
 
 ```{r depthFurtherCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 round(depthPerspectiveTable,3) %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Coherence scores in a single agent version of the Depth scenario (rounded).") %>% 
+                        linesep = "",  escape = FALSE, caption = "Coherence scores in a single agent version of the Depth scenario (rounded).") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
+
+
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+X1greaterX2<- depthPerspectiveTable[1,] > depthPerspectiveTable[2,] 
+depthPerspectiveResults <- as.data.frame(rbind(X1greaterX2))
+rownames(depthPerspectiveResults) <- c("Depth: X$_1>$X$_2$")
+```
+
+
+
 ```{r depthFurtherDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 depthPerspectiveResults %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Desideratum satisfaction in the single agent version of the Depth scenario.") %>%   
+                        linesep = "",  escape = FALSE, caption = "Desideratum satisfaction in the single agent version of the Depth scenario.") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 

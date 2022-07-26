@@ -1,18 +1,10 @@
 A <- c("W1","W2")
 B <- c("W3","W4")
 C <- c("W4","W5")
-# # 
-
-
 
 #CALCULATIONS FOR THREE-NODE NARATED BNs
 
 
-structuredCoherenceUpdated(W12BN,A,c("1","1"))
-
-W1calculations <- structuredCoherenceNarration(W12BN,A,c("1","1"))[[1]][[1]][[2]]
-
-save(W1calculations, file = "W1calculations.Rda")
 
 
 
@@ -22,6 +14,7 @@ W12Table <- CoherencesTableNarr(W12BN,
                            exampleName = "Witness"
 )
 
+W12Table
 
 
 W34Table <- CoherencesTableNarr(W34BN,
@@ -43,6 +36,8 @@ WNarrTable <- as.data.frame(rbind(W12Table,
                                       W45Table
 ))
 
+WNarrTable
+
 save(WNarrTable,file = "calculations/RdataObjects/WNarrTable.Rda")
 
 
@@ -63,6 +58,8 @@ WNarrResults <- as.data.frame(rbind(W1W2greaterW3W4,W4W5greaterW3W4))
 rownames(WNarrResults) <- c("Witness: W$_1$W$_2>$W$_3$W$_4$","Witness: W$_4$W$_5>$W$_3$W$_4$")
 # # 
 # # 
+
+WNarrResults
 # # 
 
 save(WNarrResults,file="calculations/RdataObjects/WNarrResults.Rda")
@@ -70,13 +67,6 @@ save(WNarrResults,file="calculations/RdataObjects/WNarrResults.Rda")
 #WNarrResults
 
 #WNarrTable
-
-
-
-
-
-
-
 
 
 

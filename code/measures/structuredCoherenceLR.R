@@ -181,27 +181,27 @@ structuredL <- function(BN, narrationNodes, states){
     }
     variants$PriorAnte <- priorAnte
     
-    
-    priorAnte <- numeric(nrow(variants))
-    
-    for (row in 1:nrow(variants)){
-      rowNodes <- as.vector(unlist(c(antecedents)))
-      rowStates <- as.vector(unlist(variants[row,2:(length(antecedents[[1]])+1)]))
-      PriorJoints <- querygrain(JN,nodes=rowNodes,type="joint")
-      PriorJoints <- aperm(PriorJoints, rowNodes)
-      steps <- numeric(length(rowNodes))
-      for(rn in 1:length(rowNodes)){
-        steps[rn] <- paste(rowNodes[rn], "=", "\"",rowStates[rn],"\"")
-      }
-      steps<- gsub(" ", "", steps, fixed = TRUE)
-      final <- paste("PriorJoints[",paste(steps,collapse=","),"]",sep="")
-      noquote(final)
-      prior <- eval(parse(text=final))
-      priorAnte[row] <- prior
-    }
-    variants$PriorAnte <- priorAnte
-    
-    variants   
+    #this was duplicated
+    # priorAnte <- numeric(nrow(variants))
+    # 
+    # for (row in 1:nrow(variants)){
+    #   rowNodes <- as.vector(unlist(c(antecedents)))
+    #   rowStates <- as.vector(unlist(variants[row,2:(length(antecedents[[1]])+1)]))
+    #   PriorJoints <- querygrain(JN,nodes=rowNodes,type="joint")
+    #   PriorJoints <- aperm(PriorJoints, rowNodes)
+    #   steps <- numeric(length(rowNodes))
+    #   for(rn in 1:length(rowNodes)){
+    #     steps[rn] <- paste(rowNodes[rn], "=", "\"",rowStates[rn],"\"")
+    #   }
+    #   steps<- gsub(" ", "", steps, fixed = TRUE)
+    #   final <- paste("PriorJoints[",paste(steps,collapse=","),"]",sep="")
+    #   noquote(final)
+    #   prior <- eval(parse(text=final))
+    #   priorAnte[row] <- prior
+    # }
+    # variants$PriorAnte <- priorAnte
+    # 
+    # variants   
     
     AnteIfC <- numeric(nrow(variants))
     AnteIfnC <- numeric(nrow(variants))    

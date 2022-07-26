@@ -20,6 +20,8 @@ DunnitTwinTable <- CoherencesTable(DunnitBN,
 
 DunnitTableSeparate <- rbind(DunnitNoTwinTable,DunnitTwinTable)
 
+
+DunnitTableSeparate
 # 
 # 
 # DunnitTableSeparate
@@ -41,17 +43,19 @@ rownames(DunnitResultsSeparate) <- c("Dunnit: Dunnit$<$Twin")
 # 
 # #DunnitResults2
 # 
+
+DunnitResultsSeparate 
 # 
 # 
- save(DunnitResultsSeparate,file="calculations/RdataObjects/DunnitResultsSeparate.Rda")
+save(DunnitResultsSeparate,file="calculations/RdataObjects/DunnitResultsSeparate.Rda")
 
  
-load("calculations/RdataObjects/DunnitResults3.Rda")
+#load("calculations/RdataObjects/DunnitResults3.Rda")
 
 
 #DunnitResults3
 
-DunnitResults3LaTeX <- tableLaTeX(DunnitTable3)
+#DunnitResults3LaTeX <- tableLaTeX(DunnitTable3)
 
 
 

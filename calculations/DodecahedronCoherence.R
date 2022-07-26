@@ -3,49 +3,53 @@ Dice2SixBN
 Dice2DodBN 
 
 
-  BN <- Dice2SixBN 
-  
-  Dice2SixBN
-  
-  structuredCoherence(BN = Dice2SixBN, narrationNodes = c("O2","O24"), states = c("1","1"))
- 
-  structuredCoherenceNarration(BN = Dice2SixBN, narrationNodes = c("O2","O24"), states = c("1","1"))
-  
-  
-  structuredCoherenceNarration(BN = Dice2DodBN, narrationNodes = c("O2","O24"), states = c("1","1"))
-  
-    
-   
-  Dice2SixTable <- CoherencesTableNarr(Dice2SixBN,
-                               scenariosList = list(c("O2","O24")),
-                               statesList   = list(c("1","1")),
-                               exampleName = "Regular die"
- )
-
-
-Dice2SixTable  
-
-
-Dice2DodTable <- CoherencesTableNarr(Dice2DodBN,
-                                     scenariosList = list(c("O2","O24")),
-                                     statesList   = list(c("1","1")),
-                                     exampleName = "Dodecahedron"
-)
-
-
-Dice2DodTable
-
-
-
-
+#  BN <- Dice2SixBN 
+#   
+#   Dice2SixBN
+#   
+#   structuredCoherence(BN = Dice2SixBN, narrationNodes = c("O2","O24"), states = c("1","1"))
+#  
+#   structuredCoherenceNarration(BN = Dice2SixBN, narrationNodes = c("O2","O24"), states = c("1","1"))
+#   
+#   
+#   structuredCoherenceNarration(BN = Dice2DodBN, narrationNodes = c("O2","O24"), states = c("1","1"))
+#   
+#     
+#    
+#   Dice2SixTable <- CoherencesTableNarr(Dice2SixBN,
+#                                scenariosList = list(c("O2","O24")),
+#                                statesList   = list(c("1","1")),
+#                                exampleName = "Regular die"
+#  )
+# 
+# 
+# Dice2SixTable  
+# 
+# 
+# Dice2DodTable <- CoherencesTableNarr(Dice2DodBN,
+#                                      scenariosList = list(c("O2","O24")),
+#                                      statesList   = list(c("1","1")),
+#                                      exampleName = "Dodecahedron"
+# )
+# 
+# 
+# Dice2DodTable
+# 
 
 
 
+
+
+BN <- RegularBN
 RegularTable <- CoherencesTableNarr(RegularBN,
                                      scenariosList = list(c("T","TF")),
                                      statesList   = list(c("1","1")),
                                      exampleName = "Regular"
 )
+
+
+structuredCoherenceNarration(RegularBN, c("T","TF"), c("1","1"))
+
 
 
 

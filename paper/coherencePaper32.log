@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.7.16)  26 JUL 2022 08:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.7.16)  26 JUL 2022 12:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2193,12 +2193,12 @@ Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-6-1.
 pdf  used on input line 711.
 (pdftex.def)             Requested size: 85.74199pt x 66.01158pt.
 
-Overfull \hbox (1.562pt too wide) in paragraph at lines 724--733
+Overfull \hbox (1.562pt too wide) in paragraph at lines 733--733
 [][] 
  []
 
 
-Overfull \hbox (8.78197pt too wide) in paragraph at lines 747--756
+Overfull \hbox (8.78197pt too wide) in paragraph at lines 756--756
 [][] 
  []
 
@@ -2210,178 +2210,174 @@ ype pdf)
 Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-9-1.
 pdf  used on input line 766.
 (pdftex.def)             Requested size: 114.31981pt x 77.84088pt.
-
-LaTeX Warning: Reference `tab:dunnitDesiderata' on page 8 undefined on input li
-ne 790.
-
 [8 <./coherencePaper32_files/figure-latex/unnamed-chunk-6-1.pdf> <./coherencePa
 per32_files/figure-latex/unnamed-chunk-9-1.pdf>]
-<coherencePaper32_files/figure-latex/unnamed-chunk-12-1.pdf, id=153, 54.2025pt 
+<coherencePaper32_files/figure-latex/unnamed-chunk-13-1.pdf, id=155, 54.2025pt 
 x 246.9225pt>
-File: coherencePaper32_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (
+File: coherencePaper32_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (
 type pdf)
-<use coherencePaper32_files/figure-latex/unnamed-chunk-12-1.pdf>
-Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-12-1
-.pdf  used on input line 856.
+<use coherencePaper32_files/figure-latex/unnamed-chunk-13-1.pdf>
+Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-13-1
+.pdf  used on input line 870.
 (pdftex.def)             Requested size: 54.20236pt x 246.92188pt.
-[9 <./coherencePaper32_files/figure-latex/unnamed-chunk-12-1.pdf>]
-<coherencePaper32_files/figure-latex/unnamed-chunk-18-1.pdf, id=173, 311.1625pt
+[9 <./coherencePaper32_files/figure-latex/unnamed-chunk-13-1.pdf>]
+<coherencePaper32_files/figure-latex/unnamed-chunk-20-1.pdf, id=175, 311.1625pt
  x 246.9225pt>
-File: coherencePaper32_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (
-type pdf)
-<use coherencePaper32_files/figure-latex/unnamed-chunk-18-1.pdf>
-Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-18-1
-.pdf  used on input line 1015.
-(pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1020.
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1020.
-[10] [11 <./coherencePaper32_files/figure-latex/unnamed-chunk-18-1.pdf>]
-
-LaTeX Warning: Reference `sec:mean' on page 12 undefined on input line 1133.
-
-<coherencePaper32_files/figure-latex/unnamed-chunk-20-1.pdf, id=201, 413.545pt 
-x 246.9225pt>
 File: coherencePaper32_files/figure-latex/unnamed-chunk-20-1.pdf Graphic file (
 type pdf)
 <use coherencePaper32_files/figure-latex/unnamed-chunk-20-1.pdf>
 Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-20-1
-.pdf  used on input line 1142.
-(pdftex.def)             Requested size: 85.74272pt x 51.19589pt.
-[12 <./coherencePaper32_files/figure-latex/unnamed-chunk-20-1.pdf>]
-<coherencePaper32_files/figure-latex/unnamed-chunk-24-1.pdf, id=223, 311.1625pt
- x 246.9225pt>
-File: coherencePaper32_files/figure-latex/unnamed-chunk-24-1.pdf Graphic file (
-type pdf)
-<use coherencePaper32_files/figure-latex/unnamed-chunk-24-1.pdf>
-Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-24-1
-.pdf  used on input line 1239.
+.pdf  used on input line 1029.
 (pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1034.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1034.
+[10] [11 <./coherencePaper32_files/figure-latex/unnamed-chunk-20-1.pdf>]
 
-Overfull \hbox (113.10822pt too wide) in paragraph at lines 1256--1265
-[][] 
- []
+LaTeX Warning: Reference `sec:mean' on page 12 undefined on input line 1147.
 
-<coherencePaper32_files/figure-latex/unnamed-chunk-25-1.pdf, id=225, 311.1625pt
- x 246.9225pt>
-File: coherencePaper32_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (
-type pdf)
-<use coherencePaper32_files/figure-latex/unnamed-chunk-25-1.pdf>
-Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-25-1
-.pdf  used on input line 1278.
-(pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
-<coherencePaper32_files/figure-latex/unnamed-chunk-26-1.pdf, id=226, 311.1625pt
- x 246.9225pt>
-File: coherencePaper32_files/figure-latex/unnamed-chunk-26-1.pdf Graphic file (
-type pdf)
-<use coherencePaper32_files/figure-latex/unnamed-chunk-26-1.pdf>
-Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-26-1
-.pdf  used on input line 1283.
-(pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
-[13 <./coherencePaper32_files/figure-latex/unnamed-chunk-24-1.pdf>] [14 <./cohe
-rencePaper32_files/figure-latex/unnamed-chunk-25-1.pdf> <./coherencePaper32_fil
-es/figure-latex/unnamed-chunk-26-1.pdf>]
-<coherencePaper32_files/figure-latex/unnamed-chunk-28-1.pdf, id=266, 381.425pt 
+<coherencePaper32_files/figure-latex/unnamed-chunk-23-1.pdf, id=203, 413.545pt 
 x 246.9225pt>
+File: coherencePaper32_files/figure-latex/unnamed-chunk-23-1.pdf Graphic file (
+type pdf)
+<use coherencePaper32_files/figure-latex/unnamed-chunk-23-1.pdf>
+Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-23-1
+.pdf  used on input line 1156.
+(pdftex.def)             Requested size: 85.74272pt x 51.19589pt.
+[12 <./coherencePaper32_files/figure-latex/unnamed-chunk-23-1.pdf>]
+<coherencePaper32_files/figure-latex/unnamed-chunk-28-1.pdf, id=225, 311.1625pt
+ x 246.9225pt>
 File: coherencePaper32_files/figure-latex/unnamed-chunk-28-1.pdf Graphic file (
 type pdf)
 <use coherencePaper32_files/figure-latex/unnamed-chunk-28-1.pdf>
 Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-28-1
-.pdf  used on input line 1363.
-(pdftex.def)             Requested size: 114.3178pt x 74.00572pt.
+.pdf  used on input line 1253.
+(pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
 
-Overfull \hbox (46.6199pt too wide) in paragraph at lines 1413--1413
+Overfull \hbox (113.10822pt too wide) in paragraph at lines 1270--1279
 [][] 
  []
 
-
-Overfull \hbox (46.6199pt too wide) in paragraph at lines 1413--1413
-[][] 
- []
-
-
-Overfull \hbox (46.6199pt too wide) in paragraph at lines 1413--1413
-[][] 
- []
-
-<coherencePaper32_files/figure-latex/unnamed-chunk-30-1.pdf, id=267, 381.425pt 
-x 246.9225pt>
+<coherencePaper32_files/figure-latex/unnamed-chunk-29-1.pdf, id=227, 311.1625pt
+ x 246.9225pt>
+File: coherencePaper32_files/figure-latex/unnamed-chunk-29-1.pdf Graphic file (
+type pdf)
+<use coherencePaper32_files/figure-latex/unnamed-chunk-29-1.pdf>
+Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-29-1
+.pdf  used on input line 1292.
+(pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
+<coherencePaper32_files/figure-latex/unnamed-chunk-30-1.pdf, id=228, 311.1625pt
+ x 246.9225pt>
 File: coherencePaper32_files/figure-latex/unnamed-chunk-30-1.pdf Graphic file (
 type pdf)
 <use coherencePaper32_files/figure-latex/unnamed-chunk-30-1.pdf>
 Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-30-1
-.pdf  used on input line 1423.
+.pdf  used on input line 1297.
+(pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
+[13 <./coherencePaper32_files/figure-latex/unnamed-chunk-28-1.pdf>] [14 <./cohe
+rencePaper32_files/figure-latex/unnamed-chunk-29-1.pdf> <./coherencePaper32_fil
+es/figure-latex/unnamed-chunk-30-1.pdf>]
+<coherencePaper32_files/figure-latex/unnamed-chunk-33-1.pdf, id=268, 381.425pt 
+x 246.9225pt>
+File: coherencePaper32_files/figure-latex/unnamed-chunk-33-1.pdf Graphic file (
+type pdf)
+<use coherencePaper32_files/figure-latex/unnamed-chunk-33-1.pdf>
+Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-33-1
+.pdf  used on input line 1377.
 (pdftex.def)             Requested size: 114.3178pt x 74.00572pt.
 
-Overfull \hbox (46.6199pt too wide) in paragraph at lines 1473--1473
+Overfull \hbox (46.6199pt too wide) in paragraph at lines 1427--1427
 [][] 
  []
 
 
-Overfull \hbox (46.6199pt too wide) in paragraph at lines 1473--1473
+Overfull \hbox (46.6199pt too wide) in paragraph at lines 1427--1427
 [][] 
  []
 
 
-Overfull \hbox (46.6199pt too wide) in paragraph at lines 1473--1473
+Overfull \hbox (46.6199pt too wide) in paragraph at lines 1427--1427
 [][] 
  []
 
-[15 <./coherencePaper32_files/figure-latex/unnamed-chunk-28-1.pdf>] [16 <./cohe
-rencePaper32_files/figure-latex/unnamed-chunk-30-1.pdf>]
-<coherencePaper32_files/figure-latex/unnamed-chunk-35-1.pdf, id=306, 53.19875pt
- x 246.9225pt>
+<coherencePaper32_files/figure-latex/unnamed-chunk-35-1.pdf, id=269, 381.425pt 
+x 246.9225pt>
 File: coherencePaper32_files/figure-latex/unnamed-chunk-35-1.pdf Graphic file (
 type pdf)
 <use coherencePaper32_files/figure-latex/unnamed-chunk-35-1.pdf>
 Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-35-1
-.pdf  used on input line 1569.
-(pdftex.def)             Requested size: 53.19861pt x 246.92188pt.
-<coherencePaper32_files/figure-latex/unnamed-chunk-36-1.pdf, id=307, 53.19875pt
+.pdf  used on input line 1437.
+(pdftex.def)             Requested size: 114.3178pt x 74.00572pt.
+
+Overfull \hbox (46.6199pt too wide) in paragraph at lines 1487--1487
+[][] 
+ []
+
+
+Overfull \hbox (46.6199pt too wide) in paragraph at lines 1487--1487
+[][] 
+ []
+
+
+Overfull \hbox (46.6199pt too wide) in paragraph at lines 1487--1487
+[][] 
+ []
+
+[15 <./coherencePaper32_files/figure-latex/unnamed-chunk-33-1.pdf>] [16 <./cohe
+rencePaper32_files/figure-latex/unnamed-chunk-35-1.pdf>]
+<coherencePaper32_files/figure-latex/unnamed-chunk-41-1.pdf, id=309, 53.19875pt
  x 246.9225pt>
-File: coherencePaper32_files/figure-latex/unnamed-chunk-36-1.pdf Graphic file (
+File: coherencePaper32_files/figure-latex/unnamed-chunk-41-1.pdf Graphic file (
 type pdf)
-<use coherencePaper32_files/figure-latex/unnamed-chunk-36-1.pdf>
-Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-36-1
-.pdf  used on input line 1592.
+<use coherencePaper32_files/figure-latex/unnamed-chunk-41-1.pdf>
+Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-41-1
+.pdf  used on input line 1585.
 (pdftex.def)             Requested size: 53.19861pt x 246.92188pt.
-[17 <./coherencePaper32_files/figure-latex/unnamed-chunk-35-1.pdf>]
-<coherencePaper32_files/figure-latex/unnamed-chunk-38-1.pdf, id=324, 311.1625pt
+<coherencePaper32_files/figure-latex/unnamed-chunk-42-1.pdf, id=310, 53.19875pt
  x 246.9225pt>
-File: coherencePaper32_files/figure-latex/unnamed-chunk-38-1.pdf Graphic file (
+File: coherencePaper32_files/figure-latex/unnamed-chunk-42-1.pdf Graphic file (
 type pdf)
-<use coherencePaper32_files/figure-latex/unnamed-chunk-38-1.pdf>
-Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-38-1
-.pdf  used on input line 1659.
+<use coherencePaper32_files/figure-latex/unnamed-chunk-42-1.pdf>
+Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-42-1
+.pdf  used on input line 1608.
+(pdftex.def)             Requested size: 53.19861pt x 246.92188pt.
+[17 <./coherencePaper32_files/figure-latex/unnamed-chunk-41-1.pdf>]
+<coherencePaper32_files/figure-latex/unnamed-chunk-45-1.pdf, id=327, 311.1625pt
+ x 246.9225pt>
+File: coherencePaper32_files/figure-latex/unnamed-chunk-45-1.pdf Graphic file (
+type pdf)
+<use coherencePaper32_files/figure-latex/unnamed-chunk-45-1.pdf>
+Package pdftex.def Info: coherencePaper32_files/figure-latex/unnamed-chunk-45-1
+.pdf  used on input line 1675.
 (pdftex.def)             Requested size: 122.48764pt x 97.19986pt.
 
-Overfull \hbox (18.03595pt too wide) in paragraph at lines 1701--1710
+Overfull \hbox (18.03595pt too wide) in paragraph at lines 1717--1726
 [][] 
  []
 
 
-Overfull \hbox (23.59589pt too wide) in paragraph at lines 1712--1721
+Overfull \hbox (23.59589pt too wide) in paragraph at lines 1728--1737
 [][] 
  []
 
-[18 <./coherencePaper32_files/figure-latex/unnamed-chunk-36-1.pdf>] [19 <./cohe
-rencePaper32_files/figure-latex/unnamed-chunk-38-1.pdf>] [20] [21]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1940.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1940.
+[18 <./coherencePaper32_files/figure-latex/unnamed-chunk-42-1.pdf>] [19 <./cohe
+rencePaper32_files/figure-latex/unnamed-chunk-45-1.pdf>] [20] [21]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1956.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1956.
 (./coherencePaper32.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1940.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1940.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1956.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1956.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1940.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1956.
  ) 
 Here is how much of TeX's memory you used:
- 36491 strings out of 492982
- 670406 string characters out of 6134896
- 915969 words of memory out of 5000000
- 38903 multiletter control sequences out of 15000+600000
+ 36501 strings out of 492982
+ 670618 string characters out of 6134896
+ 917196 words of memory out of 5000000
+ 38911 multiletter control sequences out of 15000+600000
  120111 words of font info for 389 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  63i,15n,80p,8949b,748s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2399,10 +2395,10 @@ fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
 times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/
 texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on coherencePaper32.pdf (21 pages, 259438 bytes).
+Output written on coherencePaper32.pdf (21 pages, 261457 bytes).
 PDF statistics:
- 531 PDF objects out of 1000 (max. 8388607)
- 446 compressed objects within 5 object streams
- 134 named destinations out of 1000 (max. 500000)
+ 534 PDF objects out of 1000 (max. 8388607)
+ 449 compressed objects within 5 object streams
+ 136 named destinations out of 1000 (max. 500000)
  35003 words of extra memory for PDF output out of 35830 (max. 10000000)
 
