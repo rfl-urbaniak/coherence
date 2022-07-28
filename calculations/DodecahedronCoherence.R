@@ -38,6 +38,9 @@ Dice2DodBN
 
 
 
+structuredCoherenceNarration(RegularBN, c("T","TF"), c("1","1"))
+
+structuredL(RegularBN, c("T","TF"), c("1","1"))
 
 
 BN <- RegularBN
@@ -48,12 +51,6 @@ RegularTable <- CoherencesTableNarr(RegularBN,
 )
 
 
-structuredCoherenceNarration(RegularBN, c("T","TF"), c("1","1"))
-
-
-
-
-
 DodecahedronTable <- CoherencesTableNarr(DodecahedronBN,
                                     scenariosList = list(c("T","TF")),
                                     statesList   = list(c("1","1")),
@@ -61,8 +58,8 @@ DodecahedronTable <- CoherencesTableNarr(DodecahedronBN,
 )
 
 
-RegularTable
-DodecahedronTable
+#RegularTable
+#DodecahedronTable
 
 DiceTableNew <- rbind(RegularTable,DodecahedronTable)
 

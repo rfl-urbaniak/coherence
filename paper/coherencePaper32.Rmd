@@ -1749,34 +1749,65 @@ CPkable1("DodecahedronBN","TF")
 
 
 
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- load("../calculations/RdataObjects/diceTablePaper.Rda") -->
+<!-- load("../calculations/RdataObjects/dodecahedronResultsNew.Rda") -->
+
+<!-- colnames(DiceTableNew) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1", "S") -->
+<!-- colnames(dodecahedronResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1","S") -->
+
+
+<!-- DiceTableNew <- DiceTableNew[,-8] -->
+<!-- #colnames(DiceTableNew)[8] <- "Structured" -->
+
+<!-- dodecahedronResults <- dodecahedronResults[,-8] -->
+<!-- #colnames(dodecahedronResults)[8] <- "Structured" -->
+<!-- ``` -->
+
+
+
+
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
-load("../calculations/RdataObjects/diceTablePaper.Rda")
-load("../calculations/RdataObjects/dodecahedronResultsNew.Rda")
+source("../code/measures/structuredCoherenceNarr.R")
+BN <- RegularBN
+RegularTable <- CoherencesTableNarr(RegularBN,
+                                     scenariosList = list(c("T","TF")),
+                                     statesList   = list(c("1","1")),
+                                     exampleName = "Regular"
+)
 
-colnames(DiceTableNew) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1", "S")
-colnames(dodecahedronResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1","S")
 
+DodecahedronTable <- CoherencesTableNarr(DodecahedronBN,
+                                    scenariosList = list(c("T","TF")),
+                                    statesList   = list(c("1","1")),
+                                    exampleName = "Dodecahedron"
+)
 
-DiceTableNew <- DiceTableNew[,-8]
-#colnames(DiceTableNew)[8] <- "Structured"
-
-dodecahedronResults <- dodecahedronResults[,-8]
-#colnames(dodecahedronResults)[8] <- "Structured"
+DiceTableNew <- rbind(RegularTable,DodecahedronTable)
 ```
 
 
 ```{r diceCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 round(DiceTableNew,3) %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Coherence scores in the dice problem (rounded).") %>% 
+                        linesep = "",  escape = FALSE, caption = "Coherence scores in the dice problem (rounded).") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
-```{r diceDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
-dodecahedronResults %>%  kable(format = "latex",booktabs=T,
-                        linesep = "",  escape = FALSE, caption = "Desideratum satisfaction in the dice problem.") %>%
-  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+RegularSameDod <- DiceTableNew[1,] == DiceTableNew[2,] 
+dodecahedronResults <- as.data.frame(RegularSameDod)
+rownames(dodecahedronResults) <- c("Dodecahedron:  Regular $=$  Dodecahedron")
+
 ```
 
+```{r diceDesiderata2,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} 
+ dodecahedronResults %>%  kable(format = "latex",booktabs=T, 
+                                linesep = "",  escape = FALSE, caption = "Desideratum satisfaction in the dice problem.") %>% 
+ kable_styling(latex_options=c("striped","scale_down","HOLD_position")) 
+```
 
 
 

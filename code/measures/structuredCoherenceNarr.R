@@ -7,7 +7,7 @@
 
 
 
-
+# 
 # 
 # BN <- RegularBN
 # narrationNodes  <- c("T","TF")
@@ -39,8 +39,8 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
   ECSnarrL <-numeric(length(parented))
   
   
-  
   for (i in 1:length(parented)){
+  
     consequent <- parented[i]
     
     
@@ -275,6 +275,9 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
     #ECSnarrS[i] <- sum(variants$ZscaledNarr)
   }
   
+  #ECSnarrZ
+  #ECSnarrLR
+  #ECSnarrL
   
   # populationSD <- function( vector ){
   #   sqrt(sum((vector - mean(vector))^2)/(length(vector)))
@@ -294,13 +297,22 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
   # }
   # 
   
-  structuredScoreNoSD <- function(ECS)  if (min(ECS) <= 0) {
+  structuredScoreNoSD <- function(ECS)  if (is.na(min(ECS))){
+    NA
+  } else {
+  if (min(ECS) <= 0) {
     (mean(ECS)) * (min(ECS) +1) - min(ECS)^2
   } else {
     (mean(ECS))
   }
+    }
+    
   
+#  structuredScoreNoSD(ECSnarrZ)
   
+#  structuredScoreNoSD(ECSnarrLR)
+  
+#  min(ECSnarrLR) <= 0
   
   #structuredScoreNoSD(ECSnarrZ)
   #structuredScoreNoSD(ECSnarrLR)

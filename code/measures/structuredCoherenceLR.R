@@ -300,10 +300,14 @@ structuredL <- function(BN, narrationNodes, states){
   # }
   # 
   
-  structuredScoreNoSD <- function(ECS)  if (min(ECS) <= 0) {
-    (mean(ECS)) * (min(ECS) +1) - min(ECS)^2
+  structuredScoreNoSD <- function(ECS)  if (is.na(min(ECS))){
+    NA
   } else {
-    (mean(ECS))
+    if (min(ECS) <= 0) {
+      (mean(ECS)) * (min(ECS) +1) - min(ECS)^2
+    } else {
+      (mean(ECS))
+    }
   }
   
   # structuredScoreLR <- function(ECS)  if (min(ECS) <= 1) {
