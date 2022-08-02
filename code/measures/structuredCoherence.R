@@ -1,10 +1,10 @@
 
-Z <- function(posterior,prior){
-  d <- posterior - prior
-  ifelse(prior == posterior, 0, ifelse(posterior > prior, d/(1-prior), d/prior))
-}
-
-
+# Z <- function(posterior,prior){
+#   d <- posterior - prior
+#   ifelse(prior == posterior, 0, ifelse(posterior > prior, d/(1-prior), d/prior))
+# }
+# 
+# 
 
 
 structuredNoSD <- function(BN, narrationNodes, states){

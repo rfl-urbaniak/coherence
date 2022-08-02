@@ -43,11 +43,11 @@ CoherencesRow <- function (BN, narrationNodes, states,
 
 
 #watch out! this works with INDEPENDENT nodes!! )
-CoherencesTable <- function(BN,scenariosList,
+CoherencesTable <- function(BNlist,scenariosList,
                             statesList,exampleName){
   rows <- list()
   for(s in 1:length(scenariosList)){
-    rows[[s]] <-  CoherencesRow(BN,scenariosList[[s]],statesList[[s]], 
+    rows[[s]] <-  CoherencesRow(BNlist[[s]],scenariosList[[s]],statesList[[s]], 
                                 exampleName = exampleName)
   }
   table <- do.call("rbind", rows)
@@ -72,9 +72,9 @@ CoherencesRowNarr <- function (BN, narrationNodes, states,
   SH <- ShogenjiCoherenceForBNs(BN,narrationNodes,states)[[3]]
   SHg <- ShogenjiGeneralizedCoherence(BN, narrationNodes, states)[[1]]
   RO <- RocheCoherenceForBNs(BN,narrationNodes,states)[[3]]
-  Znarr <- structuredCoherenceNarration(BN, narrationNodes,states)$structuredZnarr
-  LRnarr <- structuredCoherenceNarration(BN, narrationNodes,states)$structuredLRnarr
-  Lnarr <- structuredCoherenceNarration(BN, narrationNodes,states)$structuredLnarr
+  Znarr <- structuredNarr(BN, narrationNodes,states)$structuredZnarr
+  LRnarr <- structuredNarr(BN, narrationNodes,states)$structuredLRnarr
+  Lnarr <- structuredNarr(BN, narrationNodes,states)$structuredLnarr
   
   
   row <- data.frame( 
@@ -85,9 +85,9 @@ CoherencesRowNarr <- function (BN, narrationNodes, states,
     DM = DM,
     R = RO,
     Fi = FI,
-    SZnarr= Znarr,
-    SLRnarr = LRnarr,
-    SLnarr  = Lnarr
+    SZ= Znarr,
+    SLR = LRnarr,
+    SL  = Lnarr
   )
 #  exampleName <- "W1W2"
   
@@ -98,20 +98,71 @@ CoherencesRowNarr <- function (BN, narrationNodes, states,
 
 
 
+# 
+# 
+# CoherencesRowNarr <- function (BN, narrationNodes, states,
+#                                statusLR = rep("Ind",FitelsonSize(length(narrationNodes))),
+#                                statusRL = rep("Ind",FitelsonSize(length(narrationNodes))),
+#                                exampleName){
+#   FI <- FitelsonCoherenceForBNs(BN, narrationNodes,
+#                                 states = states, statusLR,statusRL)[[3]]
+#   DM <- DouvenMeijsCoherenceForBNs(BN,narrationNodes,states)[[3]]
+#   OL <- OlssonCoherenceForBNs(BN,narrationNodes,states)[[3]]
+#   OLg <- OlssonGeneralizedCoherence(BN, narrationNodes, states)[[1]]
+#   SH <- ShogenjiCoherenceForBNs(BN,narrationNodes,states)[[3]]
+#   SHg <- ShogenjiGeneralizedCoherence(BN, narrationNodes, states)[[1]]
+#   RO <- RocheCoherenceForBNs(BN,narrationNodes,states)[[3]]
+#   Znarr <- structuredNarr(BN, narrationNodes,states)$structuredZnarr
+#   LRnarr <- structuredNarr(BN, narrationNodes,states)$structuredLRnarr
+#   Lnarr <- structuredNarr(BN, narrationNodes,states)$structuredLnarr
+#   
+#   
+#   row <- data.frame( 
+#     OG = OL,
+#     OGGen = OLg,
+#     Sh = SH,
+#     ShGen = SHg,
+#     DM = DM,
+#     R = RO,
+#     Fi = FI,
+#     SZnarr= Znarr,
+#     SLRnarr = LRnarr,
+#     SLnarr  = Lnarr
+#   )
+#   #  exampleName <- "W1W2"
+#   
+#   rownames(row) <- paste(paste(exampleName, ":", sep = ""), paste(narrationNodes, sep = "", collapse=""), paste(states, sep = "", collapse=""), sep = " ")
+#   
+#   return(row)
+# }
+
+
+
 #watch out! this works with INDEPENDENT nodes!! )
-CoherencesTableNarr <- function(BN,scenariosList,
+CoherencesTableNarr <- function(BNlist,scenariosList,
                             statesList,exampleName){
   rows <- list()
   for(s in 1:length(scenariosList)){
-    rows[[s]] <-  CoherencesRowNarr(BN,scenariosList[[s]],statesList[[s]], 
+    rows[[s]] <-  CoherencesRowNarr(BNlist[[s]],scenariosList[[s]],statesList[[s]], 
                                 exampleName = exampleName)
   }
   table <- do.call("rbind", rows)
   return(table)
 }
 
-
-
+# 
+# 
+# #watch out! this works with INDEPENDENT nodes!! )
+# CoherencesTableNarr2 <- function(BNlist,scenariosList,
+#                                 statesList,exampleName){
+#   rows <- list()
+#   for(s in 1:length(scenariosList)){
+#     rows[[s]] <-  CoherencesRowNarr2(BNlist[[s]],scenariosList[[s]],statesList[[s]], 
+#                                     exampleName = exampleName)
+#   }
+#   table <- do.call("rbind", rows)
+#   return(table)
+# }
 
 
 

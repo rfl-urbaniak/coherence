@@ -316,12 +316,13 @@
 
 The notion of coherence is often used in many philosophical, especially epistemological, discussions (for instance, in discussions about the truth-conduciveness of coherence). When we talk about the coherence of a set of propositions or about the coherence of a story, we seem to refer to how well their individual pieces fit together. How are we to understand and apply this notion systematically, though? In particular, we will be interested in probabilistic explications of this notion, as Bayesian epistemology strives to be a general epistemological project and as such it should be able to accommodate coherence-oriented considerations.
 
-There is also a more practical reason to develop a better understanding of the notion: a plausible measure of coherence could be used to better evaluate the quality of some stories or narrations. For example in the legal context we would like to be able to assess the quality of a testimony in the court of law. Focusing only on the probability of a story is to some extent problematic, because from such a perspective, more detailed stories are penalized --- they contain more propositions, so they (usually) have lower probabilities. A plausible coherence measure could be used to asses an important aspect of a narration which so far seems to escape probabilistic analysis.
+There is also a more practical reason to develop a better understanding of the notion: a plausible measure of coherence could be used to better evaluate the quality of some stories or narrations. For example in the legal context we would like to be able to assess the quality of a testimony in the court of law.\\
+\todo{REFS}
 
 Multiple probabilistic explications of coherence have been proposed
-(Douven \& Meijs, 2007; Fitelson, 2003; Glass, 2002; Meijs \& Douven, 2007; Olsson, 2001; Roche, 2013; Tomoji Shogenji, 1999). However, clear general principles to choose between them are hard to come by. One paper where some such principles have been formulated is (Schippers, 2014), where a list of seeming plausible adequacy conditions for a coherence measure is proposed and shown to be inconsistent to argue for pluralism about the notion of coherence. However, some of those requirements are quite non-trivial.\footnote{Let us illustrate this. The (Dependence) condition formulated there requires that the coherence score of a set of propositions is above (below) the neutral score if for all pairs of non-empty subsets the posterior of an element of a pair conditional on the other element is higher than the prior of the former. This makes some of the features of the coherence measure dependent on the priors, and whether it should be so is not obvious. On the other hand, (Agreement) is formulated in terms of conditional probabilities between such pairs. If on a given measure \(\mathsf{P}\) all conditional probabilities (between pairs already mentioned) are higher than on \(\mathsf{P}'\), the coherence of a set given \(\mathsf{P}\) should be higher than given \(\mathsf{P}'\). The (Equivalence) requirement is that any finite set of logically equivalent propositions should be maximally coherent. This is suspicious, as the set \(\{ 0= 1, 2, = 5\}\) is a set of equivalent propositions (with sufficiently strong notion of logical equivalence in the background), but we would intuitively hesitate to say it's maximally coherent.}
+(Douven \& Meijs, 2007; Fitelson, 2003; Glass, 2002; Meijs \& Douven, 2007; Olsson, 2001; Roche, 2013; Shogenji, 1999). However, clear general principles to choose between them are hard to come by. One paper where some such principles have been formulated is (Schippers, 2014), where a list of seemingly plausible adequacy conditions for a coherence measure is proposed and shown to be inconsistent to argue for pluralism about the notion of coherence. However, some of those requirements are quite non-trivial.\footnote{Let us illustrate this. The (Dependence) condition formulated there requires that the coherence score of a set of propositions is above (below) the neutral score if for all pairs of non-empty subsets the posterior of an element of a pair conditional on the other element is higher than the prior of the former. This makes some of the features of the coherence measure dependent on the priors, and whether it should be so is not obvious. On the other hand, (Agreement) is formulated in terms of conditional probabilities between such pairs. If on a given measure \(\mathsf{P}\) all conditional probabilities (between pairs already mentioned) are higher than on \(\mathsf{P}'\), the coherence of a set given \(\mathsf{P}\) should be higher than given \(\mathsf{P}'\). The (Equivalence) requirement is that any finite set of logically equivalent propositions should be maximally coherent. This is suspicious, as the set \(\{ 0= 1, 2, = 5\}\) is a set of equivalent propositions (with sufficiently strong notion of logical equivalence in the background), but we would intuitively hesitate to say it's maximally coherent.}
 
-The general point here is not that the approach taken in (Schippers, 2014) is flawed, but rather that the task of formulating general principles for coherence is far from trivial, and that so far no clear least of such uncontroversial desiderata is on the horizon.
+The general point here is not that the approach taken in (Schippers, 2014) is flawed, but rather that the task of formulating general principles for coherence is a challenge, and that no clear list of such uncontroversial desiderata is on the horizon.
 
 One approach to obtaining some clarity on which abstract conditions are plausible is looking at various thought experiments in which our intuitions about what the coherence scores should be (at least comparatively) are more robust than direct assessment of general requirements. In fact, looking at examples is what the main stream of literature on probabilistic coherence focused on, and each probabilistic measure of coherence faces a selection of seemingly intuitive counterexamples.
 
@@ -329,12 +330,12 @@ We decided to work with this methodology. We first gathered key examples that oc
   The whole work has been made possible by all those who contributed to the development of \textsf{\textbf{R}} language, and Marco Scutari, the author of \textsf{\textbf{bnlearn}} package, who was kind enough to extend his package with additional features upon our requests (Scutari \& Denis, 2015).} Then we reflected on the results, noticing that one weakness of the measures is that they pay little attention to the underlying structure of a given narration in the calculation of its coherence.
 
 Inspired by this observation, we formulate our own proposal, which diverges from the known purely probabilistic measures of coherence in three important respects: (i) It is not a function of a probability measure and a set
-of propositions alone, because it is also sensitive to the selection and direction of arrows in a Bayesian network representing an agent's credal state. (ii) Unlike in the case of quite a few coherence measures, it is sensitive to
+of propositions alone, because it is also sensitive to the selection and direction of edges in a Bayesian network representing an agent's credal state. (ii) Unlike in the case of quite a few coherence measures, it is sensitive to
 the weakest links in the narration. (iii) It is not obtained by simply averaging confirmation levels between all possible combinations of elements.
 
-We described this approach in a more detailed introduction to this measure {[}ANONYMIZED{]}, which explains the method and some of the theoretical decisions that we have made, and show how it works using a Bayesian network developed for the well-known Sally Clark case (Fenton \& Neil, 2018). In this paper, we briefly describe the key motivations and provide a pseudo-code description of our measure, moving on to comparing its performance to other measures of coherence.
+We described this approach in a more detailed introduction to this measure {[}ANONYMIZED{]}, which explains the method and some of the theoretical decisions that we have made, and show how it works using a Bayesian network developed for the well-known Sally Clark case (Fenton \& Neil, 2018). The goal of the current paper is to discuss a range of philosophical counterexamples to the existing probabilistic measures of coherence and evaluate the performance of our approach using those as a benchmark, arguing that it performs much better than the existing ones.
 
-Accordingly, in Section \ref{sec:measures} we introduce all the coherence measures, and in Section \ref{sec:examples} we explain what the examples are, their corresponding desiderata and their status on various coherence measures, including ours. The order in which issues in the discussion of any given example are discussed is straightforward: we first explain what the situation we're to consider, what the intuitive desiderata related to it are supposed to be, how the situation is represented by means of a Bayesian network(s), and what happens when we apply all coherence measures.
+Accordingly, in Section \ref{sec:measures} we introduce all the coherence measures, including the key motivations for and a pseudo-code description of our measure. In Section \ref{sec:examples} we describe the thought experiments meant as counterexamples to coherence measures, their corresponding desiderata and their status on various coherence measures, including ours. The order of the discussion of any given example is straightforward: we first explain what the situation we are to consider is, what the intuitive desiderata related to it are supposed to be, how the situation is represented by means of a Bayesian network(s), and what happens when we apply all coherence measures. We end with Section \ref{sec:discussion} in which we compare all of the results and draw some general conclusions.
 
 \hypertarget{probabilistic-coherence-measures-and-structured-coherence}{%
 \section{Probabilistic coherence measures and structured coherence}\label{probabilistic-coherence-measures-and-structured-coherence}}
@@ -347,7 +348,7 @@ Quite a few different measures of coherence have been proposed in the literature
 \tightlist
 \item
   Shogenji's
-  \textbf{deviation from independence} (Tomoji Shogenji, 1999), is defined as the ratio between the probability of the
+  \textbf{deviation from independence} (Shogenji, 1999), is defined as the ratio between the probability of the
   conjunction of all claims, and the probability that the conjunction
   would get if all its conjuncts were probabilistically independent (scaling from 0 to \(\infty\) with neutral point 1):
 \end{itemize}
@@ -372,9 +373,9 @@ Quite a few different measures of coherence have been proposed in the literature
     \mathcal{C}_{O}(S)=\frac{P(\bigwedge S)}{P(\bigvee S)}
 \end{align}
 
-\noindent It was later generalized in a way analogous to the one used in the generalization of the Shogenji's measure.
+\noindent It has also been generalized in a way analogous to the one used in the generalization of the Shogenji's measure (Meijs \& Douven, 2007).
 
-Both of these approaches are susceptible to various objections and counterexamples (Akiba, 2000; Bovens \& Hartmann, 2004; Crupi, Tentori, \& Gonzalez, 2007; Koscholke, 2016; Merricks, 1995; Schippers \& Koscholke, 2019; Tomoji Shogenji, 1999, 2006; T. Shogenji, 2001; M. Siebel, 2004; Mark Siebel, 2006). To overcome them, more recent works proposed \textbf{average mutual support} measures. The \textbf{general recipe }for such measures is as follows.
+Both of these approaches are susceptible to various objections and counterexamples (Akiba, 2000; Bovens \& Hartmann, 2004; Crupi, Tentori, \& Gonzalez, 2007; Koscholke, 2016; Merricks, 1995; Schippers \& Koscholke, 2019; Shogenji, 1999, 2001, 2006; Siebel, 2004, 2006). To overcome them, more recent works proposed \textbf{average mutual support} measures, starting with (Fitelson, 2003). The general recipe for such measures is as follows.
 
 \begin{itemize}
 \item
@@ -395,8 +396,7 @@ Both of these approaches are susceptible to various objections and counterexampl
 \mathsf{mean}\left(\left\{\mathsf{conf}(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i \rangle \in P\right\} \right).
 \end{align*}
 
-\noindent Different measures of coherence result from different choices of a confirmation measure. Notably, different measures use different scales and have different neutral points, if any---the idea is that the coherence of probabilistically independent propositions should be neither positive nor
-negative. Here are the key candidates present in the literature:
+\noindent Different measures of coherence result from different choices of a confirmation measure. Here are the key candidates present in the literature:
 
 \begin{itemize}
 \tightlist
@@ -446,75 +446,71 @@ negative. Here are the key candidates present in the literature:
 \mathsf{mean}\left(\left\{A(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i\rangle \in P\right\} \right) 
 \end{align}
 
-Given the embarrassment of the riches, one approach to choose a coherence measure present in the literature\todo{REF} is to formulate abstract formal requirements for a coherence measure and to investigate whether a given coherence measure satisfies them. Unfortunately, there is no agreement in the literature on what such requirements should be, so we will not follow this path. \todo{Should we say more about this?}
+Mind your head: different measures use different scales and have different neutral points (values taken for any set of probabilistically independent propositions; not all measures have neutral points). This is worth keeping in mind when it comes to various desiderata that we will discuss.
 
-Another approach, which has dominated the literature on the topic, is to look at how the measures behave in test scenarios. Many putative scenarios were put forward as counterexamples. They usually have the form of a few propositions formulated in natural language, such that intuitive judgments of coherence involved and the formal coherence calculations seem to diverge (Akiba, 2000; Bovens \& Hartmann, 2004; Koscholke, 2016; Meijs \& Douven, 2007, 2007; Merricks, 1995; Schippers \& Koscholke, 2019, 2019; Tomoji Shogenji, 1999, 2006; T. Shogenji, 2001; M. Siebel, 2004; Mark Siebel, 2006). We will focus on these examples in what follows. To spoil the experience, let us already point out that the probabilistic measures we introduced above don't seem to handle these examples very well (read on for details).
+As we already mentioned in the introduction, formulating abstract formal requirements for a coherence measure and investigating whether a given coherence measure satisfies them has not resulted in an agreement. For this reason, we follow another path, which has dominated the literature on the topic. We look at how the measures behave in test scenarios. Many putative scenarios were put forward as counterexamples. They usually have the form of a few propositions formulated in natural language, such that intuitive judgments of coherence involved and the formal coherence calculations seem to diverge (Akiba, 2000; Bovens \& Hartmann, 2004; Koscholke, 2016; Meijs \& Douven, 2007, 2007; Merricks, 1995; Schippers \& Koscholke, 2019, 2019; Shogenji, 1999, 2001, 2006; Siebel, 2004, 2006). We will focus on these examples in what follows. To spoil the experience, let us already point out that the probabilistic measures we introduced above do not seem to handle these examples very well (read on for details).
 
-Inspired by these failures, in {[}REFERENCE SUPRESSED FOR ANONYMITY{]} we proposed to take a different perspective. Putting the earlier measure aside (they were problematic for multiple reasons), we noticed that the problems with the the average mutual support measure stem form the fact that the coherence score results from averaging confirmation between all possible combinations of the parts of a narration. Therefore we proposed to take a more fine-grained account. First, we represented an agent's belief state by means of a Bayesian network, which comprises not only a probabilistic measure but additional structural information, Then we used this structural information in our definition of coherence, so that only those directions of support are considered which in fact are indicated by the structure of the agent's belief state.
+Inspired by these failures, in {[}REFERENCE SUPRESSED FOR ANONYMITY{]} we proposed to take a different perspective. Putting the earliest measures aside (they were problematic for various reasons), we noticed that the problems with the average mutual support measures stem from the fact that the coherence score is an average confirmation score for all possible combinations of the parts of a narration. Therefore we proposed to take a more fine-grained account. First, we represented an agent's belief state by means of a Bayesian network, which comprises not only a probabilistic measure but additional structural information, Then we used this structural information in our definition of coherence, so that only those directions of support are considered which in fact are indicated by the structure of the agent's belief state.
 
-While we refer the reader to a more extensive treatment in {[}REFERENCE SUPRESSED FOR ANONYMITY{]}, the basic idea is this. A Bayesian network representing agent's belief state comprises of binary variables (corresponding to propositions), some of which are distinguished as narration nodes---these are those of which the agent holds binary beliefs, and this we take to be represented by taking them to be appropriately instantiated in the Bayesian network. Next, each edge in the network receives its confirmation score defined in terms of \(\mathsf{Z}\) confirmation measure (Crupi et al., 2007). Those confirmation scores are, finally, plugged in to a function that, roughly speaking, performs averaging with special attention paid to weakest links and additional penalty if some of the confirmation scores is negative. The calculations are represented by the following pseudo-code:\footnote{In fact, we developed \textbf{\textsf{R}} code calculating this and other measures to handle extensive calculations that will be discussed further on.}
+While we refer the reader to a more extensive treatment in {[}REFERENCE SUPRESSED FOR ANONYMITY{]}, we now briefly discuss the main idea behind it. A Bayesian network represents agent's probabilistic belief state with respect to the relevant nodes. Some of them are distinguished as fixed narration nodes---the agent holds definite beliefs about which states of these nodes occur.
+
+Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' fixed beliefs. For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)\footnote{DEFINITIONS}. Then, a weighted average of these scores is obtained, where weights are the probabilities of the combinations of parents' states obtained by updating the BN with the fixed states of the fixed narration nodes. The final coherence score is either the mean of the \s{ecs} scores, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.}
 
 \pagebreak 
 \footnotesize
 
 \begin{verbatim}
-FUNCTION parent_child_possible_states(parent,child)
+FUNCTION parents_child_possible_states(parents,child)
     IF child included in narration THEN
         consequentStates <- the unique state of child as reported in the narration
     ELSE
         consequentStates <- all possible states of child
-    IF parent included in narration THEN
-        antecedentStates <- the unique state of parent as reported in the narration
-    ELSE
-        antecedentStates <- all possible states of parent
-    variants <- list of all possible pairs of consequentStates and antecedentStates
+    FOR EACH parent in parents
+        IF parent included in narration THEN
+            parentStates[parent] <- the unique state of parent as reported in the narration
+        ELSE
+            parentStates[parent] <- all possible states of parent
+    parentsStates <- all combinations of parentStates
+    variants <- list of all possible combinations of consequentStates and parentsStates
     RETURN variants
 
-FUNCTION z_confirmation_measure(priorCons, postCons)
-    IF priorCons == postCons THEN
-        z <- 0
-    ELSE IF postCons > priorCons THEN
-        z <- (postCons - priorCons)/(1-priorCons)
-    ELSE
-        z <- (postCons - priorCons)/priorCons
-    RETURN z
 
-FUNCTION structured(ecs)
+FUNCTION coherence_from_ecs(ecs)
     IF min(ecs) <= 0 THEN
-        RETURN mean(ecs) * (min(ecs)+1) - min(ecs)^2
+        RETURN mean(ecs) * (min(ecs)+1) - min(ecs)min(ecs)
+        #this is equivalent to (1- |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)
     ELSE
         RETURN mean(ecs)
 
-parentedNodes <- vector of non-root nodes
-FOR EACH parentedNode IN parentedNodes
-    FOR EACH parent of parentedNode
-        variants <- parent_child_possible_states(parent,parentedNoded)
+FUNCTION structured_coherence(BN,fixedNodes,fixedStates)
+    parentedNodes <- vector of non-root nodes in BN
+    ecsList <- []
+    FOR EACH parentedNode IN parentedNodes
+        variants <- parents_child_possible_states(parents,parentedNode)
         variants_count <- length(variants)
-        ecs <- 0
-        sumPriorAnte <- 0
+        sumParentsNarr <- 0
         FOR EACH variant IN variants
-            priorCons <- marginal probability of consequent state in variant
-            postCons <- marginal probability of consequent state in variant, 
-                        calculated in BN obtained by updating on antecendent state
+            childPrior <- prior probability of the child state in variant
+            childPosterior <- posterior probability of the child state in variant,
+                        obtained by updating on the parents states
                         from this variant
-            priorAnte[variant] <- marginal probability of 
-                        the antecedent state in variant
-            sumPriorAnte <- sumPriorAnte +  priorAnte[variant]
-            z[variant] <- z_confirmation_measure(priorCons, postCons)
+            parentsNarr[variant] <- joint probability of 
+                        the parents states in variant in BN updated with fixedStates of fixedNodes
+            sumParentsNarr <- sumParentsNarr +  parentsNarr[variant] 
+            z[variant] <- z_confirmation_measure(childPrior, childPosterior)
+        ecs <- 0  #expected confirmation score
         FOR EACH variant IN variants
-            IF priorAnte[variant] > 0 THEN
-                weightAnte <- priorAnte[variant]/sumPriorAnte
+            IF parentsNarr[variant] > 0 THEN
+                weight <- parentsNarr[variant]/sumParentsNarr
             ELSE
-                weightAnte <- 1/variants_count
-            zScaledVariant <- z[variant] * weightAnte
-            ecs <- ecs + zScaledVariant
+                weight <- 1/variants_count
+            zScaled <- z[variant] * weight
+            ecs <- ecs + zScaled
         ecsList.add(ecs)
-structured(ecsList)
+    RETURN coherence_from_ecs(ecsList)
 \end{verbatim}
 
 \normalsize
-
-\todo{Add high level and motivations}
 
 \noindent Having introduced the coherence measures at play, let us now move to the key counterexamples discussed in the literature.
 
@@ -858,7 +854,7 @@ However, bigger overlap, supposedly, doesn't have to indicate higher coherence. 
     \item[(\s{JO2}$>$\s{JO3})]  \{\s{J,O,2}\} should be more coherent than \{\s{J,O,3}\}.
 \end{description}\vspace{2mm}
 
-\noindent We don't have clear intuitions about this desideratum. It seems to be in tension with the requirement offered by M. Siebel (2004, p. 336) which we'll discuss in the next subsection.\todo{fix when done}
+\noindent We don't have clear intuitions about this desideratum. It seems to be in tension with the requirement offered by Siebel (2004, p. 336) which we'll discuss in the next subsection.\todo{fix when done}
 
 \textbf{Bayesian networks.} There is a common DAG for the three scenarios, but the CPTs differ (Figure \ref{fig:japanese}).
 
@@ -977,7 +973,7 @@ Swords: JO2$>$JO3 & FALSE & FALSE & TRUE & TRUE & TRUE & FALSE & TRUE & TRUE & T
 \hypertarget{robbers}{%
 \subsection{Robbers}\label{robbers}}
 
-\textbf{The scenario.} A challenge put forward by M. Siebel (2004, p. 336) goes as follows:
+\textbf{The scenario.} A challenge put forward by Siebel (2004, p. 336) goes as follows:
 
 \begin{quote}
     Let there be ten equiprobable suspects for a murder. All of them previously committed at least one crime, two a robbery, two pick-pocketing, and the remaining six both crimes. There is thus a substantial overlap: of the total of eight suspects who committed a robbery, six were also involved in pick-pocketing, and conversely. 
@@ -1007,7 +1003,7 @@ P & The murderer is a pickpocket.\\
     \item[(\s{PR}\textgreater \s{neutral})] \{\s{P,R}\} should be regarded coherent. 
 \end{description}\vspace{2mm}
 
-According to M. Siebel (2004, p. 336) committing both crimes by the murderer should also be regarded more coherent than committing only one crime.
+According to Siebel (2004, p. 336) committing both crimes by the murderer should also be regarded more coherent than committing only one crime.
 \vspace{2mm}
 
 \begin{description}
@@ -1111,7 +1107,7 @@ Robbers: PR$>$neutral & NA & NA & FALSE & FALSE & FALSE & TRUE & FALSE & TRUE & 
 
 \todo{Consider moving to top of the list.}
 
-\textbf{The scenario.} The challenge has been offered by Tomoji Shogenji (1999, p. 339) to criticize defining coherence in terms of pairwise coherence --- it shows there are jointly incoherent pairwise coherent sets. The scenario consists of the claims displayed in Table \ref{tab:beatles}.
+\textbf{The scenario.} The challenge has been offered by Shogenji (1999, p. 339) to criticize defining coherence in terms of pairwise coherence --- it shows there are jointly incoherent pairwise coherent sets. The scenario consists of the claims displayed in Table \ref{tab:beatles}.
 
 \begin{table}[H]
 
@@ -1796,7 +1792,7 @@ Dodecahedron: TTF 11 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & 1 & NA & 1\\
 \end{table}
 
 \hypertarget{discussion}{%
-\section{Discussion}\label{discussion}}
+\section{\texorpdfstring{Discussion \label{sec:discussion}}{Discussion }}\label{discussion}}
 
 Ultimately, all the calculations are displayed in Table \ref{tab:jointCoherences} and the desiderata yield Table \ref{tab:allResults}, with corresponding success rates (Table \ref{tab:success}).
 
@@ -1907,7 +1903,7 @@ Fitelson, B. (2003). A {Probabilistic Theory} of {Coherence}. \emph{Analysis}, \
 Glass, D. H. (2002). Coherence, {Explanation}, and {Bayesian Networks}. In G. Goos, J. Hartmanis, J. van Leeuwen, M. O'Neill, R. F. E. Sutcliffe, C. Ryan, \ldots{} N. J. L. Griffith (Eds.), \emph{Artificial {Intelligence} and {Cognitive Science}} (Vol. 2464, pp. 177--182). {Berlin, Heidelberg}: {Springer Berlin Heidelberg}. \url{https://doi.org/10.1007/3-540-45750-X_23}
 
 \leavevmode\vadjust pre{\hypertarget{ref-koscholke2016evaluating}{}}%
-Koscholke, J. (2016). Evaluating {Test Cases} for {Probabilistic Measures} of {Coherence}. \emph{Erkenntnis}, \emph{81}(1), 155--181. \url{https://doi.org/10.1007/s10670-015-9734-1}
+Koscholke, J. (2016). Evaluating test cases for probabilistic measures of coherence. \emph{Erkenntnis}, \emph{81}(1), 155--181. \url{https://doi.org/10.1007/s10670-015-9734-1}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Meijs2007Alleged}{}}%
 Meijs, W., \& Douven, I. (2007). On the alleged impossibility of coherence. \emph{Synthese}, \emph{157}(3), 347--360. \url{https://doi.org/10.1007/s11229-006-9060-x}
@@ -1937,19 +1933,19 @@ Schupbach, J. N. (2008). On the alleged impossibility of bayesian coherentism. \
 Scutari, M., \& Denis, J.-B. (2015). \emph{Bayesian networks in \textbf{{r}}}. CRC Press.
 
 \leavevmode\vadjust pre{\hypertarget{ref-shogenji1999conducive}{}}%
-Shogenji, Tomoji. (1999). Is {Coherence Truth Conducive}? \emph{Analysis}, \emph{59}(4), 338--345.
+Shogenji, T. (1999). Is coherence truth-conducive? \emph{Analysis}, \emph{59}(4), 338--345.
 
 \leavevmode\vadjust pre{\hypertarget{ref-Shogenji2001Reply}{}}%
-Shogenji, T. (2001). Reply to akiba on the probabilistic measure of coherence. \emph{Analysis}, \emph{61}(2), 147--150. \url{https://doi.org/10.1093/analys/61.2.147}
+Shogenji, T. (2001). Reply to {A}kiba on the probabilistic measure of coherence. \emph{Analysis}, \emph{61}(2), 147--150. \url{https://doi.org/10.1093/analys/61.2.147}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Shogenji2006Why}{}}%
-Shogenji, Tomoji. (2006). Why does coherence appear truth-conducive? \emph{Synthese}, \emph{157}(3), 361--372. \url{https://doi.org/10.1007/s11229-006-9062-8}
+Shogenji, T. (2006). Why does coherence appear truth-conducive? \emph{Synthese}, \emph{157}(3), 361--372. \url{https://doi.org/10.1007/s11229-006-9062-8}
 
 \leavevmode\vadjust pre{\hypertarget{ref-Siebel2004On-Fitelsons-me}{}}%
 Siebel, M. (2004). On {F}itelson's measure of coherence. \emph{Analysis}, \emph{64}, 189--190.
 
 \leavevmode\vadjust pre{\hypertarget{ref-siebel2006against}{}}%
-Siebel, Mark. (2006). Against probabilistic measures of coherence. In \emph{Coherence, truth and testimony} (pp. 43--68). Springer.
+Siebel, M. (2006). Against probabilistic measures of coherence. In \emph{Coherence, truth and testimony} (pp. 43--68). Springer.
 
 \end{CSLReferences}
 

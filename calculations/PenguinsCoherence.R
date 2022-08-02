@@ -6,6 +6,8 @@ source("code/measures/Olsson.R")
 source("code/measures/Roche.R")
 source("code/measures/Shogenji.R")
 source("code/measures/structuredCoherenceLR.R")
+source("code/measures/structuredCoherenceNarr.R")
+
 
 BGP <- c("B","G","P")
 BG <- c("B","G")
@@ -13,8 +15,28 @@ BP <- c("B","P")
 
 #Coherences
 
-BN <- BirdBNbgp
-penguinsTable <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP, BG, BP), statesList   = list(c("1","1","1"), c("1","1"), c("1","1")),exampleName = "Penguins")
+
+
+structuredCoherenceNarration2(BirdBNbgp,BGP,c("1","1","1"))
+structuredCoherenceNarration(BN,BGP,c("1","1","1"))
+
+structuredCoherenceNarration(BN,BGP,c("1","1","1"))
+
+
+structuredL(BN,BG,c("1","1"))
+structuredNarr2(BN,BG,c("1","1"))
+
+c(BirdBNbgp,BirdBNbg,BirdBNbp)
+
+
+penguinsTable <- CoherencesTable(BN = list(BirdBNbgp,BirdBNbg,BirdBNbp), scenariosList = list(BGP, BG, BP), statesList   = list(c("1","1","1"), c("1","1"), c("1","1")),exampleName = "Penguins")
+
+penguinsTableNarr <- CoherencesTableNarr2(list(BirdBNbgp,BirdBNbg,BirdBNbp), scenariosList = list(BGP, BG, BP), statesList   = list(c("1","1","1"), c("1","1"), c("1","1")),exampleName = "Penguins")
+
+penguinsTable == penguinsTableNarr
+
+structuredCoherenceNarration(BirdBNbgp,BGP,c("1","1","1"))
+
 
 
 # penguinsTableBGP <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP), statesList   = list(c("1","1","1")),exampleName = "Penguins")

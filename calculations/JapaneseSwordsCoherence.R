@@ -47,10 +47,23 @@ J <- c("J","O")
                                   statesList   = list(c("1","1")),
                                  exampleName = "Japanese Swords 1"
  )
+  
+  JapaneseSwordsTableANarr <- CoherencesTableNarr(list(Jap1BN),
+                                          scenariosList = list(J),
+                                          statesList   = list(c("1","1")),
+                                          exampleName = "Japanese Swords 1"
+  )
+  
 # #
 # #
   BN <- Jap2BN
  JapaneseSwordsTableB <- CoherencesTable(Jap2BN,
+                                         scenariosList = list(J),
+                                         statesList   = list(c("1","1")),
+                                         exampleName = "Japanese Swords 2"
+ )
+ 
+ JapaneseSwordsTableBNarr <- CoherencesTableNarr(list(Jap2BN),
                                          scenariosList = list(J),
                                          statesList   = list(c("1","1")),
                                          exampleName = "Japanese Swords 2"
@@ -62,10 +75,16 @@ J <- c("J","O")
                                          statesList   = list(c("1","1")),
                                          exampleName = "Japanese Swords 3"
  )
+  
+  JapaneseSwordsTableCNarr <- CoherencesTableNarr(list(Jap3BN),
+                                          scenariosList = list(J),
+                                          statesList   = list(c("1","1")),
+                                          exampleName = "Japanese Swords 3"
+  )
 # #
 # #  #
 # #  #
-JapaneseSwordsSeparateTable <- rbind(JapaneseSwordsTableA,JapaneseSwordsTableB,JapaneseSwordsTableC)
+JapaneseSwordsSeparateTable <- rbind(JapaneseSwordsTableANarr,JapaneseSwordsTableBNarr,JapaneseSwordsTableCNarr)
 JapaneseSwordsSeparateTable 
 # #  #
 # #  #

@@ -4,15 +4,21 @@ Dunnit <- c("M","G","W","I")
 DunnitTwin<- c("M","Tw","G","W","I")
 # #
 
-DunnitNoTwinTable <- CoherencesTable(DunnitNoTwinBN,
-  scenariosList = list(Dunnit),
-  statesList   = list(c("1","1","1","1")),
-  exampleName = "Dunnit"
+# DunnitNoTwinTable <- CoherencesTable(DunnitNoTwinBN,
+#   scenariosList = list(Dunnit),
+#   statesList   = list(c("1","1","1","1")),
+#   exampleName = "Dunnit"
+# )
+#   
+DunnitNoTwinTable <- CoherencesTableNarr(list(DunnitNoTwinBN),
+                                         scenariosList = list(Dunnit),
+                                         statesList   = list(c("1","1","1","1")),
+                                         exampleName = "Dunnit"
 )
-  
+
   
 
-DunnitTwinTable <- CoherencesTable(DunnitBN,
+DunnitTwinTable <- CoherencesTableNarr(list(DunnitBN),
   scenariosList = list(DunnitTwin),
   statesList   = list(c("1","1","1","1","1")),
   exampleName = "Dunnit"

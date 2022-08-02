@@ -1,3 +1,69 @@
+library(bnlearn)
+library(gRain)
+###Just two nodes
+
+robbersTwoDAG <- model2network("[MIsP][MIsR|MIsP]")
+
+MIsPProb <- priorCPT("MIsP",prob1 = .8)
+
+MIsRProb <- singleCPT(eNode = "MIsR",hNode = "MIsP", probEifHS1 = 6/8, probEifHS2 = 1)  
+
+robbersTwoCPT <-list(MIsR=MIsRProb,MIsP=MIsPProb)
+
+robbersTwoBN <- custom.fit(robbersTwoDAG,robbersTwoCPT)
+
+JN <- compile(as.grain(robbersTwoBN))
+
+
+
+graphviz.plot(robbersTwoDAG)
+
+###  With non-trivial probs
+
+
+#odel2network("[B][P|B][G|B:P]")
+robbersUncDAG <- model2network("[Murder][MIsP|Murder][MIsR|Murder:MIsP]")
+
+graphviz.plot(robbersUncDAG)
+
+#graphviz.plot(BirdDAG3, sub = "Penguins with B=1, G =1",  highlight = list(nodes = c("Murder","MIsR"), col = "skyblue", fill= "skyblue"))
+
+#Define CPTS
+MurderProb <-  priorCPT("Murder",prob1 = 1)
+
+MIsPProb <- singleCPT(eNode = "MIsP",hNode = "Murder", probEifHS1 = .8, probEifHS2 = 0)  
+
+MIsRProb <- doubleCPT(eNode = "MIsR",h1Node = "Murder",h2Node = "MIsP",probEifH1S1H2S1 =  6/8, 
+                      probEifH1S1H2S2 = 1, probEifH1S2H2S1 = 0, probEifH1S2H2S2 = 0)
+
+MIsRProb
+MurderProb
+#GProb
+
+#BirdCPT
+robbersUncCPT <-list(Murder=MurderProb,MIsR=MIsRProb,MIsP=MIsPProb)
+
+#BirdBN
+robbersUncBN <- custom.fit(robbersUncDAG,robbersUncCPT)
+
+
+
+JN <- compile(as.grain(robbersUncBN))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #----------------------------------
 ## NOW WITH THREE STATES OF THE ROOT
 

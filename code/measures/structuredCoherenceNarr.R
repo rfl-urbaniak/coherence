@@ -12,7 +12,12 @@
 # BN <- RegularBN
 # narrationNodes  <- c("T","TF")
 # states <-  c("1","1")
+# 
+BN <-  BirdBNbgp
+narrationNodes <- c("B","G")
+states <- c("1","1")
 
+graphviz.plot(BN)
 
 structuredCoherenceNarration <- function(BN, narrationNodes, states){
   startTime <- proc.time() #start measuring computation time
@@ -38,23 +43,19 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
   ECSnarrLR <-numeric(length(parented))
   ECSnarrL <-numeric(length(parented))
   
-  
   for (i in 1:length(parented)){
-  
+    i <- 1
     consequent <- parented[i]
-    
-    
     consequentStates <- if (consequent %in% narrationNodes){
       stateOfNode(node = consequent, narrationNodes = narrationNodes, states = states)
     } else {
       findStates(consequent)
     }
     
-    
-    
+
     antecedents  <- parentList[i]
     
-    
+    #antecedents
     antecedentStates <- list()
     for(a in 1:length(antecedents[[1]])){
       antecedentStates[[a]] <- if (antecedents[[1]][a] %in% narrationNodes){
@@ -68,13 +69,9 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
       }
     }
     
-    
-    
-    
     #start the outcome table
     variants <-  expand.grid(c(list(consequentStates),antecedentStates))
     colnames(variants) <- c(consequent,antecedents[[1]])
-    
     
     
     
@@ -126,6 +123,7 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
     }
     variants <- cbind(variants, posteriorsNEG = posteriorsNEG)
     
+    #variants
     
     
     priorAnte <- numeric(nrow(variants))
@@ -151,26 +149,66 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
     
     priorAnteNarr <- numeric(nrow(variants))
     
+    #variants
     for (row in 1:nrow(variants)){
       rowNodes <- as.vector(unlist(c(antecedents)))
+      rowNodes
+      #variants
       rowStates <- as.vector(unlist(variants[row,2:(length(antecedents[[1]])+1)]))
-      PriorJoints <- querygrain(JNnarration,nodes=rowNodes,type="joint")
-      #PriorJoints
-      PriorJoints <- if(length(PriorJoints) == 1){
-      # PriorJoints
+      rowStates
+      querygrain(JN,nodes=rowNodes, type = "joint")    
+      rowNodes
+      freeNodes <- rowNodes[!rowNodes %in% narrationNodes]
+      freeNodes
+      querygrain(JNnarration,nodes=freeNodes,type="joint")
+      if (sum(rowNodes %in% narrationNodes)>0) {
+      PriorJoints <- querygrain(JNnarration,nodes=freeNodes,type="joint")
+      length(PriorJoints)
+      if(length(attributes(PriorJoints)) == 2){
+      PriorJoints <- PriorJoints[[1]]
       } else {
-        aperm(PriorJoints, rowNodes)
+        if(length(PriorJoints) == 1){
+        PriorJoints <- PriorJoints
+        } else {
+        PriorJoints <- aperm(PriorJoints, freeNodes)
+        }
       }
+      #else{
+      #  if((attributes(PriorJoints)) ==2){
+      #    PriorJoints[[1]]
+      #  }
+#PriorJoints <- if(length(PriorJoints) == 1){
+      #         } else {
+      #         aperm(PriorJoints, rowNodes)
+      #         }
+      #}
+      #str(rowNodes)
+      #length(rowNodes)
+      #PriorJoints
       steps <- numeric(length(rowNodes))
+      #steps
       for(rn in 1:length(rowNodes)){
         steps[rn] <- paste(rowNodes[rn], "=", "\"",rowStates[rn],"\"")
       }
       steps<- gsub(" ", "", steps, fixed = TRUE)
+      steps
       final <- paste("PriorJoints[",paste(steps,collapse=","),"]",sep="")
-      noquote(final)
-      prior <- eval(parse(text=final))
-      priorAnteNarr[row] <- ifelse(length(PriorJoints) == 1,PriorJoints,prior)
+      #noquote(final)
+      PriorJoints <- if(length(PriorJoints) == 1){
+                PriorJoints
+                } else {
+                aperm(PriorJoints, rowNodes)
+      }
+      priorAnteNarr[row]  <- if(length(PriorJoints) == 1) PriorJoints else  eval(parse(text=final)) 
+      # priorAnteNarr[row] <- if(length(PriorJoints) == 1){
+      #   PriorJoints } else {
+      # eval(parse(text=final))   
+      #   }
+      #prior <- eval(parse(text=final))
+      #rowNodes
+#      priorAnteNarr[row] <- ifelse(length(PriorJoints) == 1,PriorJoints,prior)
     }
+    
     variants$PriorAnteNarr <- priorAnteNarr
     
     #variants
@@ -216,7 +254,7 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
     variants$AnteIfnC <- AnteIfnC
     
     
-    
+    #variants
     
     
     
@@ -236,7 +274,7 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
       variants$WeightsAnteNarr <-  1/nrow(variants)
     }
     
-    
+    #variants
     
     
     
@@ -257,9 +295,7 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
     variants$LscaledNarr <- variants$L * variants$WeightsAnteNarr
     
     
-    
-    
-    
+
     expConfFull[[i]] <- list( "Consequent node" = consequent,
                               "Options & calculations" = variants,
                               "ECSnarrZ scaled" = sum(variants$ZscaledNarr),
@@ -320,7 +356,6 @@ structuredCoherenceNarration <- function(BN, narrationNodes, states){
   
   stopTime <- proc.time()
   elapsedTime <- stopTime - startTime
-  
   return(list("Full calculations" = expConfFull, 
               "ECSnarrZ" = ECSnarrZ,
               "ECSnarrLR" = ECSnarrLR,

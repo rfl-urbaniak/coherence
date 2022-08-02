@@ -1,16 +1,55 @@
-## Restricted nodes
-
+## Two nodes
 #BN <- robbersBN
 #BN
 
+BN <- robbersTwoBN
 
+structuredNarr(robbersTwoBN,c("MIsP","MIsR"),c("1","1"))
+structuredNarr(robbersTwoBN,c("MIsP","MIsR"),c("1","0"))
+
+robbersTwoTable <- CoherencesTableNarr(list(robbersTwoBN,robbersTwoBN,robbersTwoBN), 
+              scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
+              statesList   = list(c("1","1"),c("1","0"),c("0","1")),
+              exampleName = "Robbers")
+
+robbersTwoTable
+
+
+length(names(robbersTwoTable))
+length(neutralPoints)
+neutralPoints <- c(NA, NA ,1, 1, 0.5, 0, 0, 0, 1, 0)
+# # 
+PRgreaterPnR <- robbersTwoTable[1,] > robbersTwoTable[2,] 
+# # #PRgreaterPnR
+# # # 
+PRgreaterNeutral <- robbersTwoTable[1,] > neutralPoints
+# # # 
+robbersNarrResults <- as.data.frame(rbind(PRgreaterPnR,PRgreaterNeutral))
+# # # 
+rownames(robbersNarrResults) <- c("Robbers: PR$>$P$\\neg$R","Robbers: PR$>$neutral")
+# # # 
+
+robbersNarrResults
+
+#
+
+
+
+
+
+structuredNarr(robbersBN,c("MIsP","MIsR"),c("1","1"))
+structuredNarr(robbersBN,c("MIsP","MIsR"),c("1","0"))
+structuredNarr(robbersBN,c("MIsP","MIsR"),c("0","1"))
+
+
+structuredNarr(robbersUncBN,c("MIsP","MIsR"),c("0","1"))
 
 
 
 #structuredCoherenceUpdated(robbersBN,c("MIsP","MIsR"),c("1","0"))
 
-robbersNarrTable <- CoherencesTable(robbersNarrBN, 
-                                  scenariosList = list(c("MIsP","MIsR",:),c("MIsP","MIsR"),c("MIsP","MIsR")),
+robbersNarrTable <- CoherencesTableNarr(list(robbersBN,robbersBN,robbersBN), 
+                                  scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
                                  statesList   = list(c("1","1"),c("1","0"),c("0","1")),
                                  exampleName = "Robbers"
 )
@@ -20,8 +59,13 @@ robbersNarrTable
 
 save(robbersNarrTable, file = "calculations/RdataObjects/robbersNarrTable.Rda")
 
+
+robbersNarrTable
+
 # # 
-neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 0, 0, 0, 0)
+length(names(robbersNarrTable))
+length(neutralPoints)
+neutralPoints <- c(NA, NA ,1, 1, 0.5, 0, 0, 0, 1, 0)
 # # 
 PRgreaterPnR <- robbersNarrTable[1,] > robbersNarrTable[2,] 
 # # #PRgreaterPnR
@@ -30,8 +74,10 @@ PRgreaterNeutral <- robbersNarrTable[1,] > neutralPoints
 # # # 
 robbersNarrResults <- as.data.frame(rbind(PRgreaterPnR,PRgreaterNeutral))
 # # # 
-rownames(robbersResults3) <- c("Robbers: PR$>$P$\\neg$R","Robbers: PR$>$neutral")
+rownames(robbersNarrResults) <- c("Robbers: PR$>$P$\\neg$R","Robbers: PR$>$neutral")
 # # # 
+
+robbersNarrResults
 # # # 
 save(robbersNarrResults,file="calculations/RdataObjects/robbersNarrResults.Rda")
 
@@ -51,7 +97,15 @@ robbersTable3 <- CoherencesTable(robbersBN,
         exampleName = "Robbers"
 )
 
-robbersTable3
+robbersTable3Narr <- CoherencesTableNarr(list(robbersBN,robbersBN,robbersBN),
+                                 scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),
+                                                      c("MIsP","MIsR")),
+                                 statesList   = list(c("1","1"),c("1","0"),c("0","1")),
+                                 exampleName = "Robbers"
+)
+
+
+robbersTable3Narr
 
 save(robbersTable3,file="calculations/RdataObjects/robbersTable3.Rda")
 
