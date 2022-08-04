@@ -71,7 +71,7 @@ robbersDAG <- model2network("[WhoMurdered][MIsP|WhoMurdered][MIsR|WhoMurdered]")
 
 robbersDAGsimplified <- model2network("[W][P|W][R|W]")
 
-#graphviz.plot(robbersDAG)
+graphviz.plot(robbersDAG)
 
 #Define CPTS
 

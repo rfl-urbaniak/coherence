@@ -35,6 +35,7 @@ Z <- function(posterior,prior){
 }
 
 
+
 structuredNarr(BN,narrationNodes, states)
 
 
@@ -64,8 +65,7 @@ structuredNarr <- function(BN, narrationNodes, states){
   parented
   
   for (i in 1:length(parented)){
-    i <- 1
-    consequent <- parented[i]
+      consequent <- parented[i]
     consequentStates <- if (consequent %in% narrationNodes){
       stateOfNode(node = consequent, narrationNodes = narrationNodes, states = states)
     } else {

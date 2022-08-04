@@ -1,40 +1,40 @@
 
-Dice2SixBN 
-Dice2DodBN 
+Dice2SixBN
+Dice2DodBN
 
 
-#  BN <- Dice2SixBN 
-#   
+#  BN <- Dice2SixBN
+#
 #   Dice2SixBN
-#   
+#
 #   structuredCoherence(BN = Dice2SixBN, narrationNodes = c("O2","O24"), states = c("1","1"))
-#  
+#
 #   structuredCoherenceNarration(BN = Dice2SixBN, narrationNodes = c("O2","O24"), states = c("1","1"))
-#   
-#   
+#
+#
 #   structuredCoherenceNarration(BN = Dice2DodBN, narrationNodes = c("O2","O24"), states = c("1","1"))
-#   
-#     
-#    
+#
+#
+#
 #   Dice2SixTable <- CoherencesTableNarr(Dice2SixBN,
 #                                scenariosList = list(c("O2","O24")),
 #                                statesList   = list(c("1","1")),
 #                                exampleName = "Regular die"
 #  )
-# 
-# 
-# Dice2SixTable  
-# 
-# 
+#
+#
+# Dice2SixTable
+#
+#
 # Dice2DodTable <- CoherencesTableNarr(Dice2DodBN,
 #                                      scenariosList = list(c("O2","O24")),
 #                                      statesList   = list(c("1","1")),
 #                                      exampleName = "Dodecahedron"
 # )
-# 
-# 
+#
+#
 # Dice2DodTable
-# 
+#
 
 
 
@@ -70,6 +70,74 @@ save(DiceTableNew,file="calculations/RdataObjects/diceTablePaper.Rda")
 
 
 save(DiceTableNew,file="calculations/RdataObjects/DiceTableNew.Rda")
+
+
+structuredL(Dod2RegularBN,c("T","TF"),c("1","1"))
+structuredNarr(Dod2RegularBN,c("T","TF"),c("1","1"))
+
+structuredL(Dod2DodBN,c("T","TF"),c("1","1"))
+structuredNarr(Dod2DodBN,c("T","TF"),c("1","1"))
+
+
+
+Dod2RegularBN
+
+
+structuredNarr(RegularBN,c("T","TF"),c("1","1"))
+structuredNarr(DodecahedronBN,c("T","TF"),c("1","1"))
+
+structuredL(RegularBN,c("T","TF"),c("1","1"))
+structuredL(DodecahedronBN,c("T","TF"),c("1","1"))
+
+
+structuredL(DodecahedronBN,c("T","TF"),c("1","1"))
+
+
+
+
+
+BN <- RegularBN
+graphviz.plot(RegularBN)
+
+structuredL(RegularBN,c("T","TF"),c("1","1"))
+structuredNarr(RegularBN,c("T","TF"),c("1","1"))
+structuredL(DodecahedronBN,c("T","TF"),c("1","1"))
+
+
+
+RegularTablePlain <- CoherencesTable(RegularBN,
+                                    scenariosList = list(c("T","TF")),
+                                    statesList   = list(c("1","1")),
+                                    exampleName = "Regular"
+)
+
+
+DodecahedronTable <- CoherencesTableNarr(DodecahedronBN,
+                                         scenariosList = list(c("T","TF")),
+                                         statesList   = list(c("1","1")),
+                                         exampleName = "Dodecahedron"
+)
+
+
+#RegularTable
+#DodecahedronTable
+
+DiceTableNew <- rbind(RegularTable,DodecahedronTable)
+
+DiceTableNew
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

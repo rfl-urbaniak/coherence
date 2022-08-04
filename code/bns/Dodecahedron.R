@@ -1,3 +1,35 @@
+#JUST TWO NODES
+
+
+Dod2DAG <- model2network("[TF|T][T]")
+
+graphviz.plot(Dod2DAG)
+T2Prob <- priorCPT(node = "T", prob1 = 1/6)
+T2Prob
+TF2Prob <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/5)
+TF2Prob
+
+Dod2RegularCPT <-  list(T=T2Prob,TF=TF2Prob)
+Dod2RegularBN <- custom.fit(Dod2DAG,Dod2RegularCPT)
+
+Dod2RegularJN <- compile(as.grain(Dod2RegularBN))
+querygrain(Dod2RegularJN, nodes = "TF")
+
+
+
+T2dodProb <- priorCPT(node = "T", prob1 = 1/12)
+TF2dodProb <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/11)
+
+Dod2DodCPT <-  list(T=T2dodProb,TF=TF2dodProb)
+Dod2DodBN <- custom.fit(Dod2DAG,Dod2DodCPT)
+
+
+
+
+
+
+
+
 #The scenario:You’re either tossing a regular die, or a dodecahedron,X is the result.  Consider the coherence of:{X= 2,(X= 2∨X= 4)}. 
 #The desideratum: coherence should not change, whether it's a fair die or a dodecahedron
 

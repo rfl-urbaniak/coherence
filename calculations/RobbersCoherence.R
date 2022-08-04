@@ -2,10 +2,41 @@
 #BN <- robbersBN
 #BN
 
-BN <- robbersTwoBN
+BN <- robbersBN
 
-structuredNarr(robbersTwoBN,c("MIsP","MIsR"),c("1","1"))
-structuredNarr(robbersTwoBN,c("MIsP","MIsR"),c("1","0"))
+BN
+
+robbersBNTable <- CoherencesTableNarr(list(robbersBN,robbersBN,robbersBN), 
+                    scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
+                    statesList   = list(c("1","1"),c("1","0"),c("0","1")),
+                    exampleName = "Robbers")
+
+
+ 
+
+# robbersBNTable <- CoherencesTableNarr(list(robbersBN,robbersBN,robbersBN), 
+#                                       scenariosList = list(c("MIsP","MIsR", "WhoMurdered"),c("MIsP","MIsR", "WhoMurdered"),
+#                                                            c("MIsP","MIsR", "WhoMurdered")),
+#                                       statesList   = list(c("1","1"),c("1","0", "OnlyP"),c("0","1", "OnlyR")),
+#                                       exampleName = "Robbers")
+
+
+robbersBNTable
+
+nodes(BN)
+
+structuredNarr(robbersBN,c("MIsP","MIsR"),c("1","1"))
+
+
+structuredL(robbersBN,c("MIsP","MIsR"),c("1","1"))
+
+structuredNarr(robbersBN,c("MIsP","MIsR"),c("1","0"))
+
+structuredL(robbersBN,c("MIsP","MIsR"),c("1","0"))
+
+structuredNarr(robbersBN,c("MIsP","MIsR"),c("0","1"))
+
+
 
 robbersTwoTable <- CoherencesTableNarr(list(robbersTwoBN,robbersTwoBN,robbersTwoBN), 
               scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),

@@ -242,13 +242,14 @@ Mind your head: different measures use different scales and have different neutr
 
 As we already mentioned in the introduction,  formulating abstract formal requirements for a coherence measure and investigating whether a given coherence measure satisfies them has not resulted in an agreement. For this reason, we follow another path, which has dominated the literature on the topic.  We look at how the measures behave in test scenarios. Many putative scenarios were  put forward as counterexamples. They usually have the form of a few propositions formulated in natural language, such that intuitive judgments of coherence involved and the formal coherence calculations  seem to diverge [@shogenji1999conducive; @bovens2004bayesian; @Meijs2007Alleged; @Merricks1995;  @Meijs2007Alleged; @Siebel2004On-Fitelsons-me; @siebel2006against; @Shogenji2006Why; @Akiba2000Shogenjis; @Shogenji2001Reply; @Schippers2019General; @koscholke2016evaluating; @Schippers2019General]. We will focus on these examples in what follows. To spoil the experience, let us already point out that the probabilistic measures we introduced above do not  seem to handle these examples very well (read on for details). 
 
-Inspired by these failures, in [REFERENCE SUPRESSED FOR ANONYMITY] we proposed to take a different perspective. Putting the earliest measures aside (they were problematic for various reasons), we noticed that the problems with the average mutual support measures stem from the fact that the coherence score is an average confirmation score for all possible combinations of the parts of a narration. Therefore we proposed to take a more fine-grained account. First, we represented an agent's belief state by means of a Bayesian network, which comprises not only a probabilistic measure but additional structural information, Then we used this structural information in our definition of coherence, so that only those directions of support are considered which in fact are indicated by the structure of the agent's belief state.
+Inspired by these failures, in [REFERENCE SUPRESSED FOR ANONYMITY] we proposed to take a different perspective. Putting the earliest measures aside (they were problematic for various reasons), we noticed that the problems with the average mutual support measures stem from the fact that the coherence score is an average confirmation score for all possible combinations of the parts of a narration. Therefore we proposed to take a more fine-grained account. First, we represented an agent's credal state by means of a Bayesian network, which comprises not only a probabilistic measure but additional structural information. Then we used this structural information in our definition of coherence, so that only those directions of support are considered which in fact are indicated by the structure of the agent's belief state.
 
 
 
-While we refer the reader to a more extensive treatment in [REFERENCE SUPRESSED FOR ANONYMITY], we now briefly discuss the main idea behind it. A Bayesian network represents agent's probabilistic belief state with respect to the relevant nodes. Some of them are distinguished as fixed narration nodes---the agent holds definite beliefs about which states of these nodes occur.
+While we refer the reader to a more extensive treatment in [REFERENCE SUPRESSED FOR ANONYMITY], we now briefly discuss the main idea behind it. A Bayesian network (BN) represents agent's probabilistic belief state with respect to the relevant nodes. Additionally, some of the nodes are distinguished as  narration nodes---the agent holds definite beliefs about which states of these nodes occur, without assigning probabilities equal 1 to them.\footnote{Also, we assume that the agent does not assign probability 0 to the narration being true.} If actual learning takes place, the evidence nodes and their states need to be specified as well.
 
-Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' fixed beliefs. For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)^[DEFINITIONS]. Then, a weighted average of these scores is obtained, where weights are the probabilities of the combinations of parents' states obtained by  updating the BN  with the fixed states of the fixed narration nodes. The final coherence score is either the mean of the \s{ecs} scores, if all of them are positive, or it is a weighted average of their mean and their minimum, $(1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})$, otherwise.^[We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.]
+
+Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' binary beliefs. For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)^[DEFINITIONS]. Then, a weighted average of these scores is obtained. The weights are the normalized  probabilities of the combinations of parents' states  obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, $(1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})$, otherwise.^[We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.]
 
 
 
@@ -280,7 +281,7 @@ FUNCTION coherence_from_ecs(ecs)
     ELSE
         RETURN mean(ecs)
 
-FUNCTION structured_coherence(BN,fixedNodes,fixedStates)
+FUNCTION structured_coherence(BN,evidenceNodes,evidenceStates)
     parentedNodes <- vector of non-root nodes in BN
     ecsList <- []
     FOR EACH parentedNode IN parentedNodes
@@ -292,14 +293,14 @@ FUNCTION structured_coherence(BN,fixedNodes,fixedStates)
             childPosterior <- posterior probability of the child state in variant,
                         obtained by updating on the parents states
                         from this variant
-            parentsNarr[variant] <- joint probability of 
-                        the parents states in variant in BN updated with fixedStates of fixedNodes
-            sumParentsNarr <- sumParentsNarr +  parentsNarr[variant] 
+            parentsEvidence[variant] <- joint probability of 
+                        the parents states in variant in BN updated with evidenceStates of evidenceNodes
+            sumParentsEvidence <- sumParentsEvidence +  parentsEvidence[variant] 
             z[variant] <- z_confirmation_measure(childPrior, childPosterior)
         ecs <- 0  #expected confirmation score
         FOR EACH variant IN variants
-            IF parentsNarr[variant] > 0 THEN
-                weight <- parentsNarr[variant]/sumParentsNarr
+            IF parentsEvidence[variant] > 0 THEN
+                weight <- parentsEvidence[variant]/sumParentsEvidence
             ELSE
                 weight <- 1/variants_count
             zScaled <- z[variant] * weight
@@ -315,8 +316,21 @@ FUNCTION structured_coherence(BN,fixedNodes,fixedStates)
 
 # Challenges and their treatment  \label{sec:examples}
 
-For each of the counterexamples, we first explain what it is and what the connected desiderata are. Then  we represent it as a Bayesian network, and finally we use our \textbf{\textsf{R}} scripts to calculate coherence scores that the coherence measures included in the previous section (including ours) yield for a given example and whether the desiderata are satisfied. 
-Here are the counterexamples put forward against various coherence measures in the literature. We ignored only a few  where both we didn't share the authors' intuitions and the examples were not picked up in further discussion in the literature. 
+We will now go through a list of key counterexamples proposed in the literature, each time explaining the relevant desiderata.   We represent those scenarios as  Bayesian networks. Then we  calculate the coherence scores for those scenarios using all the measures we have introduced.  Finally, we test whether the  desiderata are  satisfied.
+
+Here are the counterexamples put forward against various coherence measures in the literature. We ignored only a few  where both we didn't share the authors' intuitions and the examples were not picked up in further discussion in the\todo{REFS} literature.\footnote{One such an example, involves
+  Sarah and her pregnancy (Tomoji Shogenji, 2006), but it focused more
+  on truth-conduciveness of coherence, which is beyond the scope of our
+  paper. We also do not discuss a few other examples involving fossils
+  and voltage (T. Shogenji, 2001; Mark Siebel, 2006). In some respects,
+  they were quite similar to the dice and depth problems that we do
+  discuss, and some of their variants simply did not inspire our
+  agreement. For instance, Siebel thinks that for voltage levels
+  \(\{V=1, V=2\}\) is more coherent than \(\{V=1, V=50\}\), while we
+  think that both sets are maximally incoherent (there might be some
+  claims in the vicinity that are not incoherent, say, focusing on
+  results of separate measurements, but an example along these lines has
+  not been properly formulated in the literature).}
 
 
 
@@ -324,7 +338,7 @@ Here are the counterexamples put forward against various coherence measures in t
 ## Penguins
 
 
-\textbf{The scenario.}  A challenge discussed in [@bovens2004bayesian,50] and [@Meijs2007Alleged] consists of the  propositions (instead of \emph{letters} or \emph{abbreviations}, we'll talk about \emph{nodes}, as these will be used later on in Bayesian networks) displayed in Table \@ref(tab:penguinsPropositions). 
+\textbf{The scenario.}  This is a  challenge to the Olsson-Glass measure discussed in [@bovens2004bayesian,50] and [@Meijs2007Alleged]. It consists of the  propositions (instead of \emph{letters} or \emph{abbreviations}, we'll talk about \emph{nodes}, as these will be used later on in Bayesian networks) displayed in Table \@ref(tab:penguinsPropositions). 
 
 ```{r penguinsPropositions,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 source("../code/bns/Penguins.R")
