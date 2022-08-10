@@ -1,1 +1,1 @@
-This is code and documentation of probabilistic coherence calculations, related to the paper "Measuring coherence with Bayesian networks" written with Alicja Kowalewska.
+This is code and documentation of probabilistic coherence calculations, related to the paper "Measuring coherence with Bayesian networks" written with Alicja Kowalewska. Download and use instruction can be found [here](https://rfl-urbaniak.github.io/coherence/) .
