@@ -1,9 +1,13 @@
-Wycofujemy sie z updajtowania po narracji, updejtujemy po evidence
+Rewrite Dice
 
-Dodac wyjasnienie binarne/probabilistyczne + footnote o niewykluczaniu i koherencji przekonan czysto probabilistycznych
+Deeply rewrite depth
+
+DONE Wycofujemy sie z updajtowania po narracji, updejtujemy po evidence
+
+DONE Dodac wyjasnienie binarne/probabilistyczne + footnote o niewykluczaniu i koherencji przekonan czysto probabilistycznych
 
 
-Dodac uwage o ostroznosci komponowania sieci, elementy nawet czysto probabilsityczne beda mialy wplyw
+DONE Dodac uwage o ostroznosci komponowania sieci, elementy nawet czysto probabilisityczne beda mialy wplyw
 
 
 
@@ -13,7 +17,8 @@ Dodac uwage o ostroznosci komponowania sieci, elementy nawet czysto probabilsity
 - Japanese swords 
 - Robbers
 - Beatles
-- Depth (agreement)
+- Depth (agreement)  [sprawdzic co sie dzieje z nowa funkcja i pomyslec]
+
 - Dice no evidence, it matters whether you explicitly include the probabilistic assumption and the support it provides, give three BNs
 
 
