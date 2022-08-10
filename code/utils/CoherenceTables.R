@@ -163,6 +163,76 @@ CoherencesTableNarr <- function(BNlist,scenariosList,
 #   table <- do.call("rbind", rows)
 #   return(table)
 # }
+#statusLR = rep("Ind",FitelsonSize(length(narrationNodes)))
+#statusRL = rep("Ind",FitelsonSize(length(narrationNodes)))
+
+#CoherencesRowEvi(BirdBNbgp,BGP,narrationStates = c("1","1","1"), exampleName = "Penguins")
+
+# BN <-BirdBNbgp
+# narrationNodes <- BGP
+# narrationStates <- c("1","1","1")
+# exampleName <- "Penguins"
+# statusLR = rep("Ind",FitelsonSize(length(narrationNodes)))
+# statusRL = rep("Ind",FitelsonSize(length(narrationNodes)))
+# exampleName <- "Penguins"
+# evidenceNodes <- c()
+# evidenceStates <- c()
+
+CoherencesRowEvi <- function (BN, narrationNodes, narrationStates, evidenceNodes = c(), evidenceStates = c(),
+                               statusLR = rep("Ind",FitelsonSize(length(narrationNodes))),
+                               statusRL = rep("Ind",FitelsonSize(length(narrationNodes))),
+                               exampleName){
+  FI <- FitelsonCoherenceForBNs(BN, narrationNodes, narrationStates, statusLR,statusRL)[[3]]
+  DM <- DouvenMeijsCoherenceForBNs(BN,narrationNodes,narrationStates)[[3]]
+  OL <- OlssonCoherenceForBNs(BN,narrationNodes,narrationStates)[[3]]
+  OLg <- OlssonGeneralizedCoherence(BN, narrationNodes, narrationStates)[[1]]
+  SH <- ShogenjiCoherenceForBNs(BN,narrationNodes,narrationStates)[[3]]
+  SHg <- ShogenjiGeneralizedCoherence(BN, narrationNodes, narrationStates)[[1]]
+  RO <- RocheCoherenceForBNs(BN,narrationNodes,narrationStates)[[3]]
+  Zevi <- structuredEvi(BN, narrationNodes,narrationStates, evidenceNodes, evidenceStates)$structuredZevi
+  LRevi <- structuredEvi(BN, narrationNodes,narrationStates, evidenceNodes, evidenceStates)$structuredLRevi
+  Levi <- structuredEvi(BN, narrationNodes,narrationStates, evidenceNodes, evidenceStates)$structuredLevi
+  
+  
+
+  row <- data.frame( 
+    OG = OL,
+    OGGen = OLg,
+    Sh = SH,
+    ShGen = SHg,
+    DM = DM,
+    R = RO,
+    Fi = FI,
+    SZ= Zevi,
+    SLR = LRevi,
+    SL  = Levi
+  )
+
+  
+  rownames(row) <- paste(paste(exampleName, ":", sep = ""), paste(narrationNodes, sep = "", collapse=""), paste(narrationStates, sep = "", collapse=""), sep = " ")
+  
+  return(row)
+}
+
+
+CoherencesTableEvi <- function(BNlist,scenariosList,
+                                statesList,exampleName){
+  rows <- list()
+  for(s in 1:length(scenariosList)){
+    rows[[s]] <-  CoherencesRowEvi(BNlist[[s]],scenariosList[[s]],statesList[[s]], 
+                                    exampleName = exampleName)
+  }
+  table <- do.call("rbind", rows)
+  return(table)
+}
+
+
+
+
+
+
+
+
 
 
 

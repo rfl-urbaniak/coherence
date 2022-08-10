@@ -1,3 +1,9 @@
+
+source("code/utils//CombinationsBN.R")
+source("code/utils//CptCreate.R")
+source("code/utils//LogicAndBNs.R")
+source("code/utils//kableCPTs.R")
+source("code/utils//CoherenceTables.R")
 source("code/measures/Fitelson.R")
 source("code/measures/DouvenMeijs.R")
 source("code/measures/generalizedOlsson.R")
@@ -5,10 +11,12 @@ source("code/measures/generalizedShogenji.R")
 source("code/measures/Olsson.R")
 source("code/measures/Roche.R")
 source("code/measures/Shogenji.R")
-source("code/measures/structuredCoherenceLR.R")
-source("code/measures/structuredCoherenceNarr.R")
+source("code/measures/structuredCoherenceEvi.R")
 
+#source("code/measures/structuredCoherenceNarr.R")
 
+getwd()
+source("code/bns/Penguins.R")
 BGP <- c("B","G","P")
 BG <- c("B","G")
 BP <- c("B","P")
@@ -16,8 +24,20 @@ BP <- c("B","P")
 #Coherences
 
 
+structuredEvi(BirdBNbgp,BGP,c("1","1","1"))
 
-structuredCoherenceNarration2(BirdBNbgp,BGP,c("1","1","1"))
+CoherencesRowEvi(BirdBNbgp,BGP,c("1","1","1"), exampleName = "Penguins")
+
+penguinsTable <- CoherencesTableEvi(BN = list(BirdBNbgp,BirdBNbg,BirdBNbp), scenariosList = list(BGP, BG, BP), statesList   = list(c("1","1","1"), c("1","1"), c("1","1")),exampleName = "Penguins")
+
+
+
+
+
+
+structuredCoherenceNarration(BN,BGP,c("1","1","1"))
+
+
 structuredCoherenceNarration(BN,BGP,c("1","1","1"))
 
 structuredCoherenceNarration(BN,BGP,c("1","1","1"))

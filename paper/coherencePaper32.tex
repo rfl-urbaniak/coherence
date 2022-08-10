@@ -450,11 +450,11 @@ Mind your head: different measures use different scales and have different neutr
 
 As we already mentioned in the introduction, formulating abstract formal requirements for a coherence measure and investigating whether a given coherence measure satisfies them has not resulted in an agreement. For this reason, we follow another path, which has dominated the literature on the topic. We look at how the measures behave in test scenarios. Many putative scenarios were put forward as counterexamples. They usually have the form of a few propositions formulated in natural language, such that intuitive judgments of coherence involved and the formal coherence calculations seem to diverge (Akiba, 2000; Bovens \& Hartmann, 2004; Koscholke, 2016; Meijs \& Douven, 2007, 2007; Merricks, 1995; Schippers \& Koscholke, 2019, 2019; Shogenji, 1999, 2001, 2006; Siebel, 2004, 2006). We will focus on these examples in what follows. To spoil the experience, let us already point out that the probabilistic measures we introduced above do not seem to handle these examples very well (read on for details).
 
-Inspired by these failures, in {[}REFERENCE SUPRESSED FOR ANONYMITY{]} we proposed to take a different perspective. Putting the earliest measures aside (they were problematic for various reasons), we noticed that the problems with the average mutual support measures stem from the fact that the coherence score is an average confirmation score for all possible combinations of the parts of a narration. Therefore we proposed to take a more fine-grained account. First, we represented an agent's belief state by means of a Bayesian network, which comprises not only a probabilistic measure but additional structural information, Then we used this structural information in our definition of coherence, so that only those directions of support are considered which in fact are indicated by the structure of the agent's belief state.
+Inspired by these failures, in {[}REFERENCE SUPRESSED FOR ANONYMITY{]} we proposed to take a different perspective. Putting the earliest measures aside (they were problematic for various reasons), we noticed that the problems with the average mutual support measures stem from the fact that the coherence score is an average confirmation score for all possible combinations of the parts of a narration. Therefore we proposed to take a more fine-grained account. First, we represented an agent's credal state by means of a Bayesian network, which comprises not only a probabilistic measure but additional structural information. Then we used this structural information in our definition of coherence, so that only those directions of support are considered which in fact are indicated by the structure of the agent's belief state.
 
-While we refer the reader to a more extensive treatment in {[}REFERENCE SUPRESSED FOR ANONYMITY{]}, we now briefly discuss the main idea behind it. A Bayesian network represents agent's probabilistic belief state with respect to the relevant nodes. Some of them are distinguished as fixed narration nodes---the agent holds definite beliefs about which states of these nodes occur.
+While we refer the reader to a more extensive treatment in {[}REFERENCE SUPRESSED FOR ANONYMITY{]}, we now briefly discuss the main idea behind it. A Bayesian network (BN) represents agent's probabilistic belief state with respect to the relevant nodes. Additionally, some of the nodes are distinguished as narration nodes---the agent holds definite beliefs about which states of these nodes occur, without assigning probabilities equal 1 to them.\footnote{Also, we assume that the agent does not assign probability 0 to the narration being true.} If actual learning takes place, the evidence nodes and their states need to be specified as well.
 
-Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' fixed beliefs. For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)\footnote{DEFINITIONS}. Then, a weighted average of these scores is obtained, where weights are the probabilities of the combinations of parents' states obtained by updating the BN with the fixed states of the fixed narration nodes. The final coherence score is either the mean of the \s{ecs} scores, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.}
+Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' binary beliefs.\footnote{Conceptually, it is possible to not restrict ourselves this way and look at all combinations of states of the nodes which are assigned non-null probabilities. But then, effectively, the binary content of the narration would have no impact on the coherence score, and we would obtain a coherence measure for the purely probabilistic part of agents' convictions. While this might be a worthy enterprise, we do not purse this idea in this paper. Calculations of a measure thus modified can be achieved by fairly straighforward modification of our code.} For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)\footnote{DEFINITIONS}. Then, a weighted average of these scores is obtained. The weights are the normalized probabilities of the combinations of parents' states obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.}
 
 \pagebreak 
 \footnotesize
@@ -482,7 +482,7 @@ FUNCTION coherence_from_ecs(ecs)
     ELSE
         RETURN mean(ecs)
 
-FUNCTION structured_coherence(BN,fixedNodes,fixedStates)
+FUNCTION structured_coherence(BN,evidenceNodes,evidenceStates)
     parentedNodes <- vector of non-root nodes in BN
     ecsList <- []
     FOR EACH parentedNode IN parentedNodes
@@ -494,14 +494,14 @@ FUNCTION structured_coherence(BN,fixedNodes,fixedStates)
             childPosterior <- posterior probability of the child state in variant,
                         obtained by updating on the parents states
                         from this variant
-            parentsNarr[variant] <- joint probability of 
-                        the parents states in variant in BN updated with fixedStates of fixedNodes
-            sumParentsNarr <- sumParentsNarr +  parentsNarr[variant] 
+            parentsEvidence[variant] <- joint probability of 
+                        the parents states in variant in BN updated with evidenceStates of evidenceNodes
+            sumParentsEvidence <- sumParentsEvidence +  parentsEvidence[variant] 
             z[variant] <- z_confirmation_measure(childPrior, childPosterior)
         ecs <- 0  #expected confirmation score
         FOR EACH variant IN variants
-            IF parentsNarr[variant] > 0 THEN
-                weight <- parentsNarr[variant]/sumParentsNarr
+            IF parentsEvidence[variant] > 0 THEN
+                weight <- parentsEvidence[variant]/sumParentsEvidence
             ELSE
                 weight <- 1/variants_count
             zScaled <- z[variant] * weight
@@ -517,13 +517,26 @@ FUNCTION structured_coherence(BN,fixedNodes,fixedStates)
 \hypertarget{challenges-and-their-treatment}{%
 \section{\texorpdfstring{Challenges and their treatment \label{sec:examples}}{Challenges and their treatment }}\label{challenges-and-their-treatment}}
 
-For each of the counterexamples, we first explain what it is and what the connected desiderata are. Then we represent it as a Bayesian network, and finally we use our \textbf{\textsf{R}} scripts to calculate coherence scores that the coherence measures included in the previous section (including ours) yield for a given example and whether the desiderata are satisfied.
-Here are the counterexamples put forward against various coherence measures in the literature. We ignored only a few where both we didn't share the authors' intuitions and the examples were not picked up in further discussion in the literature.
+We will now go through a list of key counterexamples proposed in the literature, each time explaining the relevant desiderata. We represent those scenarios as Bayesian networks. Then we calculate the coherence scores for those scenarios using all the measures we have introduced. Finally, we test whether the desiderata are satisfied.
+
+Here are the counterexamples put forward against various coherence measures in the literature. We ignored only a few where both we didn't share the authors' intuitions and the examples were not picked up in further discussion in the\todo{REFS} literature.\footnote{One such an example, involves
+  Sarah and her pregnancy (Tomoji Shogenji, 2006), but it focused more
+  on truth-conduciveness of coherence, which is beyond the scope of our
+  paper. We also do not discuss a few other examples involving fossils
+  and voltage (T. Shogenji, 2001; Mark Siebel, 2006). In some respects,
+  they were quite similar to the dice and depth problems that we do
+  discuss, and some of their variants simply did not inspire our
+  agreement. For instance, Siebel thinks that for voltage levels
+  \(\{V=1, V=2\}\) is more coherent than \(\{V=1, V=50\}\), while we
+  think that both sets are maximally incoherent (there might be some
+  claims in the vicinity that are not incoherent, say, focusing on
+  results of separate measurements, but an example along these lines has
+  not been properly formulated in the literature).}
 
 \hypertarget{penguins}{%
 \subsection{Penguins}\label{penguins}}
 
-\textbf{The scenario.} A challenge discussed in (Bovens \& Hartmann, 2004, p. 50) and (Meijs \& Douven, 2007) consists of the propositions (instead of \emph{letters} or \emph{abbreviations}, we'll talk about \emph{nodes}, as these will be used later on in Bayesian networks) displayed in Table \ref{tab:penguinsPropositions}.
+\textbf{The scenario.} This is a challenge to the Olsson-Glass measure discussed in (Bovens \& Hartmann, 2004, p. 50) and (Meijs \& Douven, 2007). It consists of the propositions (instead of \emph{letters} or \emph{abbreviations}, we'll talk about \emph{nodes}, as these will be used later on in Bayesian networks) displayed in Table \ref{tab:penguinsPropositions}.
 
 \begin{table}[H]
 
@@ -541,7 +554,7 @@ G & Tweety is a grounded animal.\\
 \end{table}
 
 \noindent \textbf{Desiderata.}
-It seems that the set \{\s{B},\s{G}\}, which doesn't contain the information about Tweety being a penguin, should be less coherent than the one that does contain this information: \{\s{B},\s{G},\s{P}\}.
+Meijs \& Douven (2007) claim that the set \{\s{B},\s{G}\}, which doesn't contain the information about Tweety being a penguin, should be less coherent than the one that does contain this information: \{\s{B},\s{G},\s{P}\}.
 
 \vspace{2mm}\begin{description}
     \item[(\s{BG}$<$\s{BGP})] \{\s{B},\s{G}\}  should be less coherent than \{\s{B},\s{G},\s{P}\}. 
@@ -556,7 +569,7 @@ However, as \s{G} is not a logical consequence of \s{P}, it can be argued that \
 
 \noindent Formally, we'll require that the absolute difference between \s{BG} and \s{BP} be greater than \(.1\) (the exact placement of the threshold doesn't make a huge difference, unless it's at an unintuitive value below \(.01\)) and that \{\s{B},\s{G}\} \(\leq\) \{\s{B},\s{P},\s{G}\}.
 
-\noindent \textbf{Bayesian network.} We used the distribution used in the original formulation to build a BN corresponding to the narrations at play (Fig. \ref{fig:BGP}).\footnote{Not without concerns. There are around 18 000 species of birds, and around 60 of them are flightless. We  couldn't find information about counts, but it seems the probability of being a penguin if one is grounded is overestimated by philosophers.  Also, there are many things that are not grounded but are not birds, mostly insects, and there's plenty of them. We did spend some time coming up with plausible ranges of probabilities to correct for such factors, and none of them actually makes a difference to the main point. So, for the sake of simplicity, we leave the original unrealistic distribution in our discussion.}
+\noindent \textbf{Bayesian network.} We used the distribution used in the original formulation (Meijs \& Douven, 2007) to build a BN corresponding to the narrations at play (Fig. \ref{fig:BGP}).\footnote{Not without concerns. There are around 18 000 species of birds, and around 60 of them are flightless. We  couldn't find information about counts, but it seems the probability of being a penguin if one is grounded is overestimated by philosophers.  Also, there are many things that are not grounded but are not birds, mostly insects, and there's plenty of them. We did spend some time coming up with plausible ranges of probabilities to correct for such factors, and none of them actually makes a difference to the main point. So, for the sake of simplicity, we leave the original unrealistic distribution in our discussion.}
 
 \begin{figure}[H]
 \hspace{2cm}\scalebox{0.7}{\begin{subfigure}[!ht]{0.4\textwidth}
@@ -602,1053 +615,13 @@ G &  &  & Pr\\
 \bottomrule
 \end{tabular}
 \end{subfigure}}
-\caption{Bayesian network for the Penuins problem.}
+\caption{Bayesian network for the Penguins problem.}
 \label{fig:BGP}
 \end{figure}
 
+\todo{Double check satisfaction for LR}
+
 \noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \ref{tab:penguinsCoherence}) and see if the desiderata are satisfied (Table \ref{tab:penguinsDesiderata}). The measures are: Olsson-Glass, generalized Olsson-Glass, Shogenji, generalized Shogenji, Douven-Meijs, Roche, Fitelson, Structured with Z, LR, and L used as a confirmation measure.
-
-\begin{table}[H]
-
-\caption{\label{tab:penguinsCoherence}Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1 at an arrow used in the calculations is involved.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrrr}
-\toprule
-  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Penguins: BGP 111} & \cellcolor{gray!6}{0.01} & \cellcolor{gray!6}{0.015} & \cellcolor{gray!6}{4.00} & \cellcolor{gray!6}{2.01} & \cellcolor{gray!6}{0.255} & \cellcolor{gray!6}{0.51} & \cellcolor{gray!6}{0.453} & \cellcolor{gray!6}{0.505} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{0.669}\\
-Penguins: BG 11 & 0.01 & 0.010 & 0.04 & 0.04 & -0.480 & 0.02 & -0.960 & -0.960 & 0.02 & -0.960\\
-\cellcolor{gray!6}{Penguins: BP 11} & \cellcolor{gray!6}{0.02} & \cellcolor{gray!6}{0.020} & \cellcolor{gray!6}{2.00} & \cellcolor{gray!6}{2.00} & \cellcolor{gray!6}{0.255} & \cellcolor{gray!6}{0.51} & \cellcolor{gray!6}{0.669} & \cellcolor{gray!6}{0.010} & \cellcolor{gray!6}{2.02} & \cellcolor{gray!6}{0.338}\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:penguinsDesiderata}Desiderata satisfaction for the Penguins scenario.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllllll}
-\toprule
-  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Penguins: BG$<$BGP} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE}\\
-Penguins: BG$<<$ BP$<$ BGP & FALSE & FALSE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & NA & TRUE\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\hypertarget{dunnit}{%
-\subsection{Dunnit}\label{dunnit}}
-
-\textbf{The scenario.} Another challenge, introduced by Merricks (1995) goes as follows: Mr.~Dunnit is a suspect in the murder case. Detectives first obtained the body of evidence specified in Table \ref{tab:dunnitPropositions1}.
-
-\begin{table}[H]
-
-\caption{\label{tab:dunnitPropositions1}Initial evidence in the Dunnit scenario.}
-\centering
-\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{25em}}
-\toprule
-node & content\\
-\midrule
-\cellcolor{gray!6}{I} & \cellcolor{gray!6}{Witnesses claim to have seen Dunnit do it (incriminating testimony).}\\
-M & Dunnit had a motive for the murder.\\
-\cellcolor{gray!6}{W} & \cellcolor{gray!6}{A credible witness claims to have seen Dunnit two hundred miles from the scene of the crime at the time of the murder.}\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\noindent In light of this information they try to assess whether Dunnit is responsible for the crime (Table \ref{tab:dunnitPropositions2}.
-
-\begin{table}[H]
-
-\caption{\label{tab:dunnitPropositions2}The guilt statement in the Dunnit scenario.}
-\centering
-\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{25em}}
-\toprule
-node & content\\
-\midrule
-\cellcolor{gray!6}{G} & \cellcolor{gray!6}{Dunnit is guilty.}\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\noindent Now, suppose the detectives learn Dunnit has a twin brother (Table \ref{tab:dunnitPropositions3}).
-
-\begin{table}[H]
-
-\caption{\label{tab:dunnitPropositions3}New evidence in the Dunnit scenario.}
-\centering
-\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{25em}}
-\toprule
-node & content\\
-\midrule
-\cellcolor{gray!6}{Tw} & \cellcolor{gray!6}{Dunnit has an identical twin which was seen by the credible witness two hundred miles from the scene of the crime during the murder.}\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\noindent What are our intuitions when we compare the coherence of \(\{\)\s{I,M,W,G}\(\}\) with the coherence of \(\{\)\s{I,M,W,G,Tw}\(\}\)?
-
-\noindent \textbf{Desideratum.} It seems that adding proposition about a twin should increase the coherence of the set.
-
-\vspace{2mm}\begin{description}
-    \item[(Dunnit$<$Twin)] $\{$\s{I,M,W,G}$\}$ should be less coherent than $\{$\s{I,M,W,G,Tw}$\}$. 
-\end{description}\vspace{2mm}
-
-\textbf{Bayesian networks.} Here, we deal with two separate BNs. One, before the \textsf{Twin} node is even considered (Figure \ref{fig:twinless}), and one with the \textsf{Twin} node (Figure \ref{fig:twin}). The CPTs for the no-twin version are in agreement with those in the ones in the Twin case. Since the original example didn't specify exact probabilities, we came up with some plausible values.
-
-\begin{figure}[H]
-\scalebox{1.7}{
-\begin{subfigure}[!ht]{0.3\textwidth}
-
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-6-1} \end{center}
-\end{subfigure}} 
-\hspace{-0.8cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
-
-\begin{tabular}{lr}
-\toprule
-M & Pr\\
-\midrule
-1 & 0.4\\
-0 & 0.6\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrr}
-\toprule
-\multicolumn{1}{c}{G} & \multicolumn{2}{c}{M} \\
-  & 1 & 0\\
-\midrule
-1 & 0.05 & 0.005\\
-0 & 0.95 & 0.995\\
-\bottomrule
-\end{tabular}
-\end{subfigure}  }
- \hspace{0.5cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
-
-\begin{tabular}{lrr}
-\toprule
-\multicolumn{1}{c}{I} & \multicolumn{2}{c}{G} \\
-  & 1 & 0\\
-\midrule
-1 & 0.8 & 0.005\\
-0 & 0.2 & 0.995\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrr}
-\toprule
-\multicolumn{1}{c}{W} & \multicolumn{2}{c}{G} \\
-  & 1 & 0\\
-\midrule
-1 & 0.012 & 0.207\\
-0 & 0.988 & 0.793\\
-\bottomrule
-\end{tabular}
-\end{subfigure}}
-\caption{Twin-less BN for the \textsf{Dunnit} problem.}
-\label{fig:twinless}
-\end{figure}
-
-\begin{figure}[H]
-\scalebox{1.7}{
-\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-9-1} \end{center}
-\end{subfigure}} 
-\hspace{-1cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.3\textwidth}
-
-\begin{tabular}{lllr}
-\toprule
-\multicolumn{1}{c}{} & \multicolumn{1}{c}{G} & \multicolumn{1}{c}{Tw} & \multicolumn{1}{c}{} \\
-W &  &  & Pr\\
-\midrule
-1 & 1 & 1 & 0.200\\
-0 & 1 & 1 & 0.800\\
-1 & 0 & 1 & 0.400\\
-0 & 0 & 1 & 0.600\\
-1 & 1 & 0 & 0.005\\
-0 & 1 & 0 & 0.995\\
-1 & 0 & 0 & 0.200\\
-0 & 0 & 0 & 0.800\\
-\bottomrule
-\end{tabular}
-\end{subfigure}}
-\caption{BN for the \textsf{Dunnit} problem. The key difference for the twin version lies in the construction of the CPT for \textsf{W}. The table gives conditional probabilities for \textsf{W} given various joint states of \textsf{Tw} and \textsf{G}.}
-\label{fig:twin}
-\end{figure}
-
-\textbf{Results.}
-Coherence calculations result in Table \ref{tab:dunnitCoherence} and how they fare with respect to the desideratum is displayed in Table \ref{tab:dunnitDesiderata}.
-
-\begin{table}[H]
-
-\caption{\label{tab:dunnitCoherence}Coherence scores for the Dunnit scenario (rounded).}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrrr}
-\toprule
-  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Dunnit: MGWI 1111} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0.087} & \cellcolor{gray!6}{4.294} & \cellcolor{gray!6}{11.012} & \cellcolor{gray!6}{0.167} & \cellcolor{gray!6}{0.266} & \cellcolor{gray!6}{0.169} & \cellcolor{gray!6}{-0.891} & \cellcolor{gray!6}{56.689} & \cellcolor{gray!6}{-0.817}\\
-Dunnit: MTwGWI 11111 & 0 & 0.042 & 73.836 & 13.669 & 0.150 & 0.214 & 0.385 & 0.267 & 57.002 & 0.451\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:dunnitDesiderata}Desideratum satisfaction for the Dunnit scenario.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllllll}
-\toprule
-  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Dunnit: Dunnit$<$Twin} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\hypertarget{japanese-swords}{%
-\subsection{Japanese swords}\label{japanese-swords}}
-
-\textbf{The scenario.} The next challenge comes from (Meijs \& Douven, 2007, p. 414):
-
-\begin{quote}
-  We start by considering two situations in both of which it is assumed that a murder has been committed in a street in a big city with 10,000,000 inhabitants, 1,059 of them being Japanese, 1,059 of them owning Samurai swords, and 9 of them both being Japanese and owning Samurai swords. In situation I we assume that the murderer lives in the city and that everyone living in the city is equally likely to be the murderer. In situation II, on the other hand, we make the assumption that the victim was murdered by someone living in the street in which her body was found. In that street live 100 persons, 10 of them being Japanese, 10 owning a Samurai sword, and 9 both being Japanese and owning a Samurai sword. [\dots] [In situation III] we have 12 suspects who all live in the same house, and 10 of them are Japanese, 10 own a Samurai sword, and 9 are both Japanese and Samurai sword owners.
-\end{quote}
-
-\noindent The nodes involved are as in Table \ref{tab:japanesePropositions1}.
-
-\begin{table}[H]
-
-\caption{\label{tab:japanesePropositions1}Nodes in the Japanese swords scenario.}
-\centering
-\begin{tabular}[t]{ll}
-\toprule
-node & content\\
-\midrule
-\cellcolor{gray!6}{J} & \cellcolor{gray!6}{The murderer is Japanese.}\\
-O & The murderer owns a Samurai sword.\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Now, we look at three separate scenarios: (\textsf{1}) The murderer lives in the city, (\textsf{2}) The murderer lives in the street popular among Japanese owners of Samurai swords, and (\textsf{3}) The murderer lives in the house with many Japanese owners of Samurai swords.
-
-\noindent \textbf{Desiderata.} In all of the above situations the number of Japanese owners of Samurai swords remains the same. However, situations 1 and 2 differ in the relative overlap of \s{J} and \s{O}. Because \s{J} and \s{O} are more correlated in situation 2, it seems more coherent than situation 1.
-
-\vspace{2mm}\begin{description}
-    \item[(\s{JO2}$>$\s{JO1})]  \{\s{J,O,2}\} should be more coherent than \{\s{J,O,1}\}.
-\end{description}\vspace{2mm}
-
-However, bigger overlap, supposedly, doesn't have to indicate higher coherence. In situation 3 \s{J} and \s{O} confirm each other to a lesser extent than in situation 2 (compare \(P(J|O)-P(J)\) and \(P(O|J)-P(O)\) in both cases), and for this reason Douven and Meijs claim that situation 2 is more coherent than situation 3.
-\vspace{2mm}
-
-\begin{description}
-    \item[(\s{JO2}$>$\s{JO3})]  \{\s{J,O,2}\} should be more coherent than \{\s{J,O,3}\}.
-\end{description}\vspace{2mm}
-
-\noindent We don't have clear intuitions about this desideratum. It seems to be in tension with the requirement offered by Siebel (2004, p. 336) which we'll discuss in the next subsection.\todo{fix when done}
-
-\textbf{Bayesian networks.} There is a common DAG for the three scenarios, but the CPTs differ (Figure \ref{fig:japanese}).
-
-\begin{figure}[H]
-\scalebox{0.5}{
-\hspace{2.5cm}\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-13-1} \end{center}
-\end{subfigure}} \hfill
-\begin{subfigure}[!ht]{0.2\textwidth}
-
-\begin{tabular}{lr}
-\toprule
-J & Pr\\
-\midrule
-1 & 0\\
-0 & 1\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrr}
-\toprule
-\multicolumn{1}{c}{O} & \multicolumn{2}{c}{J} \\
-  & 1 & 0\\
-\midrule
-1 & 0.008 & 0\\
-0 & 0.992 & 1\\
-\bottomrule
-\end{tabular}
-\caption{Scenario 1.}
-\end{subfigure} 
-\begin{subfigure}[!ht]{0.2\textwidth}
-
-\begin{tabular}{lr}
-\toprule
-J & Pr\\
-\midrule
-1 & 0.1\\
-0 & 0.9\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrr}
-\toprule
-\multicolumn{1}{c}{O} & \multicolumn{2}{c}{J} \\
-  & 1 & 0\\
-\midrule
-1 & 0.9 & 0.011\\
-0 & 0.1 & 0.989\\
-\bottomrule
-\end{tabular}
-\caption{Scenario 2.}
-\end{subfigure}  \hfill
-\begin{subfigure}[!ht]{0.2\textwidth}
-
-\begin{tabular}{lr}
-\toprule
-J & Pr\\
-\midrule
-1 & 0.833\\
-0 & 0.167\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrr}
-\toprule
-\multicolumn{1}{c}{O} & \multicolumn{2}{c}{J} \\
-  & 1 & 0\\
-\midrule
-1 & 0.9 & 0.5\\
-0 & 0.1 & 0.5\\
-\bottomrule
-\end{tabular}
-\caption{Scenario 3.}
-\end{subfigure} 
-\caption{A common DAG and three sets of CPTs for the \textsf{Japanese Swords} problem.}
-\label{fig:japanese}
-\end{figure}
-
-\textbf{Results.} Coherence calculations are in Table \ref{tab:japaneseCoherence} and the status of the desiderata involved is displayed in Table \ref{tab:japaneseDesiderata}.
-
-\begin{table}[H]
-
-\caption{\label{tab:japaneseCoherence}Coherence scores in the Japanese swords scenarios (rounded).}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrrr}
-\toprule
-  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Japanese Swords 1: JO 11} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{80.251} & \cellcolor{gray!6}{80.251} & \cellcolor{gray!6}{0.008} & \cellcolor{gray!6}{0.008} & \cellcolor{gray!6}{0.976} & \cellcolor{gray!6}{0.008} & \cellcolor{gray!6}{80.93} & \cellcolor{gray!6}{0.976}\\
-Japanese Swords 2: JO 11 & 0.818 & 0.818 & 9.000 & 9.000 & 0.800 & 0.900 & 0.976 & 0.889 & 81.00 & 0.976\\
-\cellcolor{gray!6}{Japanese Swords 3: JO 11} & \cellcolor{gray!6}{0.818} & \cellcolor{gray!6}{0.818} & \cellcolor{gray!6}{1.080} & \cellcolor{gray!6}{1.080} & \cellcolor{gray!6}{0.067} & \cellcolor{gray!6}{0.900} & \cellcolor{gray!6}{0.286} & \cellcolor{gray!6}{0.400} & \cellcolor{gray!6}{1.80} & \cellcolor{gray!6}{0.286}\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:japaneseDesiderata}Desiderata satisfaction in the Japanese swords scenarios.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllllll}
-\toprule
-  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Swords: JO2$>$JO1} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
-Swords: JO2$>$JO3 & FALSE & FALSE & TRUE & TRUE & TRUE & FALSE & TRUE & TRUE & TRUE & TRUE\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\hypertarget{robbers}{%
-\subsection{Robbers}\label{robbers}}
-
-\textbf{The scenario.} A challenge put forward by Siebel (2004, p. 336) goes as follows:
-
-\begin{quote}
-    Let there be ten equiprobable suspects for a murder. All of them previously committed at least one crime, two a robbery, two pick-pocketing, and the remaining six both crimes. There is thus a substantial overlap: of the total of eight suspects who committed a robbery, six were also involved in pick-pocketing, and conversely. 
-\end{quote}
-
-\noindent The nodes involved are Table \ref{tab:robbersPropositions}.
-
-\begin{table}[H]
-
-\caption{\label{tab:robbersPropositions}Nodes in the Robbers scenario.}
-\centering
-\begin{tabular}[t]{ll}
-\toprule
-node & content\\
-\midrule
-\cellcolor{gray!6}{W} & \cellcolor{gray!6}{Real perpetrator status (three possible states).}\\
-P & The murderer is a pickpocket.\\
-\cellcolor{gray!6}{R} & \cellcolor{gray!6}{The murderer is a robber.}\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\noindent  \textbf{Desiderata.} The first observation is that the set of propositions that corresponds to the situation in which a murderer committed both crimes should be regarded coherent. Most suspects committed both crimes, so this option is even the most probable one.
-\vspace{2mm}
-
-\begin{description}
-    \item[(\s{PR}\textgreater \s{neutral})] \{\s{P,R}\} should be regarded coherent. 
-\end{description}\vspace{2mm}
-
-According to Siebel (2004, p. 336) committing both crimes by the murderer should also be regarded more coherent than committing only one crime.
-\vspace{2mm}
-
-\begin{description}
-    \item[(\s{PR}$>$\s{P}$\neg$\s{R})] \{\s{P,R}\} should be more coherent than \{\s{P},$\neg$\s{R}\} and \{$\neg$\s{P},\s{R}\}.
-\end{description}\vspace{2mm}
-
-\noindent  This requirement is slightly more controversial. Even though \{\s{P,R}\} is the most probable setup, \s{P} and \s{R} disconfirm each other (\(Pr(P|R)<Pr(P)\) and \(Pr(R|P)<Pr(R)\)). Moreover, the intuition behind this desideratum seems to conflict with the intuition behind (\s{JO2}\(>\)\s{JO3}).
-
-\textbf{Bayesian networks.} The robbers counterexample involves a phenomenon we've already seen: it is not clear whether the information about the prior probabilities is supposed to be part of the narration or not. \todo{is this comment still needed?} If we want to include this information in our coherence assessment, we can do this employing a single BN.
-
-\vspace{1mm}
-\footnotesize
-
-\normalsize
-
-\begin{figure}[H]
-\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{center}\includegraphics{coherencePaper32_files/figure-latex/unnamed-chunk-20-1} \end{center}
-\end{subfigure} \hfill
-\begin{subfigure}[!ht]{0.4\textwidth}
-
-\centering\begingroup\fontsize{9}{11}\selectfont
-\begin{tabular}{lr}
-\toprule
-  & Pr\\
-\midrule
-\cellcolor{gray!6}{OnlyP} & \cellcolor{gray!6}{0.2}\\
-OnlyR & 0.2\\
-\cellcolor{gray!6}{Both} & \cellcolor{gray!6}{0.6}\\
-\bottomrule
-\end{tabular}
-
-
-
-
-\begin{tabular}{lrrr}
-\toprule
-\multicolumn{1}{c}{MisP} & \multicolumn{3}{c}{WhoMurdered} \\
-  & OnlyP & OnlyR & Both\\
-\midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1}\\
-0 & 0 & 1 & 0\\
-\bottomrule
-\end{tabular}
-
-\begin{tabular}{lrrr}
-\toprule
-\multicolumn{1}{c}{MisR} & \multicolumn{3}{c}{WhoMurdered} \\
-  & OnlyP & OnlyR & Both\\
-\midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{1}\\
-0 & 1 & 0 & 0\\
-\bottomrule
-\end{tabular}
-
-
-\endgroup{}
-
-
-\end{subfigure}
-\caption{BN for the \textsf{Robbers} problem.}
-\label{fig:Robbers}
-\end{figure}
-
-\textbf{Results.} Coherence calculations yield the results in Table \ref{tab:robbersCoherence}, and the performance of the coherence measures with respect to the desiderata is illustrated in Table \ref{tab:robbersDesiderata}.
-
-\begin{table}[H]
-
-\caption{\label{tab:robbersCoherence}Coherence scores in the Robbers scenario (rounded).}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrrr}
-\toprule
-  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-Robbers: MIsPMIsR 11 & 0.60 & 0.60 & 0.937 & 0.937 & -0.050 & 0.750 & -0.143 & 0.60 & Inf & 0.60\\
-Robbers: MIsPMIsR 10 & 0.25 & 0.25 & 1.250 & 1.250 & 0.125 & 0.625 & 0.571 & -0.36 & Inf & -0.36\\
-Robbers: MIsPMIsR 01 & 0.25 & 0.25 & 1.250 & 1.250 & 0.125 & 0.625 & 0.571 & -0.36 & Inf & -0.36\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:robbersDesiderata}Desiderata satisfaction in the Robbers problem.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllllll}
-\toprule
-  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-Robbers: PR$>$P$\neg$R & TRUE & TRUE & FALSE & FALSE & FALSE & TRUE & FALSE & TRUE & FALSE & TRUE\\
-Robbers: PR$>$neutral & NA & NA & FALSE & FALSE & FALSE & TRUE & FALSE & TRUE & TRUE & TRUE\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\hypertarget{the-beatles}{%
-\subsection{The Beatles}\label{the-beatles}}
-
-\todo{Consider moving to top of the list.}
-
-\textbf{The scenario.} The challenge has been offered by Shogenji (1999, p. 339) to criticize defining coherence in terms of pairwise coherence --- it shows there are jointly incoherent pairwise coherent sets. The scenario consists of the claims displayed in Table \ref{tab:beatles}.
-
-\begin{table}[H]
-
-\caption{\label{tab:beatles}Nodes in the Beatles scenario.}
-\centering
-\begin{tabular}[t]{ll}
-\toprule
-node & content\\
-\midrule
-\cellcolor{gray!6}{D} & \cellcolor{gray!6}{Exactly one of the Beatles (John, Paul, George and Ringo) is dead.}\\
-J & John is alive.\\
-\cellcolor{gray!6}{P} & \cellcolor{gray!6}{Paul is alive.}\\
-G & George is alive.\\
-\cellcolor{gray!6}{R} & \cellcolor{gray!6}{Ringo is alive.}\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\noindent  \textbf{Desiderata.} The set consisting of all of these propositions is logically inconsistent (even though the propositions are pairwise consistent), so it seems quite intuitive that it should be incoherent.
-\vspace{2mm}
-
-\begin{description}
-    \item[(below neutral)] \{\s{D,J,P,G,R}\} should be incoherent.
-\end{description}\vspace{2mm}
-
-We can make this desideratum a bit stronger by requiring that the coherence score for \{\s{D,J,P,G,R}\} should be minimal.
-\vspace{2mm}
-
-\begin{description}
-    \item[(minimal)] \{\s{D,J,P,G,R}\} should get the lowest possible coherence value.
-\end{description}\vspace{2mm}
-
-\noindent  One may argue that some coherence measures also measure the degree of incoherence, therefore logically inconsistent sets don't need to get the minimal score. We'll discuss this issue further in Section \ref{sec:mean}.\todo{check ref}
-
-For the sake of example, we assume the prior probability of each individual band member being dead to 0.5 (as in the above table), and the CPT for \textsf{D} is many-dimensional and so difficult to present concisely, but the method is straightforward: probability 1 is given to \textsf{D} in all combinations of the parents in which exactly one is true, and otherwise \textsf{D} gets conditional probability 0.
-
-\begin{figure}[H]
-\scalebox{1.6}{
-\begin{subfigure}[!ht]{0.3\textwidth}
-
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-23-1} \end{center}
-\end{subfigure}} \hfill
-\begin{subfigure}[!ht]{0.2\textwidth}
-
-\begin{tabular}{lr}
-\toprule
-G & Pr\\
-\midrule
-1 & 0.5\\
-0 & 0.5\\
-\bottomrule
-\end{tabular}
-\end{subfigure}
-\caption{Bayesian network for the \textsf{Beatles} scenario.}
-\end{figure}
-
-\textbf{Results.} Coherence calculations give the results from Table \ref{tab:beatlesCoherence}, and the satisfaction of the desiderata involved can be inspected by looking at Table \ref{tab:beatlesDesiderata}.
-
-\begin{table}[H]
-
-\caption{\label{tab:beatlesCoherence}Coherence scores in the Beatles scenario (rounded).}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrrr}
-\toprule
-  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Beatles: JPGRD 11111} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0.202} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1.423} & \cellcolor{gray!6}{0.025} & \cellcolor{gray!6}{0.322} & \cellcolor{gray!6}{-0.036} & \cellcolor{gray!6}{-1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{-1}\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:beatlesDesiderata}Desiderata satisfaction in the Beatles scenario.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllllll}
-\toprule
-  & OG & OGGen & Sh & ShG & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Beatles: below neutral} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
-Beatles: minimal & TRUE & FALSE & TRUE & FALSE & FALSE & FALSE & FALSE & TRUE & TRUE & TRUE\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\hypertarget{the-witnesses}{%
-\subsection{The Witnesses}\label{the-witnesses}}
-
-\textbf{The scenario.}This one comes from (Olsson, 2005, p. 391). Again, equally reliable witnesses try to identify a criminal. Consider the reports listed in Table \ref{tab:witnessesProp} (we extended the original scenario by adding \s{W5}).
-
-\begin{table}[H]
-
-\caption{\label{tab:witnessesProp}Testimonies in the Witnesses scenario.}
-\centering
-\begin{tabular}[t]{ll}
-\toprule
-node & content\\
-\midrule
-\cellcolor{gray!6}{W1} & \cellcolor{gray!6}{Witness no. 1: ‘‘Steve did it’’}\\
-W2 & Witness no. 2: ‘‘Steve did it’’\\
-\cellcolor{gray!6}{W3} & \cellcolor{gray!6}{Witness no. 3: ‘‘Steve, Martin or David did it’’}\\
-W4 & Witness no. 4: ‘‘Steve, John or James did it’’\\
-\cellcolor{gray!6}{W5} & \cellcolor{gray!6}{Wittness no. 5: ‘‘Steve, John or Peter did it’’}\\
-D & Who committed the deed (6  possible values)\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\noindent Note that this time each proposition has the structure ``Witness no. \(X\) claims that \dots'' instead of explicitly stating the witness' testimony.
-
-\textbf{Desiderata.} First, we can observe that \s{W1} and \s{W2} fully agree. Testimonies of \s{W3} and \s{W4} overlap only partially, therefore it seems that \{\s{W1},\s{W2}\} is more coherent than \{\s{W3},\s{W4}\}.
-\vspace{2mm}
-
-\begin{description}
-    \item[(\s{W1W2\textgreater W3W4})] \{\s{W1},\s{W2}\} should be more coherent than \{\s{W3},\s{W4}\}.
-\end{description}\vspace{2mm}
-
-Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} and \s{W4}, so \{\s{W4},\s{W5}\} seems more coherent than \{\s{W3},\s{W4}\}.
-\vspace{2mm}
-
-\begin{description}
-    \item[(\s{W4W5\textgreater W3W4})] \{\s{W4},\s{W5}\} should be more coherent than \{\s{W3},\s{W4}\}.
-\end{description}\vspace{2mm}
-
-\textbf{Bayesian networks.} Two requirements are associated with this example: both \(\{\)\textsf{W1, W2}\(\}\) and \(\{\)\textsf{W4, W5}\(\}\) should be more coherent than \(\{\)\textsf{W3, W4}\(\}\). The basic idea behind the CPTs we used is that for any particular witness we take the probability of them including the perpetrator in their list to be 0.8, and the probability of including an innocent to be .05. Of course, the example can be run with different conditional probability tables. Let's first take a look at the BN for the first scenario (Figure \ref{fig:w1w2}).
-
-\vspace{1mm}
-\footnotesize
-
-\normalsize
-
-\begin{figure}[H]
-\scalebox{1.2}{
-\hspace{1cm}\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-28-1} \end{center}
-\end{subfigure}} \hfill
-\begin{subfigure}[!ht]{0.3\textwidth}
-\begin{tabular}{lr}
-\toprule
-D & Pr\\
-\midrule
-\cellcolor{gray!6}{Steve} & \cellcolor{gray!6}{0.167}\\
-Martin & 0.167\\
-\cellcolor{gray!6}{David} & \cellcolor{gray!6}{0.167}\\
-John & 0.167\\
-\cellcolor{gray!6}{James} & \cellcolor{gray!6}{0.167}\\
-Peter & 0.167\\
-\bottomrule
-\end{tabular}
-\end{subfigure}
-\centering
-\begin{subfigure}[!ht]{0.3\textwidth}
-\begin{tabular}{lrrrrrr}
-\toprule
-\multicolumn{1}{c}{W1} & \multicolumn{2}{c}{D} \\
-  & Steve & Martin & David & John & James & Peter\\
-\midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.8} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05}\\
-0 & 0.2 & 0.95 & 0.95 & 0.95 & 0.95 & 0.95\\
-\bottomrule
-\end{tabular}
-\end{subfigure}
-\caption{BN for the \textsf{W1W2} narration in the \textsf{Witness} problem. CPT for \textsf{W2} is identical to the one for \textsf{W1}.}
-\label{fig:w1w2}
-\end{figure}
-
-The CPT for \textsf{D} is uniform. The table for \textsf{W1} provides the conditional probability of \textsf{W1} listing (\textsf{W1}=1) or not listing (\textsf{W1}=0) a particular person given that the actual value of \textsf{D} is Steve/Martin/\dots. The underlying rule is: if someone is guilty, a witness will mention them with probability \(.8\), and if they aren't, they will be listed with probability \(.05\). In the remaining two BNs for the problem the CPT for \textsf{D} remains the same, and the CPTs for the witness nodes are analogous to the one for \textsf{W1}. The remaining BNs have the following obvious DAGs (Fig. \ref{fig:witness}).
-
-\begin{figure}[H]
-\centering
-\scalebox{1.2}{
-\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-29-1} \end{center}
-\end{subfigure}}
-
-\scalebox{1.2}{\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-30-1} \end{center}
-\end{subfigure}}
-\caption{Two remaining DAGs for the \textsf{Witness} problem.}
-\label{fig:witness}
-\end{figure}
-
-\textbf{Results.} We think that what this example illustrates is that we should really carefully think about whose cognitive perspective is taken when we represent a narration using a BN, focusing on whether the BN involves nodes which are not part of the narration whose coherence is to be evaluated. In particular, the probabilistic information about the uniform distribution of guilt probability is not part of any of the three involved narrations, but rather a part of a third-person set-up prior to obtaining any evidence.
-
-To evaluate the coherence of a narration, at least for unmentioned assumptions that one doesn't have strong independent reasons to keep, one should think counterfactually, granting the consequences of the narration and asking what would happen if it indeed was true. In our case, a judge who evaluates the coherence of witness testimonies once she has heard them, no longer thinks that the distribution of \textsf{D} is uniform. And this agrees with the counterfactual strategy we just described: it is a consequence of the probabilistic set-up and the content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and \textsf{W2} were true, the distribution for \textsf{D} no longer would be uniform, and so it is unfair to judge the coherence of this scenario without giving up this assumption and updating one's assumptions about \textsf{D}.
-
-In such a case, we think, we should update \textsf{D} to what it would be had \textsf{W1} and \textsf{W2} be instantiated with 1s and use these updated probabilities to build the weights used in our coherence calculations for this narration (and proceed accordingly, instead updating on another set of narration nodes in the coherence evaluation of other narrations).\footnote{Note  however that  you should not simply instantiate the BN with \textsf{W1} and \textsf{W2}, propagate and run the coherence calculations on the updated BN. Then both these nodes would get 1s in their respective CPTs and coherence calculations would make   all  confirmation measures involved in such calculations  based on posterior probability equal 1 (Table \\ref{witnessesWeights}). If narration members have probability one, no other information will be able to confirm it.}
-
-\begin{table}[H]
-
-\caption{\label{tab:witnessesWeights}Propagated probabilities for D in the Witnesses scenario (rounded).}
-\centering
-\begin{tabular}[t]{lrrrrrr}
-\toprule
-  & Steve & Martin & David & John & James & Peter\\
-\midrule
-\cellcolor{gray!6}{Pr} & \cellcolor{gray!6}{0.981} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004}\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Once this strategy is taken, the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \ref{tab:witnessesCoherence} and the status of the desiderata is in Table \ref{tab:witnessesDesiderata}. Now all the weights come from Bayesian networks updated from the perspertive of a given narration, which is emphasized by our use of abbreviations SZnarr, SLRnarr, and SLnarr.
-
-\begin{table}[H]
-
-\caption{\label{tab:witnessesCoherence}Coherence scores in the Witnesses scenario (rounded).}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrrr}
-\toprule
-  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZnarr & SLRnarr & SLnarr\\
-\midrule
-\cellcolor{gray!6}{Witness: W1W2 11} & \cellcolor{gray!6}{0.451} & \cellcolor{gray!6}{0.451} & \cellcolor{gray!6}{3.551} & \cellcolor{gray!6}{3.551} & \cellcolor{gray!6}{0.446} & \cellcolor{gray!6}{0.621} & \cellcolor{gray!6}{0.771} & \cellcolor{gray!6}{0.729} & \cellcolor{gray!6}{18.501} & \cellcolor{gray!6}{0.871}\\
-Witness: W3W4 11 & 0.187 & 0.187 & 0.740 & 0.740 & -0.110 & 0.315 & -0.234 & 0.494 & 4.863 & 0.528\\
-\cellcolor{gray!6}{Witness: W4W5 11} & \cellcolor{gray!6}{0.365} & \cellcolor{gray!6}{0.365} & \cellcolor{gray!6}{1.260} & \cellcolor{gray!6}{1.260} & \cellcolor{gray!6}{0.110} & \cellcolor{gray!6}{0.535} & \cellcolor{gray!6}{0.218} & \cellcolor{gray!6}{0.602} & \cellcolor{gray!6}{5.236} & \cellcolor{gray!6}{0.637}\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:witnessesDesiderata}Desiderata satisfaction in the Witnesses scenario.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllllll}
-\toprule
-  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZnarr & SLRnarr & SLnarr\\
-\midrule
-\cellcolor{gray!6}{Witness: W$_1$W$_2>$W$_3$W$_4$} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
-Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\hypertarget{depth}{%
-\subsection{Depth}\label{depth}}
-
-\textbf{The scenario.} There are eight equally likely suspects \(1, \dots, 8\), and three equally reliable witnesses \(a, b, c\), each trying to identify the person responsible for the crime. Compare two different situations -- \s{X1} and \s{X2}:
-\begin{align*}
-    X_1 & = \{a:(1 \vee 2 \vee 3), b:(1\vee 2 \vee 4), c:(1 \vee 3 \vee 4)\}\\
-    X_2 & =  \{a:(1 \vee 2 \vee 3), b:(1\vee  4 \vee 5), c:(1 \vee 6 \vee 7)\}
-\end{align*}
-
-\noindent \textbf{Desiderata.} In \s{X1} witnesses' testimonies have bigger overlap, between each pair of the witnesses 2 suspects are the same, and in \s{X2} only 1 suspect is always the same. Following Schupbach (2008), one may have an intuition that the first situation is more coherent.
-\vspace{2mm}
-
-\begin{description}
-    \item[(\s{X1\textgreater X2})] $X_1$  should be more coherent than $X_2$.
-\end{description}\vspace{2mm}
-
-\noindent \textbf{Bayesian networks.} We start with representing the two scenarios with two fairly natural BNs (\textsf{C} stands for who Committed the crime, \textsf{TXYZ} stands for Testimony that \(X\vee Y \vee Z\)), see Figures \ref{fig:dod1} and \ref{fig:dod2}.
-
-\begin{figure}[H]
-\scalebox{1.7}{
-\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-33-1} \end{center}
-\end{subfigure}} 
-\hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth}
-
-\begin{tabular}{lr}
-\toprule
-C & Pr\\
-\midrule
-1 & 0.125\\
-2 & 0.125\\
-3 & 0.125\\
-4 & 0.125\\
-5 & 0.125\\
-6 & 0.125\\
-7 & 0.125\\
-8 & 0.125\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrrrrrrrr}
-\toprule
-\multicolumn{1}{c}{T123} & \multicolumn{2}{c}{C} \\
-  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
-\midrule
-1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0\\
-0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrrrrrrrr}
-\toprule
-\multicolumn{1}{c}{T124} & \multicolumn{2}{c}{C} \\
-  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
-\midrule
-1 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 0\\
-0 & 0 & 0 & 1 & 0 & 1 & 1 & 1 & 1\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrrrrrrrr}
-\toprule
-\multicolumn{1}{c}{T134} & \multicolumn{2}{c}{C} \\
-  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
-\midrule
-1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0\\
-0 & 0 & 1 & 0 & 0 & 1 & 1 & 1 & 1\\
-\bottomrule
-\end{tabular}
-\end{subfigure}}
-\caption{BN for \textsf{X1} in the \textsf{Depth} problem.}
-\label{fig:dod1}
-\end{figure}
-
-\begin{figure}[H]
-\scalebox{1.7}{
-\begin{subfigure}[!ht]{0.4\textwidth}
-
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-35-1} \end{center}
-\end{subfigure}} 
-\hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth}
-
-\begin{tabular}{lr}
-\toprule
-C & Pr\\
-\midrule
-1 & 0.125\\
-2 & 0.125\\
-3 & 0.125\\
-4 & 0.125\\
-5 & 0.125\\
-6 & 0.125\\
-7 & 0.125\\
-8 & 0.125\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrrrrrrrr}
-\toprule
-\multicolumn{1}{c}{T123} & \multicolumn{2}{c}{C} \\
-  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
-\midrule
-1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0\\
-0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrrrrrrrr}
-\toprule
-\multicolumn{1}{c}{T145} & \multicolumn{2}{c}{C} \\
-  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
-\midrule
-1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0\\
-0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 1\\
-\bottomrule
-\end{tabular}
-
-
-\begin{tabular}{lrrrrrrrr}
-\toprule
-\multicolumn{1}{c}{T167} & \multicolumn{2}{c}{C} \\
-  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
-\midrule
-1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 0\\
-0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 1\\
-\bottomrule
-\end{tabular}
-\end{subfigure}}
-\caption{BN for \textsf{X2} in the \textsf{Depth} problem.}
-\label{fig:dod2}
-\end{figure}
-
-\textbf{Results.} One effect of dropping the ``the witness testified that'' and using the testimony contents themselves is that the CPTs for the narration nodes are deterministically connected with the root node. In result, the coherence calculations give the results in Table \ref{tab:depthCoherence}, and the status of the desiderata is pictured in Table \ref{tab:depthDesiderata}.
-
-\begin{table}[H]
-
-\caption{\label{tab:depthCoherence}Coherence scores for the Depth problem (rounded).}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrrr}
-\toprule
-  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Depth: T123T124T134 111} & \cellcolor{gray!6}{0.250} & \cellcolor{gray!6}{0.438} & \cellcolor{gray!6}{2.37} & \cellcolor{gray!6}{1.926} & \cellcolor{gray!6}{0.198} & \cellcolor{gray!6}{0.542} & \cellcolor{gray!6}{0.382} & \cellcolor{gray!6}{-0.25} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{-0.25}\\
-Depth: T123T145T167 111 & 0.143 & 0.186 & 2.37 & 1.259 & 0.188 & 0.500 & 0.343 & -0.25 & Inf & -0.25\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:depthDesiderata}Desiderata satisfaction for the Depth problem.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllllll}
-\toprule
-  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Depth: X$_1>$X$_2$} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE}\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\todo{need to revise this}
-
-Note that this time we listed two values for our measure. \textsf{Structured 1} shows the values obtained if we do not update the weighting of the node not included in the narration, and \textsf{Structured 2} is the result of such an updated weighing (analogous to the updating involved in the \textsf{Witness} problem). Now, what are we to make of this?
-
-\textsf{Structured 1} is negative. This isn't too surprising: after all, this is the coherence of the narration with the probabilistic assumption that the distribution for \textsf{C} is uniform, and this probabilistic assumption undermines the narration. Why, however, does \textsf{Structured 2} equal 1, and why are the results identical for both narrations? This, upon reflection, isn't too suprising either. If the BN and the narration is supposed to represent a single agent's credal state, there is only one state of \textsf{C} in which the whole narration \(X_1\) is true -- trivially, it is the one in which suspect 1 is guilty, and it is the same unique state of \textsf{C} in which the whole narration \(X_2\) is true. Since seen as narrations these sets have exactly the same truth conditions, there is no surprise in them being equally coherent.
-
-What if the sentences in the set are not claims made by one agent and there is no single underlying credal state? We aren't convinced that our tool is optimal for measuring the agreement of multiple witnesses. Instead, there already exists a working measure of such an agreement --- Cohen's \(\kappa\) -- which already gives the desired results.
-
-To illustrate, let's think of a simplified situation (devoid of three-dimensional tables) with two witnesses \(w1\) and \(w2\), where the respective sets are
-\(A = \{1 \vee 2 \vee 3, 1\vee 2 \vee 4\}\) and
-\(B = \{1 \vee 2 \vee 3, 1\vee 4 \vee 5\}\) and in each set the first proposition comes from \(w1\) and the second from \(w2\). The information for these two sets is pictured in Tables \ref{tab:AkableTab} and \ref{tab:BkableTab}.
-
-\begin{table}[H]
-
-\caption{\label{tab:AkableTab}Situation A in the Depth problem.}
-\centering
-\begin{tabular}[t]{lrr}
-\toprule
-  & w2: suspect & w2: innocent\\
-\midrule
-\cellcolor{gray!6}{w1:suspect} & \cellcolor{gray!6}{2} & \cellcolor{gray!6}{1}\\
-w1: innocent & 1 & 4\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:BkableTab}Situation B in the Depth problem.}
-\centering
-\begin{tabular}[t]{lrr}
-\toprule
-  & w2: suspect & w2: innocent\\
-\midrule
-\cellcolor{gray!6}{w1: suspect} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{2}\\
-w1: innocent & 2 & 3\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\noindent Standard calculations using the \textsf{vcd} package results in the unweighted values of Cohen's \(\kappa\) pictured in Table \ref{tab:kappas2table}.
-
-\begin{table}[H]
-
-\caption{\label{tab:kappas2table}Kappas for the Depth scenario.}
-\centering
-\begin{tabular}[t]{lrr}
-\toprule
-  & A & B\\
-\midrule
-\cellcolor{gray!6}{value} & \cellcolor{gray!6}{0.467} & \cellcolor{gray!6}{-0.067}\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Let's further illustrate our point about the requirement that the BN should represent a single agent's cognitive state. For instance, you can represent, the situation in \(A\) from the perspective of the first witness. This suggests we should focus only on the nodes involved in the narration, and on the fact that from the witness' perspective the suspects are not equally likely. The example doesn't provide us enough information to build a table for \textsf{C}. In fact, no information about the wintess attitude towards this node is given, but given they say what they say, it's unlikely they think the distribution is uniform. So let's take one of the witness' own statements as the root (which ones we choose doesn't change the outcome). Clearly (or, at least, hopefully, if we talk about witnesses), the agent thinks her own claim is very likely and evaluates the probability of the other statements in \(A\) or \(B\) from its perspective. This gives us two different BNs, and when we calculate the respective coherence scores we actually do get the desired result, which isn't too hard for the other measures either.
-
-\begin{figure}[H]
-\hspace{2cm}\scalebox{0.6}{
-\begin{subfigure}[!ht]{0.3\textwidth}
-
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-41-1} \end{center}
-\end{subfigure} }\hfill
-\begin{subfigure}[!ht]{0.6\textwidth}
-\centering\begingroup\fontsize{9}{11}\selectfont
-\begin{tabular}{lrr}
-\toprule
-\multicolumn{1}{c}{T124} & \multicolumn{2}{c}{T123} \\
-  & 1 & 0\\
-\midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.667} & \cellcolor{gray!6}{0.2}\\
-0 & 0.333 & 0.8\\
-\bottomrule
-\end{tabular}
-\endgroup{}
-\end{subfigure}
-\caption{A witness perspective for the \textsf{agreement} problem, set $A$.}
-\end{figure}
-
-\begin{figure}[H]
-\hspace{2cm}\scalebox{0.6}{
-\begin{subfigure}[!ht]{0.3\textwidth}
-
-
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-42-1} \end{center}
-\end{subfigure}} \hfill
-\begin{subfigure}[!ht]{0.6\textwidth}
-\centering\begingroup\fontsize{9}{11}\selectfont
-
-\begin{tabular}{lrr}
-\toprule
-\multicolumn{1}{c}{T124} & \multicolumn{2}{c}{T123} \\
-  & 1 & 0\\
-\midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.333} & \cellcolor{gray!6}{0.4}\\
-0 & 0.667 & 0.6\\
-\bottomrule
-\end{tabular}
-\endgroup{}
-\end{subfigure}
-\caption{A witness perspective for the \textsf{agreement} problem, set $B$.}
-\end{figure}
-
-\noindent Now, the resulting calculations and outcomes are in Tables \ref{tab:depthFurtherCoherence} and \ref{tab:depthFurtherDesiderata}, and the situation is no longer problematic for any of the measures.
-
-\begin{table}[H]
-
-\caption{\label{tab:depthFurtherCoherence}Coherence scores in a single agent version of the Depth scenario (rounded).}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrrr}
-\toprule
-  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{WitnessA: T123T124 11} & \cellcolor{gray!6}{0.664} & \cellcolor{gray!6}{0.664} & \cellcolor{gray!6}{1.014} & \cellcolor{gray!6}{1.014} & \cellcolor{gray!6}{0.012} & \cellcolor{gray!6}{0.830} & \cellcolor{gray!6}{0.280} & \cellcolor{gray!6}{0.027} & \cellcolor{gray!6}{1.043} & \cellcolor{gray!6}{0.021}\\
-WitnessB: T123T145 11 & 0.331 & 0.331 & 0.996 & 0.996 & -0.003 & 0.655 & -0.047 & -0.004 & 0.994 & -0.003\\
-\bottomrule
-\end{tabular}}
-\end{table}
-
-\begin{table}[H]
-
-\caption{\label{tab:depthFurtherDesiderata}Desideratum satisfaction in the single agent version of the Depth scenario.}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllllll}
-\toprule
-  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
-\midrule
-\cellcolor{gray!6}{Depth: X$_1>$X$_2$} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
-\bottomrule
-\end{tabular}}
-\end{table}
 
 \hypertarget{dice}{%
 \subsection{Dice}\label{dice}}
@@ -1667,7 +640,7 @@ WitnessB: T123T145 11 & 0.331 & 0.331 & 0.996 & 0.996 & -0.003 & 0.655 & -0.047 
 \begin{figure}[H]
 \scalebox{1.3}{\begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-45-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-4-1} \includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-4-2} \end{center}
 \end{subfigure}}  
 \hspace{0.2cm}\begin{subfigure}[!ht]{0.25\textwidth}
 
@@ -1762,34 +735,869 @@ O & Pr\\
 
 \textbf{Results.} Calculation of coherence scores of the scenarios in the respective BNs yield the result in Table \ref{tab:diceCoherence}, and the status of the desiderata is pictured in Table \ref{tab:diceDesiderata}.
 
+\todo{make sure Dice precede robbers}
+
+\hypertarget{dunnit}{%
+\subsection{Dunnit}\label{dunnit}}
+
+\textbf{The scenario.} Another challenge, introduced by Merricks (1995) goes as follows: Mr.~Dunnit is a suspect in the murder case. Detectives first obtained the body of evidence specified in Table \ref{tab:dunnitPropositions1}.
+
 \begin{table}[H]
 
-\caption{\label{tab:diceCoherence}Coherence scores in the dice problem (rounded).}
+\caption{\label{tab:dunnitPropositions1}Initial evidence in the Dunnit scenario.}
 \centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrrr}
+\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{25em}}
 \toprule
-  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZnarr & SLRnarr & SLnarr\\
+node & content\\
 \midrule
-\cellcolor{gray!6}{Regular: TTF 11} & \cellcolor{gray!6}{0.5} & \cellcolor{gray!6}{0.5} & \cellcolor{gray!6}{3} & \cellcolor{gray!6}{3} & \cellcolor{gray!6}{0.500} & \cellcolor{gray!6}{0.75} & \cellcolor{gray!6}{0.833} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{1}\\
-Dodecahedron: TTF 11 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & 1 & NA & 1\\
+\cellcolor{gray!6}{I} & \cellcolor{gray!6}{Witnesses claim to have seen Dunnit do it (incriminating testimony).}\\
+M & Dunnit had a motive for the murder.\\
+\cellcolor{gray!6}{W} & \cellcolor{gray!6}{A credible witness claims to have seen Dunnit two hundred miles from the scene of the crime at the time of the murder.}\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
+\end{table}
+
+\noindent In light of this information they try to assess whether Dunnit is responsible for the crime (Table \ref{tab:dunnitPropositions2}).
+
+\begin{table}[H]
+
+\caption{\label{tab:dunnitPropositions2}The guilt statement in the Dunnit scenario.}
+\centering
+\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{25em}}
+\toprule
+node & content\\
+\midrule
+\cellcolor{gray!6}{G} & \cellcolor{gray!6}{Dunnit is guilty.}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent Now, suppose the detectives learn Dunnit has a twin brother (Table \ref{tab:dunnitPropositions3}).
+
+\begin{table}[H]
+
+\caption{\label{tab:dunnitPropositions3}New evidence in the Dunnit scenario.}
+\centering
+\begin{tabular}[t]{l>{\raggedright\arraybackslash}p{25em}}
+\toprule
+node & content\\
+\midrule
+\cellcolor{gray!6}{Tw} & \cellcolor{gray!6}{Dunnit has an identical twin which was seen by the credible witness two hundred miles from the scene of the crime during the murder.}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent What are our intuitions when we compare the coherence of \(\{\)\s{I,M,W,G}\(\}\) with the coherence of \(\{\)\s{I,M,W,G,Tw}\(\}\)?
+
+\noindent \textbf{Desideratum.} It seems that adding proposition about a twin should increase the coherence of the set.
+
+\vspace{2mm}\begin{description}
+    \item[(Dunnit$<$Twin)] $\{$\s{I,M,W,G}$\}$ should be less coherent than $\{$\s{I,M,W,G,Tw}$\}$. 
+\end{description}\vspace{2mm}
+
+\textbf{Bayesian networks.} Here, we deal with two separate BNs. One, before the \textsf{Twin} node is even considered (Figure \ref{fig:twinless}), and one with the \textsf{Twin} node (Figure \ref{fig:twin}). The CPTs for the no-twin version are in agreement with those in the ones in the Twin case. Since Merricks (1995) did not specify probabilities in the original example (and its further discussion focused on the general relationship between coherence and the addition of propositions), we came up with plausible values.
+
+\begin{figure}[H]
+\scalebox{1.7}{
+\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-9-1} \end{center}
+\end{subfigure}} 
+\hspace{-0.8cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+M & Pr\\
+\midrule
+1 & 0.4\\
+0 & 0.6\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{G} & \multicolumn{2}{c}{M} \\
+  & 1 & 0\\
+\midrule
+1 & 0.05 & 0.005\\
+0 & 0.95 & 0.995\\
+\bottomrule
+\end{tabular}
+\end{subfigure}  }
+ \hspace{0.5cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{I} & \multicolumn{2}{c}{G} \\
+  & 1 & 0\\
+\midrule
+1 & 0.8 & 0.005\\
+0 & 0.2 & 0.995\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{W} & \multicolumn{2}{c}{G} \\
+  & 1 & 0\\
+\midrule
+1 & 0.012 & 0.207\\
+0 & 0.988 & 0.793\\
+\bottomrule
+\end{tabular}
+\end{subfigure}}
+\caption{Twin-less BN for the \textsf{Dunnit} problem.}
+\label{fig:twinless}
+\end{figure}
+
+\begin{figure}[H]
+\scalebox{1.7}{
+\begin{subfigure}[!ht]{0.4\textwidth}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\end{subfigure}} 
+\hspace{-1cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{tabular}{lllr}
+\toprule
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{G} & \multicolumn{1}{c}{Tw} & \multicolumn{1}{c}{} \\
+W &  &  & Pr\\
+\midrule
+1 & 1 & 1 & 0.200\\
+0 & 1 & 1 & 0.800\\
+1 & 0 & 1 & 0.400\\
+0 & 0 & 1 & 0.600\\
+1 & 1 & 0 & 0.005\\
+0 & 1 & 0 & 0.995\\
+1 & 0 & 0 & 0.200\\
+0 & 0 & 0 & 0.800\\
+\bottomrule
+\end{tabular}
+\end{subfigure}}
+\caption{BN for the \textsf{Dunnit} problem. The key difference for the twin version lies in the construction of the CPT for \textsf{W}. The table gives conditional probabilities for \textsf{W} given various joint states of \textsf{Tw} and \textsf{G}.}
+\label{fig:twin}
+\end{figure}
+
+\todo{Add table for TW}
+
+\hypertarget{japanese-swords}{%
+\subsection{Japanese swords}\label{japanese-swords}}
+
+\textbf{The scenario.} The next challenge comes from (Meijs \& Douven, 2007, p. 414):
+
+\begin{quote}
+  We start by considering two situations in both of which it is assumed that a murder has been committed in a street in a big city with 10,000,000 inhabitants, 1,059 of them being Japanese, 1,059 of them owning Samurai swords, and 9 of them both being Japanese and owning Samurai swords. In situation I we assume that the murderer lives in the city and that everyone living in the city is equally likely to be the murderer. In situation II, on the other hand, we make the assumption that the victim was murdered by someone living in the street in which her body was found. In that street live 100 persons, 10 of them being Japanese, 10 owning a Samurai sword, and 9 both being Japanese and owning a Samurai sword. [\dots] [In situation III] we have 12 suspects who all live in the same house, and 10 of them are Japanese, 10 own a Samurai sword, and 9 are both Japanese and Samurai sword owners.
+\end{quote}
+
+\noindent The nodes involved are as in Table \ref{tab:japanesePropositions1}.
+
+\begin{table}[H]
+
+\caption{\label{tab:japanesePropositions1}Nodes in the Japanese swords scenario.}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+node & content\\
+\midrule
+\cellcolor{gray!6}{J} & \cellcolor{gray!6}{The murderer is Japanese.}\\
+O & The murderer owns a Samurai sword.\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Now, we look at three separate scenarios: (\textsf{1}) The murderer lives in the city, (\textsf{2}) The murderer lives in the street popular among Japanese owners of Samurai swords, and (\textsf{3}) The murderer lives in the house with many Japanese owners of Samurai swords.
+
+\noindent \textbf{Desiderata.} In all of the above situations the number of Japanese owners of Samurai swords remains the same. However, situations 1 and 2 differ in the relative overlap of \s{J} and \s{O}. Because \s{J} and \s{O} are more correlated in situation 2, it seems more coherent than situation 1.
+
+\vspace{2mm}\begin{description}
+    \item[(\s{JO2}$>$\s{JO1})]  \{\s{J,O,2}\} should be more coherent than \{\s{J,O,1}\}.
+\end{description}\vspace{2mm}
+
+However, bigger overlap doesn't have to indicate higher coherence. In situation 3 \s{J} and \s{O} confirm each other to a lesser extent than in situation 2 (compare \(P(J|O)-P(J)\) and \(P(O|J)-P(O)\) in both cases), and for this reason Douven and Meijs claim that situation 2 is more coherent than situation 3.
+\vspace{2mm}
+
+\begin{description}
+    \item[(\s{JO2}$>$\s{JO3})]  \{\s{J,O,2}\} should be more coherent than \{\s{J,O,3}\}.
+\end{description}\vspace{2mm}
+
+\textbf{Bayesian networks.} There is a common DAG for the three scenarios, but the CPTs differ (Figure \ref{fig:japanese}).
+
+\begin{figure}[H]
+\scalebox{0.5}{
+\hspace{2.5cm}\begin{subfigure}[!ht]{0.4\textwidth}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-14-1} \end{center}
+\end{subfigure}} \hfill
+\begin{subfigure}[!ht]{0.2\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+J & Pr\\
+\midrule
+1 & 0\\
+0 & 1\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{O} & \multicolumn{2}{c}{J} \\
+  & 1 & 0\\
+\midrule
+1 & 0.008 & 0\\
+0 & 0.992 & 1\\
+\bottomrule
+\end{tabular}
+\caption{Scenario 1.}
+\end{subfigure} 
+\begin{subfigure}[!ht]{0.2\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+J & Pr\\
+\midrule
+1 & 0.1\\
+0 & 0.9\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{O} & \multicolumn{2}{c}{J} \\
+  & 1 & 0\\
+\midrule
+1 & 0.9 & 0.011\\
+0 & 0.1 & 0.989\\
+\bottomrule
+\end{tabular}
+\caption{Scenario 2.}
+\end{subfigure}  \hfill
+\begin{subfigure}[!ht]{0.2\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+J & Pr\\
+\midrule
+1 & 0.833\\
+0 & 0.167\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{O} & \multicolumn{2}{c}{J} \\
+  & 1 & 0\\
+\midrule
+1 & 0.9 & 0.5\\
+0 & 0.1 & 0.5\\
+\bottomrule
+\end{tabular}
+\caption{Scenario 3.}
+\end{subfigure} 
+\caption{A common DAG and three sets of CPTs for the \textsf{Japanese Swords} problem.}
+\label{fig:japanese}
+\end{figure}
+
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
+
+--\textgreater{}
+--\textgreater{}
+
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
+
+\hypertarget{robbers}{%
+\subsection{Robbers}\label{robbers}}
+
+\textbf{The scenario.} A challenge put forward by Siebel (2004, p. 336) goes as follows:
+
+\begin{quote}
+    Let there be ten equiprobable suspects for a murder. All of them previously committed at least one crime, two a robbery, two pick-pocketing, and the remaining six both crimes. There is thus a substantial overlap: of the total of eight suspects who committed a robbery, six were also involved in pick-pocketing, and conversely. 
+\end{quote}
+
+\noindent The nodes involved are Table \ref{tab:robbersPropositions}.
+
+\begin{table}[H]
+
+\caption{\label{tab:robbersPropositions}Nodes in the Robbers scenario.}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+node & content\\
+\midrule
+\cellcolor{gray!6}{W} & \cellcolor{gray!6}{Real perpetrator status (states: OnlyP, OnlyR, Both).}\\
+P & The murderer is a pickpocket.\\
+\cellcolor{gray!6}{R} & \cellcolor{gray!6}{The murderer is a robber.}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent  \textbf{Desiderata.} The first observation is that the set of propositions that corresponds to the situation in which a murderer committed both crimes should be regarded coherent. Most suspects committed both crimes, so this option is even the most probable one.
+\vspace{2mm}
+
+\begin{description}
+    \item[(\s{PR}\textgreater \s{neutral})] \{\s{P,R}\} should be regarded coherent. 
+\end{description}\vspace{2mm}
+
+According to Siebel (2004, p. 336) committing both crimes by the murderer should also be regarded more coherent than committing only one crime.
+\vspace{2mm}
+
+\begin{description}
+    \item[(\s{PR}$>$\s{P}$\neg$\s{R})] \{\s{P,R}\} should be more coherent than \{\s{P},$\neg$\s{R}\} and \{$\neg$\s{P},\s{R}\}.
+\end{description}\vspace{2mm}
+
+\noindent  This requirement is slightly more controversial. Even though \{\s{P,R}\} is the most probable setup, \s{P} and \s{R} disconfirm each other (\(Pr(P|R)<Pr(P)\) and \(Pr(R|P)<Pr(R)\)). Moreover, the intuition behind this desideratum seems to conflict with the intuition behind (\s{JO2}\(>\)\s{JO3}).
+
+\textbf{Bayesian networks.}
+
+The robbers counterexample illustrates the point we already discussed when we talked about the Dice example: a purely probabilistic assumption may or may not be explicitly included as part of the narration. Its explicit inclusion, achieved by the addition of a node in a BN can play a role in coherence calculations. Here, such an inclusion is in line with the example as it was proposed in the literature, where the underlying prior probabilities were explicitly listed as part of the story.
+
+the information about the prior probabilities is supposed to be part of the narration or not. \todo{is this comment still needed?} If we want to include this information in our coherence assessment, we can do this employing a single BN.
+
+\vspace{1mm}
+\footnotesize
+
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-18-1} \includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-18-2} \includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-18-3} \end{center}
+\normalsize
+
+\begin{figure}[H]
+\begin{subfigure}[!ht]{0.4\textwidth}
+
+\begin{center}\includegraphics{coherencePaper32_files/figure-latex/unnamed-chunk-19-1} \end{center}
+\end{subfigure} \hfill
+\begin{subfigure}[!ht]{0.4\textwidth}
+
+\centering\begingroup\fontsize{9}{11}\selectfont
+\begin{tabular}{lr}
+\toprule
+  & Pr\\
+\midrule
+\cellcolor{gray!6}{OnlyP} & \cellcolor{gray!6}{0.2}\\
+OnlyR & 0.2\\
+\cellcolor{gray!6}{Both} & \cellcolor{gray!6}{0.6}\\
+\bottomrule
+\end{tabular}
+
+
+
+
+\begin{tabular}{lrrr}
+\toprule
+\multicolumn{1}{c}{MisP} & \multicolumn{3}{c}{WhoMurdered} \\
+  & OnlyP & OnlyR & Both\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1}\\
+0 & 0 & 1 & 0\\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{lrrr}
+\toprule
+\multicolumn{1}{c}{MisR} & \multicolumn{3}{c}{WhoMurdered} \\
+  & OnlyP & OnlyR & Both\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{1}\\
+0 & 1 & 0 & 0\\
+\bottomrule
+\end{tabular}
+
+
+\endgroup{}
+
+
+\end{subfigure}
+\caption{BN for the \textsf{Robbers} problem.}
+\label{fig:Robbers}
+\end{figure}
+
+\textbf{Results.} Coherence calculations yield the results in Table \ref{tab:robbersCoherence}, and the performance of the coherence measures with respect to the desiderata is illustrated in Table \ref{tab:robbersDesiderata}.
+
+--\textgreater{}
+
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
+
+--\textgreater{}
+--\textgreater{}
+
+--\textgreater{}
+
+\hypertarget{the-beatles}{%
+\subsection{The Beatles}\label{the-beatles}}
+
+\todo{Consider moving to top of the list.}
+
+\textbf{The scenario.} The challenge has been offered by Shogenji (1999, p. 339) to criticize defining coherence in terms of pairwise coherence --- it shows there are jointly incoherent pairwise coherent sets. The scenario consists of the claims displayed in Table \ref{tab:beatles}.
+
+\begin{table}[H]
+
+\caption{\label{tab:beatles}Nodes in the Beatles scenario.}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+node & content\\
+\midrule
+\cellcolor{gray!6}{D} & \cellcolor{gray!6}{Exactly one of the Beatles (John, Paul, George and Ringo) is dead.}\\
+J & John is alive.\\
+\cellcolor{gray!6}{P} & \cellcolor{gray!6}{Paul is alive.}\\
+G & George is alive.\\
+\cellcolor{gray!6}{R} & \cellcolor{gray!6}{Ringo is alive.}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\todo{REF}
+
+\noindent  \textbf{Desiderata.} The set consisting of all of these propositions is logically inconsistent (even though the propositions are pairwise consistent), so it seems quite intuitive that it should be incoherent.\footnote{One may argue that some coherence measures also measure the degree of incoherence, therefore logically inconsistent sets don't need to get the minimal score. We do not focus on such an understanding of coherence in this paper. If you think different inconsistent scenarios can differ in coherence---in line with ACCURACY, COHERENCE AND EVIDENCE---our measure can accommodate this move by revising the calculations of coherence based on the \s{ecs} scores (for example, the penalty for the weakest link can be lowered, or dropped).}
+\vspace{2mm}
+
+\begin{description}
+    \item[(below neutral)] \{\s{D,J,P,G,R}\} should be incoherent.
+\end{description}\vspace{2mm}
+
+We can make this desideratum a bit stronger by requiring that the coherence score for \{\s{D,J,P,G,R}\} should be minimal.
+\vspace{2mm}
+
+\begin{description}
+    \item[(minimal)] \{\s{D,J,P,G,R}\} should get the lowest possible coherence value.
+\end{description}\vspace{2mm}
+
+For the sake of example, we assume the prior probability of each individual band member being dead to 0.5 (as in the above table), and the CPT for \textsf{D} is many-dimensional and so difficult to present concisely, but the method is straightforward: probability 1 is given to \textsf{D} in all combinations of the parents in which exactly one is true, and otherwise \textsf{D} gets conditional probability 0.
+
+\begin{figure}[H]
+\scalebox{1.6}{
+\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-20-1} \end{center}
+\end{subfigure}} \hfill
+\begin{subfigure}[!ht]{0.2\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+G & Pr\\
+\midrule
+1 & 0.5\\
+0 & 0.5\\
+\bottomrule
+\end{tabular}
+\end{subfigure}
+\caption{Bayesian network for the \textsf{Beatles} scenario.}
+\end{figure}
+
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
+
+--\textgreater{}
+--\textgreater{}
+
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
+
+\hypertarget{the-witnesses}{%
+\subsection{The Witnesses}\label{the-witnesses}}
+
+\textbf{The scenario.} This counterexample comes from (Olsson, 2005, p. 391). Equally reliable witnesses try to identify a criminal. Consider the reports listed in Table \ref{tab:witnessesProp} (we extended the original scenario by adding \s{W5}).
+
+\begin{table}[H]
+
+\caption{\label{tab:witnessesProp}Testimonies in the Witnesses scenario.}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+node & content\\
+\midrule
+\cellcolor{gray!6}{W1} & \cellcolor{gray!6}{Witness no. 1: ‘‘Steve did it’’}\\
+W2 & Witness no. 2: ‘‘Steve did it’’\\
+\cellcolor{gray!6}{W3} & \cellcolor{gray!6}{Witness no. 3: ‘‘Steve, Martin or David did it’’}\\
+W4 & Witness no. 4: ‘‘Steve, John or James did it’’\\
+\cellcolor{gray!6}{W5} & \cellcolor{gray!6}{Wittness no. 5: ‘‘Steve, John or Peter did it’’}\\
+D & Who committed the deed (6  possible values)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent Note that this time each proposition has the structure ``Witness no. \(X\) claims that \dots'' instead of explicitly stating the witness' testimony.
+
+\textbf{Desiderata.} First, we can observe that \s{W1} and \s{W2} fully agree. Testimonies of \s{W3} and \s{W4} overlap only partially, therefore it seems that \{\s{W1},\s{W2}\} is more coherent than \{\s{W3},\s{W4}\}.
+\vspace{2mm}
+
+\begin{description}
+    \item[(\s{W1W2\textgreater W3W4})] \{\s{W1},\s{W2}\} should be more coherent than \{\s{W3},\s{W4}\}.
+\end{description}\vspace{2mm}
+
+Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} and \s{W4}, so \{\s{W4},\s{W5}\} seems more coherent than \{\s{W3},\s{W4}\}.
+\vspace{2mm}
+
+\begin{description}
+    \item[(\s{W4W5\textgreater W3W4})] \{\s{W4},\s{W5}\} should be more coherent than \{\s{W3},\s{W4}\}.
+\end{description}\vspace{2mm}
+
+\noindent \textbf{Bayesian networks.} The basic idea behind the CPTs we used is that for any particular witness we take the probability of them including the perpetrator in their list to be 0.8, and the probability of including an innocent to be .05. Of course, the example can be run with different conditional probability tables. Moreover, in this case, the fact that the witnesses provided their testimonies constitutes evidence (in contrast with the Robbers scenario, where there is no evidence as to who the perpetrator is), and so we update on it in our weights calculations. Let's first take a look at the BN for the first scenario (Figure \ref{fig:w1w2}).
+
+\vspace{1mm}
+\footnotesize
+
+\normalsize
+
+\begin{figure}[H]
+\scalebox{1.2}{
+\hspace{1cm}\begin{subfigure}[!ht]{0.4\textwidth}
+
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-23-1} \end{center}
+\end{subfigure}} \hfill
+\begin{subfigure}[!ht]{0.3\textwidth}
+\begin{tabular}{lr}
+\toprule
+D & Pr\\
+\midrule
+\cellcolor{gray!6}{Steve} & \cellcolor{gray!6}{0.167}\\
+Martin & 0.167\\
+\cellcolor{gray!6}{David} & \cellcolor{gray!6}{0.167}\\
+John & 0.167\\
+\cellcolor{gray!6}{James} & \cellcolor{gray!6}{0.167}\\
+Peter & 0.167\\
+\bottomrule
+\end{tabular}
+\end{subfigure}
+\centering
+\begin{subfigure}[!ht]{0.3\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{W1} & \multicolumn{2}{c}{D} \\
+  & Steve & Martin & David & John & James & Peter\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.8} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05}\\
+0 & 0.2 & 0.95 & 0.95 & 0.95 & 0.95 & 0.95\\
+\bottomrule
+\end{tabular}
+\end{subfigure}
+\caption{BN for the \textsf{W1W2} narration in the \textsf{Witness} problem. CPT for \textsf{W2} is identical to the one for \textsf{W1}.}
+\label{fig:w1w2}
+\end{figure}
+
+In the remaining two BNs for the problem the CPT for \textsf{D} remains the same, and the CPTs for the witness nodes are analogous to the one for \textsf{W1}. The remaining BNs have the following DAGs (Fig. \ref{fig:witness}).
+
+\begin{figure}[H]
+\centering
+\scalebox{1.2}{
+\begin{subfigure}[!ht]{0.4\textwidth}
+
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-24-1} \end{center}
+\end{subfigure}}
+
+\scalebox{1.2}{\begin{subfigure}[!ht]{0.4\textwidth}
+
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-25-1} \end{center}
+\end{subfigure}}
+\caption{Two remaining DAGs for the \textsf{Witness} problem.}
+\label{fig:witness}
+\end{figure}
+
+\textbf{Results.} Note that in this case we're dealing with the perspective of someone who starts with a uniform prior for \s{D}, and subsequently considers what would happen if she obtained a given set of testimonies as evidence. Clearly, then, the distribution for \s{D} would no longer be uniform, but rather result from updating on this evidence.
+
+\begin{table}[H]
+
+\caption{\label{tab:witnessesWeights}Propagated probabilities for D in the Witnesses scenario (rounded).}
+\centering
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+  & Steve & Martin & David & John & James & Peter\\
+\midrule
+\cellcolor{gray!6}{Pr} & \cellcolor{gray!6}{0.981} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In the coherence calculations we first obtain how specific states of the narration child nodes in a narration would be confirmed by various states of \s{D}. In calculating these confirmation scores we do \emph{not} use the updated BN (after all, confirmation by evidence if you start with BN according to which you already received it would not be positive). However, the weights assigned to confirmation scores in the \s{ecs} calculations should be the (normalized) probabilities obtained by updating on the evidence. If given the evidence included in the scenario Steve is the most likely perpetrator, in your coherence calculations you give the most weight to the confirmation score obtained if he indeed is the perpetrator.
+
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
+
+--\textgreater{}
+--\textgreater{}
+
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
+
+\hypertarget{depth}{%
+\subsection{Depth}\label{depth}}
+
+\todo{add tables explaining nodes}
+
+\textbf{The scenario.} There are eight equally likely suspects \(1, \dots, 8\), and three equally reliable witnesses each trying to identify the person responsible for the crime. Compare two sets of claims about who is responsible. In contrast with Witnesses, the example ingores the fact that these are testimonies and by focusing on the material disjunctive content.
+
+\s{X1} and \s{X2}: \todo{Revise}
+\begin{align*}
+    X_1 & = \{(1 \vee 2 \vee 3), (1\vee 2 \vee 4), (1 \vee 3 \vee 4)\}\\
+    X_2 & =  \{(1 \vee 2 \vee 3), (1\vee  4 \vee 5), (1 \vee 6 \vee 7)\}
+\end{align*}
+
+\noindent \textbf{Desiderata.} In \s{X1} witnesses' testimonies have bigger overlap, between each pair of the witnesses 2 suspects are the same, and in \s{X2} only 1 suspect is always the same. Following Schupbach (2008), one may have an intuition that the first situation is more coherent.
+\vspace{2mm}
+
+\begin{description}
+    \item[(\s{X1\textgreater X2})] $X_1$  should be more coherent than $X_2$.
+\end{description}\vspace{2mm}
+
+\todo{convert to table}
+
+\noindent \textbf{Bayesian networks.} We start with representing the two scenarios with two fairly natural BNs (\textsf{C} stands for who Committed the crime, \textsf{TXYZ} stands for Testimony that \(X\vee Y \vee Z\)), see Figures \ref{fig:dod1} and \ref{fig:dod2}.
+
+\begin{figure}[H]
+\scalebox{1.7}{
+\begin{subfigure}[!ht]{0.4\textwidth}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-26-1} \end{center}
+\end{subfigure}} 
+\hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+C & Pr\\
+\midrule
+1 & 0.125\\
+2 & 0.125\\
+3 & 0.125\\
+4 & 0.125\\
+5 & 0.125\\
+6 & 0.125\\
+7 & 0.125\\
+8 & 0.125\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{T123} & \multicolumn{2}{c}{C} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\midrule
+1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{T124} & \multicolumn{2}{c}{C} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\midrule
+1 & 1 & 1 & 0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{T134} & \multicolumn{2}{c}{C} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\midrule
+1 & 1 & 0 & 1 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+\end{subfigure}}
+\caption{BN for \textsf{X1} in the \textsf{Depth} problem.}
+\label{fig:dod1}
+\end{figure}
+
+\begin{figure}[H]
+\scalebox{1.7}{
+\begin{subfigure}[!ht]{0.4\textwidth}
+
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-28-1} \end{center}
+\end{subfigure}} 
+\hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+C & Pr\\
+\midrule
+1 & 0.125\\
+2 & 0.125\\
+3 & 0.125\\
+4 & 0.125\\
+5 & 0.125\\
+6 & 0.125\\
+7 & 0.125\\
+8 & 0.125\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{T123} & \multicolumn{2}{c}{C} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\midrule
+1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{T145} & \multicolumn{2}{c}{C} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\midrule
+1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 & 0\\
+0 & 0 & 1 & 1 & 0 & 0 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{T167} & \multicolumn{2}{c}{C} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8\\
+\midrule
+1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 0\\
+0 & 0 & 1 & 1 & 1 & 1 & 0 & 0 & 1\\
+\bottomrule
+\end{tabular}
+\end{subfigure}}
+\caption{BN for \textsf{X2} in the \textsf{Depth} problem.}
+\label{fig:dod2}
+\end{figure}
+
+\textbf{Results.} One effect of dropping the ``the witness testified that'' and using the testimony contents themselves is that the CPTs for the narration nodes are deterministically connected with the root node. In result, the coherence calculations give the results in Table \ref{tab:depthCoherence}, and the status of the desiderata is pictured in Table \ref{tab:depthDesiderata}.
+
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
+
+--\textgreater{}
+--\textgreater{}
+
+\todo{need to revise this}
+
+Note that this time we listed two values for our measure. \textsf{Structured 1} shows the values obtained if we do not update the weighting of the node not included in the narration, and \textsf{Structured 2} is the result of such an updated weighing (analogous to the updating involved in the \textsf{Witness} problem). Now, what are we to make of this?
+
+\textsf{Structured 1} is negative. This isn't too surprising: after all, this is the coherence of the narration with the probabilistic assumption that the distribution for \textsf{C} is uniform, and this probabilistic assumption undermines the narration. Why, however, does \textsf{Structured 2} equal 1, and why are the results identical for both narrations? This, upon reflection, isn't too suprising either. If the BN and the narration is supposed to represent a single agent's credal state, there is only one state of \textsf{C} in which the whole narration \(X_1\) is true -- trivially, it is the one in which suspect 1 is guilty, and it is the same unique state of \textsf{C} in which the whole narration \(X_2\) is true. Since seen as narrations these sets have exactly the same truth conditions, there is no surprise in them being equally coherent.
+
+What if the sentences in the set are not claims made by one agent and there is no single underlying credal state? We aren't convinced that our tool is optimal for measuring the agreement of multiple witnesses. Instead, there already exists a working measure of such an agreement --- Cohen's \(\kappa\) -- which already gives the desired results.
+
+To illustrate, let's think of a simplified situation (devoid of three-dimensional tables) with two witnesses \(w1\) and \(w2\), where the respective sets are
+\(A = \{1 \vee 2 \vee 3, 1\vee 2 \vee 4\}\) and
+\(B = \{1 \vee 2 \vee 3, 1\vee 4 \vee 5\}\) and in each set the first proposition comes from \(w1\) and the second from \(w2\). The information for these two sets is pictured in Tables \ref{tab:AkableTab} and \ref{tab:BkableTab}.
+
+\begin{table}[H]
+
+\caption{\label{tab:AkableTab}Situation A in the Depth problem.}
+\centering
+\begin{tabular}[t]{lrr}
+\toprule
+  & w2: suspect & w2: innocent\\
+\midrule
+\cellcolor{gray!6}{w1:suspect} & \cellcolor{gray!6}{2} & \cellcolor{gray!6}{1}\\
+w1: innocent & 1 & 4\\
+\bottomrule
+\end{tabular}
 \end{table}
 
 \begin{table}[H]
 
-\caption{\label{tab:diceDesiderata2}Desideratum satisfaction in the dice problem.}
+\caption{\label{tab:BkableTab}Situation B in the Depth problem.}
 \centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lllllllllll}
+\begin{tabular}[t]{lrr}
 \toprule
-  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZnarr & SLRnarr & SLnarr\\
+  & w2: suspect & w2: innocent\\
 \midrule
-\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{TRUE}\\
+\cellcolor{gray!6}{w1: suspect} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{2}\\
+w1: innocent & 2 & 3\\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
+
+\noindent Standard calculations using the \textsf{vcd} package results in the unweighted values of Cohen's \(\kappa\) pictured in Table \ref{tab:kappas2table}.
+
+\begin{table}[H]
+
+\caption{\label{tab:kappas2table}Kappas for the Depth scenario.}
+\centering
+\begin{tabular}[t]{lrr}
+\toprule
+  & A & B\\
+\midrule
+\cellcolor{gray!6}{value} & \cellcolor{gray!6}{0.467} & \cellcolor{gray!6}{-0.067}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Let's further illustrate our point about the requirement that the BN should represent a single agent's cognitive state. For instance, you can represent, the situation in \(A\) from the perspective of the first witness. This suggests we should focus only on the nodes involved in the narration, and on the fact that from the witness' perspective the suspects are not equally likely. The example doesn't provide us enough information to build a table for \textsf{C}. In fact, no information about the wintess attitude towards this node is given, but given they say what they say, it's unlikely they think the distribution is uniform. So let's take one of the witness' own statements as the root (which ones we choose doesn't change the outcome). Clearly (or, at least, hopefully, if we talk about witnesses), the agent thinks her own claim is very likely and evaluates the probability of the other statements in \(A\) or \(B\) from its perspective. This gives us two different BNs, and when we calculate the respective coherence scores we actually do get the desired result, which isn't too hard for the other measures either.
+
+\begin{figure}[H]
+\hspace{2cm}\scalebox{0.6}{
+\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-32-1} \end{center}
+\end{subfigure} }\hfill
+\begin{subfigure}[!ht]{0.6\textwidth}
+\centering\begingroup\fontsize{9}{11}\selectfont
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{T124} & \multicolumn{2}{c}{T123} \\
+  & 1 & 0\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.667} & \cellcolor{gray!6}{0.2}\\
+0 & 0.333 & 0.8\\
+\bottomrule
+\end{tabular}
+\endgroup{}
+\end{subfigure}
+\caption{A witness perspective for the \textsf{agreement} problem, set $A$.}
+\end{figure}
+
+\begin{figure}[H]
+\hspace{2cm}\scalebox{0.6}{
+\begin{subfigure}[!ht]{0.3\textwidth}
+
+
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-33-1} \end{center}
+\end{subfigure}} \hfill
+\begin{subfigure}[!ht]{0.6\textwidth}
+\centering\begingroup\fontsize{9}{11}\selectfont
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{T124} & \multicolumn{2}{c}{T123} \\
+  & 1 & 0\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.333} & \cellcolor{gray!6}{0.4}\\
+0 & 0.667 & 0.6\\
+\bottomrule
+\end{tabular}
+\endgroup{}
+\end{subfigure}
+\caption{A witness perspective for the \textsf{agreement} problem, set $B$.}
+\end{figure}
+
+\noindent Now, the resulting calculations and outcomes are in Tables \ref{tab:depthFurtherCoherence} and \ref{tab:depthFurtherDesiderata}, and the situation is no longer problematic for any of the measures.
+
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
+
+--\textgreater{}
+--\textgreater{}
+--\textgreater{}
 
 \hypertarget{discussion}{%
 \section{\texorpdfstring{Discussion \label{sec:discussion}}{Discussion }}\label{discussion}}
