@@ -5,61 +5,78 @@ C <- c("W4","W5")
 #CALCULATIONS FOR THREE-NODE NARATED BNs
 
 
+structuredEvi(W12BN, narrationNodes = A, narrationStates = c("1","1"), 
+              evidenceNodes = A, evidenceStates = c("1","1"))
+
+
+CoherencesRowEvi(W12BN,
+                 narrationNodes =   A,
+                 narrationStates   = c("1","1"),
+                 evidenceNodes = A,
+                 evidenceStates = c("1","1"),
+                 exampleName = "Witness"
+)
 
 
 
-W12Table <- CoherencesTableNarr(W12BN,
+
+
+W12Table <- CoherencesTableEvi(list(W12BN),
                            scenariosList = list(A),
                            statesList   = list(c("1","1")),
+                           evidenceList = list(A),
+                           evidenceStatesList = list(c("1","1")),
                            exampleName = "Witness"
 )
 
-W12Table
 
 
-W34Table <- CoherencesTableNarr(W34BN,
-                                scenariosList = list(B),
-                                statesList   = list(c("1","1")),
-                                exampleName = "Witness"
+W34Table <- CoherencesTableEvi(list(W34BN),
+                               scenariosList = list(B),
+                               statesList   = list(c("1","1")),
+                               evidenceList = list(B),
+                               evidenceStatesList = list(c("1","1")),
+                               exampleName = "Witness"
 )
 
-W45Table <- CoherencesTableNarr(W45BN,
-                                scenariosList = list(C),
-                                statesList   = list(c("1","1")),
-                                exampleName = "Witness"
+W45Table <- CoherencesTableEvi(list(W45BN),
+                               scenariosList = list(C),
+                               statesList   = list(c("1","1")),
+                               evidenceList = list(C),
+                               evidenceStatesList = list(c("1","1")),
+                               exampleName = "Witness"
 )
 
 
 
-WNarrTable <- as.data.frame(rbind(W12Table, 
+WTable <- as.data.frame(rbind(W12Table, 
                                       W34Table,
-                                      W45Table
-))
+                                      W45Table))
 
-WNarrTable
+WTable
+
+
+
 
 save(WNarrTable,file = "calculations/RdataObjects/WNarrTable.Rda")
 
 
 
-
-
-
-W1W2greaterW3W4 <- WNarrTable[1,] > WNarrTable[2,] 
+W1W2greaterW3W4 <- WTable[1,] > WTable[2,] 
 # #W1W2greaterW3W4
 # # 
-W4W5greaterW3W4 <- WNarrTable[3,] > WNarrTable[2,] 
+W4W5greaterW3W4 <- WTable[3,] > WTable[2,] 
 # # #W4W5greaterW3W4
 # # 
 # # 
-WNarrResults <- as.data.frame(rbind(W1W2greaterW3W4,W4W5greaterW3W4))
+WResults <- as.data.frame(rbind(W1W2greaterW3W4,W4W5greaterW3W4))
 # # 
 # # 
-rownames(WNarrResults) <- c("Witness: W$_1$W$_2>$W$_3$W$_4$","Witness: W$_4$W$_5>$W$_3$W$_4$")
+rownames(WResults) <- c("Witness: W$_1$W$_2>$W$_3$W$_4$","Witness: W$_4$W$_5>$W$_3$W$_4$")
 # # 
 # # 
 
-WNarrResults
+WResults
 # # 
 
 save(WNarrResults,file="calculations/RdataObjects/WNarrResults.Rda")

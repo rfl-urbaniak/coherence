@@ -1,0 +1,1868 @@
+---
+title: "Structured probabilistic coherence \\linebreak and the usual counterexamples to probabilistic measures of coherence"
+# author: 
+#   - "\\normalsize Rafal Urbaniak ([LoPSE research group](http://lopsegdansk.blogspot.com/p/lopse-team.html), University of Gdansk)"
+#   - "\\normalsize Alicja Kowalewska  (Carnegie Mellon University \\& [LoPSE research group](http://lopsegdansk.blogspot.com/p/lopse-team.html))" 
+output:
+  bookdown::pdf_document2:
+    number_sections: true
+    df_print: kable 
+    keep_tex: true
+    toc_depth: 3
+    includes:
+      in_header:
+        - Rafal_latex7.sty
+fontsize: 10pt
+bibliography: coherence.bib
+csl: apa-6th-edition.csl 
+documentclass: scrartcl
+linkcolor: blue 
+filecolor: blue
+citecolor: blue
+urlcolor: blue
+toccolor: blue
+---
+\setlength{\abovedisplayskip}{-10pt}
+\setlength{\belowdisplayskip}{5pt}
+
+```{r setup, include=FALSE, echo=FALSE}
+require("knitr")
+knitr::opts_chunk$set(fig.pos = "H")
+#opts_knit$set(root.dir = "../code")
+
+```
+
+
+```{r setup2, include=FALSE, cache = TRUE}
+library(tidyverse)
+library(ggplot2)
+library(gridExtra)
+library(bnlearn)
+library(knitr)
+library(kableExtra)
+library(gRain)
+library(reshape2)
+library(tidyverse)
+library(plyr)
+library(rje)
+library(bnlearn)
+library(utils)
+library(latex2exp)
+library(useful)
+library(tidyverse)
+library(stringr)
+library(plot3D)
+library(tinytex)
+
+
+source("../code/utils//CombinationsBN.R")
+source("../code/utils//CptCreate.R")
+source("../code/utils//LogicAndBNs.R")
+source("../code/utils//kableCPTs.R")
+
+source("../code/measures/Fitelson.R")
+source("../code/measures/DouvenMeijs.R")
+source("../code/measures/generalizedOlsson.R")
+source("../code/measures/generalizedShogenji.R")
+source("../code/measures/Olsson.R")
+source("../code/measures/Roche.R")
+source("../code/measures/Shogenji.R")
+source("../code/measures/structuredCoherenceLR.R")
+source("../code/measures/structuredCoherenceEvi.R")
+source("../code/utils//CoherenceTables.R")
+```
+
+
+\pagebreak 
+
+
+# Introduction \& motivations
+
+
+
+The notion of coherence is often used in many philosophical, especially epistemological, discussions (for instance, in discussions  about the  truth-conduciveness of coherence).  When we talk about the coherence of a set of propositions or about the coherence of a story, we seem to  refer to   how well their individual pieces fit together.  How are we to understand and apply this notion systematically, though? In particular, we will be interested in probabilistic explications of this notion, as Bayesian epistemology strives to be a general epistemological project and as such it should be able to accommodate coherence-oriented considerations. 
+
+
+
+
+There is also a  more practical  reason to develop a better understanding of the notion: a plausible measure of coherence could be used to better evaluate the quality of some stories or narrations. For example in the legal context we would like to be able to assess the quality of a testimony in the court of law.  
+\todo{REFS}
+
+<!-- Allen R (2010) No plausible alternative to a plausible story of guilt as the rule of decision in criminal cases. In: Cruz, J., Laudan, L. (eds) Proof and standards of proof in the law. Northwestern University School of Law, pp 10–27 -->
+
+<!-- Pennington N, Hastie R (1991) A cognitive theory of juror decision making: the story model. Cardozo Law Rev. 13:519–557 -->
+
+<!-- Spottswood M (2013) Bridging the gap between Bayesian and story-comparison models of juridical inference. Law Probab Risk, pp. mgt010 -->
+
+<!-- Vlek C (2016) When stories and numbers meet in court: constructing and explaining Bayesian networks for criminal cases with scenarios. Rijksuniversiteit Groningen -->
+
+
+
+<!-- Focusing only on the probability of a story is to some extent problematic, because from such a perspective, more detailed stories are  penalized --- they contain more propositions, so they (usually) have lower probabilities. A plausible coherence measure could be used to asses an important aspect of a narration which so far seems to escape probabilistic analysis.  -->
+
+
+
+
+Multiple probabilistic explications of coherence have been proposed 
+[@shogenji1999conducive; @olsson2001conducive; @glass2002; @fitelson2003ProbabilisticTheoryCoherence; @Douven2007measuring; @Meijs2007Alleged; @Roche2013Coherence].  However, clear general principles to choose between them are hard to come by. One paper where some such principles have been formulated is [@Schippers2014Probabilistic], where a list of seemingly plausible adequacy conditions for a coherence measure is proposed and shown to be inconsistent to argue for pluralism about the notion of coherence. However, some of those requirements are quite non-trivial.^[Let us illustrate this.  The (Dependence) condition formulated there requires that the coherence score of a set of propositions is above (below) the neutral score if for all pairs of non-empty subsets  the posterior of an element of a pair conditional on the other element is higher than the prior of the former. This makes some of the features of the coherence measure dependent on the priors, and whether it should be so is not obvious.  On the other hand, (Agreement) is formulated in terms of conditional probabilities between such pairs. If on a given measure $\mathsf{P}$ all conditional probabilities (between pairs already mentioned) are higher than on $\mathsf{P}'$, the coherence of a set given $\mathsf{P}$ should be higher than given $\mathsf{P}'$.   The (Equivalence) requirement is that any  finite set of logically equivalent propositions should be maximally coherent. This is suspicious, as the set $\{ 0= 1, 2, = 5\}$ is a set of equivalent propositions (with sufficiently strong notion of logical equivalence in the background), but we would intuitively hesitate to say it's maximally coherent.]
+
+The general point here is not that the approach taken in [@Schippers2014Probabilistic] is flawed, but rather that the task of formulating general principles for coherence is a challenge, and that  no clear list of such uncontroversial desiderata is on the horizon.
+
+One approach to obtaining some clarity on which abstract conditions are plausible is looking at various thought experiments in which our intuitions about what the coherence scores should be (at least comparatively) are more robust than direct assessment of general requirements. In fact, looking at examples is what the main stream of literature on probabilistic coherence focused on, and each probabilistic measure of coherence faces a selection of seemingly intuitive counterexamples.  
+
+We decided to work with this methodology. We first gathered key examples that occur in the literature, represented them in terms of Bayesian networks, and developed \textbf{\textsf{R}} scripts calculating all coherence scores for the Bayesian networks at play, pushing further the results obtained by @koscholke2016evaluating.^[
+The whole work has been made possible by all those who contributed to the development of \textsf{\textbf{R}} language, and Marco Scutari, the author of \textsf{\textbf{bnlearn}} package, who was kind enough to extend his package with additional features upon our requests [@Scutari2015Bayesian-Networ].]  Then we reflected on the results, noticing that one weakness of the measures is that they pay little attention to the underlying structure  of a given narration in the calculation of its coherence. 
+
+Inspired by this observation, we formulate our own proposal, which  diverges from the known purely probabilistic measures of coherence in three important respects: (i) It is not a function of a probability measure and a set
+of propositions alone, because it is also sensitive to the selection and direction of edges in a Bayesian network representing an agent's credal state. (ii) Unlike in the case of quite a few coherence measures, it is  sensitive to
+ the  weakest links in the narration. (iii) It is not obtained by simply averaging confirmation levels between all possible combinations of elements. 
+
+We described this approach in a more detailed introduction to this measure [ANONYMIZED], which explains the method and some of the theoretical decisions that we have made, and show how it works using a  Bayesian network developed for the well-known Sally Clark case [@Fenton2018Risk]. The goal of the current  paper is to discuss a range of philosophical counterexamples to the existing  probabilistic measures of coherence and evaluate the performance of our approach using those as a benchmark, arguing that it performs much better than the existing ones. 
+
+Accordingly, in Section \ref{sec:measures} we introduce all the coherence measures, including the key motivations for and a pseudo-code description of our measure. In Section \ref{sec:examples} we describe the thought experiments meant as counterexamples to coherence measures, their corresponding desiderata and their status on various coherence measures, including ours. The order of the  discussion of any given example is straightforward: we first explain what the situation we are to consider is, what the intuitive desiderata related to it are supposed to be, how the situation is represented by means of a Bayesian network(s), and what happens when we apply all coherence measures. We end with  Section \ref{sec:discussion} in which we compare all of the results and draw some general conclusions. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Probabilistic coherence measures and structured coherence
+
+\label{sec:measures}
+
+Quite a few different measures of coherence have been proposed in the literature.  Two early proposals are:
+
+-  Shogenji's 
+  \textbf{deviation from independence} [@shogenji1999conducive], is defined as the ratio between the probability of the
+conjunction of all claims, and the probability that the conjunction
+would get if all its conjuncts were probabilistically independent (scaling from 0 to $\infty$ with neutral point 1):
+
+
+
+\begin{align}
+    \tag{Shogenji}
+    \label{coh:Shogenji}
+     \mathcal{C}_{S}(S)=\frac{P(\bigwedge S)}{\prod_{i=1}^{\vert S \vert}\{P(S_i)\vert i \in S\}}
+\end{align}
+
+\noindent This measure was later generalized by @Meijs2007Alleged. According to this approach, \eqref{coh:Shogenji} is applied not only to the whole set of propositions, but to each non-empty non-singleton subset of the set, and  the final value is defined as the average of all sub-values thus obtained.
+
+-   \textbf{Relative overlap}  [@olsson2001conducive; @glass2002], is defined as the ratio  between the intersection of all propositions and their union (scaling from -1 to 1 with no clear neutral point):
+
+\begin{align}
+    \tag{Olsson}
+    \label{coh:Olsson}
+    \mathcal{C}_{O}(S)=\frac{P(\bigwedge S)}{P(\bigvee S)}
+\end{align}
+
+\noindent It has also been generalized in a way analogous to the one used in the generalization of  the Shogenji's measure [@Meijs2007Alleged].
+
+Both of these approaches are susceptible to various objections and counterexamples [@Merricks1995; @shogenji1999conducive; @Akiba2000Shogenjis; @Shogenji2001Reply; @bovens2004bayesian; @Siebel2004On-Fitelsons-me; @siebel2006against; @Shogenji2006Why; @crupi2007BayesianMeasuresEvidential; @koscholke2016evaluating; @Schippers2019General]. To overcome them, more recent works proposed \textbf{average mutual support} measures, starting with [@fitelson2003ProbabilisticTheoryCoherence]. The general recipe for such measures is as follows.
+
+
+\begin{itemize}
+\item
+  Given that \(S\) is a set whose coherence is to be measured, let \(P\)
+  indicate the set of all ordered pairs of non-empty, disjoint subsets
+  of \(S\).
+\item
+  First, define a confirmation function (of  a hypothesis \(H\) by evidence  \(E\)): \(\mathsf{conf}(H,E)\).
+\item
+  For each pair \(\langle X, Y \rangle \in P\), calculate
+  \(\mathsf{conf}(\bigwedge X, \bigwedge Y)\), where $\bigwedge X$  is the conjunction of all the elements of $X$ (and $\bigwedge Y$ is to be understood analogously).
+\item
+  Take the mean of all the results:
+\end{itemize}\begin{align*}
+    \mathcal{C}(S) & =
+\mathsf{mean}\left(\left\{\mathsf{conf}(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i \rangle \in P\right\} \right).
+\end{align*}
+
+\noindent Different measures of coherence result from different choices of a confirmation measure. Here are the key candidates present in the literature:
+
+
+-  @fitelson2003ProbabilisticTheoryCoherence   uses the following confirmation function (the resulting coherence measure ranges from -1 to 1 with neutral point at 0):
+
+\begin{align}
+    F(H,E) & = \begin{cases}
+    1 & E\models H, E\not \models \bot \\
+    -1 & E \models \neg H\\
+    \frac{P(E|H)-P(E|\neg H)}{P(E|H)+P(E|\neg H)} & \mbox{o/w}
+    \end{cases} \nonumber \\
+\tag{Fitelson}  
+    \mathcal{C}_{F}(S) & =
+\mathsf{mean}\left(\left\{F(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i\rangle \in P\right\} \right)
+\end{align}
+
+
+-  @Douven2007measuring  use the difference confirmation measure (with coherence ranging from -1 to 1 with neutral point at 0):
+
+\begin{align}
+    D(H,E) &= P(H|E) - P(H) \nonumber \\
+\tag{DM}  
+    \mathcal{C}_{DM}(S) & =
+\mathsf{mean}\left(\left\{D(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i\rangle \in P\right\} \right)
+\end{align}
+
+
+-  @Roche2013Coherence uses the absolute confirmation measure 
+(the resulting coherence measure ranges from 0 to 1 with neutral point at $0.5$): 
+
+\begin{align} \nonumber 
+    A(H,E)  & = \begin{cases}
+    1 & E\models H, E\not \models \bot \\
+    0 & E \models \neg H\\
+    P(H|E) & \mbox{o/w} \\
+    \end{cases} \\
+\tag{Roche}  
+    \mathcal{C}_{R}(S) & =
+\mathsf{mean}\left(\left\{A(\bigwedge X_i, \bigwedge Y_i) | \langle X_i, Y_i\rangle \in P\right\} \right) 
+\end{align}
+
+Mind your head: different measures use different scales and have different neutral points (values  taken for any set of probabilistically independent propositions; not all measures have neutral points).  This is worth keeping in mind when it comes to various desiderata that we will discuss. 
+
+As we already mentioned in the introduction,  formulating abstract formal requirements for a coherence measure and investigating whether a given coherence measure satisfies them has not resulted in an agreement. For this reason, we follow another path, which has dominated the literature on the topic.  We look at how the measures behave in test scenarios. Many putative scenarios were  put forward as counterexamples. They usually have the form of a few propositions formulated in natural language, such that intuitive judgments of coherence involved and the formal coherence calculations  seem to diverge [@shogenji1999conducive; @bovens2004bayesian; @Meijs2007Alleged; @Merricks1995;  @Meijs2007Alleged; @Siebel2004On-Fitelsons-me; @siebel2006against; @Shogenji2006Why; @Akiba2000Shogenjis; @Shogenji2001Reply; @Schippers2019General; @koscholke2016evaluating; @Schippers2019General]. We will focus on these examples in what follows. To spoil the experience, let us already point out that the probabilistic measures we introduced above do not  seem to handle these examples very well (read on for details). 
+
+Inspired by these failures, in [REFERENCE SUPRESSED FOR ANONYMITY] we proposed to take a different perspective. Putting the earliest measures aside (they were problematic for various reasons), we noticed that the problems with the average mutual support measures stem from the fact that the coherence score is an average confirmation score for all possible combinations of the parts of a narration. Therefore we proposed to take a more fine-grained account. First, we represented an agent's credal state by means of a Bayesian network, which comprises not only a probabilistic measure but additional structural information. Then we used this structural information in our definition of coherence, so that only those directions of support are considered which in fact are indicated by the structure of the agent's belief state.
+
+
+
+While we refer the reader to a more extensive treatment in [REFERENCE SUPRESSED FOR ANONYMITY], we now briefly discuss the main idea behind it. A Bayesian network (BN) represents agent's probabilistic belief state with respect to the relevant nodes. Additionally, some of the nodes are distinguished as  narration nodes---the agent holds definite beliefs about which states of these nodes occur, without assigning probabilities equal 1 to them.\footnote{Also, we assume that the agent does not assign probability 0 to the narration being true.} If actual learning takes place, the evidence nodes and their states need to be specified as well.
+
+
+Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' binary beliefs.\footnote{Conceptually, it is possible to not restrict ourselves this way and look at all combinations of states of the nodes which are assigned non-null probabilities. But then, effectively, the binary content of the narration would have no impact on the coherence score, and we would obtain a coherence measure for the purely probabilistic part of agents' convictions. While this might be a worthy enterprise, we do not purse this idea in this paper. Calculations of a measure thus modified can be achieved by fairly straighforward modification of our code.} For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)^[DEFINITIONS]. Then, a weighted average of these scores is obtained. The weights are the normalized  probabilities of the combinations of parents' states  obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, $(1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})$, otherwise.^[We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.]
+
+
+
+
+\pagebreak 
+\footnotesize 
+
+```{r eval = FALSE, highlight = FALSE}
+
+FUNCTION parents_child_possible_states(parents,child)
+    IF child included in narration THEN
+        consequentStates <- the unique state of child as reported in the narration
+    ELSE
+        consequentStates <- all possible states of child
+    FOR EACH parent in parents
+        IF parent included in narration THEN
+            parentStates[parent] <- the unique state of parent as reported in the narration
+        ELSE
+            parentStates[parent] <- all possible states of parent
+    parentsStates <- all combinations of parentStates
+    variants <- list of all possible combinations of consequentStates and parentsStates
+    RETURN variants
+
+
+FUNCTION coherence_from_ecs(ecs)
+    IF min(ecs) <= 0 THEN
+        RETURN mean(ecs) * (min(ecs)+1) - min(ecs)min(ecs)
+        #this is equivalent to (1- |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)
+    ELSE
+        RETURN mean(ecs)
+
+FUNCTION structured_coherence(BN,evidenceNodes,evidenceStates)
+    parentedNodes <- vector of non-root nodes in BN
+    ecsList <- []
+    FOR EACH parentedNode IN parentedNodes
+        variants <- parents_child_possible_states(parents,parentedNode)
+        variants_count <- length(variants)
+        sumParentsNarr <- 0
+        FOR EACH variant IN variants
+            childPrior <- prior probability of the child state in variant
+            childPosterior <- posterior probability of the child state in variant,
+                        obtained by updating on the parents states
+                        from this variant
+            parentsEvidence[variant] <- joint probability of 
+                        the parents states in variant in BN updated with evidenceStates of evidenceNodes
+            sumParentsEvidence <- sumParentsEvidence +  parentsEvidence[variant] 
+            z[variant] <- z_confirmation_measure(childPrior, childPosterior)
+        ecs <- 0  #expected confirmation score
+        FOR EACH variant IN variants
+            IF parentsEvidence[variant] > 0 THEN
+                weight <- parentsEvidence[variant]/sumParentsEvidence
+            ELSE
+                weight <- 1/variants_count
+            zScaled <- z[variant] * weight
+            ecs <- ecs + zScaled
+        ecsList.add(ecs)
+    RETURN coherence_from_ecs(ecsList)
+```
+\normalsize 
+
+ 
+\noindent Having introduced the coherence measures at play, let us now move to the key counterexamples discussed in the literature.
+
+
+# Challenges and their treatment  \label{sec:examples}
+
+We will now go through a list of key counterexamples proposed in the literature, each time explaining the relevant desiderata.   We represent those scenarios as  Bayesian networks. Then we  calculate the coherence scores for those scenarios using all the measures we have introduced.  Finally, we test whether the  desiderata are  satisfied.
+
+Here are the counterexamples put forward against various coherence measures in the literature. We ignored only a few  where both we didn't share the authors' intuitions and the examples were not picked up in further discussion in the\todo{REFS} literature.\footnote{One such an example, involves
+  Sarah and her pregnancy (Tomoji Shogenji, 2006), but it focused more
+  on truth-conduciveness of coherence, which is beyond the scope of our
+  paper. We also do not discuss a few other examples involving fossils
+  and voltage (T. Shogenji, 2001; Mark Siebel, 2006). In some respects,
+  they were quite similar to the dice and depth problems that we do
+  discuss, and some of their variants simply did not inspire our
+  agreement. For instance, Siebel thinks that for voltage levels
+  \(\{V=1, V=2\}\) is more coherent than \(\{V=1, V=50\}\), while we
+  think that both sets are maximally incoherent (there might be some
+  claims in the vicinity that are not incoherent, say, focusing on
+  results of separate measurements, but an example along these lines has
+  not been properly formulated in the literature).}
+
+
+
+
+## Penguins
+
+
+\textbf{The scenario.}  This is a  challenge to the Olsson-Glass measure discussed in [@bovens2004bayesian,50] and [@Meijs2007Alleged]. It consists of the  propositions (instead of \emph{letters} or \emph{abbreviations}, we'll talk about \emph{nodes}, as these will be used later on in Bayesian networks) displayed in Table \@ref(tab:penguinsPropositions). 
+
+```{r penguinsPropositions,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("../code/bns/Penguins.R")
+B <- "Tweety is a bird."
+G <-  "Tweety is a grounded animal."
+P <-   "Tweety is a penguin."
+
+
+penguin <- data.frame(c("B","G","P"),c(B,G,P))
+colnames(penguin) <- c("node","content")
+penguinsPropositions <- penguin %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, 
+                        caption = "Propositions in the Penguins scenario") %>%   
+                          kable_styling(latex_options=c("striped","HOLD_position")) 
+penguinsPropositions
+```
+
+
+
+
+\noindent \textbf{Desiderata.}
+@Meijs2007Alleged claim that the set \{\s{B},\s{G}\}, which doesn't contain the information about Tweety being a penguin, should be less coherent than the one that does contain this information: \{\s{B},\s{G},\s{P}\}.
+
+\vspace{2mm}\begin{description}
+    \item[(\s{BG}$<$\s{BGP})] \{\s{B},\s{G}\}  should be less coherent than \{\s{B},\s{G},\s{P}\}. 
+\end{description}\vspace{2mm}
+
+Another intuition about this scenario [@Schippers2019General] is that when you consider a set which says that Tweety is both a bird and a penguin: \{\s{B},\s{P}\}, adding proposition about not flying (\s{G}) shouldn't  increase the coherence of the set as much as moving from \{\s{B},\s{G}\} to \{\s{B},\s{G}, \s{P}\}.  It's a well-known fact that penguins don’t fly and by adding \s{G} explicitly to the set, one wouldn't gain as much information. 
+However, as \s{G} is not a logical consequence of \s{P}, it can be argued that \{\s{B},\s{P}\} and \{\s{B},\s{P},\s{G}\} represent different information sets, and so some  difference in their coherence is  to be expected.
+
+\vspace{2mm}\begin{description}
+    \item[(\s{BG} $\ll$ \s{BP}$\leq$\s{BGP})]  \{\s{B},\s{P}\} should be notably above  \{\s{B},\s{G}\}, and less than \{\s{B},\s{P},\s{G}\}.
+\end{description}\vspace{2mm}
+
+\noindent Formally, we'll require that the absolute difference between \s{BG} and \s{BP} be greater than $.1$ (the exact placement of the threshold doesn't make a huge difference, unless it's at an unintuitive value below  $.01$) and that \{\s{B},\s{G}\} $\leq$  \{\s{B},\s{P},\s{G}\}.
+
+
+\noindent \textbf{Bayesian network.} We used the distribution used in the original formulation [@Meijs2007Alleged] to build a BN corresponding to the narrations at play (Fig. \ref{fig:BGP}).\footnote{Not without concerns. There are around 18 000 species of birds, and around 60 of them are flightless. We  couldn't find information about counts, but it seems the probability of being a penguin if one is grounded is overestimated by philosophers.  Also, there are many things that are not grounded but are not birds, mostly insects, and there's plenty of them. We did spend some time coming up with plausible ranges of probabilities to correct for such factors, and none of them actually makes a difference to the main point. So, for the sake of simplicity, we leave the original unrealistic distribution in our discussion.}
+
+
+
+\begin{figure}[H]
+\hspace{2cm}\scalebox{0.7}{\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "100%", dpi = 300}
+source("../code/bns//Penguins.R")
+ 
+graphviz.plot(BirdDAGbgp)
+```
+\end{subfigure}} \hfill
+\hspace{-3cm}\scalebox{0.8}{\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+source("../code/utils//kableCPTs.R")
+CPkable0("BirdBNbgp","B")
+CPkable1("BirdBNbgp","P")
+CPkable2("BirdBNbgp","G")
+```
+\end{subfigure}}
+\caption{Bayesian network for the Penguins problem.}
+\label{fig:BGP}
+\end{figure}
+
+
+
+
+<!-- \begin{figure}[H] -->
+<!-- \hspace{2cm}\scalebox{0.6}{ -->
+<!-- \begin{subfigure}[!ht]{0.4\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%",  dpi = 300, fig.height=2.5, fig.width=2} -->
+<!-- graphviz.plot(BirdDAGbg) -->
+<!-- ``` -->
+<!-- \end{subfigure} } -->
+<!-- \hfill -->
+<!-- \hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- CPkable0("BirdBNbg","B") -->
+<!-- CPkable1("BirdBNbg","G") -->
+<!-- ``` -->
+<!-- \end{subfigure} -->
+<!-- \label{fig-BG} -->
+<!-- \caption{Bayesian network for the \textsf{BG} scenario.} -->
+<!-- \end{figure} -->
+
+
+
+<!-- \begin{figure}[H] -->
+<!-- \scalebox{0.6}{ -->
+<!-- \hspace{4cm}\begin{subfigure}[!ht]{0.4\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", dpi = 300, fig.width=2, fig.height= 2.5} -->
+<!-- graphviz.plot(BirdDAGbp) -->
+<!-- ``` -->
+<!-- \end{subfigure}} \hfill -->
+<!-- \hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- CPkable0("BirdBNbp","B") -->
+<!-- CPkable1("BirdBNbp","P") -->
+<!-- ``` -->
+<!-- \end{subfigure} -->
+<!-- \caption{Bayesian network for the \textsf{BP} scenario.} -->
+<!-- \label{fig:BP} -->
+<!-- \end{figure} -->
+
+
+
+
+
+\todo{Double check satisfaction for LR}
+
+\noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \@ref(tab:penguinsCoherence)) and see if the desiderata are satisfied (Table \@ref(tab:penguinsDesiderata)).  The measures are: Olsson-Glass, generalized Olsson-Glass, Shogenji, generalized Shogenji, Douven-Meijs, Roche, Fitelson, Structured with Z, LR, and L used as a confirmation measure.
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+BGP <- c("B","G","P")
+BG <- c("B","G")
+BP <- c("B","P")
+
+BN <- BirdBNbgp
+penguinsTable <- CoherencesTableEvi(BN = list(BirdBNbgp,BirdBNbg,BirdBNbp), scenariosList = list(BGP, BG, BP), statesList   = list(c("1","1","1"), c("1","1"), c("1","1")),exampleName = "Penguins")
+
+
+# penguinsTableBGP <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP), statesList   = list(c("1","1","1")),exampleName = "Penguins")
+#
+# penguinsTableBG <- CoherencesTable(BirdBNbg, scenariosList = list(BG), statesList   = list(c("1","1")),exampleName = "Penguins")
+#
+# penguinsTableBP <- CoherencesTable(BirdBNbp, scenariosList = list(BP), statesList   = list(c("1","1")),exampleName = "Penguins")
+
+#penguinsTable <- rbind(penguinsTableBGP,penguinsTableBG,penguinsTableBP)
+```
+
+
+
+```{r penguinsCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+library(tidyverse)
+round(penguinsTable,3) %>%  kable(format = "latex",booktabs=T,
+  linesep = "",  escape = FALSE, caption = "Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1 at an arrow used in the calculations is involved.") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+
+
+```{r ,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"}
+BGlessBGP <- penguinsTable[1,] > penguinsTable[2,]
+#BPatleastBGP <- round(penguinsTable[3,],4) >= round(penguinsTable[1,],4)
+BPbetweenBGandBGP <-  abs(penguinsTable[3,] - penguinsTable[2,]) >.1 & abs(penguinsTable[1,] - penguinsTable[3,]) >=0
+
+penguinsResults <- as.data.frame(rbind(BGlessBGP,BPbetweenBGandBGP))
+rownames(penguinsResults) <- c("Penguins: BG$<$BGP","Penguins: BG$<<$ BP$<$ BGP")
+```
+
+```{r penguinsDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+library(tidyverse)
+library(kableExtra)
+penguinsResults %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Desiderata satisfaction for the Penguins scenario.") %>%
+   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+
+
+
+
+
+
+
+
+## Dice
+
+\textbf{The scenario.} This  scenario was offered by @Schippers2019General. You're either tossing a regular die, or a dodecahedron, $X$ is the result (there is nothing particular about this choice of dice; \emph{mutatis mutandis} this should hold for other possible pairs of dice as well). Consider the coherence of:
+\begin{align*} D &= \{X=2, (X=2\vee X=4)\}.\end{align*}
+
+\noindent \textbf{Desiderata.} According to  @Schippers2019General, in this scenario posterior conditional probabilities are fixed: getting 2 or 4 logically follows from getting 2 ($P(X=2\vee X=4|X=2)=1$), and you always have 50\% chance to get 2 given that the outcome was 2 or 4 ($P(X=2|X=2\vee X=4)=0.5$). Therefore, they claim, the coherence of the set \s{D} should not change no matter which die you use. 
+
+\vspace{2mm}\begin{description}
+    \item[(\s{D=const})] the coherence of \s{D} should not change.
+\end{description}\vspace{2mm}
+
+\textbf{Bayesian networks.} When one is forced to represent the scenario as a BN the situation is not straightforward. On one hand, the description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors bring up (1 and .5) do not capture this  information. In the simplest approach in which the information about the die is ignored, we can build a DAG containing two nodes: 
+\todo{tabela z nodami}
+
+\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs.
+
+\todo{BN two nodes with CTP}
+
+If we do so, the results are as expected.
+
+\todo{Add results for two nodes}
+
+However, if we include the probabilistic information about all the potential outcomes as part of agents' overall narration,  we can  use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with.
+
+\todo{Add three nodes BNs with CPTs}
+
+Then the results are as follows:
+
+\todo{Results for three}
+
+\noindent This might seem problematic, but really shouldn't. After all, now the narration is not merely 'the result is a two (and a two or a four)',  but rather  `I will toss this $n$-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the $n$).
+
+Further, we could also explore the option of the narration being `the die was fair, but it has been tossed and the result is a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated  with  \s{T} and \s{TF} treated as evidence. When we proceed this way, the coherence scores are as in the two-node variants.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- We'll follow the strategy similar to the one we already used. Since neither the example nor the narrations involve information about how probable it is that we're dealing with a regular die, as opposed to a dodecahedron, we avoid using a node representing this. Moreover, if at a given time the agent claims that the result is both two and (two or four), their cognitive situation at that time cannot be represented using uniform distribution for possible toss outcomes. Instead, we start with initial separate BNs for a regular die and a dodecahedron which do have uniform distributions for the \textsf{O} (outcome) node (Fig. \ref{fig:diceBN}), but when weighing the antecedent nodes which are not strictly speaking part of the narration, we use the probabilities updated in light of the narration content itself.  -->
+
+
+
+<!-- \begin{figure}[H] -->
+<!-- \scalebox{1.3}{\begin{subfigure}[!ht]{0.3\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", dpi = 300} -->
+<!-- source("../code/bns/Dodecahedron.R") -->
+<!-- graphviz.plot(DodDAG) -->
+<!-- ``` -->
+<!-- \end{subfigure}}   -->
+<!-- \hspace{0.2cm}\begin{subfigure}[!ht]{0.25\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", fig.height = 1.5, dpi = 300, fig.width = 1.5} -->
+<!-- CPkable0("RegularBN","O") -->
+<!-- ``` -->
+<!-- \caption{Root CPT for the regular die.} -->
+<!-- \end{subfigure}  -->
+<!-- \hspace{0.2cm} \begin{subfigure}[!ht]{0.25\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", fig.height = 1.5, dpi = 300, fig.width = 1.5} -->
+<!-- CPkable0("DodecahedronBN","O") -->
+<!-- ``` -->
+<!-- \caption{Root CPT for the dodecahedron.} -->
+<!-- \end{subfigure} -->
+
+<!-- \begin{subfigure}[!ht]{0.25\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", dpi = 300} -->
+<!-- CPkable1("RegularBN","T") -->
+<!-- CPkable1("RegularBN","TF") -->
+<!-- ``` -->
+<!-- \caption{Conditional probabilities for the regular die.} -->
+<!-- \end{subfigure} \hfill -->
+<!-- \scalebox{0.8}{\begin{subfigure}[!ht]{0.7\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", dpi = 300} -->
+<!-- CPkable1("DodecahedronBN","T") -->
+<!-- CPkable1("DodecahedronBN","TF")  -->
+<!-- ``` -->
+<!-- \caption{\large Conditional probabilities for the dodecahedron.} -->
+<!-- \end{subfigure}}  -->
+<!-- \caption{BNs for the \textsf{dice} problem.} -->
+<!-- \label{fig:diceBN} -->
+<!-- \end{figure} -->
+
+
+
+
+
+<!-- \textbf{Results.} Calculation of coherence scores of the scenarios in the respective BNs yield the result in Table \@ref(tab:diceCoherence), and the status of the desiderata is pictured in Table \@ref(tab:diceDesiderata). -->
+
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- load("../calculations/RdataObjects/diceTablePaper.Rda") -->
+<!-- load("../calculations/RdataObjects/dodecahedronResultsNew.Rda") -->
+
+<!-- colnames(DiceTableNew) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1", "S") -->
+<!-- colnames(dodecahedronResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1","S") -->
+
+
+<!-- DiceTableNew <- DiceTableNew[,-8] -->
+<!-- #colnames(DiceTableNew)[8] <- "Structured" -->
+
+<!-- dodecahedronResults <- dodecahedronResults[,-8] -->
+<!-- #colnames(dodecahedronResults)[8] <- "Structured" -->
+<!-- ``` -->
+
+
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- source("../code/measures/structuredCoherenceNarr.R") -->
+<!-- BN <- RegularBN -->
+<!-- RegularTable <- CoherencesTableNarr(RegularBN, -->
+<!--                                      scenariosList = list(c("T","TF")), -->
+<!--                                      statesList   = list(c("1","1")), -->
+<!--                                      exampleName = "Regular" -->
+<!-- ) -->
+
+
+<!-- DodecahedronTable <- CoherencesTableNarr(DodecahedronBN, -->
+<!--                                     scenariosList = list(c("T","TF")), -->
+<!--                                     statesList   = list(c("1","1")), -->
+<!--                                     exampleName = "Dodecahedron" -->
+<!-- ) -->
+
+<!-- DiceTableNew <- rbind(RegularTable,DodecahedronTable) -->
+<!-- ``` -->
+
+
+<!-- ```{r diceCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- round(DiceTableNew,3) %>%  kable(format = "latex",booktabs=T, -->
+<!--                         linesep = "",  escape = FALSE, caption = "Coherence scores in the dice problem (rounded).") %>% -->
+<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
+<!-- ``` -->
+
+
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- RegularSameDod <- DiceTableNew[1,] == DiceTableNew[2,]  -->
+<!-- dodecahedronResults <- as.data.frame(RegularSameDod) -->
+<!-- rownames(dodecahedronResults) <- c("Dodecahedron:  Regular $=$  Dodecahedron") -->
+
+<!-- ``` -->
+
+<!-- ```{r diceDesiderata2,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}  -->
+<!--  dodecahedronResults %>%  kable(format = "latex",booktabs=T,  -->
+<!--                                 linesep = "",  escape = FALSE, caption = "Desideratum satisfaction in the dice problem.") %>%  -->
+<!--  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))  -->
+<!-- ``` -->
+
+
+
+
+
+
+
+\todo{make sure Dice precede robbers}
+
+
+
+
+
+
+## Dunnit
+
+
+
+\textbf{The scenario.} Another challenge, introduced by  @Merricks1995 goes as follows:  Mr. Dunnit is a suspect in the murder case. Detectives first obtained the body of evidence specified in Table \@ref(tab:dunnitPropositions1).
+
+
+```{r dunnitPropositions1,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("../code/bns/Dunnit.R")
+I <- "Witnesses claim to have seen Dunnit do it (incriminating testimony)."
+M <-  "Dunnit had a motive for the murder."
+W <-   "A credible witness claims to have seen Dunnit two hundred miles from the scene of the crime at the time of the murder."
+
+
+dunnit <- data.frame(c("I","M","W"),c(I,M,W))
+colnames(dunnit) <- c("node","content")
+dunnit %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Initial evidence in the Dunnit scenario.") %>%  
+  kable_styling(latex_options=c("striped","HOLD_position")) %>%
+  column_spec(2, width = "25em")
+```
+
+
+\noindent In light of this information they try to assess whether Dunnit is responsible for the crime (Table \@ref(tab:dunnitPropositions2)).
+
+
+```{r dunnitPropositions2,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+G <-  "Dunnit is guilty."
+
+dunnit <- data.frame(c("G"),c(G))
+colnames(dunnit) <- c("node","content")
+dunnit %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "The guilt statement in the Dunnit scenario.") %>%
+  kable_styling(latex_options=c("striped","HOLD_position")) %>% column_spec(2, width = "25em")
+```
+
+\noindent Now, suppose the detectives learn Dunnit has a twin brother (Table \@ref(tab:dunnitPropositions3)). 
+
+```{r dunnitPropositions3,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("../code/bns/Dunnit.R")
+Tw <- "Dunnit has an identical twin which was seen by the credible witness two hundred miles from the scene of the crime during the murder."
+
+dunnit <- data.frame(c("Tw"),c(Tw))
+colnames(dunnit) <- c("node","content")
+dunnit %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "New evidence in the Dunnit scenario.") %>% 
+  kable_styling(latex_options=c("striped","HOLD_position")) %>% column_spec(2, width = "25em")
+```
+
+
+
+
+
+\noindent What are our intuitions when we compare the coherence of $\{$\s{I,M,W,G}$\}$ with the coherence of   $\{$\s{I,M,W,G,Tw}$\}$? 
+
+
+\noindent \textbf{Desideratum.}  It seems that adding proposition about a twin should increase the coherence of the set.
+
+\vspace{2mm}\begin{description}
+    \item[(Dunnit$<$Twin)] $\{$\s{I,M,W,G}$\}$ should be less coherent than $\{$\s{I,M,W,G,Tw}$\}$. 
+\end{description}\vspace{2mm}
+
+
+
+
+
+\textbf{Bayesian networks.} Here, we deal with two separate BNs. One, before the \textsf{Twin} node is even considered (Figure \ref{fig:twinless}), and one with the \textsf{Twin} node (Figure \ref{fig:twin}). The CPTs for the no-twin version are in agreement with those in the ones in the Twin case. Since @Merricks1995 did not specify probabilities in the original example (and its further discussion focused on the general relationship between coherence and the addition of propositions), we came up with  plausible values.
+
+
+
+
+\begin{figure}[H]
+\scalebox{1.7}{
+\begin{subfigure}[!ht]{0.3\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+graphviz.plot(DunnitNoTwinDAG, layout = "twopi")
+```
+\end{subfigure}} 
+\hspace{-0.8cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("DunnitNoTwinBN","M")
+CPkable1("DunnitNoTwinBN","G")
+```
+\end{subfigure}  }
+ \hspace{0.5cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+
+CPkable1("DunnitNoTwinBN","I")
+CPkable1("DunnitNoTwinBN","W")
+```
+\end{subfigure}}
+\caption{Twin-less BN for the \textsf{Dunnit} problem.}
+\label{fig:twinless}
+\end{figure}
+
+
+
+\begin{figure}[H]
+\scalebox{1.7}{
+\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+graphviz.plot(DunnitDAG, layout = "twopi")
+```
+\end{subfigure}} 
+\hspace{-1cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.3\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable2("DunnitBN","W")
+```
+\end{subfigure}}
+\caption{BN for the \textsf{Dunnit} problem. The key difference for the twin version lies in the construction of the CPT for \textsf{W}. The table gives conditional probabilities for \textsf{W} given various joint states of \textsf{Tw} and \textsf{G}.}
+\label{fig:twin}
+\end{figure}
+
+\todo{Add table for TW}
+
+
+<!-- \textbf{Results.}  -->
+<!-- Coherence calculations result in Table \@ref(tab:dunnitCoherence) and how they fare with respect to the desideratum is displayed in Table \@ref(tab:dunnitDesiderata).  -->
+
+```{r, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, message = FALSE, warning = FALSE}
+library(gRain)
+library(bnlearn)
+library(rje)
+library(useful)
+source("../code/utils/CombinationsBN.R")
+Dunnit <- c("M","G","W","I")
+DunnitTwin<- c("M","Tw","G","W","I")
+# #
+
+
+DunnitNoTwinTable <- CoherencesTableEvi(list(DunnitNoTwinBN),
+                                         scenariosList = list(Dunnit),
+                                         statesList   = list(c("1","1","1","1")),
+                                         exampleName = "Dunnit"
+)
+
+  
+
+DunnitTwinTable <- CoherencesTableEvi(list(DunnitBN),
+  scenariosList = list(DunnitTwin),
+  statesList   = list(c("1","1","1","1","1")),
+  exampleName = "Dunnit"
+)
+
+DunnitTableSeparate <- rbind(DunnitNoTwinTable,DunnitTwinTable)
+```
+
+
+
+
+<!-- colnames(DunnitTableSeparate) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- colnames(DunnitResultsSeparate) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") -->
+<!-- DunnitTableSeparate <- DunnitTableSeparate[,-7] -->
+<!-- DunnitResultsSeparate <- DunnitResultsSeparate[,-7] -->
+<!-- ``` -->
+
+
+```{r dunnitCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+library(tidyverse)
+round(DunnitTableSeparate,3) %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Coherence scores for the Dunnit scenario (rounded).") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+```{r, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, message = FALSE, warning = FALSE}
+DunnitLessTwin <- DunnitTableSeparate[1,] < DunnitTableSeparate[2,]
+DunnitResultsSeparate <- as.data.frame(DunnitLessTwin)
+rownames(DunnitResultsSeparate) <- c("Dunnit: Dunnit$<$Twin")
+```
+
+
+
+
+```{r dunnitDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE,  fig.show = "hold", out.width = "70%", dpi = 300}
+library(tidyverse)
+library(knitr)
+DunnitResultsSeparate %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Desideratum satisfaction for the Dunnit scenario.") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Japanese  swords
+
+\textbf{The scenario.} The next challenge comes from   [@Meijs2007Alleged,414]:
+
+\begin{quote}
+  We start by considering two situations in both of which it is assumed that a murder has been committed in a street in a big city with 10,000,000 inhabitants, 1,059 of them being Japanese, 1,059 of them owning Samurai swords, and 9 of them both being Japanese and owning Samurai swords. In situation I we assume that the murderer lives in the city and that everyone living in the city is equally likely to be the murderer. In situation II, on the other hand, we make the assumption that the victim was murdered by someone living in the street in which her body was found. In that street live 100 persons, 10 of them being Japanese, 10 owning a Samurai sword, and 9 both being Japanese and owning a Samurai sword. [\dots] [In situation III] we have 12 suspects who all live in the same house, and 10 of them are Japanese, 10 own a Samurai sword, and 9 are both Japanese and Samurai sword owners.
+\end{quote}
+
+ 
+\noindent The nodes involved are as in Table \@ref(tab:japanesePropositions1). 
+
+
+```{r japanesePropositions1,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("../code/bns/JapaneseSwords.R")
+J <- "The murderer is Japanese."
+O <-  "The murderer owns a Samurai sword."
+
+swords <- data.frame(c("J","O"),c(J,O))
+colnames(swords) <- c("node","content")
+swords %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Nodes in the Japanese swords scenario.") %>%  
+kable_styling(latex_options=c("striped","HOLD_position"))
+```
+
+Now, we look at three separate scenarios: (\textsf{1})      The murderer lives in the city, (\textsf{2})   The murderer lives in the street popular among Japanese owners of Samurai swords, and (\textsf{3})      The murderer lives in the house with many Japanese owners of Samurai swords.
+
+
+
+
+\noindent \textbf{Desiderata.} In all of the above situations  the number of Japanese owners of Samurai swords remains the same. However, situations 1 and 2 differ in the relative overlap of \s{J} and \s{O}. Because \s{J} and \s{O} are more correlated in situation 2, it seems more coherent than situation 1.
+
+\vspace{2mm}\begin{description}
+    \item[(\s{JO2}$>$\s{JO1})]  \{\s{J,O,2}\} should be more coherent than \{\s{J,O,1}\}.
+\end{description}\vspace{2mm}
+
+However, bigger overlap  doesn't have  to indicate higher coherence. In situation 3 \s{J} and \s{O} confirm each other to a lesser extent  than in situation 2 (compare $P(J|O)-P(J)$ and $P(O|J)-P(O)$ in both cases), and for this reason  Douven and Meijs  claim that situation 2 is more coherent than situation 3.
+\vspace{2mm}\begin{description}
+    \item[(\s{JO2}$>$\s{JO3})]  \{\s{J,O,2}\} should be more coherent than \{\s{J,O,3}\}.
+\end{description}\vspace{2mm}
+
+<!-- \noindent We  don't have clear intuitions about this desideratum. It seems to be in tension with the requirement offered by @Siebel2004On-Fitelsons-me[336]  which we'll discuss in the next subsection.\todo{fix when done}  -->
+
+
+\textbf{Bayesian networks.} There is a common DAG for the three scenarios, but the CPTs differ (Figure \ref{fig:japanese}).
+
+\begin{figure}[H]
+\scalebox{0.5}{
+\hspace{2.5cm}\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, fig.width=2}
+source("../code/bns/JapaneseSwords.R")
+graphviz.plot(JapDAG)
+```
+\end{subfigure}} \hfill
+\begin{subfigure}[!ht]{0.2\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("Jap1BN","J")
+CPkable1("Jap1BN","O")
+```
+\caption{Scenario 1.}
+\end{subfigure} 
+\begin{subfigure}[!ht]{0.2\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("Jap2BN","J")
+CPkable1("Jap2BN","O")
+```
+\caption{Scenario 2.}
+\end{subfigure}  \hfill
+\begin{subfigure}[!ht]{0.2\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("Jap3BN","J")
+CPkable1("Jap3BN","O")
+```
+\caption{Scenario 3.}
+\end{subfigure} 
+\caption{A common DAG and three sets of CPTs for the \textsf{Japanese Swords} problem.}
+\label{fig:japanese}
+\end{figure}
+
+
+
+
+\textbf{Results.} Coherence calculations are in Table \@ref(tab:japaneseCoherence) and the status of the desiderata involved is displayed in Table \@ref(tab:japaneseDesiderata).
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+J <- c("J","O")
+
+BN <- Jap1BN
+  JapaneseSwordsTableA <- CoherencesTableEvi(list(Jap1BN),
+                                  scenariosList = list(J),
+                                  statesList   = list(c("1","1")),
+                                 exampleName = "Japanese Swords 1"
+ )
+  
+
+BN <- Jap2BN
+JapaneseSwordsTableB <- CoherencesTableEvi(list(Jap2BN),
+                                         scenariosList = list(J),
+                                         statesList   = list(c("1","1")),
+                                         exampleName = "Japanese Swords 2"
+ )
+ 
+
+BN <- Jap3BN
+JapaneseSwordsTableC <- CoherencesTableEvi(list(Jap3BN),
+                                         scenariosList = list(J),
+                                         statesList   = list(c("1","1")),
+                                         exampleName = "Japanese Swords 3"
+ )
+  
+JapaneseSwordsSeparateTable <- rbind(JapaneseSwordsTableA,JapaneseSwordsTableB,JapaneseSwordsTableC)
+```
+
+
+
+```{r japaneseCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+round(JapaneseSwordsSeparateTable,3) %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Japanese swords scenarios (rounded).") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+JO2greaterJO1 <- JapaneseSwordsSeparateTable[2,] > JapaneseSwordsSeparateTable[1,]
+JO2greaterJO3 <- JapaneseSwordsSeparateTable[2,] > JapaneseSwordsSeparateTable[3,]
+JapaneseSwordsSeparateResults <- as.data.frame(rbind(JO2greaterJO1,JO2greaterJO3))
+rownames(JapaneseSwordsSeparateResults) <- c("Swords: JO2$>$JO1","Swords: JO2$>$JO3")
+```
+
+
+```{r japaneseDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+JapaneseSwordsSeparateResults %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Japanese swords scenarios.") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+
+
+
+
+## Robbers
+
+\textbf{The scenario.} A challenge put forward by @Siebel2004On-Fitelsons-me[336]  goes as follows:
+\begin{quote}
+    Let there be ten equiprobable suspects for a murder. All of them previously committed at least one crime, two a robbery, two pick-pocketing, and the remaining six both crimes. There is thus a substantial overlap: of the total of eight suspects who committed a robbery, six were also involved in pick-pocketing, and conversely. 
+\end{quote}
+\noindent The nodes involved are Table \@ref(tab:robbersPropositions).
+
+
+```{r robbersPropositions, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+W <-  "Real perpetrator status (states: OnlyP, OnlyR, Both)."
+P <-  "The murderer is a pickpocket."
+R <-  "The murderer is a robber."
+
+robbers <- data.frame(c("W","P","R"),c(W,P,R))
+colnames(robbers) <- c("node","content")
+robbers %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Nodes in the Robbers scenario.") %>%   
+  kable_styling(latex_options=c("striped","HOLD_position"))
+```
+
+
+
+
+
+
+
+
+
+\noindent  \textbf{Desiderata.}  The first observation is that the set of propositions that corresponds to the situation in which a murderer committed both crimes should be regarded coherent. Most suspects committed both crimes, so this option is even the most probable one.
+\vspace{2mm}\begin{description}
+    \item[(\s{PR}\textgreater \s{neutral})] \{\s{P,R}\} should be regarded coherent. 
+\end{description}\vspace{2mm}
+
+According to @Siebel2004On-Fitelsons-me[336]  committing both crimes by the murderer should also be regarded more coherent than committing only one crime. 
+\vspace{2mm}\begin{description}
+    \item[(\s{PR}$>$\s{P}$\neg$\s{R})] \{\s{P,R}\} should be more coherent than \{\s{P},$\neg$\s{R}\} and \{$\neg$\s{P},\s{R}\}.
+\end{description}\vspace{2mm}
+\noindent  This requirement is slightly more controversial. Even though \{\s{P,R}\} is the most probable setup, \s{P} and \s{R} disconfirm each other ($Pr(P|R)<Pr(P)$ and $Pr(R|P)<Pr(R)$). Moreover, the intuition behind this desideratum seems to conflict with the intuition behind (\s{JO2}$>$\s{JO3}).  
+
+
+
+\textbf{Bayesian networks.} 
+
+The robbers counterexample illustrates the point we already discussed when we talked about the Dice example:  a purely  probabilistic assumption may or may not be explicitly included as part of the narration. Its explicit inclusion, achieved by the addition of  a node  in a BN can play a role in coherence calculations. Here, such an inclusion is in line with the example as it was proposed in the literature, where the underlying prior probabilities were explicitly listed as part of the story.
+
+
+the information about the prior probabilities is supposed to be part of the narration or not. \todo{is this comment still needed?} If we want to include this information in our coherence assessment, we can do this employing a single BN.
+
+\vspace{1mm}
+\footnotesize
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+library(bnlearn)
+library(gRain)
+library(kableExtra)
+source("../code/bns/Robbers.R")
+
+robTable0 <- round(whoMurderedProb,3)  %>%   kable(format = "latex",booktabs=T,
+      linesep = "", escape = FALSE, col.names = c("Pr")) %>% kable_styling(latex_options=c("striped"),font_size = 9, full_width =  FALSE)  
+
+
+robTable1 <- MIsPProb %>%   kable(format = "latex",booktabs=T,
+      linesep = "", escape = FALSE) %>% kable_styling(latex_options=c("striped"),font_size = 9, full_width =  FALSE) 
+  
+robTable1 <- add_header_above(robTable1, c("MisP","WhoMurdered"=3), line = FALSE)
+
+  
+robTable2 <- MIsRProb %>%   kable(format = "latex",booktabs=T,
+      linesep = "", escape = FALSE) %>% kable_styling(latex_options=c("striped"),font_size = 9, full_width =  FALSE) 
+  
+robTable2 <- add_header_above(robTable2, c("MisR","WhoMurdered"=3), line = FALSE)
+
+```
+\normalsize
+
+
+\begin{figure}[H]
+\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", dpi = 300}
+graphviz.plot(robbersDAGsimplified)
+```
+\end{subfigure} \hfill
+\begin{subfigure}[!ht]{0.4\textwidth}
+
+\centering\begingroup\fontsize{9}{11}\selectfont
+\begin{tabular}{lr}
+\toprule
+  & Pr\\
+\midrule
+\cellcolor{gray!6}{OnlyP} & \cellcolor{gray!6}{0.2}\\
+OnlyR & 0.2\\
+\cellcolor{gray!6}{Both} & \cellcolor{gray!6}{0.6}\\
+\bottomrule
+\end{tabular}
+
+
+
+
+\begin{tabular}{lrrr}
+\toprule
+\multicolumn{1}{c}{MisP} & \multicolumn{3}{c}{WhoMurdered} \\
+  & OnlyP & OnlyR & Both\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1}\\
+0 & 0 & 1 & 0\\
+\bottomrule
+\end{tabular}
+
+\begin{tabular}{lrrr}
+\toprule
+\multicolumn{1}{c}{MisR} & \multicolumn{3}{c}{WhoMurdered} \\
+  & OnlyP & OnlyR & Both\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{1}\\
+0 & 1 & 0 & 0\\
+\bottomrule
+\end{tabular}
+
+
+\endgroup{}
+
+
+\end{subfigure}
+\caption{BN for the \textsf{Robbers} problem.}
+\label{fig:Robbers}
+\end{figure}
+
+
+
+
+\textbf{Results.} Coherence calculations yield the  results in Table \@ref(tab:robbersCoherence), and the performance of the coherence measures with respect to the desiderata is illustrated in Table \@ref(tab:robbersDesiderata).
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
+robbersBNTable <- CoherencesTableEvi(list(robbersBN,robbersBN,robbersBN), 
+                    scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
+                    statesList   = list(c("1","1"),c("1","0"),c("0","1")),
+                    exampleName = "Robbers")
+```
+
+
+
+
+```{r robbersCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
+round(robbersBNTable,3) %>% kable(format = "latex",booktabs=T,
+                        #col.names = c(node, "1", "0"),
+                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Robbers scenario (rounded).") %>%
+  kable_styling(latex_options=c("scale_down", "HOLD_position"))
+```
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
+neutralPoints <- c(NA, NA ,1, 1, 0.5, 0, 0, 0, 1, 0)
+PRgreaterPnR <- robbersBNTable[1,] > robbersBNTable[2,] 
+PRgreaterNeutral <- robbersBNTable[1,] > neutralPoints
+robbersEviResults <- as.data.frame(rbind(PRgreaterPnR,PRgreaterNeutral))
+rownames(robbersEviResults) <- c("Robbers: PR$>$P$\\neg$R","Robbers: PR$>$neutral")
+```
+
+
+```{r robbersDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
+robbersEviResults %>% kable(format = "latex",booktabs=T,
+                        #col.names = c(node, "1", "0"),
+                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Robbers problem.") %>%
+  kable_styling(latex_options=c("scale_down", "HOLD_position"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## The Beatles
+
+\todo{Consider moving to top of the list.}
+
+\textbf{The scenario.} The challenge has been offered by @shogenji1999conducive[339] to criticize defining coherence in terms of  pairwise coherence --- it shows there are jointly incoherent pairwise coherent sets.  The scenario consists of the claims displayed in Table  \@ref(tab:beatles).
+
+```{r beatles, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+D <-  "Exactly one of the Beatles (John, Paul, George and Ringo) is dead."
+J <- "John is alive."
+P <- "Paul is alive."
+G <- "George is alive."
+R <-  "Ringo is alive."
+
+beatles <- data.frame(c("D","J","P","G","R"),c(D,J,P,G,R))
+colnames(beatles) <- c("node","content")
+beatles %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Nodes in the Beatles scenario.") %>%   kable_styling(latex_options=c("striped","HOLD_position"))
+```
+
+
+
+
+
+\todo{REF}
+\noindent  \textbf{Desiderata.} The set consisting of all of these propositions is logically inconsistent (even though the propositions are pairwise consistent), so it seems quite intuitive that it should be incoherent.\footnote{One may argue that some coherence measures also measure the degree of incoherence, therefore logically inconsistent sets don't need to get the minimal score. We do not focus on such an understanding of coherence in this paper. If you think different inconsistent scenarios can differ in coherence---in line with ACCURACY, COHERENCE AND EVIDENCE---our measure can accommodate this move by revising the calculations of coherence based on the \s{ecs} scores (for example, the penalty for the weakest link can be lowered, or dropped).}
+\vspace{2mm}\begin{description}
+    \item[(below neutral)] \{\s{D,J,P,G,R}\} should be incoherent.
+\end{description}\vspace{2mm}
+ We can make this desideratum a bit stronger by requiring that the coherence score for \{\s{D,J,P,G,R}\} should be minimal.
+\vspace{2mm}\begin{description}
+    \item[(minimal)] \{\s{D,J,P,G,R}\} should get the lowest possible coherence value.
+\end{description}\vspace{2mm}
+
+
+
+For the sake of example, we assume the prior probability of each individual band member being dead to 0.5 (as in the above table), and the CPT for \textsf{D} is many-dimensional and so difficult to present concisely, but the method is straightforward: probability 1 is given to \textsf{D} in all combinations of the parents in which exactly one is true, and otherwise \textsf{D} gets conditional probability 0.
+
+
+\begin{figure}[H]
+\scalebox{1.6}{
+\begin{subfigure}[!ht]{0.3\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+source("../code/bns/Beatles.R")
+graphviz.plot(BeatlesDAG)
+```
+\end{subfigure}} \hfill
+\begin{subfigure}[!ht]{0.2\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("BeatlesBN","G") 
+```
+\end{subfigure}
+\caption{Bayesian network for the \textsf{Beatles} scenario.}
+\end{figure}
+
+
+\textbf{Results.} Coherence calculations give the results from Table \@ref(tab:beatlesCoherence), and the satisfaction of the desiderata involved can be inspected by looking at Table \@ref(tab:beatlesDesiderata).
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+B <- c("J","P","G","R","D")
+BN <- BeatlesBN
+#
+BeatlesTable <- CoherencesTableEvi(list(BeatlesBN),
+                                        scenariosList = list(B),
+                                        statesList   = list(c("1","1","1","1","1")),
+                                        exampleName = "Beatles"
+)
+```
+
+
+
+
+
+```{r beatlesCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+round(BeatlesTable,3) %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Beatles scenario (rounded).") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+B <- c("J","P","G","R","D")
+minima <-  c(0, 0 ,0, 0, -1, -1, 0, -1, 0, -1)
+neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 1, 0)
+BeatlesMinimal <- BeatlesTable[1,] == minima
+BeatlesBelowNeutral <- BeatlesTable[1,] < neutralPoints
+BeatlesResults <- as.data.frame(rbind(BeatlesBelowNeutral, BeatlesMinimal))
+rownames(BeatlesResults) <- c("Beatles: below neutral", "Beatles: minimal")
+```
+
+
+
+```{r beatlesDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+BeatlesResults %>%  kable(format = "latex",booktabs=T,
+        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Beatles scenario.") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## The Witnesses
+
+\textbf{The scenario.} This counterexample comes from [@olsson2005,391]. Equally reliable witnesses try to identify a criminal. Consider the  reports listed in Table \@ref(tab:witnessesProp) (we extended the original scenario by adding \s{W5}).
+
+
+
+```{r witnessesProp,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("../code/bns/Witness.R")
+w1 <-  "Witness no. 1: ‘‘Steve did it’’"
+w2 <-  "Witness no. 2: ‘‘Steve did it’’"
+w3 <-  "Witness no. 3: ‘‘Steve, Martin or David did it’’"
+w4 <- "Witness no. 4: ‘‘Steve, John or James did it’’"
+w5 <- "Wittness no. 5: ‘‘Steve, John or Peter did it’’"
+D  <-  "Who committed the deed (6  possible values)"
+
+witnesses <- data.frame(c("W1","W2","W3","W4","W5","D"),c(w1,w2,w3,w4,w5,D))
+colnames(witnesses) <- c("node","content")
+witnesses %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Testimonies in the Witnesses scenario.") %>% 
+  kable_styling(latex_options=c("striped","HOLD_position"))
+```
+
+
+
+\noindent Note that this time each proposition has the structure ‘‘Witness no. $X$ claims that \dots" instead of explicitly stating the witness' testimony. 
+
+\textbf{Desiderata.} First, we can observe that \s{W1} and \s{W2} fully agree. Testimonies of \s{W3} and \s{W4} overlap only partially, therefore it seems that \{\s{W1},\s{W2}\} is more coherent than \{\s{W3},\s{W4}\}.
+\vspace{2mm}\begin{description}
+    \item[(\s{W1W2\textgreater W3W4})] \{\s{W1},\s{W2}\} should be more coherent than \{\s{W3},\s{W4}\}.
+\end{description}\vspace{2mm}
+
+Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} and \s{W4}, so \{\s{W4},\s{W5}\} seems more coherent than \{\s{W3},\s{W4}\}.
+\vspace{2mm}\begin{description}
+    \item[(\s{W4W5\textgreater W3W4})] \{\s{W4},\s{W5}\} should be more coherent than \{\s{W3},\s{W4}\}.
+\end{description}\vspace{2mm}
+
+
+\noindent \textbf{Bayesian networks.}   The basic idea behind the CPTs we used  is that for any particular witness we take the probability of them including the perpetrator in their list to be 0.8, and the probability of including an innocent to be .05. Of course, the example can be run with different conditional probability tables.  Moreover, in this case, the fact that the witnesses provided their testimonies constitutes evidence (in contrast  with the Robbers scenario, where there is no evidence as to who the perpetrator is), and so we update  on it in our weights calculations.  Let's first take a look at the BN for the first scenario (Figure \ref{fig:w1w2}). 
+
+\vspace{1mm}
+\footnotesize
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+source("../code/bns/Witness.R")
+Dcpt <- as.data.frame(W12BN$D[[4]])
+Dcpt$Freq <- round(Dcpt$Freq,3)
+colnames(Dcpt) <-  c("D", "Pr")
+
+#Dcpt %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE) %>%   kable_styling(latex_options=c("striped"))
+#CPkable1("W12BN","W1") %>%   kable_styling(latex_options=c("striped"))
+```
+\normalsize
+
+\begin{figure}[H]
+\scalebox{1.2}{
+\hspace{1cm}\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
+graphviz.plot(W12DAG)
+```
+\end{subfigure}} \hfill
+\begin{subfigure}[!ht]{0.3\textwidth}
+\begin{tabular}{lr}
+\toprule
+D & Pr\\
+\midrule
+\cellcolor{gray!6}{Steve} & \cellcolor{gray!6}{0.167}\\
+Martin & 0.167\\
+\cellcolor{gray!6}{David} & \cellcolor{gray!6}{0.167}\\
+John & 0.167\\
+\cellcolor{gray!6}{James} & \cellcolor{gray!6}{0.167}\\
+Peter & 0.167\\
+\bottomrule
+\end{tabular}
+\end{subfigure}
+\centering
+\begin{subfigure}[!ht]{0.3\textwidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{W1} & \multicolumn{2}{c}{D} \\
+  & Steve & Martin & David & John & James & Peter\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.8} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05} & \cellcolor{gray!6}{0.05}\\
+0 & 0.2 & 0.95 & 0.95 & 0.95 & 0.95 & 0.95\\
+\bottomrule
+\end{tabular}
+\end{subfigure}
+\caption{BN for the \textsf{W1W2} narration in the \textsf{Witness} problem. CPT for \textsf{W2} is identical to the one for \textsf{W1}.}
+\label{fig:w1w2}
+\end{figure}
+
+
+<!-- The CPT for \textsf{D} is  uniform.  The table for \textsf{W1} provides the conditional probability of \textsf{W1} listing (\textsf{W1}=1) or not listing  (\textsf{W1}=0) a particular person given that the actual value of \textsf{D} is Steve/Martin/\dots. The underlying rule is: if someone is guilty, a witness will mention them with probability $.8$, and if they aren't, they will be listed with probability $.05$. -->
+
+In the remaining two BNs for the problem the CPT for \textsf{D} remains the same, and the CPTs for the witness nodes are analogous to the one for \textsf{W1}. The remaining BNs have the following  DAGs (Fig. \ref{fig:witness}).
+
+
+\begin{figure}[H]
+\centering
+\scalebox{1.2}{
+\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
+graphviz.plot(W34DAG)
+```
+\end{subfigure}}
+
+\scalebox{1.2}{\begin{subfigure}[!ht]{0.4\textwidth}
+```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
+graphviz.plot(W45DAG)
+```
+\end{subfigure}}
+\caption{Two remaining DAGs for the \textsf{Witness} problem.}
+\label{fig:witness}
+\end{figure}
+
+
+
+
+<!-- We think that what this example illustrates is that  we should really carefully think about whose cognitive perspective is taken when we represent a narration using a BN, focusing on whether the BN involves nodes which are not part of the narration whose coherence is to be evaluated. In particular, the probabilistic information about the uniform distribution of  guilt probability is not part of any of the three involved narrations, but rather a part of a third-person set-up prior to obtaining any evidence.  -->
+
+<!-- To evaluate the coherence of a narration, at least for unmentioned assumptions that one doesn't have strong independent reasons to keep, one should think counterfactually, granting the consequences of the narration and asking what would happen if it indeed was true. In our case, a judge who evaluates the coherence of witness testimonies once she has heard them, no longer thinks that the distribution of \textsf{D} is uniform. And this agrees with the counterfactual strategy we just described: it is a consequence of the probabilistic set-up and the content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and \textsf{W2} were true, the distribution for \textsf{D} no longer would be uniform, and so it is unfair to judge the coherence of this scenario without giving up this assumption and updating one's assumptions about \textsf{D}.  -->
+
+\textbf{Results.}  Note that in this case we're dealing with the perspective of someone who starts with a uniform prior for \s{D}, and subsequently considers what would happen if she obtained a given set of testimonies as evidence. Clearly, then, the distribution for \s{D} would no longer be uniform, but rather result from updating on this evidence. 
+
+
+
+```{r witnessesWeights,echo=FALSE,eval=TRUE, fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%",  dpi = 300}
+ updatedW12BN <- updateBN(W12BN,c("W1","W2"), c("1","1"))
+#
+ D12cpt <- as.data.frame(updatedW12BN$D[[4]])
+ D12cpt$`updatedW12BN$D[[4]]` <- round(D12cpt$`updatedW12BN$D[[4]]`,3)
+ colnames(D12cpt) <-  c("Pr")
+
+
+t(D12cpt) %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Propagated probabilities for D in the Witnesses scenario (rounded).") %>%   kable_styling(latex_options=c("striped","HOLD_position"))
+```
+
+
+In the coherence calculations we first obtain how specific states of the narration child nodes in a narration would be confirmed by various states of \s{D}. In calculating these confirmation scores we do \emph{not} use the updated BN (after all, confirmation by evidence if you start with BN according to which you  already received it would not be positive).  However, the weights assigned to   confirmation scores in the \s{ecs} calculations should be the (normalized) probabilities obtained by updating on the evidence. If given the evidence included in the scenario Steve is the most likely perpetrator, in your coherence calculations you give the most weight to the confirmation score obtained if he indeed is the perpetrator.
+
+
+<!-- Once this strategy is taken,  the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \@ref(tab:witnessesCoherence) and the status of the desiderata is in Table \@ref(tab:witnessesDesiderata). Now all the weights come from Bayesian networks updated from the perspertive of a given narration, which is emphasized by our use of abbreviations SZnarr, SLRnarr, and SLnarr.  -->
+
+
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+A <- c("W1","W2")
+B <- c("W3","W4")
+C <- c("W4","W5")
+
+W12Table <- CoherencesTableEvi(list(W12BN),
+                           scenariosList = list(A),
+                           statesList   = list(c("1","1")),
+                           evidenceList = list(A),
+                           evidenceStatesList = list(c("1","1")),
+                           exampleName = "Witness"
+)
+
+
+
+W34Table <- CoherencesTableEvi(list(W34BN),
+                               scenariosList = list(B),
+                               statesList   = list(c("1","1")),
+                               evidenceList = list(B),
+                               evidenceStatesList = list(c("1","1")),
+                               exampleName = "Witness"
+)
+
+W45Table <- CoherencesTableEvi(list(W45BN),
+                               scenariosList = list(C),
+                               statesList   = list(c("1","1")),
+                               evidenceList = list(C),
+                               evidenceStatesList = list(c("1","1")),
+                               exampleName = "Witness"
+)
+
+
+
+WTable <- as.data.frame(rbind(W12Table, 
+                                      W34Table,
+                                      W45Table))
+```
+
+
+
+
+
+
+
+```{r witnessesCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+round(WTable,3) %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Coherence scores in the Witnesses scenario (rounded).") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+W1W2greaterW3W4 <- WTable[1,] > WTable[2,] 
+W4W5greaterW3W4 <- WTable[3,] > WTable[2,] 
+WResults <- as.data.frame(rbind(W1W2greaterW3W4,W4W5greaterW3W4))
+rownames(WResults) <- c("Witness: W$_1$W$_2>$W$_3$W$_4$","Witness: W$_4$W$_5>$W$_3$W$_4$")
+
+```
+
+
+
+```{r witnessesDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+WResults %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Witnesses scenario.") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Depth
+
+\todo{add tables explaining nodes}
+
+\textbf{The scenario.} There are eight equally likely suspects $1, \dots, 8$, and three equally reliable witnesses  each trying to identify the person responsible for the crime. Compare two sets of claims about who is responsible. In contrast with Witnesses, the example ignores the fact that these are testimonies and by focusing on the material disjunctive content.  
+
+\s{X1} and \s{X2}: \todo{Revise}
+\begin{align*}
+    X_1 & = \{(1 \vee 2 \vee 3), (1\vee 2 \vee 4), (1 \vee 3 \vee 4)\}\\
+    X_2 & =  \{(1 \vee 2 \vee 3), (1\vee  4 \vee 5), (1 \vee 6 \vee 7)\}
+\end{align*}
+
+\noindent \textbf{Desiderata.}  In \s{X1} witnesses’ testimonies have bigger overlap, between each pair of the witnesses 2 suspects are the same, and in \s{X2} only 1 suspect is always the same. Following @Schupbach2008Alleged, one may have an intuition that the first situation is more coherent.
+\vspace{2mm}\begin{description}
+    \item[(\s{X1\textgreater X2})] $X_1$  should be more coherent than $X_2$.
+\end{description}\vspace{2mm}
+
+
+This desideratum presupposes we are dealing with claims made by different persons. However, on our approach the narration nodes and the BN involved are supposed to represent one agent's credal state. As long as you take the  narration to be equivalent to the conjunction of the elements, an agent accepting all the elements of either $X_1$ or $X_2$ would simply accept that 1 is responsible, and we do not think it makes sense to ask about the coherence of a single proposition. Moreover, since both sets are logically equivalent, the desideratum would  no longer be  intuitive on the single-agent approach. 
+
+
+There is a way to represent the fact that different people made different testimonies within our approach. We already employed this strategy to the Witnesses scenario (precede the claims with "witness $a$ said") and we could deploy it here. But mathematically this would be repetitive, as there would be no essential difference in the calculations.
+
+
+
+If we insist that  the propositions are  put forward by different agents and  no one claims that all elements of the narration are true, we should turn to another tool. For instance, there already exists a working measure of such an agreement---Cohen's $\kappa$ -- which gives the desired results. To illustrate, let's think of a simplified situation  with two witnesses $w1$ and $w2$, where the respective sets are  $A  = \{1 \vee 2 \vee 3, 1\vee 2 \vee 4\}$ and $B = \{1\vee 2\vee 3, 1 \vee 4 \vee 5\}$ whose corresponding values of $\kappa$ are $0.467 -0.067$.
+
+
+
+
+<!-- \todo{convert to table} -->
+<!-- \noindent \textbf{Bayesian networks.}   We start with representing the two scenarios with two fairly natural BNs (\textsf{C} stands for who Committed the crime, \textsf{TXYZ} stands for Testimony that $X\vee Y \vee Z$), see Figures \ref{fig:dod1} and \ref{fig:dod2}. -->
+
+
+
+
+
+<!-- \begin{figure}[H] -->
+<!-- \scalebox{1.7}{ -->
+<!-- \begin{subfigure}[!ht]{0.4\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- source("../code/bns//Depth.R") -->
+<!-- graphviz.plot(DX1DAG) -->
+<!-- ``` -->
+<!-- \end{subfigure}}  -->
+<!-- \hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- CPkable0("DX1BN","C") -->
+<!-- CPkable1("DX1BN","T123") -->
+<!-- CPkable1("DX1BN","T124") -->
+<!-- CPkable1("DX1BN","T134") -->
+<!-- ``` -->
+<!-- \end{subfigure}} -->
+<!-- \caption{BN for \textsf{X1} in the \textsf{Depth} problem.} -->
+<!-- \label{fig:dod1} -->
+<!-- \end{figure} -->
+
+
+
+
+
+
+
+<!-- \begin{figure}[H] -->
+<!-- \scalebox{1.7}{ -->
+<!-- \begin{subfigure}[!ht]{0.4\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- graphviz.plot(DX2DAG) -->
+<!-- ``` -->
+<!-- \end{subfigure}}  -->
+<!-- \hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth} -->
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- CPkable0("DX2BN","C") -->
+<!-- CPkable1("DX2BN","T123") -->
+<!-- CPkable1("DX2BN","T145") -->
+<!-- CPkable1("DX2BN","T167") -->
+<!-- ``` -->
+<!-- \end{subfigure}} -->
+<!-- \caption{BN for \textsf{X2} in the \textsf{Depth} problem.} -->
+<!-- \label{fig:dod2} -->
+<!-- \end{figure} -->
+
+
+
+<!-- \textbf{Results.} One effect of dropping the "the witness testified that" and using the testimony contents themselves is that the CPTs for the narration nodes are deterministically connected with the root node. In result, the coherence calculations give the results in Table \@ref(tab:depthCoherence), and the status of the desiderata is pictured in Table \@ref(tab:depthDesiderata). -->
+
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- X1 <- c("T123","T124","T134") -->
+<!-- X2 <- c("T123","T145","T167") -->
+<!-- BN <- DepthBN -->
+
+<!-- depthTableX1 <- CoherencesTable(DX1BN, -->
+<!--                                scenariosList = list(X1), -->
+<!--                                statesList   = list(c("1","1","1")), -->
+<!--                                exampleName = "Depth" -->
+<!-- ) -->
+
+<!-- depthTableX2 <- CoherencesTable(DX2BN, -->
+<!--                                         scenariosList = list(X2), -->
+<!--                                         statesList   = list(c("1","1","1")), -->
+<!--                                         exampleName = "Depth" -->
+<!-- ) -->
+
+<!-- depthTable <- rbind(depthTableX1,depthTableX2) -->
+<!-- ``` -->
+
+<!-- <!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} --> -->
+<!-- <!-- load("../calculations/RdataObjects/depthTableNarr.Rda") --> -->
+<!-- <!-- load("../calculations/RdataObjects/depthResultsNarr.Rda") --> -->
+<!-- <!-- load("../calculations/RdataObjects/WNarrTable.Rda") --> -->
+
+<!-- <!-- colnames(depthTableNarr) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1", "S2") --> -->
+<!-- <!-- colnames(depthResultsNarr) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1","S2") --> -->
+
+<!-- ```{r depthCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- round(depthTable,3) %>% -->
+<!--   kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Coherence scores for the Depth problem (rounded).") %>%   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
+<!-- ``` -->
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- X1greaterX2<- depthTable[1,] > depthTable[2,] -->
+<!-- depthResults <- as.data.frame(rbind(X1greaterX2)) -->
+<!-- rownames(depthResults) <- c("Depth: X$_1>$X$_2$") -->
+<!-- ``` -->
+
+
+
+
+<!-- ```{r depthDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
+<!-- depthResults %>%  kable(format = "latex",booktabs=T, -->
+<!--                         linesep = "",  escape = FALSE, caption = "Desiderata satisfaction for the Depth problem.") %>% -->
+<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
+<!-- ``` -->
+
+
+<!-- \todo{need to revise this} -->
+<!-- Note that this time we listed two values for our measure. \textsf{Structured 1} shows the values obtained if we do not update the weighting of the node not included in the narration, and \textsf{Structured 2} is the result of such an updated weighing (analogous to the updating involved in the \textsf{Witness} problem). Now, what are we to make of this? -->
+
+<!-- \textsf{Structured 1} is negative. This isn't too surprising: after all, this is the coherence of the narration with the probabilistic assumption that the distribution for \textsf{C} is uniform, and this probabilistic assumption undermines the narration. Why, however, does \textsf{Structured 2} equal 1, and why are the results identical for both narrations?  This, upon reflection, isn't too suprising either. If the BN and the narration is supposed to represent a single agent's credal state, there is only one state of \textsf{C} in which the whole narration $X_1$ is true -- trivially, it is the one in which suspect 1 is guilty, and it is the same unique state of \textsf{C} in which the whole narration $X_2$ is true.  Since seen as narrations these sets have exactly the same truth conditions, there is no surprise in them being equally coherent.  -->
+
+
+
+
+Let's further illustrate  our point about the  requirement that the BN should represent a single agent's cognitive state. For instance, you can represent, the situation in $A$ from the perspective of the first witness. This suggests we should focus only on the nodes involved in the narration, and on the fact that from the witness' perspective the suspects are not equally likely. The example doesn't provide us enough information to build a table for \textsf{C}. In fact, no information about the wintess attitude towards this node is given, but given they say what they say, it's unlikely they think the distribution is uniform. So let's take one of the witness' own statements as the root (which ones we choose doesn't change the outcome). Clearly (or, at least, hopefully, if we talk about witnesses), the agent thinks her own claim is very likely and evaluates the probability of the other statements in $A$ or $B$ from its perspective. This gives us two different BNs, and when we calculate the respective coherence scores we actually do get the desired result, which isn't too hard for the other measures either. 
+
+
+
+
+
+\begin{figure}[H]
+\hspace{2cm}\scalebox{0.6}{
+\begin{subfigure}[!ht]{0.3\textwidth}
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", dpi = 300}
+source("../code/bns/Depth.R")
+graphviz.plot(T123DAG)
+```
+\end{subfigure} }\hfill
+\begin{subfigure}[!ht]{0.6\textwidth}
+\centering\begingroup\fontsize{9}{11}\selectfont
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{T124} & \multicolumn{2}{c}{T123} \\
+  & 1 & 0\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.667} & \cellcolor{gray!6}{0.2}\\
+0 & 0.333 & 0.8\\
+\bottomrule
+\end{tabular}
+\endgroup{}
+\end{subfigure}
+\caption{A witness perspective for the \textsf{agreement} problem, set $A$.}
+\end{figure}
+
+
+
+\begin{figure}[H]
+\hspace{2cm}\scalebox{0.6}{
+\begin{subfigure}[!ht]{0.3\textwidth}
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
+graphviz.plot(T123DAG2)
+```
+\end{subfigure}} \hfill
+\begin{subfigure}[!ht]{0.6\textwidth}
+\centering\begingroup\fontsize{9}{11}\selectfont
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{T124} & \multicolumn{2}{c}{T123} \\
+  & 1 & 0\\
+\midrule
+\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.333} & \cellcolor{gray!6}{0.4}\\
+0 & 0.667 & 0.6\\
+\bottomrule
+\end{tabular}
+\endgroup{}
+\end{subfigure}
+\caption{A witness perspective for the \textsf{agreement} problem, set $B$.}
+\end{figure}
+
+
+
+\noindent Now, the resulting calculations and outcomes are in Tables \@ref(tab:depthFurtherCoherence) and \@ref(tab:depthFurtherDesiderata), and the situation is no longer problematic for any of the measures.
+
+
+
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- witnessA1 <- CoherencesTable(T123BN, -->
+<!--                                  scenariosList = list(c("T123","T124")), -->
+<!--                                  statesList   = list(c("1","1")), -->
+<!--                                  exampleName = "WitnessA" -->
+<!-- ) -->
+
+<!-- witnessB1 <- CoherencesTable(T123BN2, -->
+<!--                              scenariosList = list(c("T123","T145")), -->
+<!--                              statesList   = list(c("1","1")), -->
+<!--                              exampleName = "WitnessB" -->
+<!-- ) -->
+
+
+<!-- depthPerspectiveTable <- rbind(witnessA1,witnessB1) -->
+<!-- ``` -->
+
+
+<!-- <!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} --> -->
+<!-- <!-- load("../calculations/RdataObjects/depthPerspectiveTable.Rda") --> -->
+<!-- <!-- load("../calculations/RdataObjects/depthPerspectiveResults.Rda") --> -->
+
+<!-- <!-- colnames(depthPerspectiveTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") --> -->
+<!-- <!-- colnames(depthPerspectiveResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") --> -->
+<!-- <!-- ``` --> -->
+
+
+<!-- ```{r depthFurtherCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- round(depthPerspectiveTable,3) %>%  kable(format = "latex",booktabs=T, -->
+<!--                         linesep = "",  escape = FALSE, caption = "Coherence scores in a single agent version of the Depth scenario (rounded).") %>% -->
+<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
+<!-- ``` -->
+
+
+
+
+
+<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- X1greaterX2<- depthPerspectiveTable[1,] > depthPerspectiveTable[2,]  -->
+<!-- depthPerspectiveResults <- as.data.frame(rbind(X1greaterX2)) -->
+<!-- rownames(depthPerspectiveResults) <- c("Depth: X$_1>$X$_2$") -->
+<!-- ``` -->
+
+
+
+<!-- ```{r depthFurtherDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
+<!-- depthPerspectiveResults %>%  kable(format = "latex",booktabs=T, -->
+<!--                         linesep = "",  escape = FALSE, caption = "Desideratum satisfaction in the single agent version of the Depth scenario.") %>% -->
+<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
+<!-- ``` -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Summary \label{sec:discussion}
+
+
+Ultimately, all the calculations are displayed in Table \@ref(tab:jointCoherences) and  the  desiderata yield Table \@ref(tab:allResults), with corresponding success rates (Table \@ref(tab:success)).
+
+
+
+
+```{r jointCoherences,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+load("../calculations/RdataObjects/coherencesAll.Rda")
+
+colnames(coherencesAll) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
+
+coherencesAll  %>%  kable(format = "latex",booktabs=T, 
+                         linesep = "",  escape = FALSE, caption =  "Coherence scores for all the examples.") %>%   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) 
+
+
+```
+
+
+```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+#readRDS("../calculations/RdataObjects/coherencesAll.Rda")
+
+load("../calculations/RdataObjects/resultsAll.Rda")
+
+#colnames(coherencesAll) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
+colnames(resultsAll) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S")
+
+```
+
+```{r allResults,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+resultsAll %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Overall desiderata satisfaction in the examples discussed).") %>%  
+  kable_styling(latex_options=c("striped","HOLD_position","scale_down"))
+```
+
+```{r success,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+round(t(colMeans(resultsAll, na.rm = TRUE, dims = 1)),3) %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, caption = "Success rates in the examples discussed.") %>%  
+  kable_styling(latex_options=c("striped","HOLD_position"))
+```
+
+
+
+
+
+
+
+
+
+# References {-}
+

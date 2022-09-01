@@ -623,6 +623,37 @@ G &  &  & Pr\\
 
 \noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \ref{tab:penguinsCoherence}) and see if the desiderata are satisfied (Table \ref{tab:penguinsDesiderata}). The measures are: Olsson-Glass, generalized Olsson-Glass, Shogenji, generalized Shogenji, Douven-Meijs, Roche, Fitelson, Structured with Z, LR, and L used as a confirmation measure.
 
+\begin{table}[H]
+
+\caption{\label{tab:penguinsCoherence}Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1 at an arrow used in the calculations is involved.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrrrrrrrrr}
+\toprule
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
+\midrule
+\cellcolor{gray!6}{Penguins: BGP 111} & \cellcolor{gray!6}{0.01} & \cellcolor{gray!6}{0.015} & \cellcolor{gray!6}{4.00} & \cellcolor{gray!6}{2.01} & \cellcolor{gray!6}{0.255} & \cellcolor{gray!6}{0.51} & \cellcolor{gray!6}{0.453} & \cellcolor{gray!6}{0.505} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{0.669}\\
+Penguins: BG 11 & 0.01 & 0.010 & 0.04 & 0.04 & -0.480 & 0.02 & -0.960 & -0.960 & 0.02 & -0.960\\
+\cellcolor{gray!6}{Penguins: BP 11} & \cellcolor{gray!6}{0.02} & \cellcolor{gray!6}{0.020} & \cellcolor{gray!6}{2.00} & \cellcolor{gray!6}{2.00} & \cellcolor{gray!6}{0.255} & \cellcolor{gray!6}{0.51} & \cellcolor{gray!6}{0.669} & \cellcolor{gray!6}{0.010} & \cellcolor{gray!6}{2.02} & \cellcolor{gray!6}{0.338}\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]
+
+\caption{\label{tab:penguinsDesiderata}Desiderata satisfaction for the Penguins scenario.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lllllllllll}
+\toprule
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
+\midrule
+\cellcolor{gray!6}{Penguins: BG$<$BGP} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
+Penguins: BG$<<$ BP$<$ BGP & FALSE & FALSE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
 \hypertarget{dice}{%
 \subsection{Dice}\label{dice}}
 
@@ -635,12 +666,14 @@ G &  &  & Pr\\
     \item[(\s{D=const})] the coherence of \s{D} should not change.
 \end{description}\vspace{2mm}
 
+\todo{tabela z nodami}
+
 \textbf{Bayesian networks.} We'll follow the strategy similar to the one we already used. Since neither the example nor the narrations involve information about how probable it is that we're dealing with a regular die, as opposed to a dodecahedron, we avoid using a node representing this. Moreover, if at a given time the agent claims that the result is both two and (two or four), their cognitive situation at that time cannot be represented using uniform distribution for possible toss outcomes. Instead, we start with initial separate BNs for a regular die and a dodecahedron which do have uniform distributions for the \textsf{O} (outcome) node (Fig. \ref{fig:diceBN}), but when weighing the antecedent nodes which are not strictly speaking part of the narration, we use the probabilities updated in light of the narration content itself.
 
 \begin{figure}[H]
 \scalebox{1.3}{\begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-4-1} \includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-4-2} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-6-1} \includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-6-2} \end{center}
 \end{subfigure}}  
 \hspace{0.2cm}\begin{subfigure}[!ht]{0.25\textwidth}
 
@@ -801,7 +834,7 @@ node & content\\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-11-1} \end{center}
 \end{subfigure}} 
 \hspace{-0.8cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -856,7 +889,7 @@ M & Pr\\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-12-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-14-1} \end{center}
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.3\textwidth}
 
@@ -928,7 +961,7 @@ However, bigger overlap doesn't have to indicate higher coherence. In situation 
 \scalebox{0.5}{
 \hspace{2.5cm}\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-14-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-16-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -1065,13 +1098,13 @@ the information about the prior probabilities is supposed to be part of the narr
 \vspace{1mm}
 \footnotesize
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-18-1} \includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-18-2} \includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-18-3} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-20-1} \includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-20-2} \includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-20-3} \end{center}
 \normalsize
 
 \begin{figure}[H]
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics{coherencePaper32_files/figure-latex/unnamed-chunk-19-1} \end{center}
+\begin{center}\includegraphics{coherencePaper32_files/figure-latex/unnamed-chunk-21-1} \end{center}
 \end{subfigure} \hfill
 \begin{subfigure}[!ht]{0.4\textwidth}
 
@@ -1177,7 +1210,7 @@ For the sake of example, we assume the prior probability of each individual band
 \scalebox{1.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-20-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-22-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -1254,7 +1287,7 @@ Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} an
 \scalebox{1.2}{
 \hspace{1cm}\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-23-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-25-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.3\textwidth}
 \begin{tabular}{lr}
@@ -1293,12 +1326,12 @@ In the remaining two BNs for the problem the CPT for \textsf{D} remains the same
 \scalebox{1.2}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-24-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-26-1} \end{center}
 \end{subfigure}}
 
 \scalebox{1.2}{\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-25-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-27-1} \end{center}
 \end{subfigure}}
 \caption{Two remaining DAGs for the \textsf{Witness} problem.}
 \label{fig:witness}
@@ -1352,6 +1385,8 @@ In the coherence calculations we first obtain how specific states of the narrati
     \item[(\s{X1\textgreater X2})] $X_1$  should be more coherent than $X_2$.
 \end{description}\vspace{2mm}
 
+In our framework, the BN with narration and evidence nodes and states is supposed to represent the conviction of a single agent. From this perspective, calculating the coherence of \(X_1\) (or of \(X_2\)) in our way would presume these are the beliefs of a single agent. This being the case, if the agent accepts an uncontroversial application of the conjunction closure
+
 \todo{convert to table}
 
 \noindent \textbf{Bayesian networks.} We start with representing the two scenarios with two fairly natural BNs (\textsf{C} stands for who Committed the crime, \textsf{TXYZ} stands for Testimony that \(X\vee Y \vee Z\)), see Figures \ref{fig:dod1} and \ref{fig:dod2}.
@@ -1360,7 +1395,7 @@ In the coherence calculations we first obtain how specific states of the narrati
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-26-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-28-1} \end{center}
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth}
 
@@ -1420,7 +1455,7 @@ C & Pr\\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-28-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-30-1} \end{center}
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth}
 
@@ -1547,7 +1582,7 @@ Let's further illustrate our point about the requirement that the BN should repr
 \hspace{2cm}\scalebox{0.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-32-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-34-1} \end{center}
 \end{subfigure} }\hfill
 \begin{subfigure}[!ht]{0.6\textwidth}
 \centering\begingroup\fontsize{9}{11}\selectfont
@@ -1570,7 +1605,7 @@ Let's further illustrate our point about the requirement that the BN should repr
 \begin{subfigure}[!ht]{0.3\textwidth}
 
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-33-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper32_files/figure-latex/unnamed-chunk-35-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.6\textwidth}
 \centering\begingroup\fontsize{9}{11}\selectfont

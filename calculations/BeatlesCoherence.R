@@ -1,13 +1,43 @@
  B <- c("J","P","G","R","D")
 BN <- BeatlesBN
 # 
-BeatlesTable3 <- CoherencesTable(BeatlesBN,
+BeatlesTable <- CoherencesTableEvi(list(BeatlesBN),
                                         scenariosList = list(B),
                                         statesList   = list(c("1","1","1","1","1")),
                                         exampleName = "Beatles"
 )
 
-BeatlesTable3
+BeatlesTable
+
+
+Table2LaTeX <- tableLaTeX(BeatlesTable2)
+
+#BeatlesTable3LaTeX <- tableLaTeX(BeatlesTable3)
+
+# 
+# BeatlesTable2
+# 
+# 
+minima <-  c(0, 0 ,0, 0, -1, -1, 0, -1, 0, -1)
+neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 1, 0)
+
+BeatlesMinimal <- BeatlesTable[1,] == minima
+BeatlesBelowNeutral <- BeatlesTable[1,] < neutralPoints 
+# # BeatlesIncoherent
+# # BeatlesMinimal
+# # 
+# # # 
+# # # 
+BeatlesResults <- as.data.frame(rbind(BeatlesBelowNeutral, BeatlesMinimal))
+# # # 
+# # # 
+rownames(BeatlesResults) <- c("Beatles: below neutral", "Beatles: minimal")
+# # 
+BeatlesResults
+
+
+
+
 
 #save(BeatlesTable3,file="calculations/RdataObjects/BeatlesTable3.Rda")
 

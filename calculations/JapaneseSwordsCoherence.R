@@ -30,9 +30,10 @@ japThreeTable3
 
 
 
-
-
-
+structuredEvi(Jap1BN,
+                   J,
+                   c("1","1")
+)
 
 
 
@@ -42,49 +43,32 @@ J <- c("J","O")
 # #
 # #
   BN <- Jap1BN
-  JapaneseSwordsTableA <- CoherencesTable(Jap1BN,
+  JapaneseSwordsTableA <- CoherencesTableEvi(list(Jap1BN),
                                   scenariosList = list(J),
                                   statesList   = list(c("1","1")),
                                  exampleName = "Japanese Swords 1"
  )
   
-  JapaneseSwordsTableANarr <- CoherencesTableNarr(list(Jap1BN),
-                                          scenariosList = list(J),
-                                          statesList   = list(c("1","1")),
-                                          exampleName = "Japanese Swords 1"
-  )
   
 # #
 # #
-  BN <- Jap2BN
- JapaneseSwordsTableB <- CoherencesTable(Jap2BN,
+BN <- Jap2BN
+ JapaneseSwordsTableB <- CoherencesTableEvi(list(Jap2BN),
                                          scenariosList = list(J),
                                          statesList   = list(c("1","1")),
                                          exampleName = "Japanese Swords 2"
  )
  
- JapaneseSwordsTableBNarr <- CoherencesTableNarr(list(Jap2BN),
-                                         scenariosList = list(J),
-                                         statesList   = list(c("1","1")),
-                                         exampleName = "Japanese Swords 2"
- )
-# #
-   BN <- Jap3BN
-  JapaneseSwordsTableC <- CoherencesTable(Jap3BN,
+#
+BN <- Jap3BN
+JapaneseSwordsTableC <- CoherencesTableEvi(list(Jap3BN),
                                          scenariosList = list(J),
                                          statesList   = list(c("1","1")),
                                          exampleName = "Japanese Swords 3"
  )
   
-  JapaneseSwordsTableCNarr <- CoherencesTableNarr(list(Jap3BN),
-                                          scenariosList = list(J),
-                                          statesList   = list(c("1","1")),
-                                          exampleName = "Japanese Swords 3"
-  )
-# #
-# #  #
-# #  #
-JapaneseSwordsSeparateTable <- rbind(JapaneseSwordsTableANarr,JapaneseSwordsTableBNarr,JapaneseSwordsTableCNarr)
+
+JapaneseSwordsSeparateTable <- rbind(JapaneseSwordsTableA,JapaneseSwordsTableB,JapaneseSwordsTableC)
 JapaneseSwordsSeparateTable 
 # #  #
 # #  #
@@ -99,15 +83,11 @@ save(JapaneseSwordsSeparateTable,file="calculations/RdataObjects/JapaneseSwordsS
 # # # 
  JO2greaterJO1 <- JapaneseSwordsSeparateTable[2,] > JapaneseSwordsSeparateTable[1,] 
 # # #JO2greaterJO1
-# # # 
  JO2greaterJO3 <- JapaneseSwordsSeparateTable[2,] > JapaneseSwordsSeparateTable[3,] 
 # # #JO2greaterJO1
-# # # 
-# # # 
  JapaneseSwordsSeparateResults <- as.data.frame(rbind(JO2greaterJO1,JO2greaterJO3))
 # # # 
-# # # 
- rownames(JapaneseSwordsSeparateResults) <- c("Swords: JO2$>$JO1","Swords: JO2$>$JO3")
+rownames(JapaneseSwordsSeparateResults) <- c("Swords: JO2$>$JO1","Swords: JO2$>$JO3")
 # # # 
 # # 
 # 

@@ -4,37 +4,42 @@
 
 BN <- robbersBN
 
+graphviz.plot(robbersBN)
+
 BN
 
-robbersBNTable <- CoherencesTableNarr(list(robbersBN,robbersBN,robbersBN), 
+robbersBNTable <- CoherencesTableEvi(list(robbersBN,robbersBN,robbersBN), 
                     scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
                     statesList   = list(c("1","1"),c("1","0"),c("0","1")),
                     exampleName = "Robbers")
 
-
- 
-
-# robbersBNTable <- CoherencesTableNarr(list(robbersBN,robbersBN,robbersBN), 
-#                                       scenariosList = list(c("MIsP","MIsR", "WhoMurdered"),c("MIsP","MIsR", "WhoMurdered"),
-#                                                            c("MIsP","MIsR", "WhoMurdered")),
-#                                       statesList   = list(c("1","1"),c("1","0", "OnlyP"),c("0","1", "OnlyR")),
-#                                       exampleName = "Robbers")
-
-
 robbersBNTable
 
-nodes(BN)
+structuredEvi(robbersBN,c("MIsP","MIsR"),c("1","1"))
+CoherencesRowEvi(list(robbersBN), list(c("MIsP","MIsR")), list(c("1","1")))
 
-structuredNarr(robbersBN,c("MIsP","MIsR"),c("1","1"))
 
 
-structuredL(robbersBN,c("MIsP","MIsR"),c("1","1"))
 
-structuredNarr(robbersBN,c("MIsP","MIsR"),c("1","0"))
+length(neutralPoints)
+neutralPoints <- c(NA, NA ,1, 1, 0.5, 0, 0, 0, 1, 0)
+# # 
+PRgreaterPnR <- robbersBNTable[1,] > robbersBNTable[2,] 
+# # #PRgreaterPnR
+# # # 
+PRgreaterNeutral <- robbersBNTable[1,] > neutralPoints
+# # # 
+robbersEviResults <- as.data.frame(rbind(PRgreaterPnR,PRgreaterNeutral))
+# # # 
+rownames(robbersEviResults) <- c("Robbers: PR$>$P$\\neg$R","Robbers: PR$>$neutral")
+# # # 
 
-structuredL(robbersBN,c("MIsP","MIsR"),c("1","0"))
+robbersEviResults
+# # # 
 
-structuredNarr(robbersBN,c("MIsP","MIsR"),c("0","1"))
+
+
+
 
 
 
@@ -67,31 +72,6 @@ robbersNarrResults
 
 
 
-
-structuredNarr(robbersBN,c("MIsP","MIsR"),c("1","1"))
-structuredNarr(robbersBN,c("MIsP","MIsR"),c("1","0"))
-structuredNarr(robbersBN,c("MIsP","MIsR"),c("0","1"))
-
-
-structuredNarr(robbersUncBN,c("MIsP","MIsR"),c("0","1"))
-
-
-
-#structuredCoherenceUpdated(robbersBN,c("MIsP","MIsR"),c("1","0"))
-
-robbersNarrTable <- CoherencesTableNarr(list(robbersBN,robbersBN,robbersBN), 
-                                  scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
-                                 statesList   = list(c("1","1"),c("1","0"),c("0","1")),
-                                 exampleName = "Robbers"
-)
-
-
-robbersNarrTable
-
-save(robbersNarrTable, file = "calculations/RdataObjects/robbersNarrTable.Rda")
-
-
-robbersNarrTable
 
 # # 
 length(names(robbersNarrTable))

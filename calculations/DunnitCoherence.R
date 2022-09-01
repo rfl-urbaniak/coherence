@@ -1,5 +1,8 @@
 #The intuition is that M, G, W, I should be less coherent than M, T, G, W, I 
 # 
+
+source("../code/bns/Dunnit.R")
+
 Dunnit <- c("M","G","W","I")
 DunnitTwin<- c("M","Tw","G","W","I")
 # #
@@ -10,7 +13,7 @@ DunnitTwin<- c("M","Tw","G","W","I")
 #   exampleName = "Dunnit"
 # )
 #   
-DunnitNoTwinTable <- CoherencesTableNarr(list(DunnitNoTwinBN),
+DunnitNoTwinTable <- CoherencesTableEvi(list(DunnitNoTwinBN),
                                          scenariosList = list(Dunnit),
                                          statesList   = list(c("1","1","1","1")),
                                          exampleName = "Dunnit"
@@ -18,7 +21,7 @@ DunnitNoTwinTable <- CoherencesTableNarr(list(DunnitNoTwinBN),
 
   
 
-DunnitTwinTable <- CoherencesTableNarr(list(DunnitBN),
+DunnitTwinTable <- CoherencesTableEvi(list(DunnitBN),
   scenariosList = list(DunnitTwin),
   statesList   = list(c("1","1","1","1","1")),
   exampleName = "Dunnit"

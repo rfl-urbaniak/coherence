@@ -17,6 +17,29 @@ querygrain(Dod2RegularJN, nodes = "TF")
 
 
 
+
+
+Dod2reverseDAG <- model2network("[T|TF][TF]")
+
+graphviz.plot(Dod2DAG)
+TFrProb <- priorCPT(node = "TF", prob1 = 1/3)
+
+TrProb <- singleCPT(eNode = "T",hNode = "TF", probEifHS1 = 1/2, probEifHS2 = 0)
+
+
+
+Dod2ReverseCPT <-  list(TF=TFrProb,T=TrProb)
+Dod2ReverseBN <- custom.fit(Dod2reverseDAG,Dod2ReverseCPT)
+
+
+TFrDodProb <- priorCPT(node = "TF", prob1 = 1/6)
+Dod2DodReverseCPT <-  list(TF=TFrDodProb,T=TrProb)
+Dod2DodReverseBN <- custom.fit(Dod2reverseDAG,Dod2DodReverseCPT)
+
+
+
+
+
 T2dodProb <- priorCPT(node = "T", prob1 = 1/12)
 TF2dodProb <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/11)
 

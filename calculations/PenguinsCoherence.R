@@ -31,6 +31,20 @@ CoherencesRowEvi(BirdBNbgp,BGP,c("1","1","1"), exampleName = "Penguins")
 penguinsTable <- CoherencesTableEvi(BN = list(BirdBNbgp,BirdBNbg,BirdBNbp), scenariosList = list(BGP, BG, BP), statesList   = list(c("1","1","1"), c("1","1"), c("1","1")),exampleName = "Penguins")
 
 
+penguinsTable
+
+BGlessBGP <- penguinsTable[1,] > penguinsTable[2,] 
+#BPatleastBGP <- round(penguinsTable[3,],4) >= round(penguinsTable[1,],4)
+BPbetweenBGandBGP <-  abs(penguinsTable[3,] - penguinsTable[2,]) >.1 & abs(penguinsTable[1,] - penguinsTable[3,]) >=0
+
+
+
+penguinsResults <- as.data.frame(rbind(BGlessBGP,BPbetweenBGandBGP))
+rownames(penguinsResults) <- c("Penguins: BG$<$BGP","Penguins: BG$<<$ BP$<$ BGP")
+
+penguinsResults
+
+#-----------------
 
 
 

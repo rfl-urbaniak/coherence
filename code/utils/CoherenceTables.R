@@ -150,33 +150,9 @@ CoherencesTableNarr <- function(BNlist,scenariosList,
   return(table)
 }
 
-# 
-# 
-# #watch out! this works with INDEPENDENT nodes!! )
-# CoherencesTableNarr2 <- function(BNlist,scenariosList,
-#                                 statesList,exampleName){
-#   rows <- list()
-#   for(s in 1:length(scenariosList)){
-#     rows[[s]] <-  CoherencesRowNarr2(BNlist[[s]],scenariosList[[s]],statesList[[s]], 
-#                                     exampleName = exampleName)
-#   }
-#   table <- do.call("rbind", rows)
-#   return(table)
-# }
-#statusLR = rep("Ind",FitelsonSize(length(narrationNodes)))
-#statusRL = rep("Ind",FitelsonSize(length(narrationNodes)))
 
-#CoherencesRowEvi(BirdBNbgp,BGP,narrationStates = c("1","1","1"), exampleName = "Penguins")
 
-# BN <-BirdBNbgp
-# narrationNodes <- BGP
-# narrationStates <- c("1","1","1")
-# exampleName <- "Penguins"
-# statusLR = rep("Ind",FitelsonSize(length(narrationNodes)))
-# statusRL = rep("Ind",FitelsonSize(length(narrationNodes)))
-# exampleName <- "Penguins"
-# evidenceNodes <- c()
-# evidenceStates <- c()
+
 
 CoherencesRowEvi <- function (BN, narrationNodes, narrationStates, evidenceNodes = c(), evidenceStates = c(),
                                statusLR = rep("Ind",FitelsonSize(length(narrationNodes))),
@@ -215,11 +191,29 @@ CoherencesRowEvi <- function (BN, narrationNodes, narrationStates, evidenceNodes
 }
 
 
+
+
 CoherencesTableEvi <- function(BNlist,scenariosList,
-                                statesList,exampleName){
+                                statesList,evidenceList = list(c()),evidenceStatesList =
+                                 list(c()), exampleName){
   rows <- list()
+  if (length(evidenceList) == 1 & length(evidenceList) < length(scenariosList) &
+            length(evidenceList[[1]]) == 0 ){
+            for(i in 2:length(scenariosList)){
+                  evidenceList <- append(evidenceList,list(c()))
+                   }
+            }
+  if (length(evidenceStatesList) == 1 & 
+          length(evidenceStatesList) < length(scenariosList) &
+          length(evidenceStatesList[[1]]) == 0 ){
+          for(i in 2:length(scenariosList)){
+                evidenceStatesList <- append(evidenceStatesList,list(c()))
+            }
+        }
+  
   for(s in 1:length(scenariosList)){
-    rows[[s]] <-  CoherencesRowEvi(BNlist[[s]],scenariosList[[s]],statesList[[s]], 
+    rows[[s]] <-  CoherencesRowEvi(BNlist[[s]],scenariosList[[s]],statesList[[s]],
+                                   evidenceList[[s]], evidenceStatesList[[s]],
                                     exampleName = exampleName)
   }
   table <- do.call("rbind", rows)
