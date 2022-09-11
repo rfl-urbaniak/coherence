@@ -1,3 +1,5 @@
+library(bnlearn)
+library(gRain)
 
 source("code/utils//CombinationsBN.R")
 source("code/utils//CptCreate.R")
@@ -23,10 +25,22 @@ BP <- c("B","P")
 
 #Coherences
 
+BirdBNbgp
+                
+
+
+BirdJN <- compile(as.grain(BirdBNbgp))
+querygrain(BirdJN, nodes = "P")
+querygrain(BirdJN, nodes = "G")
+querygrain(BirdJN,nodes = c("B", "P"), type = "joint")
+BirdJNG <- setEvidence(BirdJN, nodes = "G", states = "1")
+querygrain(BirdJNG,nodes = c("B", "P"), type = "joint")
+querygrain(BirdJNG,nodes = c("B"), type = "joint")
+
 
 structuredEvi(BirdBNbgp,BGP,c("1","1","1"))
 
-CoherencesRowEvi(BirdBNbgp,BGP,c("1","1","1"), exampleName = "Penguins")
+wCoherencesRowEvi(BirdBNbgp,BGP,c("1","1","1"), exampleName = "Penguins")
 
 penguinsTable <- CoherencesTableEvi(BN = list(BirdBNbgp,BirdBNbg,BirdBNbp), scenariosList = list(BGP, BG, BP), statesList   = list(c("1","1","1"), c("1","1"), c("1","1")),exampleName = "Penguins")
 

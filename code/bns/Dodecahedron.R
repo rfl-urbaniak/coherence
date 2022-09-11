@@ -15,6 +15,7 @@ Dod2RegularBN <- custom.fit(Dod2DAG,Dod2RegularCPT)
 Dod2RegularJN <- compile(as.grain(Dod2RegularBN))
 querygrain(Dod2RegularJN, nodes = "TF")
 
+CPkable0("Dod2RegularBN","TF")
 
 
 

@@ -6,10 +6,6 @@
 \documentclass[
   10pt,
 ]{scrartcl}
-\title{Structured probabilistic coherence \linebreak and the usual counterexamples to probabilistic measures of coherence}
-\author{}
-\date{\vspace{-2.5em}}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -39,17 +35,46 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Structured probabilistic coherence and the usual counterexamples to probabilistic measures of coherence},
-  colorlinks=true,
-  linkcolor={blue},
-  filecolor={blue},
-  citecolor={blue},
-  urlcolor={blue},
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -297,6 +322,21 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Structured probabilistic coherence and the usual counterexamples to probabilistic measures of coherence},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={blue},
+  citecolor={blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Structured probabilistic coherence \linebreak and the usual counterexamples to probabilistic measures of coherence}
+\author{}
+\date{\vspace{-2.5em}}
 
 \begin{document}
 \maketitle
@@ -459,56 +499,58 @@ Each parented node in the BN receives its expected confirmation score (\s{ECS}).
 \pagebreak 
 \footnotesize
 
-\begin{verbatim}
-FUNCTION parents_child_possible_states(parents,child)
-    IF child included in narration THEN
-        consequentStates <- the unique state of child as reported in the narration
-    ELSE
-        consequentStates <- all possible states of child
-    FOR EACH parent in parents
-        IF parent included in narration THEN
-            parentStates[parent] <- the unique state of parent as reported in the narration
-        ELSE
-            parentStates[parent] <- all possible states of parent
-    parentsStates <- all combinations of parentStates
-    variants <- list of all possible combinations of consequentStates and parentsStates
-    RETURN variants
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FUNCTION parents\_child\_possible\_states(parents,child)}
+\NormalTok{    IF child included in narration THEN}
+\NormalTok{        consequentStates \textless{}{-} the unique state of child as reported in the narration}
+\NormalTok{    ELSE}
+\NormalTok{        consequentStates \textless{}{-} all possible states of child}
+\NormalTok{    FOR EACH parent in parents}
+\NormalTok{        IF parent included in narration THEN}
+\NormalTok{            parentStates[parent] \textless{}{-} the unique state of parent as reported in the narration}
+\NormalTok{        ELSE}
+\NormalTok{            parentStates[parent] \textless{}{-} all possible states of parent}
+\NormalTok{    parentsStates \textless{}{-} all combinations of parentStates}
+\NormalTok{    variants \textless{}{-} list of all possible combinations of consequentStates and parentsStates}
+\NormalTok{    RETURN variants}
 
 
-FUNCTION coherence_from_ecs(ecs)
-    IF min(ecs) <= 0 THEN
-        RETURN mean(ecs) * (min(ecs)+1) - min(ecs)min(ecs)
-        #this is equivalent to (1- |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)
-    ELSE
-        RETURN mean(ecs)
+\NormalTok{FUNCTION coherence\_from\_ecs(ecs)}
+\NormalTok{    IF min(ecs) \textless{}= 0 THEN}
+\NormalTok{        RETURN mean(ecs) * (min(ecs)+1) {-} min(ecs)min(ecs)}
+\NormalTok{        \#this is equivalent to (1{-} |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)}
+\NormalTok{    ELSE}
+\NormalTok{        RETURN mean(ecs)}
 
-FUNCTION structured_coherence(BN,evidenceNodes,evidenceStates)
-    parentedNodes <- vector of non-root nodes in BN
-    ecsList <- []
-    FOR EACH parentedNode IN parentedNodes
-        variants <- parents_child_possible_states(parents,parentedNode)
-        variants_count <- length(variants)
-        sumParentsNarr <- 0
-        FOR EACH variant IN variants
-            childPrior <- prior probability of the child state in variant
-            childPosterior <- posterior probability of the child state in variant,
-                        obtained by updating on the parents states
-                        from this variant
-            parentsEvidence[variant] <- joint probability of 
-                        the parents states in variant in BN updated with evidenceStates of evidenceNodes
-            sumParentsEvidence <- sumParentsEvidence +  parentsEvidence[variant] 
-            z[variant] <- z_confirmation_measure(childPrior, childPosterior)
-        ecs <- 0  #expected confirmation score
-        FOR EACH variant IN variants
-            IF parentsEvidence[variant] > 0 THEN
-                weight <- parentsEvidence[variant]/sumParentsEvidence
-            ELSE
-                weight <- 1/variants_count
-            zScaled <- z[variant] * weight
-            ecs <- ecs + zScaled
-        ecsList.add(ecs)
-    RETURN coherence_from_ecs(ecsList)
-\end{verbatim}
+\NormalTok{FUNCTION structured\_coherence(BN,evidenceNodes,evidenceStates)}
+\NormalTok{    parentedNodes \textless{}{-} vector of non{-}root nodes in BN}
+\NormalTok{    ecsList \textless{}{-} []}
+\NormalTok{    FOR EACH parentedNode IN parentedNodes}
+\NormalTok{        variants \textless{}{-} parents\_child\_possible\_states(parents,parentedNode)}
+\NormalTok{        variants\_count \textless{}{-} length(variants)}
+\NormalTok{        sumParentsNarr \textless{}{-} 0}
+\NormalTok{        FOR EACH variant IN variants}
+\NormalTok{            childPrior \textless{}{-} prior probability of the child state in variant}
+\NormalTok{            childPosterior \textless{}{-} posterior probability of the child state in variant,}
+\NormalTok{                        obtained by updating on the parents states}
+\NormalTok{                        from this variant}
+\NormalTok{            parentsEvidence[variant] \textless{}{-} joint probability of }
+\NormalTok{                        the parents states in variant in BN updated with evidenceStates of evidenceNodes}
+\NormalTok{            sumParentsEvidence \textless{}{-} sumParentsEvidence +  parentsEvidence[variant] }
+\NormalTok{            z[variant] \textless{}{-} z\_confirmation\_measure(childPrior, childPosterior)}
+\NormalTok{        ecs \textless{}{-} 0  \#expected confirmation score}
+\NormalTok{        FOR EACH variant IN variants}
+\NormalTok{            IF parentsEvidence[variant] \textgreater{} 0 THEN}
+\NormalTok{                weight \textless{}{-} parentsEvidence[variant]/sumParentsEvidence}
+\NormalTok{            ELSE}
+\NormalTok{                weight \textless{}{-} 1/variants\_count}
+\NormalTok{            zScaled \textless{}{-} z[variant] * weight}
+\NormalTok{            ecs \textless{}{-} ecs + zScaled}
+\NormalTok{        ecsList.add(ecs)}
+\NormalTok{    RETURN coherence\_from\_ecs(ecsList)}
+\end{Highlighting}
+\end{Shaded}
 
 \normalsize
 
@@ -574,9 +616,9 @@ However, as \s{G} is not a logical consequence of \s{P}, it can be argued that \
 \begin{figure}[H]
 \hspace{2cm}\scalebox{0.7}{\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-2-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotBirdDag-1} \end{center}
 \end{subfigure}} \hfill
-\hspace{-3cm}\scalebox{0.8}{\begin{subfigure}[!ht]{0.4\textwidth}
+\hspace{-3cm}\scalebox{0.7}{\begin{subfigure}[!ht]{0.4\textwidth}
 
 \begin{tabular}{lr}
 \toprule
@@ -621,7 +663,7 @@ G &  &  & Pr\\
 
 \todo{Double check satisfaction for LR}
 
-\noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \ref{tab:penguinsCoherence}) and see if the desiderata are satisfied (Table \ref{tab:penguinsDesiderata}). The measures are: Olsson-Glass, generalized Olsson-Glass, Shogenji, generalized Shogenji, Douven-Meijs, Roche, Fitelson, Structured with Z, LR, and L used as a confirmation measure.
+\noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \ref{tab:penguinsCoherence}) and see if the desiderata are satisfied (Table \ref{tab:penguinsDesiderata}). The measures are: Olsson-Glass, generalized Olsson-Glass, Shogenji, generalized Shogenji, Douven-Meijs, Roche, Fitelson, Structured with Z, LR, and L used as a confirmation measure.\footnote{One phenomenon woth noticing is that the structured measure in its variant that employs likelihood ratio gives \s{Infinity} in one case. The reason why this happens is as follows. One of the child nodes is \s{G}. We need to calculate the expected support its parents' states provide for \s{G}. In the case the scenario actually specifies that all nodes have value 1, this boils down to calculating the likelihood ratio for only one case. We treat \((\s{B} = 1 \wedge \s{P} = 1)=\s{E}\) as the evidence. \(\pr{E \vert \s{G} =1} = .02\), that is, if Tweety is grounded, the probability that it's a bird and a penguin is quite low, but \(\pr{E \vert \neg \s{G}} = 0\), because it is impossible that Tweety is a bird and a penguin if she isn't grounded. But then, the LR would require dividing \(.02\) by \(0\), which the calculations take at the limit to be infinity. Such cases will come up whenever some combinations of evidence under considerations are excluded by the state of a child node, and in the expected value calculations the presence of infinity will spread, as it is enough that it's the LR for at least one combination with a non-zero probability. This is one of the reasons we do not really think likelihood ratio is the appropriate measure for coherence calculations.}
 
 \begin{table}[H]
 
@@ -641,7 +683,7 @@ Penguins: BG 11 & 0.01 & 0.010 & 0.04 & 0.04 & -0.480 & 0.02 & -0.960 & -0.960 &
 
 \begin{table}[H]
 
-\caption{\label{tab:penguinsDesiderata}Desiderata satisfaction for the Penguins scenario.}
+\caption{\label{tab:penguinsDesiderata2}Desiderata satisfaction for the Penguins scenario.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllllllllll}
@@ -666,12 +708,80 @@ Penguins: BG$<<$ BP$<$ BGP & FALSE & FALSE & TRUE & TRUE & TRUE & TRUE & TRUE & 
     \item[(\s{D=const})] the coherence of \s{D} should not change.
 \end{description}\vspace{2mm}
 
-\textbf{Bayesian networks.} When one is forced to represent the scenario as a BN the situation is not straightforward. On one hand, the description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors bring up (1 and .5) do not capture this information. In the simplest approach in which the information about the die is ignored, we can build a DAG containing two nodes:
-\todo{tabela z nodami}
+\textbf{Bayesian networks.} When one is about to represent the scenario as a BN the situation is not straightforward. On one hand, the scenario description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors explicitly bring up (1 and .5) do not capture this information. In the simplest approach in which the information about the die is ignored, we can build a DAG containing two nodes:
+
+\begin{table}[H]
+
+\caption{\label{tab:penguinsDesiderata}Propositions in the dice scenario}
+\centering
+\begin{tabular}[t]{ll}
+\toprule
+node & content\\
+\midrule
+\cellcolor{gray!6}{TF} & \cellcolor{gray!6}{The result is a two or a four.}\\
+T & The result is a two.\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs.
 
-\todo{BN two nodes with CTP}
+\begin{figure}[H]
+\scalebox{.6}{\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/TwoDiceDAG2-1} \end{center}
+\end{subfigure}}
+\scalebox{.9}{\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+T & Pr\\
+\midrule
+1 & 0.167 = \nicefrac{1\,}{6}\\
+0 & 0.833 = \nicefrac{5\,}{6}\\
+\bottomrule
+\end{tabular}
+
+\vspace{1mm}
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{TF} & \multicolumn{2}{c}{T} \\
+  & 1 & 0\\
+\midrule
+1 & 1 & 0.2 = \nicefrac{1\,}{5}\\
+0 & 0 & 0.8 = \nicefrac{4\,}{5}\\
+\bottomrule
+\end{tabular}
+
+\end{subfigure}} 
+\scalebox{.9}{\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+T & Pr\\
+\midrule
+1 & 0.083 = \nicefrac{1\,}{12}\\
+0 & 0.917  = \nicefrac{11\,}{12}\\
+\bottomrule
+\end{tabular}
+\vspace{1mm}
+
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{TF} & \multicolumn{2}{c}{T} \\
+  & 1 & 0\\
+\midrule
+1 & 1 & 0.091 = \nicefrac{1\,}{11} \\
+0 & 0 & 0.909 = \nicefrac{10\,}{11}\\
+\bottomrule
+\end{tabular}
+\end{subfigure}} 
+
+\caption{A two-node BN for the dice problem, with CPTs for a regular die (center) and for a dodecahedron (right)}
+\label{fig:TwodiceBN}
+\end{figure}
 
 If we do so, the results are as expected.
 
@@ -685,7 +795,7 @@ Then the results are as follows:
 
 \todo{Results for three}
 
-\noindent This might seem problematic, but really shouldn't. After all, now the narration is not merely `the result is a two (and a two or a four),' but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the \(n\)).
+\noindent This might seem problematic, but really shouldn't. After all, now the narration is not merely `the result is a two (and a two or a four)', but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the \(n\)).
 
 Further, we could also explore the option of the narration being `the die was fair, but it has been tossed and the result is a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated with \s{T} and \s{TF} treated as evidence. When we proceed this way, the coherence scores are as in the two-node variants.
 
@@ -755,7 +865,7 @@ node & content\\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-6-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper40_files/figure-latex/plotDunnitDAG1-1} \end{center}
 \end{subfigure}} 
 \hspace{-0.8cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -810,7 +920,7 @@ M & Pr\\
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-9-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper40_files/figure-latex/plotDunnitFullDAG-1} \end{center}
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.3\textwidth}
 
@@ -911,7 +1021,7 @@ However, bigger overlap doesn't have to indicate higher coherence. In situation 
 \scalebox{0.5}{
 \hspace{2.5cm}\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-13-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper40_files/figure-latex/plotJapaneseDAG-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -1070,13 +1180,13 @@ the information about the prior probabilities is supposed to be part of the narr
 \vspace{1mm}
 \footnotesize
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-19-1} \includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-19-2} \includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-19-3} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/whoMurderedProbabilities-1} \includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/whoMurderedProbabilities-2} \includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/whoMurderedProbabilities-3} \end{center}
 \normalsize
 
 \begin{figure}[H]
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics{coherencePaper40_files/figure-latex/unnamed-chunk-20-1} \end{center}
+\begin{center}\includegraphics{coherencePaper40_files/figure-latex/robbersDAGplot-1} \end{center}
 \end{subfigure} \hfill
 \begin{subfigure}[!ht]{0.4\textwidth}
 
@@ -1202,7 +1312,7 @@ For the sake of example, we assume the prior probability of each individual band
 \scalebox{1.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-23-1} \end{center}
+\begin{center}\includegraphics[width=0.7\linewidth]{coherencePaper40_files/figure-latex/plotBeatlesDAG-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
 
@@ -1236,7 +1346,7 @@ G & Pr\\
 
 \begin{table}[H]
 
-\caption{\label{tab:beatlesDesiderata}Desiderata satisfaction in the Beatles scenario.}
+\caption{\label{tab:beatlesDesiderata2}Desiderata satisfaction in the Beatles scenario.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllllllllll}
@@ -1299,7 +1409,7 @@ Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} an
 \scalebox{1.2}{
 \hspace{1cm}\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-28-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotw1w2dag-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.3\textwidth}
 \begin{tabular}{lr}
@@ -1338,12 +1448,12 @@ In the remaining two BNs for the problem the CPT for \textsf{D} remains the same
 \scalebox{1.2}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-29-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotw3w4dag-1} \end{center}
 \end{subfigure}}
 
 \scalebox{1.2}{\begin{subfigure}[!ht]{0.4\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-30-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotw4w5dag-1} \end{center}
 \end{subfigure}}
 \caption{Two remaining DAGs for the \textsf{Witness} problem.}
 \label{fig:witness}
@@ -1421,7 +1531,7 @@ This desideratum presupposes we are dealing with claims made by different person
 
 There is a way to represent the fact that different people made different testimonies within our approach. We already employed this strategy to the Witnesses scenario (precede the claims with ``witness \(a\) said'') and we could deploy it here. But mathematically this would be repetitive, as there would be no essential difference in the calculations.
 
-If we insist that the propositions are put forward by different agents and no one claims that all elements of the narration are true, we should turn to another tool. For instance, there already exists a working measure of such an agreement---Cohen's \(\kappa\) -- which gives the desired results. To illustrate, let's think of a simplified situation with two witnesses \(w1\) and \(w2\), where the respective sets are \(A = \{1 \vee 2 \vee 3, 1\vee 2 \vee 4\}\) and \(B = \{1\vee 2\vee 3, 1 \vee 4 \vee 5\}\) whose corresponding vallues of \(\kappa\) are \(0.467 -0.067\).
+If we insist that the propositions are put forward by different agents and no one claims that all elements of the narration are true, we should turn to another tool. For instance, there already exists a working measure of such an agreement---Cohen's \(\kappa\) -- which gives the desired results. To illustrate, let's think of a simplified situation with two witnesses \(w1\) and \(w2\), where the respective sets are \(A = \{1 \vee 2 \vee 3, 1\vee 2 \vee 4\}\) and \(B = \{1\vee 2\vee 3, 1 \vee 4 \vee 5\}\) whose corresponding values of \(\kappa\) are \(0.467 -0.067\).
 
 --\textgreater{}
 --\textgreater{}
@@ -1437,7 +1547,7 @@ Let's further illustrate our point about the requirement that the BN should repr
 \hspace{2cm}\scalebox{0.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-33-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotT123-1} \end{center}
 \end{subfigure} }\hfill
 \begin{subfigure}[!ht]{0.6\textwidth}
 \centering\begingroup\fontsize{9}{11}\selectfont
@@ -1460,7 +1570,7 @@ Let's further illustrate our point about the requirement that the BN should repr
 \begin{subfigure}[!ht]{0.3\textwidth}
 
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/unnamed-chunk-34-1} \end{center}
+\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotT1232-1} \end{center}
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.6\textwidth}
 \centering\begingroup\fontsize{9}{11}\selectfont
@@ -1489,8 +1599,8 @@ Let's further illustrate our point about the requirement that the BN should repr
 --\textgreater{}
 --\textgreater{}
 
-\hypertarget{discussion}{%
-\section{\texorpdfstring{Discussion \label{sec:discussion}}{Discussion }}\label{discussion}}
+\hypertarget{summary}{%
+\section{\texorpdfstring{Summary \label{sec:discussion}}{Summary }}\label{summary}}
 
 Ultimately, all the calculations are displayed in Table \ref{tab:jointCoherences} and the desiderata yield Table \ref{tab:allResults}, with corresponding success rates (Table \ref{tab:success}).
 

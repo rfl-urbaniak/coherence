@@ -27,7 +27,6 @@ toccolor: blue
 
 ```{r setup, include=FALSE, echo=FALSE}
 require("knitr")
-knitr::opts_chunk$set(fig.pos = "H")
 #opts_knit$set(root.dir = "../code")
 
 ```
@@ -383,17 +382,19 @@ However, as \s{G} is not a logical consequence of \s{P}, it can be argued that \
 
 \begin{figure}[H]
 \hspace{2cm}\scalebox{0.7}{\begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "100%", dpi = 300}
+```{r plotBirdDag,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "100%", dpi = 300}
 source("../code/bns//Penguins.R")
  
 graphviz.plot(BirdDAGbgp)
 ```
 \end{subfigure}} \hfill
-\hspace{-3cm}\scalebox{0.8}{\begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+\hspace{-3cm}\scalebox{0.7}{\begin{subfigure}[!ht]{0.4\textwidth}
+```{r plotBirdCPTs,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
 source("../code/utils//kableCPTs.R")
 CPkable0("BirdBNbgp","B")
+
 CPkable1("BirdBNbgp","P")
+
 CPkable2("BirdBNbgp","G")
 ```
 \end{subfigure}}
@@ -404,50 +405,14 @@ CPkable2("BirdBNbgp","G")
 
 
 
-<!-- \begin{figure}[H] -->
-<!-- \hspace{2cm}\scalebox{0.6}{ -->
-<!-- \begin{subfigure}[!ht]{0.4\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%",  dpi = 300, fig.height=2.5, fig.width=2} -->
-<!-- graphviz.plot(BirdDAGbg) -->
-<!-- ``` -->
-<!-- \end{subfigure} } -->
-<!-- \hfill -->
-<!-- \hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- CPkable0("BirdBNbg","B") -->
-<!-- CPkable1("BirdBNbg","G") -->
-<!-- ``` -->
-<!-- \end{subfigure} -->
-<!-- \label{fig-BG} -->
-<!-- \caption{Bayesian network for the \textsf{BG} scenario.} -->
-<!-- \end{figure} -->
-
-
-
-<!-- \begin{figure}[H] -->
-<!-- \scalebox{0.6}{ -->
-<!-- \hspace{4cm}\begin{subfigure}[!ht]{0.4\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", dpi = 300, fig.width=2, fig.height= 2.5} -->
-<!-- graphviz.plot(BirdDAGbp) -->
-<!-- ``` -->
-<!-- \end{subfigure}} \hfill -->
-<!-- \hspace{-3cm}\begin{subfigure}[!ht]{0.4\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- CPkable0("BirdBNbp","B") -->
-<!-- CPkable1("BirdBNbp","P") -->
-<!-- ``` -->
-<!-- \end{subfigure} -->
-<!-- \caption{Bayesian network for the \textsf{BP} scenario.} -->
-<!-- \label{fig:BP} -->
-<!-- \end{figure} -->
-
 
 
 
 
 \todo{Double check satisfaction for LR}
 
-\noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \@ref(tab:penguinsCoherence)) and see if the desiderata are satisfied (Table \@ref(tab:penguinsDesiderata)).  The measures are: Olsson-Glass, generalized Olsson-Glass, Shogenji, generalized Shogenji, Douven-Meijs, Roche, Fitelson, Structured with Z, LR, and L used as a confirmation measure.
+\noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \@ref(tab:penguinsCoherence)) and see if the desiderata are satisfied (Table \@ref(tab:penguinsDesiderata)).  The measures are: Olsson-Glass, generalized Olsson-Glass, Shogenji, generalized Shogenji, Douven-Meijs, Roche, Fitelson, Structured with Z, LR, and L used as a confirmation measure.^[One phenomenon woth noticing is that the structured measure in its variant that employs likelihood ratio gives \s{Infinity} in one case. The reason why this happens is as follows. One of the child nodes is \s{G}. We need to calculate the expected support its parents' states provide for \s{G}. In the case the scenario actually specifies that all nodes have value 1, this boils down to calculating the likelihood ratio for only one case. We treat   $(\s{B} = 1 \wedge \s{P} = 1)=\s{E}$ as the evidence. $\pr{E \vert \s{G} =1} = .02$, that is, if Tweety is grounded, the probability that it's a bird and a penguin is quite low, but  $\pr{E \vert \neg \s{G}} = 0$, because it is impossible that Tweety is a bird and a penguin if she isn't grounded. But then, the LR would require dividing $.02$ by $0$, which the calculations take at the limit to be infinity. Such cases will come up whenever some combinations of evidence under considerations are excluded by the state of a child node, and in the expected value calculations the presence of infinity will spread, as it is enough that it's the LR for at least one combination with a non-zero probability. This is one of the reasons we do not really think likelihood ratio is the appropriate measure for coherence calculations.]
+
 
 
 ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
@@ -458,14 +423,6 @@ BP <- c("B","P")
 BN <- BirdBNbgp
 penguinsTable <- CoherencesTableEvi(BN = list(BirdBNbgp,BirdBNbg,BirdBNbp), scenariosList = list(BGP, BG, BP), statesList   = list(c("1","1","1"), c("1","1"), c("1","1")),exampleName = "Penguins")
 
-
-# penguinsTableBGP <- CoherencesTable(BirdBNbgp, scenariosList = list(BGP), statesList   = list(c("1","1","1")),exampleName = "Penguins")
-#
-# penguinsTableBG <- CoherencesTable(BirdBNbg, scenariosList = list(BG), statesList   = list(c("1","1")),exampleName = "Penguins")
-#
-# penguinsTableBP <- CoherencesTable(BirdBNbp, scenariosList = list(BP), statesList   = list(c("1","1")),exampleName = "Penguins")
-
-#penguinsTable <- rbind(penguinsTableBGP,penguinsTableBG,penguinsTableBP)
 ```
 
 
@@ -489,7 +446,7 @@ penguinsResults <- as.data.frame(rbind(BGlessBGP,BPbetweenBGandBGP))
 rownames(penguinsResults) <- c("Penguins: BG$<$BGP","Penguins: BG$<<$ BP$<$ BGP")
 ```
 
-```{r penguinsDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+```{r penguinsDesiderata2,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
 library(tidyverse)
 library(kableExtra)
 penguinsResults %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Desiderata satisfaction for the Penguins scenario.") %>%
@@ -516,12 +473,101 @@ penguinsResults %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = 
     \item[(\s{D=const})] the coherence of \s{D} should not change.
 \end{description}\vspace{2mm}
 
-\textbf{Bayesian networks.} When one is forced to represent the scenario as a BN the situation is not straightforward. On one hand, the description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors bring up (1 and .5) do not capture this  information. In the simplest approach in which the information about the die is ignored, we can build a DAG containing two nodes: 
-\todo{tabela z nodami}
+\textbf{Bayesian networks.} When one is about  to represent the scenario as a BN the situation is not straightforward. On one hand, the scenario description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors explicitly bring up (1 and .5) do not capture this  information. In the simplest approach in which the information about the die is ignored, we can build a DAG containing two nodes: 
+
+
+```{r penguinsDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+TF <- "The result is a two or a four."
+TT <-  "The result is a two."
+
+diceNodesTable <- data.frame(c("TF","T"),c(TF,TT))
+colnames(diceNodesTable) <- c("node","content")
+dicePropositions <- diceNodesTable %>%  kable(format = "latex",booktabs=T,
+                        linesep = "",  escape = FALSE, 
+                        caption = "Propositions in the dice scenario") %>%     kable_styling(latex_options=c("striped","HOLD_position")) 
+dicePropositions
+```
+
+
 
 \noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs.
 
-\todo{BN two nodes with CTP}
+
+
+```{r TwoDiceDAG,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", dpi = 300}
+
+Dod2DAG <- model2network("[TF|T][T]")
+T2Prob <- priorCPT(node = "T", prob1 = 1/6)
+TF2Prob <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/5)
+Dod2RegularCPT <-  list(T=T2Prob,TF=TF2Prob)
+Dod2RegularBN <- custom.fit(Dod2DAG,Dod2RegularCPT)
+
+T2dodProb <- priorCPT(node = "T", prob1 = 1/12)
+TF2dodProb <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/11)
+Dod2DodecahedronCPT <-  list(T=T2dodProb,TF=TF2dodProb)
+Dod2DodecahedronBN <- custom.fit(Dod2DAG,Dod2DodecahedronCPT)
+```
+
+
+\begin{figure}[H]
+\scalebox{.6}{\begin{subfigure}[!ht]{0.3\textwidth}
+```{r TwoDiceDAG2,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", dpi = 300}
+graphviz.plot(Dod2DAG)
+```
+\end{subfigure}}
+\scalebox{.9}{\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+T & Pr\\
+\midrule
+1 & 0.167 = \nicefrac{1\,}{6}\\
+0 & 0.833 = \nicefrac{5\,}{6}\\
+\bottomrule
+\end{tabular}
+
+\vspace{1mm}
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{TF} & \multicolumn{2}{c}{T} \\
+  & 1 & 0\\
+\midrule
+1 & 1 & 0.2 = \nicefrac{1\,}{5}\\
+0 & 0 & 0.8 = \nicefrac{4\,}{5}\\
+\bottomrule
+\end{tabular}
+
+\end{subfigure}} 
+\scalebox{.9}{\begin{subfigure}[!ht]{0.3\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+T & Pr\\
+\midrule
+1 & 0.083 = \nicefrac{1\,}{12}\\
+0 & 0.917  = \nicefrac{11\,}{12}\\
+\bottomrule
+\end{tabular}
+\vspace{1mm}
+
+
+\begin{tabular}{lrr}
+\toprule
+\multicolumn{1}{c}{TF} & \multicolumn{2}{c}{T} \\
+  & 1 & 0\\
+\midrule
+1 & 1 & 0.091 = \nicefrac{1\,}{11} \\
+0 & 0 & 0.909 = \nicefrac{10\,}{11}\\
+\bottomrule
+\end{tabular}
+\end{subfigure}} 
+
+\caption{A two-node BN for the dice problem, with CPTs for a regular die (center) and for a dodecahedron (right)}
+\label{fig:TwodiceBN}
+\end{figure}
+
+
 
 If we do so, the results are as expected.
 
@@ -542,19 +588,9 @@ Further, we could also explore the option of the narration being `the die was fa
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- We'll follow the strategy similar to the one we already used. Since neither the example nor the narrations involve information about how probable it is that we're dealing with a regular die, as opposed to a dodecahedron, we avoid using a node representing this. Moreover, if at a given time the agent claims that the result is both two and (two or four), their cognitive situation at that time cannot be represented using uniform distribution for possible toss outcomes. Instead, we start with initial separate BNs for a regular die and a dodecahedron which do have uniform distributions for the \textsf{O} (outcome) node (Fig. \ref{fig:diceBN}), but when weighing the antecedent nodes which are not strictly speaking part of the narration, we use the probabilities updated in light of the narration content itself.  -->
+
+
 
 
 
@@ -751,18 +787,18 @@ dunnit %>%  kable(format = "latex",booktabs=T,
 \begin{figure}[H]
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.3\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+```{r plotDunnitDAG1,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 graphviz.plot(DunnitNoTwinDAG, layout = "twopi")
 ```
 \end{subfigure}} 
 \hspace{-0.8cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+```{r plotDunnitTables,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 CPkable0("DunnitNoTwinBN","M")
 CPkable1("DunnitNoTwinBN","G")
 ```
 \end{subfigure}  }
  \hspace{0.5cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.2\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+```{r plotDunnitTables2,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
 
 CPkable1("DunnitNoTwinBN","I")
 CPkable1("DunnitNoTwinBN","W")
@@ -777,12 +813,12 @@ CPkable1("DunnitNoTwinBN","W")
 \begin{figure}[H]
 \scalebox{1.7}{
 \begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+```{r plotDunnitFullDAG,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 graphviz.plot(DunnitDAG, layout = "twopi")
 ```
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.3\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+```{r plotDunnitTables3,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
 CPkable2("DunnitBN","W")
 ```
 \end{subfigure}}
@@ -796,7 +832,7 @@ CPkable2("DunnitBN","W")
 <!-- \textbf{Results.}  -->
 <!-- Coherence calculations result in Table \@ref(tab:dunnitCoherence) and how they fare with respect to the desideratum is displayed in Table \@ref(tab:dunnitDesiderata).  -->
 
-```{r, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, message = FALSE, warning = FALSE}
+```{r dunnitResultsTable, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, message = FALSE, warning = FALSE}
 library(gRain)
 library(bnlearn)
 library(rje)
@@ -841,7 +877,7 @@ round(DunnitTableSeparate,3) %>%  kable(format = "latex",booktabs=T,
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
-```{r, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, message = FALSE, warning = FALSE}
+```{r DunnitResultsSeparate, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, message = FALSE, warning = FALSE}
 DunnitLessTwin <- DunnitTableSeparate[1,] < DunnitTableSeparate[2,]
 DunnitResultsSeparate <- as.data.frame(DunnitLessTwin)
 rownames(DunnitResultsSeparate) <- c("Dunnit: Dunnit$<$Twin")
@@ -920,13 +956,13 @@ However, bigger overlap  doesn't have  to indicate higher coherence. In situatio
 \begin{figure}[H]
 \scalebox{0.5}{
 \hspace{2.5cm}\begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, fig.width=2}
+```{r plotJapaneseDAG,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, fig.width=2}
 source("../code/bns/JapaneseSwords.R")
 graphviz.plot(JapDAG)
 ```
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+```{r plotJapaneseCPTs,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 CPkable0("Jap1BN","J")
 CPkable1("Jap1BN","O")
 ```
@@ -940,7 +976,7 @@ CPkable1("Jap2BN","O")
 \caption{Scenario 2.}
 \end{subfigure}  \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+```{r plotJapaneseCPT2,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 CPkable0("Jap3BN","J")
 CPkable1("Jap3BN","O")
 ```
@@ -955,7 +991,7 @@ CPkable1("Jap3BN","O")
 
 \textbf{Results.} Coherence calculations are in Table \@ref(tab:japaneseCoherence) and the status of the desiderata involved is displayed in Table \@ref(tab:japaneseDesiderata).
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+```{r JapaneseSwordsTable1,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 J <- c("J","O")
 
 BN <- Jap1BN
@@ -993,7 +1029,7 @@ round(JapaneseSwordsSeparateTable,3) %>%  kable(format = "latex",booktabs=T,
 ```
 
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+```{r JapaneseSwordsDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 JO2greaterJO1 <- JapaneseSwordsSeparateTable[2,] > JapaneseSwordsSeparateTable[1,]
 JO2greaterJO3 <- JapaneseSwordsSeparateTable[2,] > JapaneseSwordsSeparateTable[3,]
 JapaneseSwordsSeparateResults <- as.data.frame(rbind(JO2greaterJO1,JO2greaterJO3))
@@ -1063,7 +1099,7 @@ the information about the prior probabilities is supposed to be part of the narr
 
 \vspace{1mm}
 \footnotesize
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+```{r whoMurderedProbabilities, echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
 library(bnlearn)
 library(gRain)
 library(kableExtra)
@@ -1090,7 +1126,7 @@ robTable2 <- add_header_above(robTable2, c("MisR","WhoMurdered"=3), line = FALSE
 
 \begin{figure}[H]
 \begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", dpi = 300}
+```{r robbersDAGplot,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", dpi = 300}
 graphviz.plot(robbersDAGsimplified)
 ```
 \end{subfigure} \hfill
@@ -1145,7 +1181,7 @@ OnlyR & 0.2\\
 \textbf{Results.} Coherence calculations yield the  results in Table \@ref(tab:robbersCoherence), and the performance of the coherence measures with respect to the desiderata is illustrated in Table \@ref(tab:robbersDesiderata).
 
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
+```{r robbersBNtable,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
 robbersBNTable <- CoherencesTableEvi(list(robbersBN,robbersBN,robbersBN), 
                     scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
                     statesList   = list(c("1","1"),c("1","0"),c("0","1")),
@@ -1163,7 +1199,7 @@ round(robbersBNTable,3) %>% kable(format = "latex",booktabs=T,
 ```
 
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
+```{r robbersDesiderata2,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
 neutralPoints <- c(NA, NA ,1, 1, 0.5, 0, 0, 0, 1, 0)
 PRgreaterPnR <- robbersBNTable[1,] > robbersBNTable[2,] 
 PRgreaterNeutral <- robbersBNTable[1,] > neutralPoints
@@ -1234,13 +1270,13 @@ For the sake of example, we assume the prior probability of each individual band
 \begin{figure}[H]
 \scalebox{1.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
+```{r plotBeatlesDAG,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300}
 source("../code/bns/Beatles.R")
 graphviz.plot(BeatlesDAG)
 ```
 \end{subfigure}} \hfill
 \begin{subfigure}[!ht]{0.2\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+```{r plotBeatlesCPTs1,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
 CPkable0("BeatlesBN","G") 
 ```
 \end{subfigure}
@@ -1251,7 +1287,7 @@ CPkable0("BeatlesBN","G")
 \textbf{Results.} Coherence calculations give the results from Table \@ref(tab:beatlesCoherence), and the satisfaction of the desiderata involved can be inspected by looking at Table \@ref(tab:beatlesDesiderata).
 
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+```{r beatlesResults,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 B <- c("J","P","G","R","D")
 BN <- BeatlesBN
 #
@@ -1273,7 +1309,7 @@ round(BeatlesTable,3) %>%  kable(format = "latex",booktabs=T,
 ```
 
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+```{r beatlesDesiderata1,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 B <- c("J","P","G","R","D")
 minima <-  c(0, 0 ,0, 0, -1, -1, 0, -1, 0, -1)
 neutralPoints <- c(NA, NA ,1, 1, 0, 0, 0.5, 0, 1, 0)
@@ -1285,7 +1321,7 @@ rownames(BeatlesResults) <- c("Beatles: below neutral", "Beatles: minimal")
 
 
 
-```{r beatlesDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+```{r beatlesDesiderata2, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 BeatlesResults %>%  kable(format = "latex",booktabs=T,
         linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in the Beatles scenario.") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
@@ -1348,7 +1384,7 @@ Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} an
 
 \vspace{1mm}
 \footnotesize
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+```{r plotRobbersTable1,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 source("../code/bns/Witness.R")
 Dcpt <- as.data.frame(W12BN$D[[4]])
 Dcpt$Freq <- round(Dcpt$Freq,3)
@@ -1362,7 +1398,7 @@ colnames(Dcpt) <-  c("D", "Pr")
 \begin{figure}[H]
 \scalebox{1.2}{
 \hspace{1cm}\begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
+```{r plotw1w2dag,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
 graphviz.plot(W12DAG)
 ```
 \end{subfigure}} \hfill
@@ -1406,13 +1442,13 @@ In the remaining two BNs for the problem the CPT for \textsf{D} remains the same
 \centering
 \scalebox{1.2}{
 \begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
+```{r plotw3w4dag,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
 graphviz.plot(W34DAG)
 ```
 \end{subfigure}}
 
 \scalebox{1.2}{\begin{subfigure}[!ht]{0.4\textwidth}
-```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
+```{r plotw4w5dag,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
 graphviz.plot(W45DAG)
 ```
 \end{subfigure}}
@@ -1451,7 +1487,7 @@ In the coherence calculations we first obtain how specific states of the narrati
 
 
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+```{r robbersCPTS1,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 A <- c("W1","W2")
 B <- c("W3","W4")
 C <- c("W4","W5")
@@ -1502,7 +1538,7 @@ round(WTable,3) %>%  kable(format = "latex",booktabs=T,
 ```
 
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+```{r robbersDesiderata1,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 W1W2greaterW3W4 <- WTable[1,] > WTable[2,] 
 W4W5greaterW3W4 <- WTable[3,] > WTable[2,] 
 WResults <- as.data.frame(rbind(W1W2greaterW3W4,W4W5greaterW3W4))
@@ -1694,7 +1730,7 @@ Let's further illustrate  our point about the  requirement that the BN should re
 \begin{figure}[H]
 \hspace{2cm}\scalebox{0.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", dpi = 300}
+```{r plotT123,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", dpi = 300}
 source("../code/bns/Depth.R")
 graphviz.plot(T123DAG)
 ```
@@ -1721,7 +1757,7 @@ graphviz.plot(T123DAG)
 \hspace{2cm}\scalebox{0.6}{
 \begin{subfigure}[!ht]{0.3\textwidth}
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
+```{r plotT1232,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300}
 graphviz.plot(T123DAG2)
 ```
 \end{subfigure}} \hfill
@@ -1834,7 +1870,7 @@ coherencesAll  %>%  kable(format = "latex",booktabs=T,
 ```
 
 
-```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+```{r plotResultsAll,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 #readRDS("../calculations/RdataObjects/coherencesAll.Rda")
 
 load("../calculations/RdataObjects/resultsAll.Rda")
