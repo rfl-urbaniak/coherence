@@ -1,4 +1,35 @@
 
+Dod2RegularBN 
+
+
+Dod2DodecahedronBN
+
+
+TTF <- c("T", "TF")
+
+Dod2DAG <- model2network("[TF|T][T]")
+T2Prob <- priorCPT(node = "T", prob1 = 1/6)
+TF2Prob <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/5)
+Dod2RegularCPT <-  list(T=T2Prob,TF=TF2Prob)
+Dod2RegularBN <- custom.fit(Dod2DAG,Dod2RegularCPT)
+
+T2dodProb <- priorCPT(node = "T", prob1 = 1/12)
+TF2dodProb <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/11)
+Dod2DodecahedronCPT <-  list(T=T2dodProb,TF=TF2dodProb)
+Dod2DodecahedronBN <- custom.fit(Dod2DAG,Dod2DodecahedronCPT)
+
+diceTable <- CoherencesTableEvi(BN = list(Dod2RegularBN,Dod2DodecahedronBN),
+              scenariosList = list(TTF, TTF), 
+              statesList   = list(c("1", "1"), c("1", "1")),
+              exampleName = "Dice")
+
+
+diceTable
+
+
+
+
+
 structuredEvi(RegularBN, c("T","TF"), c("1","1"))
 
 structuredEvi(RegularBN, c("T","TF"), c("1","1"),

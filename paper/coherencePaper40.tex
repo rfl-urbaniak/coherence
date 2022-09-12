@@ -783,9 +783,36 @@ T & Pr\\
 \label{fig:TwodiceBN}
 \end{figure}
 
-If we do so, the results are as expected.
+\textbf{Results.} If we do so, the results are as expected for structured coherence---not so much for Shogenji, generalized Shogenji, Douven-Meijs and Fitelson (Tables \ref{tab:diceCoherence}) and \ref{tab:diceDesiderata2}).
 
-\todo{Add results for two nodes}
+\begin{table}[H]
+
+\caption{\label{tab:diceCoherence}Coherence scores for a regular die and a dodecahedron in the dice problem with two nodes (rounded).}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrrrrrrrrr}
+\toprule
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
+\midrule
+\cellcolor{gray!6}{Dice: TTF 11} & \cellcolor{gray!6}{0.5} & \cellcolor{gray!6}{0.5} & \cellcolor{gray!6}{3} & \cellcolor{gray!6}{3} & \cellcolor{gray!6}{0.500} & \cellcolor{gray!6}{0.75} & \cellcolor{gray!6}{0.833} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{1}\\
+Dice: TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & 1 & Inf & 1\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]
+
+\caption{\label{tab:diceDesiderata2}Desideratum satisfaction for two-node BNs in the dice problem.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lllllllllll}
+\toprule
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
+\midrule
+\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
+\bottomrule
+\end{tabular}}
+\end{table}
 
 However, if we include the probabilistic information about all the potential outcomes as part of agents' overall narration, we can use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with.
 

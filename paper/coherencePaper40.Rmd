@@ -490,6 +490,8 @@ dicePropositions
 
 
 
+
+
 \noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs.
 
 
@@ -569,9 +571,52 @@ T & Pr\\
 
 
 
-If we do so, the results are as expected.
+\textbf{Results.} If we do so, the results are as expected for structured coherence---not so much for Shogenji, generalized Shogenji, Douven-Meijs and Fitelson (Tables \@ref(tab:diceCoherence) and \@ref(tab:diceDesiderata2)).
 
-\todo{Add results for two nodes}
+
+
+
+
+
+
+
+```{r diceCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+TTF <- c("T", "TF")
+diceTable <- CoherencesTableEvi(BN = list(Dod2RegularBN,Dod2DodecahedronBN),
+              scenariosList = list(TTF, TTF), 
+              statesList   = list(c("1", "1"), c("1", "1")),
+              exampleName = "Dice")
+
+round(diceTable,3) %>%  kable(format = "latex",booktabs=T,
+  linesep = "",  escape = FALSE, caption = "Coherence scores for a regular die and a dodecahedron in the dice problem with two nodes (rounded).") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+
+```{r diceDesiderataCalculation ,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"}
+
+diceDesiderata <- diceTable[1,] == diceTable[2,] 
+diceDesiderata <- as.data.frame(diceDesiderata)
+rownames(diceDesiderata) <- c("Dodecahedron:  Regular $=$  Dodecahedron")
+```
+
+```{r diceDesiderata2,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+diceDesiderata %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Desideratum satisfaction for two-node BNs in the dice problem.") %>%
+   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 However, if we include the probabilistic information about all the potential outcomes as part of agents' overall narration,  we can  use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with.
 
