@@ -16,7 +16,7 @@ JN <- compile(as.grain(robbersTwoBN))
 
 
 
-graphviz.plot(robbersTwoDAG)
+#Sgraphviz.plot(robbersTwoDAG)
 
 ###  With non-trivial probs
 
@@ -24,7 +24,7 @@ graphviz.plot(robbersTwoDAG)
 #odel2network("[B][P|B][G|B:P]")
 robbersUncDAG <- model2network("[Murder][MIsP|Murder][MIsR|Murder:MIsP]")
 
-graphviz.plot(robbersUncDAG)
+#graphviz.plot(robbersUncDAG)
 
 #graphviz.plot(BirdDAG3, sub = "Penguins with B=1, G =1",  highlight = list(nodes = c("Murder","MIsR"), col = "skyblue", fill= "skyblue"))
 
@@ -36,8 +36,8 @@ MIsPProb <- singleCPT(eNode = "MIsP",hNode = "Murder", probEifHS1 = .8, probEifH
 MIsRProb <- doubleCPT(eNode = "MIsR",h1Node = "Murder",h2Node = "MIsP",probEifH1S1H2S1 =  6/8, 
                       probEifH1S1H2S2 = 1, probEifH1S2H2S1 = 0, probEifH1S2H2S2 = 0)
 
-MIsRProb
-MurderProb
+#MIsRProb
+#MurderProb
 #GProb
 
 #BirdCPT
@@ -71,7 +71,7 @@ robbersDAG <- model2network("[WhoMurdered][MIsP|WhoMurdered][MIsR|WhoMurdered]")
 
 robbersDAGsimplified <- model2network("[W][P|W][R|W]")
 
-graphviz.plot(robbersDAG)
+#graphviz.plot(robbersDAG)
 
 #Define CPTS
 
@@ -84,16 +84,13 @@ whoMurderedProb <-  array(c(0.2,0.2,0.6), dim = 3,
 MIsPProb <-  array(c(1,0,0,1,1,0), dim = c(2,3),dimnames = list(MIsP = c("1","0"), WhoMurdered = whoMurderedDimnames))
 
 
-MIsPProb
+#MIsPProb
 
 MIsRProb <-  array(c(0,1,1,0,1,0), dim = c(2,3),dimnames = list(MIsR = c("1","0"), WhoMurdered = whoMurderedDimnames))
 
-
-
-
 robbersCPT <-list(WhoMurdered=whoMurderedProb,MIsP=MIsPProb,MIsR=MIsRProb)
 
-robbersCPT
+#robbersCPT
 #PickpocketsAndRobberers3CPT 
 
 robbersBN <- custom.fit(robbersDAG,robbersCPT)
@@ -118,9 +115,6 @@ RobbersJNP0 <- setEvidence(robbersJN,"MIsP", "0")
 
 RobbersJNR1 <- setEvidence(robbersJN,"MIsR",  "1")
 RobbersJNR0 <- setEvidence(robbersJN,"MIsR", "0")
-
-
-
 
 #querygrain(RobbersJNP1, "MIsR")
 #querygrain(RobbersJNP0, "MIsR")

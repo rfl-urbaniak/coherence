@@ -779,11 +779,11 @@ T & Pr\\
 \end{tabular}
 \end{subfigure}} 
 
-\caption{A two-node BN for the dice problem, with CPTs for a regular die (center) and for a dodecahedron (right)}
+\caption{Two-node BNs for the dice problem, with CPTs for a regular die (center) and for a dodecahedron (right)}
 \label{fig:TwodiceBN}
 \end{figure}
 
-\textbf{Results.} If we do so, the results are as expected for structured coherence---not so much for Shogenji, generalized Shogenji, Douven-Meijs and Fitelson (Tables \ref{tab:diceCoherence}) and \ref{tab:diceDesiderata2}).
+\textbf{Results.} If we do so, the results are as expected for structured coherence---not so much for Shogenji, generalized Shogenji, Douven-Meijs and Fitelson (Tables \ref{tab:diceCoherence} and \ref{tab:diceDesiderata2}). As the child node logically follows from the parent node, the structured coherence score is 1 if we use \s{Z} or \s{L} as the confirmation measure, and \(\infty\) if we use the likelihood ratio.
 
 \begin{table}[H]
 
@@ -814,19 +814,154 @@ Dice: TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & 1 & Inf & 1\\
 \end{tabular}}
 \end{table}
 
-However, if we include the probabilistic information about all the potential outcomes as part of agents' overall narration, we can use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with.
+\{Bayesian networks (again).\} However, if we include the probabilistic information about all the potential outcomes as part of agents' overall narration, we can use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with.
 
-\todo{Add three nodes BNs with CPTs}
+\begin{figure}[H]
+\scalebox{.35}{\begin{subfigure}[!ht]{.7\textwidth}
 
-Then the results are as follows:
+\begin{flushleft}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/ThreeDiceDAG2-1} \end{flushleft}
+\end{subfigure}}
+\scalebox{.55}{\begin{subfigure}[!ht]{0.35\textwidth}
 
-\todo{Results for three}
+\begin{tabular}{lr}
+\toprule
+O & Pr\\
+\midrule
+1 & 0.167 = \nicefrac{1\,}{6}\\
+2 & 0.167\\
+3 & 0.167\\
+4 & 0.167\\
+5 & 0.167\\
+6 & 0.167\\
+\bottomrule
+\end{tabular}
 
-\noindent This might seem problematic, but really shouldn't. After all, now the narration is not merely `the result is a two (and a two or a four)', but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the \(n\)).
+
+\vspace{1mm}
+
+
+
+
+\begin{tabular}{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{T} & \multicolumn{2}{c}{O} \\
+  & 1 & 2 & 3 & 4 & 5 & 6\\
+\midrule
+1 & 0 & 1 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+\vspace{1mm}
+
+
+
+
+\begin{tabular}{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{TF} & \multicolumn{2}{c}{O} \\
+  & 1 & 2 & 3 & 4 & 5 & 6\\
+\midrule
+1 & 0 & 1 & 0 & 1 & 0 & 0\\
+0 & 1 & 0 & 1 & 0 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+
+
+
+
+
+\end{subfigure}} 
+\scalebox{.55}{\begin{subfigure}[!ht]{0.18\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+O & Pr\\
+\midrule
+1 & 0.083 = \nicefrac{1\,}{12}\\
+2 & 0.083\\
+3 & 0.083\\
+4 & 0.083\\
+5 & 0.083\\
+6 & 0.083\\
+7 & 0.083\\
+8 & 0.083\\
+9 & 0.083\\
+10 & 0.083\\
+11 & 0.083\\
+12 & 0.083\\
+\bottomrule
+\end{tabular}
+
+
+\vspace{1mm}
+
+
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{T} & \multicolumn{2}{c}{O} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+\midrule
+1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+\vspace{1mm}
+
+
+
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{TF} & \multicolumn{2}{c}{O} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+\midrule
+1 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+\end{subfigure}} 
+
+\caption{Three-node BNs for the dice problem, with CPTs for a regular die (center) and for a dodecahedron (right)}
+\label{fig:ThreediceBN}
+\end{figure}
+
+\textbf{Results (again).} Then the results are as follows:
+
+\begin{table}[H]
+
+\caption{\label{tab:diceCoherenceThree}Coherence scores for a regular die and a dodecahedron in the dice problem with three nodes (rounded).}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lrrrrrrrrrr}
+\toprule
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
+\midrule
+\cellcolor{gray!6}{Dice (three nodes): TTF 11} & \cellcolor{gray!6}{0.5} & \cellcolor{gray!6}{0.5} & \cellcolor{gray!6}{3} & \cellcolor{gray!6}{3} & \cellcolor{gray!6}{0.500} & \cellcolor{gray!6}{0.75} & \cellcolor{gray!6}{0.833} & \cellcolor{gray!6}{-0.611} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{-0.611}\\
+Dice (three nodes): TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & -0.819 & Inf & -0.819\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\begin{table}[H]
+
+\caption{\label{tab:diceDesiderataThree2}Desideratum satisfaction for three-node BNs in the dice problem.}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}[t]{lllllllllll}
+\toprule
+  & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
+\midrule
+\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE}\\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+\noindent This might seem problematic, but really should not. After all, now the narration is not merely `the result is a two (and a two or a four)', but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the \(n\)). Notice also how the measure that uses LR fails to pick up on this difference, as at least one of confirmation scores in the calculations is \(\infty\) and this fact overwhelms the expected confirmation score calculations.
 
 Further, we could also explore the option of the narration being `the die was fair, but it has been tossed and the result is a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated with \s{T} and \s{TF} treated as evidence. When we proceed this way, the coherence scores are as in the two-node variants.
-
-\todo{make sure Dice precede robbers}
 
 \hypertarget{dunnit}{%
 \subsection{Dunnit}\label{dunnit}}
@@ -951,6 +1086,16 @@ M & Pr\\
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.3\textwidth}
 
+\begin{tabular}{lr}
+\toprule
+Tw & Pr\\
+\midrule
+1 & 0.034\\
+0 & 0.966\\
+\bottomrule
+\end{tabular}
+
+
 \begin{tabular}{lllr}
 \toprule
 \multicolumn{1}{c}{} & \multicolumn{1}{c}{G} & \multicolumn{1}{c}{Tw} & \multicolumn{1}{c}{} \\
@@ -971,7 +1116,8 @@ W &  &  & Pr\\
 \label{fig:twin}
 \end{figure}
 
-\todo{Add table for TW}
+\textbf{Results.}
+Coherence calculations result in Table \ref{tab:dunnitCoherence} and how they fare with respect to the desideratum is displayed in Table \ref{tab:dunnitDesiderata}.
 
 \begin{table}[H]
 
@@ -1198,16 +1344,11 @@ According to Siebel (2004, p. 336) committing both crimes by the murderer should
 
 \noindent  This requirement is slightly more controversial. Even though \{\s{P,R}\} is the most probable setup, \s{P} and \s{R} disconfirm each other (\(Pr(P|R)<Pr(P)\) and \(Pr(R|P)<Pr(R)\)). Moreover, the intuition behind this desideratum seems to conflict with the intuition behind (\s{JO2}\(>\)\s{JO3}).
 
-\textbf{Bayesian networks.}
-
-The robbers counterexample illustrates the point we already discussed when we talked about the Dice example: a purely probabilistic assumption may or may not be explicitly included as part of the narration. Its explicit inclusion, achieved by the addition of a node in a BN can play a role in coherence calculations. Here, such an inclusion is in line with the example as it was proposed in the literature, where the underlying prior probabilities were explicitly listed as part of the story.
-
-the information about the prior probabilities is supposed to be part of the narration or not. \todo{is this comment still needed?} If we want to include this information in our coherence assessment, we can do this employing a single BN.
+\textbf{Bayesian networks.} The robbers counterexample illustrates the point we already discussed when we talked about the Dice example: a purely probabilistic assumption may or may not be explicitly included as part of the narration. Its explicit inclusion, achieved by the addition of a node in a BN can play a role in coherence calculations. Here, such an inclusion is in line with the example as it was proposed in the literature, where the underlying prior probabilities were explicitly listed as part of the story.
 
 \vspace{1mm}
 \footnotesize
 
-\begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/whoMurderedProbabilities-1} \includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/whoMurderedProbabilities-2} \includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/whoMurderedProbabilities-3} \end{center}
 \normalsize
 
 \begin{figure}[H]

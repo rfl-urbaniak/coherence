@@ -565,13 +565,13 @@ T & Pr\\
 \end{tabular}
 \end{subfigure}} 
 
-\caption{A two-node BN for the dice problem, with CPTs for a regular die (center) and for a dodecahedron (right)}
+\caption{Two-node BNs for the dice problem, with CPTs for a regular die (center) and for a dodecahedron (right)}
 \label{fig:TwodiceBN}
 \end{figure}
 
 
 
-\textbf{Results.} If we do so, the results are as expected for structured coherence---not so much for Shogenji, generalized Shogenji, Douven-Meijs and Fitelson (Tables \@ref(tab:diceCoherence) and \@ref(tab:diceDesiderata2)).
+\textbf{Results.} If we do so, the results are as expected for structured coherence---not so much for Shogenji, generalized Shogenji, Douven-Meijs and Fitelson (Tables \@ref(tab:diceCoherence) and \@ref(tab:diceDesiderata2)). As the child node logically follows from the parent node, the structured coherence score is 1 if we use \s{Z} or \s{L} as the confirmation measure, and $\infty$ if we use the likelihood ratio.
 
 
 
@@ -610,148 +610,201 @@ diceDesiderata %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = F
 
 
 
+{Bayesian networks (again).} However, if we include the probabilistic information about all the potential outcomes as part of agents' overall narration,  we can  use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with.
+
+
+
+
+
+```{r ThreeDiceDAG,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", dpi = 300}
+
+DodDAG <- model2network("[O][T|O][TF|O]")
+
+#REGULAR DIE
+#Outcome 
+Oprob <- array(rep(1/6,6), dim = 6, dimnames = list(O =  1:6))
+
+#The result is a Two
+Tprob <- array(c(0,1,1,0,0,1,
+             0,1,0,1,0,1), dim = c(2,6),
+                  dimnames = list(T = c("1","0"), O = 1:6))
+
+#The result is either a Two or a Four
+TFprob <- array(c(0,1,1,0,0,1,
+             1,0,0,1,0,1), dim = c(2,6),
+           dimnames = list(TF = c("1","0"), O = 1:6))
+
+
+RegularCPT <- list(O=Oprob,T=Tprob,TF=TFprob)
+RegularBN <- custom.fit(DodDAG,RegularCPT)
+
+DOprob <- array(rep(1/12,12), dim = 12, dimnames = list(O =  1:12))
+DTprob <- array(c(0,1,1,0,0,1,
+                 0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1), dim = c(2,12),
+               dimnames = list(T = c("1","0"), O = 1:12))
+
+DTFprob <- array(c(0,1,1,0,0,1,
+                  1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1), dim = c(2,12),
+                dimnames = list(TF = c("1","0"), O = 1:12))
+
+DodecahedronCPT <- list(O=DOprob,T=DTprob,TF=DTFprob)
+DodecahedronBN <- custom.fit(DodDAG,DodecahedronCPT)
+```
+
+
+\begin{figure}[H]
+\scalebox{.35}{\begin{subfigure}[!ht]{.7\textwidth}
+```{r ThreeDiceDAG2,echo=FALSE,eval=TRUE, fig.align = "left",cache=TRUE, fig.show = "hold", out.width = "100%", dpi = 300}
+graphviz.plot(RegularBN)
+```
+\end{subfigure}}
+\scalebox{.55}{\begin{subfigure}[!ht]{0.35\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+O & Pr\\
+\midrule
+1 & 0.167 = \nicefrac{1\,}{6}\\
+2 & 0.167\\
+3 & 0.167\\
+4 & 0.167\\
+5 & 0.167\\
+6 & 0.167\\
+\bottomrule
+\end{tabular}
+
+
+\vspace{1mm}
+
+
+
+
+\begin{tabular}{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{T} & \multicolumn{2}{c}{O} \\
+  & 1 & 2 & 3 & 4 & 5 & 6\\
+\midrule
+1 & 0 & 1 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+\vspace{1mm}
+
+
+
+
+\begin{tabular}{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{TF} & \multicolumn{2}{c}{O} \\
+  & 1 & 2 & 3 & 4 & 5 & 6\\
+\midrule
+1 & 0 & 1 & 0 & 1 & 0 & 0\\
+0 & 1 & 0 & 1 & 0 & 1 & 1\\
+\bottomrule
+\end{tabular}
 
 
 
 
 
 
+\end{subfigure}} 
+\scalebox{.55}{\begin{subfigure}[!ht]{0.18\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+O & Pr\\
+\midrule
+1 & 0.083 = \nicefrac{1\,}{12}\\
+2 & 0.083\\
+3 & 0.083\\
+4 & 0.083\\
+5 & 0.083\\
+6 & 0.083\\
+7 & 0.083\\
+8 & 0.083\\
+9 & 0.083\\
+10 & 0.083\\
+11 & 0.083\\
+12 & 0.083\\
+\bottomrule
+\end{tabular}
 
 
-However, if we include the probabilistic information about all the potential outcomes as part of agents' overall narration,  we can  use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with.
+\vspace{1mm}
 
-\todo{Add three nodes BNs with CPTs}
 
-Then the results are as follows:
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{T} & \multicolumn{2}{c}{O} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+\midrule
+1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
 
-\todo{Results for three}
+\vspace{1mm}
 
-\noindent This might seem problematic, but really shouldn't. After all, now the narration is not merely 'the result is a two (and a two or a four)',  but rather  `I will toss this $n$-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the $n$).
+
+
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{TF} & \multicolumn{2}{c}{O} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+\midrule
+1 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+\end{subfigure}} 
+
+\caption{Three-node BNs for the dice problem, with CPTs for a regular die (center) and for a dodecahedron (right)}
+\label{fig:ThreediceBN}
+\end{figure}
+
+
+
+
+\textbf{Results (again).} Then the results are as follows:
+
+
+
+```{r diceCoherenceThree,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+TTF <- c("T", "TF")
+diceTableThree <- CoherencesTableEvi(BN = list(RegularBN,DodecahedronBN),
+              scenariosList = list(TTF, TTF), 
+              statesList   = list(c("1", "1"), c("1", "1")),
+              exampleName = "Dice (three nodes)")
+
+round(diceTableThree,3) %>%  kable(format = "latex",booktabs=T,
+  linesep = "",  escape = FALSE, caption = "Coherence scores for a regular die and a dodecahedron in the dice problem with three nodes (rounded).") %>%
+  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+
+```{r diceDesiderataCalculationThree ,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"}
+
+diceDesiderataThree <- diceTableThree[1,] == diceTableThree[2,] 
+diceDesiderataThree <- as.data.frame(diceDesiderataThree)
+rownames(diceDesiderataThree) <- c("Dodecahedron:  Regular $=$  Dodecahedron")
+```
+
+```{r diceDesiderataThree2,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+diceDesiderataThree %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Desideratum satisfaction for three-node BNs in the dice problem.") %>%
+   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
+```
+
+
+
+\noindent This might seem problematic, but really should not. After all, now the narration is not merely 'the result is a two (and a two or a four)',  but rather  `I will toss this $n$-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the $n$). Notice also how the measure that uses LR fails to pick up on this difference, as at least one of confirmation scores in the calculations is $\infty$ and this fact overwhelms the expected confirmation score calculations. 
 
 Further, we could also explore the option of the narration being `the die was fair, but it has been tossed and the result is a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated  with  \s{T} and \s{TF} treated as evidence. When we proceed this way, the coherence scores are as in the two-node variants.
 
 
-
-
-<!-- We'll follow the strategy similar to the one we already used. Since neither the example nor the narrations involve information about how probable it is that we're dealing with a regular die, as opposed to a dodecahedron, we avoid using a node representing this. Moreover, if at a given time the agent claims that the result is both two and (two or four), their cognitive situation at that time cannot be represented using uniform distribution for possible toss outcomes. Instead, we start with initial separate BNs for a regular die and a dodecahedron which do have uniform distributions for the \textsf{O} (outcome) node (Fig. \ref{fig:diceBN}), but when weighing the antecedent nodes which are not strictly speaking part of the narration, we use the probabilities updated in light of the narration content itself.  -->
-
-
-
-
-
-<!-- \begin{figure}[H] -->
-<!-- \scalebox{1.3}{\begin{subfigure}[!ht]{0.3\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", dpi = 300} -->
-<!-- source("../code/bns/Dodecahedron.R") -->
-<!-- graphviz.plot(DodDAG) -->
-<!-- ``` -->
-<!-- \end{subfigure}}   -->
-<!-- \hspace{0.2cm}\begin{subfigure}[!ht]{0.25\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", fig.height = 1.5, dpi = 300, fig.width = 1.5} -->
-<!-- CPkable0("RegularBN","O") -->
-<!-- ``` -->
-<!-- \caption{Root CPT for the regular die.} -->
-<!-- \end{subfigure}  -->
-<!-- \hspace{0.2cm} \begin{subfigure}[!ht]{0.25\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", fig.height = 1.5, dpi = 300, fig.width = 1.5} -->
-<!-- CPkable0("DodecahedronBN","O") -->
-<!-- ``` -->
-<!-- \caption{Root CPT for the dodecahedron.} -->
-<!-- \end{subfigure} -->
-
-<!-- \begin{subfigure}[!ht]{0.25\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", dpi = 300} -->
-<!-- CPkable1("RegularBN","T") -->
-<!-- CPkable1("RegularBN","TF") -->
-<!-- ``` -->
-<!-- \caption{Conditional probabilities for the regular die.} -->
-<!-- \end{subfigure} \hfill -->
-<!-- \scalebox{0.8}{\begin{subfigure}[!ht]{0.7\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE, fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", dpi = 300} -->
-<!-- CPkable1("DodecahedronBN","T") -->
-<!-- CPkable1("DodecahedronBN","TF")  -->
-<!-- ``` -->
-<!-- \caption{\large Conditional probabilities for the dodecahedron.} -->
-<!-- \end{subfigure}}  -->
-<!-- \caption{BNs for the \textsf{dice} problem.} -->
-<!-- \label{fig:diceBN} -->
-<!-- \end{figure} -->
-
-
-
-
-
-<!-- \textbf{Results.} Calculation of coherence scores of the scenarios in the respective BNs yield the result in Table \@ref(tab:diceCoherence), and the status of the desiderata is pictured in Table \@ref(tab:diceDesiderata). -->
-
-
-
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
-<!-- load("../calculations/RdataObjects/diceTablePaper.Rda") -->
-<!-- load("../calculations/RdataObjects/dodecahedronResultsNew.Rda") -->
-
-<!-- colnames(DiceTableNew) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1", "S") -->
-<!-- colnames(dodecahedronResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1","S") -->
-
-
-<!-- DiceTableNew <- DiceTableNew[,-8] -->
-<!-- #colnames(DiceTableNew)[8] <- "Structured" -->
-
-<!-- dodecahedronResults <- dodecahedronResults[,-8] -->
-<!-- #colnames(dodecahedronResults)[8] <- "Structured" -->
-<!-- ``` -->
-
-
-
-
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
-<!-- source("../code/measures/structuredCoherenceNarr.R") -->
-<!-- BN <- RegularBN -->
-<!-- RegularTable <- CoherencesTableNarr(RegularBN, -->
-<!--                                      scenariosList = list(c("T","TF")), -->
-<!--                                      statesList   = list(c("1","1")), -->
-<!--                                      exampleName = "Regular" -->
-<!-- ) -->
-
-
-<!-- DodecahedronTable <- CoherencesTableNarr(DodecahedronBN, -->
-<!--                                     scenariosList = list(c("T","TF")), -->
-<!--                                     statesList   = list(c("1","1")), -->
-<!--                                     exampleName = "Dodecahedron" -->
-<!-- ) -->
-
-<!-- DiceTableNew <- rbind(RegularTable,DodecahedronTable) -->
-<!-- ``` -->
-
-
-<!-- ```{r diceCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
-<!-- round(DiceTableNew,3) %>%  kable(format = "latex",booktabs=T, -->
-<!--                         linesep = "",  escape = FALSE, caption = "Coherence scores in the dice problem (rounded).") %>% -->
-<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
-<!-- ``` -->
-
-
-
-
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
-<!-- RegularSameDod <- DiceTableNew[1,] == DiceTableNew[2,]  -->
-<!-- dodecahedronResults <- as.data.frame(RegularSameDod) -->
-<!-- rownames(dodecahedronResults) <- c("Dodecahedron:  Regular $=$  Dodecahedron") -->
-
-<!-- ``` -->
-
-<!-- ```{r diceDesiderata2,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}  -->
-<!--  dodecahedronResults %>%  kable(format = "latex",booktabs=T,  -->
-<!--                                 linesep = "",  escape = FALSE, caption = "Desideratum satisfaction in the dice problem.") %>%  -->
-<!--  kable_styling(latex_options=c("striped","scale_down","HOLD_position"))  -->
-<!-- ``` -->
-
-
-
-
-
-
-
-\todo{make sure Dice precede robbers}
 
 
 
@@ -864,6 +917,8 @@ graphviz.plot(DunnitDAG, layout = "twopi")
 \end{subfigure}} 
 \hspace{-1cm}\scalebox{.8}{\begin{subfigure}[!ht]{0.3\textwidth}
 ```{r plotDunnitTables3,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300}
+CPkable0("DunnitBN","Tw")
+
 CPkable2("DunnitBN","W")
 ```
 \end{subfigure}}
@@ -871,11 +926,12 @@ CPkable2("DunnitBN","W")
 \label{fig:twin}
 \end{figure}
 
-\todo{Add table for TW}
 
 
-<!-- \textbf{Results.}  -->
-<!-- Coherence calculations result in Table \@ref(tab:dunnitCoherence) and how they fare with respect to the desideratum is displayed in Table \@ref(tab:dunnitDesiderata).  -->
+\textbf{Results.}
+Coherence calculations result in Table \@ref(tab:dunnitCoherence) and how they fare with respect to the desideratum is displayed in Table \@ref(tab:dunnitDesiderata).
+
+
 
 ```{r dunnitResultsTable, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300, message = FALSE, warning = FALSE}
 library(gRain)
@@ -1135,12 +1191,8 @@ According to @Siebel2004On-Fitelsons-me[336]  committing both crimes by the murd
 
 
 
-\textbf{Bayesian networks.} 
+\textbf{Bayesian networks.}  The robbers counterexample illustrates the point we already discussed when we talked about the Dice example:  a purely  probabilistic assumption may or may not be explicitly included as part of the narration. Its explicit inclusion, achieved by the addition of  a node  in a BN can play a role in coherence calculations. Here, such an inclusion is in line with the example as it was proposed in the literature, where the underlying prior probabilities were explicitly listed as part of the story.
 
-The robbers counterexample illustrates the point we already discussed when we talked about the Dice example:  a purely  probabilistic assumption may or may not be explicitly included as part of the narration. Its explicit inclusion, achieved by the addition of  a node  in a BN can play a role in coherence calculations. Here, such an inclusion is in line with the example as it was proposed in the literature, where the underlying prior probabilities were explicitly listed as part of the story.
-
-
-the information about the prior probabilities is supposed to be part of the narration or not. \todo{is this comment still needed?} If we want to include this information in our coherence assessment, we can do this employing a single BN.
 
 \vspace{1mm}
 \footnotesize
@@ -1276,7 +1328,7 @@ robbersEviResults %>% kable(format = "latex",booktabs=T,
 
 ## The Beatles
 
-\todo{Consider moving to top of the list.}
+
 
 \textbf{The scenario.} The challenge has been offered by @shogenji1999conducive[339] to criticize defining coherence in terms of  pairwise coherence --- it shows there are jointly incoherent pairwise coherent sets.  The scenario consists of the claims displayed in Table  \@ref(tab:beatles).
 
@@ -1307,9 +1359,10 @@ beatles %>%  kable(format = "latex",booktabs=T,
     \item[(minimal)] \{\s{D,J,P,G,R}\} should get the lowest possible coherence value.
 \end{description}\vspace{2mm}
 
+One of the important features of the example is that it illustrates the behavior of a coherence measure with respect to logical inconsistency. Notably, the set is logically inconsistent, and yet it will turn out that some coherence measures will assign to it non-minimal or even above-neutral coherence scores.
 
 
-For the sake of example, we assume the prior probability of each individual band member being dead to 0.5 (as in the above table), and the CPT for \textsf{D} is many-dimensional and so difficult to present concisely, but the method is straightforward: probability 1 is given to \textsf{D} in all combinations of the parents in which exactly one is true, and otherwise \textsf{D} gets conditional probability 0.
+\textbf{Bayesian network.} For the sake of example, we assume the prior probability of each individual band member being dead to 0.5 (as in the above table), and the CPT for \textsf{D} is many-dimensional and so difficult to present concisely, but the method is straightforward: probability 1 is given to \textsf{D} in all combinations of the parents in which exactly one is true, and otherwise \textsf{D} gets conditional probability 0.
 
 
 \begin{figure}[H]

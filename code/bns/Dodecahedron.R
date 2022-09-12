@@ -1,57 +1,28 @@
 #JUST TWO NODES
 
-
 Dod2DAG <- model2network("[TF|T][T]")
-
-graphviz.plot(Dod2DAG)
 T2Prob <- priorCPT(node = "T", prob1 = 1/6)
-T2Prob
 TF2Prob <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/5)
-TF2Prob
-
 Dod2RegularCPT <-  list(T=T2Prob,TF=TF2Prob)
 Dod2RegularBN <- custom.fit(Dod2DAG,Dod2RegularCPT)
 
 Dod2RegularJN <- compile(as.grain(Dod2RegularBN))
 querygrain(Dod2RegularJN, nodes = "TF")
 
-CPkable0("Dod2RegularBN","TF")
-
-
-
 
 Dod2reverseDAG <- model2network("[T|TF][TF]")
-
-graphviz.plot(Dod2DAG)
 TFrProb <- priorCPT(node = "TF", prob1 = 1/3)
-
 TrProb <- singleCPT(eNode = "T",hNode = "TF", probEifHS1 = 1/2, probEifHS2 = 0)
-
-
 
 Dod2ReverseCPT <-  list(TF=TFrProb,T=TrProb)
 Dod2ReverseBN <- custom.fit(Dod2reverseDAG,Dod2ReverseCPT)
-
 
 TFrDodProb <- priorCPT(node = "TF", prob1 = 1/6)
 Dod2DodReverseCPT <-  list(TF=TFrDodProb,T=TrProb)
 Dod2DodReverseBN <- custom.fit(Dod2reverseDAG,Dod2DodReverseCPT)
 
-
-
-
-
 T2dodProb <- priorCPT(node = "T", prob1 = 1/12)
 TF2dodProb <- singleCPT(eNode = "TF",hNode = "T", probEifHS1 = 1, probEifHS2 = 1/11)
-
-Dod2DodCPT <-  list(T=T2dodProb,TF=TF2dodProb)
-Dod2DodBN <- custom.fit(Dod2DAG,Dod2DodCPT)
-
-
-
-
-
-
 
 
 #The scenario:You’re either tossing a regular die, or a dodecahedron,X is the result.  Consider the coherence of:{X= 2,(X= 2∨X= 4)}. 
@@ -80,7 +51,6 @@ TFprob <- array(c(0,1,1,0,0,1,
 
 #build BN
 RegularCPT <- list(O=Oprob,T=Tprob,TF=TFprob)
-RegularCPT
 
 RegularBN <- custom.fit(DodDAG,RegularCPT)
 
@@ -113,6 +83,43 @@ DodecahedronCPT <- list(O=DOprob,T=DTprob,TF=DTFprob)
 DodecahedronBN <- custom.fit(DodDAG,DodecahedronCPT)
 
 #graphviz.chart(DodecahedronBN,type="barprob")
+
+
+graphviz.plot(RegularBN)
+
+
+CPkable0("RegularBN","O")
+
+
+CPkable1("RegularBN","T")
+
+
+CPkable1("RegularBN","TF")
+
+
+
+CPkable0("DodecahedronBN","O")
+
+
+CPkable1("DodecahedronBN","T")
+
+
+CPkable1("DodecahedronBN","TF")
+
+
+diceTableThree <- CoherencesTableEvi(BN = list(RegularBN,DodecahedronBN),
+                                     scenariosList = list(TTF, TTF), 
+                                     statesList   = list(c("1", "1"), c("1", "1")),
+                                     exampleName = "Dice (three nodes)")
+
+CoherencesTableEvi
+
+diceTableThreeEvi <- CoherencesTableEvi(BN = list(RegularBN,DodecahedronBN),
+                                     scenariosList = list(TTF, TTF), 
+                                     statesList   = list(c("1", "1"), c("1", "1")),
+                                     evidenceList = list(c("O"), c("O")),
+                                     evidenceStatesList = list(c("2"), c("2")),
+                                     exampleName = "Dice (three nodes)")
 
 
 #____ let's put them in one network using 
