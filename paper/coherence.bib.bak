@@ -6783,16 +6783,17 @@ Also ineteresting, because he proves that Bayesian Decision Theory and Pareto op
 	Volume = {37},
 	Year = {1994}}
 
-@incollection{easwaranAndFitelson2015,
-	Author = {Easwaran, Kenny and Fitelson, Branden},
-	Booktitle = {Oxford Studies in Epistemology},
-	Date-Added = {2020-03-08 13:21:11 +0100},
-	Date-Modified = {2020-03-08 13:21:12 +0100},
-	Editor = {Gendler, T. Szabo and Hawthorne, J.},
-	Publisher = {Oxford University Press},
-	Title = {Accuracy, Coherence, and Evidence},
-	Volume = {5},
-	Year = {2015}}
+@InCollection{easwaranAndFitelson2015accuracy,
+  author        = {Easwaran, Kenny and Fitelson, Branden},
+  title         = {Accuracy, Coherence, and Evidence},
+  booktitle     = {Oxford Studies in Epistemology},
+  year          = {2015},
+  editor        = {Gendler, T. Szabo and Hawthorne, J.},
+  volume        = {5},
+  publisher     = {Oxford University Press},
+  date-added    = {2020-03-08 13:21:11 +0100},
+  date-modified = {2020-03-08 13:21:12 +0100},
+}
 
 @book{Yablo2013Aboutness,
 	Author = {Yablo, Stephen},
@@ -7192,16 +7193,6 @@ Very interesting piece!
 	Title = {A comment on ``Trial by Mathematics''},
 	Volume = {84},
 	Year = {1971}}
-
-@article{Pennington1991,
-	Author = {Pennington, Nancy and Hastie, Reid},
-	Date-Added = {2020-03-08 13:21:11 +0100},
-	Date-Modified = {2020-03-08 13:21:12 +0100},
-	Journal = {Cardozo Law Review},
-	Pages = {519-557},
-	Title = {A Cognitive Theory of Juror Decision Making: the Story Model},
-	Volume = {13},
-	Year = {1991}}
 
 @article{Finkelstein1970A,
 	Author = {Finkelstein, Michael O. and Fairley, William B.},
@@ -14977,15 +14968,16 @@ truths, if given a legitimate new sense of "reduction".
 	Year = {2005},
 	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YV8QTi4uLy4uLy5UcmFzaC9QYXBlcnMvU3VwcGVzL1N1cHBlczIwMDVQc3ljaG9sb2dpY2FsIE5hdHVyZSBvZiBWZXJpZmljYXRpb25hLnBkZtIXCxgZV05TLmRhdGFPEQIYAAAAAAIYAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAADRCKi2SCsAAAAJSiUfU3VwcGVzMjAwNVBzeWNob2xvZ2ljIzk0QTI3LnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlKJ86n5dVQREYgQ0FSTwACAAQAAAkgAAAAAAAAAAAAAAAAAAAABlN1cHBlcwAQAAgAANEImqYAAAARAAgAAM6n18UAAAABABQACUolAAlJ7AECyS4ACUaaAAKVFQACAFJNYWNpbnRvc2ggSEQ6VXNlcnM6AHJhZmFsOgAuVHJhc2g6AFBhcGVyczoAU3VwcGVzOgBTdXBwZXMyMDA1UHN5Y2hvbG9naWMjOTRBMjcucGRmAA4AaAAzAFMAdQBwAHAAZQBzADIAMAAwADUAUABzAHkAYwBoAG8AbABvAGcAaQBjAGEAbAAgAE4AYQB0AHUAcgBlACAAbwBmACAAVgBlAHIAaQBmAGkAYwBhAHQAaQBvAG4AYQAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAVFVzZXJzL3JhZmFsLy5UcmFzaC9QYXBlcnMvU3VwcGVzL1N1cHBlczIwMDVQc3ljaG9sb2dpY2FsIE5hdHVyZSBvZiBWZXJpZmljYXRpb25hLnBkZgATAAEvAAAVAAIADP//AACABtIbHB0eWiRjbGFzc25hbWVYJGNsYXNzZXNdTlNNdXRhYmxlRGF0YaMdHyBWTlNEYXRhWE5TT2JqZWN00hscIiNcTlNEaWN0aW9uYXJ5oiIgXxAPTlNLZXllZEFyY2hpdmVy0SYnVHJvb3SAAQAIABEAGgAjAC0AMgA3AEAARgBNAFUAYABnAGoAbABuAHEAcwB1AHcAhACOAN8A5ADsAwgDCgMPAxoDIwMxAzUDPANFA0oDVwNaA2wDbwN0AAAAAAAAAgEAAAAAAAAAKAAAAAAAAAAAAAAAAAAAA3Y=}}
 
-@article{Siebel2004On-Fitelsons-me,
-	Author = {Siebel, M.},
-	Date-Added = {2020-03-08 13:20:13 +0100},
-	Date-Modified = {2020-03-08 13:20:13 +0100},
-	Journal = {Analysis},
-	Pages = {189-190},
-	Title = {On {F}itelson's measure of coherence},
-	Volume = {64},
-	Year = {2004}}
+@Article{Siebel2004On-Fitelsons-me,
+  author        = {Siebel, Mark},
+  title         = {On {F}itelson's measure of coherence},
+  journal       = {Analysis},
+  year          = {2004},
+  volume        = {64},
+  pages         = {189-190},
+  date-added    = {2020-03-08 13:20:13 +0100},
+  date-modified = {2020-03-08 13:20:13 +0100},
+}
 
 @article{balding2004comment,
 	Author = {Balding, David J},
@@ -17571,18 +17563,19 @@ and all mathematicians sometimes falter because their intuitive, ...},
 	Year = {1991},
 	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YV8QQy4uLy4uLy5UcmFzaC9QYXBlcnMvS2xhbWkvS2xhbWkxOTkxRXZpZGVuY2UgYW5kIGxlZ2FsIHJlYXNvbmluZy5wZGbSFwsYGVdOUy5kYXRhTxEB+gAAAAAB+gACAAAMTWFjaW50b3NoIEhEAAAAAAAAAAAAAAAAAAAA0QiotkgrAAAAozIQH0tsYW1pMTk5MUV2aWRlbmNlIGFuIzM1MTg2Ni5wZGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1GGbOkGc3AAAAAAAAAAAAAgAEAAAJIAAAAAAAAAAAAAAAAAAAAAVLbGFtaQAAEAAIAADRCJqmAAAAEQAIAADOkEsXAAAAAQAUAKMyEAAJSewBAskuAAlGmgAClRUAAgBRTWFjaW50b3NoIEhEOlVzZXJzOgByYWZhbDoALlRyYXNoOgBQYXBlcnM6AEtsYW1pOgBLbGFtaTE5OTFFdmlkZW5jZSBhbiMzNTE4NjYucGRmAAAOAFQAKQBLAGwAYQBtAGkAMQA5ADkAMQBFAHYAaQBkAGUAbgBjAGUAIABhAG4AZAAgAGwAZQBnAGEAbAAgAHIAZQBhAHMAbwBuAGkAbgBnAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgBJVXNlcnMvcmFmYWwvLlRyYXNoL1BhcGVycy9LbGFtaS9LbGFtaTE5OTFFdmlkZW5jZSBhbmQgbGVnYWwgcmVhc29uaW5nLnBkZgAAEwABLwAAFQACAAz//wAAgAbSGxwdHlokY2xhc3NuYW1lWCRjbGFzc2VzXU5TTXV0YWJsZURhdGGjHR8gVk5TRGF0YVhOU09iamVjdNIbHCIjXE5TRGljdGlvbmFyeaIiIF8QD05TS2V5ZWRBcmNoaXZlctEmJ1Ryb290gAEACAARABoAIwAtADIANwBAAEYATQBVAGAAZwBqAGwAbgBxAHMAdQB3AIQAjgDUANkA4QLfAuEC5gLxAvoDCAMMAxMDHAMhAy4DMQNDA0YDSwAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAANN}}
 
-@article{pennington1991cognitive,
-	Author = {Pennington, Nancy and Hastie, Ried},
-	Date-Added = {2020-03-08 13:20:13 +0100},
-	Date-Modified = {2020-03-08 13:20:14 +0100},
-	Journal = {Cardozo Law Review},
-	Keywords = {narration, probabilityandlaw, Gosia},
-	Pages = {519--557},
-	Publisher = {HeinOnline},
-	Title = {A cognitive theory of juror decision making: The story model},
-	Volume = {13},
-	Year = {1991},
-	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YV8QOFBlbm5pbmd0b24vUGVubmluZ3RvbjE5OTFBIGNvZ25pdGl2ZSB0aGVvcnkgb2YganVyb3IucGRm0hcLGBlXTlMuZGF0YU8RAh4AAAAAAh4AAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMwxLxJIKwAAAJwKTB9QZW5uaW5ndG9uMTk5MUEgY29nbiM5QzBCMUQucGRmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnAsd1PCa5AAAAAAAAAAAAAEAAwAACSAAAAAAAAAAAAAAAAAAAAAKUGVubmluZ3RvbgAQAAgAAMwxEvIAAAARAAgAANTwjNQAAAABABQAnApMAJoVcgBgiwQABcEjAAIN+QACAFtNYWNpbnRvc2ggSEQ6VXNlcnM6AHJhZmFsOgBHb29nbGVEcml2ZToAUGFwZXJzOgBQZW5uaW5ndG9uOgBQZW5uaW5ndG9uMTk5MUEgY29nbiM5QzBCMUQucGRmAAAOAFwALQBQAGUAbgBuAGkAbgBnAHQAbwBuADEAOQA5ADEAQQAgAGMAbwBnAG4AaQB0AGkAdgBlACAAdABoAGUAbwByAHkAIABvAGYAIABqAHUAcgBvAHIALgBwAGQAZgAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAFdVc2Vycy9yYWZhbC9Hb29nbGVEcml2ZS9QYXBlcnMvUGVubmluZ3Rvbi9QZW5uaW5ndG9uMTk5MUEgY29nbml0aXZlIHRoZW9yeSBvZiBqdXJvci5wZGYAABMAAS8AABUAAgAM//8AAIAG0hscHR5aJGNsYXNzbmFtZVgkY2xhc3Nlc11OU011dGFibGVEYXRhox0fIFZOU0RhdGFYTlNPYmplY3TSGxwiI1xOU0RpY3Rpb25hcnmiIiBfEA9OU0tleWVkQXJjaGl2ZXLRJidUcm9vdIABAAgAEQAaACMALQAyADcAQABGAE0AVQBgAGcAagBsAG4AcQBzAHUAdwCEAI4AyQDOANYC+AL6Av8DCgMTAyEDJQMsAzUDOgNHA0oDXANfA2QAAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAADZg==}}
+@Article{pennington1991cognitive,
+  author        = {Pennington, Nancy and Hastie, Ried},
+  title         = {A cognitive theory of juror decision making: the story model},
+  journal       = {Cardozo Law Review},
+  year          = {1991},
+  volume        = {13},
+  pages         = {519--557},
+  bdsk-file-1   = {YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAFgAdccmVsYXRpdmVQYXRoWWFsaWFzRGF0YV8QOFBlbm5pbmd0b24vUGVubmluZ3RvbjE5OTFBIGNvZ25pdGl2ZSB0aGVvcnkgb2YganVyb3IucGRm0hcLGBlXTlMuZGF0YU8RAh4AAAAAAh4AAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMwxLxJIKwAAAJwKTB9QZW5uaW5ndG9uMTk5MUEgY29nbiM5QzBCMUQucGRmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnAsd1PCa5AAAAAAAAAAAAAEAAwAACSAAAAAAAAAAAAAAAAAAAAAKUGVubmluZ3RvbgAQAAgAAMwxEvIAAAARAAgAANTwjNQAAAABABQAnApMAJoVcgBgiwQABcEjAAIN+QACAFtNYWNpbnRvc2ggSEQ6VXNlcnM6AHJhZmFsOgBHb29nbGVEcml2ZToAUGFwZXJzOgBQZW5uaW5ndG9uOgBQZW5uaW5ndG9uMTk5MUEgY29nbiM5QzBCMUQucGRmAAAOAFwALQBQAGUAbgBuAGkAbgBnAHQAbwBuADEAOQA5ADEAQQAgAGMAbwBnAG4AaQB0AGkAdgBlACAAdABoAGUAbwByAHkAIABvAGYAIABqAHUAcgBvAHIALgBwAGQAZgAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAFdVc2Vycy9yYWZhbC9Hb29nbGVEcml2ZS9QYXBlcnMvUGVubmluZ3Rvbi9QZW5uaW5ndG9uMTk5MUEgY29nbml0aXZlIHRoZW9yeSBvZiBqdXJvci5wZGYAABMAAS8AABUAAgAM//8AAIAG0hscHR5aJGNsYXNzbmFtZVgkY2xhc3Nlc11OU011dGFibGVEYXRhox0fIFZOU0RhdGFYTlNPYmplY3TSGxwiI1xOU0RpY3Rpb25hcnmiIiBfEA9OU0tleWVkQXJjaGl2ZXLRJidUcm9vdIABAAgAEQAaACMALQAyADcAQABGAE0AVQBgAGcAagBsAG4AcQBzAHUAdwCEAI4AyQDOANYC+AL6Av8DCgMTAyEDJQMsAzUDOgNHA0oDXANfA2QAAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAADZg==},
+  date-added    = {2020-03-08 13:20:13 +0100},
+  date-modified = {2020-03-08 13:20:14 +0100},
+  keywords      = {narration, probabilityandlaw, Gosia},
+  publisher     = {HeinOnline},
+}
 
 @article{stein1991criminal,
 	Author = {Stein, Alex},
