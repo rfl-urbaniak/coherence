@@ -237,13 +237,17 @@ While we refer the reader to a more extensive treatment in [REFERENCE SUPRESSED 
 
 
 Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' binary beliefs.\footnote{Conceptually, it is possible to not restrict ourselves this way and look at all combinations of states of the nodes which are assigned non-null probabilities. But then, effectively, the binary content of the narration would have no impact on the coherence score, and we would obtain a coherence measure for the purely probabilistic part of agents' convictions. While this might be a worthy enterprise, we do not purse this idea in this paper. Calculations of a measure thus modified can be achieved by fairly straighforward modification of our code.} For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)^[\s{Z} is  $0$ if $\s{posterior} = \s{prior}$, $\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}$ if ${\s{posterior} > \s{prior}}$, and $\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}$ in the remaining case. Call the posterior of the evidence given a hypothesis \s{likelihood} and the probability of the evidence conditional on the negation of the hypothesis \s{nlikelihood}. Then, likelihood ratio is 
-$\frac{\s{likelihood}}{\s{nlikelihood}}$ and \s{L} is $\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}$]. Then, a weighted average of these scores is obtained. The weights are the normalized  probabilities of the combinations of parents' states  obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, $(1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})$, otherwise.^[We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.]
+$\frac{\s{likelihood}}{\s{nlikelihood}}$ and \s{L} is $\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}$]. Then, a weighted average of these scores is obtained. The weights are the normalized  probabilities of the combinations of parents' states  obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, $(1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})$, otherwise.^[We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.] Here is a description of the structured coherence measure, for clarity presented in the form of a pseudo-code.
+
+\todo{check if narration and evidence are clearly distinguished}
 
 
 
+\todo{listings package}
 
 \pagebreak 
 \footnotesize 
+
 
 ```{r eval = FALSE, highlight = FALSE}
 
@@ -418,7 +422,7 @@ penguinsTable <- CoherencesTableEvi(BN = list(BirdBNbgp,BirdBNbg,BirdBNbp), scen
 ```{r penguinsCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 library(tidyverse)
 round(penguinsTable,3) %>%  kable(format = "latex",booktabs=T,
-  linesep = "",  escape = FALSE, caption = "Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1 at an arrow used in the calculations is involved.") %>%
+  linesep = "",  escape = FALSE, caption = "Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1  in the calculations is involved.") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
@@ -461,7 +465,7 @@ penguinsResults %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = 
     \item[(\s{D=const})] the coherence of \s{D} should not change.
 \end{description}\vspace{2mm}
 
-\textbf{Bayesian networks.} When one is about  to represent the scenario as a BN the situation is not straightforward. On one hand, the scenario description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors explicitly bring up (1 and .5) do not capture this  information. In the simplest approach in which the information about the die is ignored, we can build a DAG containing two nodes: 
+\textbf{Bayesian networks.} When one is about  to represent the scenario as a BN the situation is not straightforward. On one hand, the scenario description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors explicitly bring up (1 and .5) do not capture this  information. The simplest approach is to build a  DAG containing two nodes. 
 
 
 ```{r penguinsDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
@@ -477,10 +481,12 @@ dicePropositions
 ```
 
 
+\todo{just fractions in BN presentation}
 
 
+\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs.  
 
-\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs.
+\todo{think about the distinction here}
 
 
 
@@ -786,11 +792,13 @@ diceDesiderataThree %>%  kable(format = "latex",booktabs=T, linesep = "",  escap
    kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
 
-
+\todo{Split graphics}
 
 \noindent This might seem problematic, but really should not. After all, now the narration is not merely 'the result is a two (and a two or a four)',  but rather  `I will toss this $n$-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the $n$). Notice also how the measure that uses LR fails to pick up on this difference, as at least one of confirmation scores in the calculations is $\infty$ and this fact overwhelms the expected confirmation score calculations. 
 
-Further, we could also explore the option of the narration being `the die was fair, but it has been tossed and the result is a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated  with  \s{T} and \s{TF} treated as evidence. When we proceed this way, the coherence scores are as in the two-node variants.
+Further, we could also explore the option of the narration being `the die is fair, but it was tossed and the result was a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated  with  \s{T} and \s{TF} treated as evidence. When we proceed this way, the structured coherence scores are as in the two-node variant.
+
+
 
 
 
