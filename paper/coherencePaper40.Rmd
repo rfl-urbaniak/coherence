@@ -486,7 +486,7 @@ dicePropositions
 
 \noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs.  
 
-\todo{think about the distinction here}
+\todo{think about the distinction here; in the two-node model we do not include information about the die, footnote: you might think so, but since T is part of the narration, the prior doesn't count in the calculations, since in the only combination of node states that agrees with the narration T happens, and only the combinations not excluded by the narration are considered in coherence calculations.}
 
 
 
@@ -761,6 +761,7 @@ O & Pr\\
 
 
 
+\todo{define node O}
 
 \textbf{Results (again).} In such a setup, the results are as in Table \@ref(tab:diceCoherenceThree), and the status of the desideratum  is summarized in Table \@ref(tab:diceDesiderataThree2).
 
@@ -1466,6 +1467,7 @@ witnesses %>%  kable(format = "latex",booktabs=T,
 
 \noindent Note that this time each proposition has the structure ‘‘Witness no. $X$ claims that \dots" instead of explicitly stating the witness' testimony. 
 
+
 \textbf{Desiderata.} First, we can observe that \s{W1} and \s{W2} fully agree. Testimonies of \s{W3} and \s{W4} overlap only partially, therefore it seems that \{\s{W1},\s{W2}\} is more coherent than \{\s{W3},\s{W4}\}.
 \vspace{2mm}\begin{description}
     \item[(\s{W1W2\textgreater W3W4})] \{\s{W1},\s{W2}\} should be more coherent than \{\s{W3},\s{W4}\}.
@@ -1477,7 +1479,7 @@ Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} an
 \end{description}\vspace{2mm}
 
 
-\noindent \textbf{Bayesian networks.}   The basic idea behind the CPTs we used  is that for any particular witness we take the probability of them including the perpetrator in their list to be 0.8, and the probability of including an innocent to be .05. Of course, the example can be run with different conditional probability tables.  Moreover, in this case, the fact that the witnesses provided their testimonies constitutes evidence (in contrast  with the Robbers scenario, where there is no evidence as to who the perpetrator is), and so we update  on it in our weights calculations.  Let's first take a look at the BN for the first scenario (Figure \ref{fig:w1w2}). 
+\noindent \textbf{Bayesian networks.}   The basic idea behind the CPTs we used  is that for any particular witness we take the probability of them including the perpetrator in their list to be .8, and the probability of including an innocent to be .05. Of course, the example can be run with different conditional probability tables.  Moreover, in this case, the fact that the witnesses provided their testimonies constitutes evidence (in contrast  with the Robbers scenario, where there is no evidence as to who the perpetrator is), and so we update  on it in our weights calculations.  Let's first take a look at the BN for the $\{\s{W1,W2}\}$ (Figure \ref{fig:w1w2}). 
 
 \vspace{1mm}
 \footnotesize
@@ -1533,7 +1535,7 @@ Peter & 0.167\\
 <!-- The CPT for \textsf{D} is  uniform.  The table for \textsf{W1} provides the conditional probability of \textsf{W1} listing (\textsf{W1}=1) or not listing  (\textsf{W1}=0) a particular person given that the actual value of \textsf{D} is Steve/Martin/\dots. The underlying rule is: if someone is guilty, a witness will mention them with probability $.8$, and if they aren't, they will be listed with probability $.05$. -->
 
 In the remaining two BNs for the problem the CPT for \textsf{D} remains the same, and the CPTs for the witness nodes are analogous to the one for \textsf{W1}. The remaining BNs have the following  DAGs (Fig. \ref{fig:witness}).
-
+\todo{Put them next to each other. }
 
 \begin{figure}[H]
 \centering
@@ -1556,9 +1558,9 @@ graphviz.plot(W45DAG)
 
 
 
-We think that what this example illustrates is that  we should really carefully think about whose cognitive perspective is taken when we represent a narration using a BN, focusing on whether the BN involves nodes which are not part of the narration whose coherence is to be evaluated. In particular, the probabilistic information about the uniform distribution of  guilt probability is not part of any of the three involved narrations, but rather a part of a third-person set-up prior to obtaining any evidence.
+We think that what this example illustrates is that  we should really carefully think about whose cognitive perspective is taken when we represent a narration using a BN, focusing on whether the BN involves nodes which are not a part of the narration whose coherence is to be evaluated. In particular, the probabilistic information about the uniform distribution of  guilt probability is not a part of any of the three involved narrations, but rather a part of a third-person set-up prior to obtaining any evidence.
 
-To evaluate the coherence of a narration, at least for unmentioned assumptions that one doesn't have strong independent reasons to keep, one should think counterfactually, granting the consequences of the narration and asking what would happen if it indeed was true. In our case, a judge who evaluates the coherence of witness testimonies once she has heard them, no longer thinks that the distribution of \textsf{D} is uniform. And this agrees with the counterfactual strategy we just described: it is a consequence of the probabilistic set-up and the content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and \textsf{W2} were true, the distribution for \textsf{D} no longer would be uniform, and so it is unfair to judge the coherence of this scenario without giving up this assumption and updating one's assumptions about \textsf{D}.
+To evaluate the coherence of a narration, one should think counterfactually, granting the (potentially probabilistic) consequences of the narration. In our case, a judge who evaluates the coherence of witness testimonies once she has heard them, no longer thinks that the distribution of \textsf{D} is uniform. And this agrees with the counterfactual strategy we just described: it is a consequence of the probabilistic set-up and the content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and \textsf{W2} were true, the distribution for \textsf{D} no longer would be uniform, and so it is unfair to judge the coherence of this scenario without  updating one's assumptions about \textsf{D}.
 
 \textbf{Results.}  Note that in this case we're dealing with the perspective of someone who starts with a uniform prior for \s{D}, and subsequently considers what would happen if she obtained a given set of testimonies as evidence. Clearly, then, the distribution for \s{D} would no longer be uniform, but rather result from updating on this evidence. 
 
@@ -1576,9 +1578,11 @@ t(D12cpt) %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE,
 ```
 
 
-In the coherence calculations we first obtain how specific states of the narration child nodes in a narration would be confirmed by various states of \s{D}. In calculating these confirmation scores we do \emph{not} use the updated BN (after all, confirmation by evidence if you start with BN according to which you  already received it would not be positive).  However, the weights assigned to   confirmation scores in the \s{ecs} calculations should be the (normalized) probabilities obtained by updating on the evidence. If given the evidence included in the scenario Steve is the most likely perpetrator, in your coherence calculations you give the most weight to the confirmation score obtained if he indeed is the perpetrator.
+In the coherence calculations we first obtain how specific states of the narration child nodes would be confirmed by various states of \s{D}. In calculating these confirmation scores we do \emph{not} use the updated BN (recall the old evidence problem: confirmation by evidence already included  would be null).  However, the weights assigned to   confirmation scores in the \s{ecs} calculations should be the (normalized) probabilities obtained by updating on the evidence. If given the evidence included in the scenario Steve is the most likely perpetrator, in your coherence calculations you give the most weight to the confirmation score obtained if he indeed is the perpetrator.
 
- Once this strategy is taken,  the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \@ref(tab:witnessesCoherence) and the status of the desiderata is in Table \@ref(tab:witnessesDesiderata). Now all the weights come from Bayesian networks updated from the perspertive of a given narration, which is emphasized by our use of abbreviations SZnarr, SLRnarr, and SLnarr.  
+\todo{Indentation for paragraphs}
+
+ Once this strategy is taken,  the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \@ref(tab:witnessesCoherence) and the status of the desiderata is in Table \@ref(tab:witnessesDesiderata).  
 
 
 
@@ -1673,7 +1677,7 @@ WResults %>%  kable(format = "latex",booktabs=T,
 ## Depth
 
 
-\textbf{The scenario.} There are eight equally likely suspects $1, \dots, 8$, and three equally reliable witnesses  each trying to identify the person responsible for the crime. Compare two sets, \s{X1} and \s{X2},  of claims about who is responsible. In contrast with Witnesses, the example ignores the fact that these are testimonies and by focusing on the material disjunctive content: 
+\textbf{The scenario.} There are eight equally likely suspects $1, \dots, 8$, and three equally reliable witnesses  each trying to identify the person responsible for the crime. Compare two sets, \s{X1} and \s{X2},  of claims about who is responsible. In contrast with Witnesses, the example ignores the fact that these are testimonies and focuses on the material disjunctive content: 
 \begin{align*}
     X_1 & = \{(1 \vee 2 \vee 3), (1\vee 2 \vee 4), (1 \vee 3 \vee 4)\}\\
     X_2 & =  \{(1 \vee 2 \vee 3), (1\vee  4 \vee 5), (1 \vee 6 \vee 7)\}
@@ -1687,10 +1691,10 @@ WResults %>%  kable(format = "latex",booktabs=T,
 \end{description}\vspace{2mm}
 
 
-This desideratum presupposes we are dealing with claims made by different persons. However, on our approach the narration nodes and the BN involved are supposed to represent one agent's credal state. As long as you take the  narration to be equivalent to the conjunction of the elements, an agent accepting all the elements of either $X_1$ or $X_2$ would simply accept that 1 is responsible, and we do not think it makes sense to ask about the coherence of a single proposition. Moreover, since both sets are logically equivalent, the desideratum would  no longer be  intuitive on the single-agent approach. 
+This desideratum presupposes we are dealing with claims made by different agents. However, on our approach the narration nodes and the BN involved are supposed to represent one agent's credal state. As long as you take the  narration to be equivalent to the conjunction of the elements, an agent accepting all the elements of either $X_1$ or $X_2$ would simply accept that 1 is responsible, and we do not think it makes sense to ask about the coherence of a single proposition. Moreover, since both sets are logically equivalent, the desideratum would  no longer be  intuitive on the single-agent approach. 
 
 
-There is a way to represent the fact that different people made different testimonies within our approach. We already employed this strategy to the Witnesses scenario---one simply needs to precede the claims with "witness $a$ said"---and we could deploy it here. But mathematically this would be repetitive, as there would be no essential difference in the calculations and essentially we would be back at the Dunnit problem with the same resolution.
+There is a way to represent the fact that different people made different testimonies within our approach by  preceding the claims with "witness $a$ said". We already employed this strategy to the Witnesses scenario, and will not do this here again, as the problem structure is essentially the same.
 
 
 ```{r kappas,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
@@ -1714,7 +1718,7 @@ kl2 <- kappam.light(x2)
 
 
 
-If we insist that  the propositions are  put forward by different agents and  no one claims that all elements of the narration are true, we should turn to another tool. For instance, there already exists working measures of such an agreement which give the desired results. For instance, both Fleiss $\kappa$  and Light's $\kappa$ give `r round(kf1$value,3)` for \s{X1} and `r round(kf2$value,3)` for \s{X2}, which is in line with the desideratum.
+If we insist that  the disjunctions are  put forward by different agents and  the agent whose perspective we are trying to model does not assume that all of them are true, we should turn to another tool.  There already exist working measures of such an agreement which give the desired results. For instance, both Fleiss $\kappa$  and Light's $\kappa$ give `r round(kf1$value,3)` for \s{X1} and `r round(kf2$value,3)` for \s{X2}, which is in line with the desideratum.
 
 
 
@@ -1973,7 +1977,7 @@ If we insist that  the propositions are  put forward by different agents and  no
 # Summary \label{sec:discussion}
 
 
-Our goal was to improve on the existing probabilistic approaches to the notion of coherence. The main problem we identified had to do with taking average confirmation for all possible combinations of the elements of a given narration without paying attention to its structure. Accordingly, we developed an approach on which a narration is represented by means of a Bayesian network which captures additional structural information, and a selection of nodes on which an agent's has a decisive stance. Given such a representation, the coherence of a narration is---roughly speaking---a function of the expected support of children nodes in the network, ignoring combinations of states logically excluded by the narration. 
+Our goal was to improve on the existing probabilistic approaches to the notion of coherence. The main problem we identified had to do with taking average confirmation for all possible combinations of the elements of a given narration without paying attention to its structure. Accordingly, we developed an approach on which a narration is represented by means of a Bayesian network which captures additional structural information, and a selection of nodes on which an agent has a decisive stance. Given such a representation, the coherence of a narration is---roughly speaking---a function of the expected support of children nodes in the network, ignoring combinations of states logically excluded by the narration. 
 
 In the literature there is a tradition of criticizng various probabilistic explications of coherence from the perspective of philosophical thought experiments meant to pump our intuitions about what conditions coherence should satisfy. We followed this path, arguing that our measure copes with such counterexamples much better than the other candidates on the market. All the calculations are displayed in Table \@ref(tab:resultsJoint) and  the  desiderata yield Table \@ref(tab:desiderataJoint), with corresponding success rates in the last row.
 
