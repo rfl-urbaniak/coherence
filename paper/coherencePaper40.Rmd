@@ -1971,7 +1971,7 @@ If we insist that  the disjunctions are  put forward by different agents and  th
 
 
 
-
+\todo{typos in references}
 
 
 # Summary \label{sec:discussion}
