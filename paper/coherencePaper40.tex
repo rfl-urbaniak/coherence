@@ -458,58 +458,56 @@ Each parented node in the BN receives its expected confirmation score (\s{ECS}).
   \(\frac{\s{likelihood}}{\s{nlikelihood}}\) and \s{L} is \(\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}\)}. Then, a weighted average of these scores is obtained. The weights are the normalized probabilities of the combinations of parents' states obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.} Here is a description of the structured coherence measure, for clarity presented in the form of a pseudo-code and the \(z\)-confirmation measure (for other confirmation measures the code needs to be modified, but the required modification is straightforward).
 
 \vspace{2mm}
-
 \footnotesize
 \begin{Verbatim}[commandchars=\\\{\},fontfamily=futura,numbers=left,
-xleftmargin=20mm]
-\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{parents_child_possible_states}(\textcolor{NavyBlue}{parents},\textcolor{NavyBlue}{child}, \textcolor{NavyBlue}{narration})
-    \textcolor{ForestGreen}{IF} \textcolor{NavyBlue}{child} included in \textcolor{NavyBlue}{narration} \textcolor{ForestGreen}{THEN}
-        consequentStates <- the unique state of \textcolor{NavyBlue}{child} as reported in the \textcolor{NavyBlue}{narration}
+                 xleftmargin=20mm]
+\textcolor{ForestGreen}{FUNCTION} parents_child_possible_states(parents,child,narration)
+    \textcolor{ForestGreen}{IF} child included in narration \textcolor{ForestGreen}{THEN}
+        consequentStates <- the unique state of child as reported in the narration
     \textcolor{ForestGreen}{ELSE}
-        \textcolor{BurntOrange}{consequentStates} <- all possible states of \textcolor{NavyBlue}{child}
-    \textcolor{ForestGreen}{FOR EACH} \textcolor{BurntOrange}{parent} \textcolor{ForestGreen}{IN} \textcolor{NavyBlue}{parents}
-        \textcolor{ForestGreen}{IF} \textcolor{BurntOrange}{parent} included in \textcolor{NavyBlue}{narration} \textcolor{ForestGreen}{THEN}
-            \textcolor{BurntOrange}{parentStates[parent]} <- the unique state of \textcolor{BurntOrange}{parent} as reported in the \textcolor{NavyBlue}{narration}
+        consequentStates <- all possible states of child
+    \textcolor{ForestGreen}{FOR EACH} parent \textcolor{ForestGreen}{IN} parents
+        \textcolor{ForestGreen}{IF} parent included in narration \textcolor{ForestGreen}{THEN}
+            parentStates[parent] <- the unique state of parent as reported in the narration
         \textcolor{ForestGreen}{ELSE}
-            \textcolor{BurntOrange}{parentStates[parent]} <- all possible states of \textcolor{BurntOrange}{parent}
-    \textcolor{BurntOrange}{parentsStates} <- all combinations of \textcolor{BurntOrange}{parentStates}
-    \textcolor{BurntOrange}{variants} <- list of all possible combinations of \textcolor{BurntOrange}{consequentStates} and \textcolor{BurntOrange}{parentsStates}
-    \textcolor{ForestGreen}{RETURN} \textcolor{BurntOrange}{variants}
+            parentStates[parent] <- all possible states of parent
+    parentsStates <- all combinations of parentStates
+    variants <- list of all possible combinations of consequentStates and parentsStates
+    \textcolor{ForestGreen}{RETURN} variants
 
-\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{coherence_from_ecs}(\textcolor{NavyBlue}{ecs})
-    \textcolor{ForestGreen}{IF} min(\textcolor{NavyBlue}{ecs}) <= 0 \textcolor{ForestGreen}{THEN}
-        \textcolor{ForestGreen}{RETURN} mean(\textcolor{NavyBlue}{ecs}) * (min(\textcolor{NavyBlue}{ecs})+1) - min(\textcolor{NavyBlue}{ecs})min(\textcolor{NavyBlue}{ecs})
-        #this is equivalent to (1- |min(\textcolor{NavyBlue}{ecs})|) * mean(\textcolor{NavyBlue}{ecs}) + |min(\textcolor{NavyBlue}{ecs})| * min(\textcolor{NavyBlue}{ecs})
+\textcolor{ForestGreen}{FUNCTION} coherence_from_ecs(ecs)
+    \textcolor{ForestGreen}{IF} min(ecs) <= 0 \textcolor{ForestGreen}{THEN}
+        \textcolor{ForestGreen}{RETURN} mean(ecs) * (min(ecs)+1) - min(ecs)min(ecs)
+        \textcolor{gray}{#this is equivalent to (1- |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)}
     \textcolor{ForestGreen}{ELSE}
-        \textcolor{ForestGreen}{RETURN} mean(\textcolor{NavyBlue}{ecs})
+        \textcolor{ForestGreen}{RETURN} mean(ecs)
 
-\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{structured_coherence}(\textcolor{NavyBlue}{BN},\textcolor{NavyBlue}{narration},\textcolor{NavyBlue}{evidenceNodes},\textcolor{NavyBlue}{evidenceStates})
-    \textcolor{BurntOrange}{parentedNodes} <- vector of non-root nodes in \textcolor{NavyBlue}{BN}
+\textcolor{ForestGreen}{FUNCTION} structured_coherence(BN,narration,evidenceNodes,evidenceStates)
+    parentedNodes <- vector of non-root nodes in BN
     ecsList <- []
-    \textcolor{ForestGreen}{FOR EACH} \textcolor{BurntOrange}{parentedNode} \textcolor{ForestGreen}{IN} \textcolor{BurntOrange}{parentedNodes}
-        \textcolor{BurntOrange}{variants} <- \textcolor{BrickRed}{parents_child_possible_states}(parents,parentedNode, \textcolor{NavyBlue}{narration})
-        \textcolor{BurntOrange}{variants_count} <- length(\textcolor{BurntOrange}{variants})
-        \textcolor{BurntOrange}{sumParentsNarr} <- 0
-        \textcolor{ForestGreen}{FOR EACH} \textcolor{BurntOrange}{variant} \textcolor{ForestGreen}{IN} \textcolor{BurntOrange}{variants}
-            \textcolor{BurntOrange}{childPrior} <- prior probability of the child state in \textcolor{BurntOrange}{variant}
-            \textcolor{BurntOrange}{childPosterior} <- posterior probability of the child state in \textcolor{BurntOrange}{variant},
-                        obtained by updating on the parents states
-                        from this \textcolor{BurntOrange}{variant}
+    \textcolor{ForestGreen}{FOR EACH} parentedNode \textcolor{ForestGreen}{IN} parentedNodes
+        variants <- parents_child_possible_states(parents,parentedNode, narration)
+        variants_count <- length(variants)
+        sumParentsNarr <- 0
+        \textcolor{ForestGreen}{FOR EACH} variant \textcolor{ForestGreen}{IN} variants
+            childPrior <- prior probability of the child state in variant
+            childPosterior <- posterior probability of the child state in variant, 
+                obtained by updating on the parents states from this variant
             parentsEvidence[variant] <- joint probability of 
-                        the parents states in \textcolor{BurntOrange}{variant} in \textcolor{NavyBlue}{BN} updated with
-                        \textcolor{NavyBlue}{evidenceStates} of \textcolor{NavyBlue}{evidenceNodes}
-            \textcolor{BurntOrange}{sumParentsEvidence} <- \textcolor{BurntOrange}{sumParentsEvidence} +  \textcolor{BurntOrange}{parentsEvidence[variant]} 
-            \textcolor{BurntOrange}{z[variant]} <- \textcolor{BrickRed}{z_confirmation_measure}(\textcolor{BurntOrange}{childPrior}, \textcolor{BurntOrange}{childPosterior})
-        \textcolor{BurntOrange}{ecs} <- 0  #expected confirmation score
-        \textcolor{ForestGreen}{FOR EACH} \textcolor{BurntOrange}{variant} \textcolor{ForestGreen}{IN} \textcolor{BurntOrange}{variants}
-            \textcolor{ForestGreen}{IF} \textcolor{BurntOrange}{parentsEvidence[variant]} > 0 \textcolor{ForestGreen}{THEN}
-                \textcolor{BurntOrange}{weight} <- \textcolor{BurntOrange}{parentsEvidence[variant]}/\textcolor{BurntOrange}{sumParentsEvidence}
+                the parents states in variant in BN updated with
+                evidenceStates of evidenceNodes
+            sumParentsEvidence <- sumParentsEvidence +  parentsEvidence[variant] 
+            z[variant] <- z_confirmation_measure(childPrior, childPosterior)
+        ecs <- 0  \textcolor{gray}{#expected confirmation score}
+        \textcolor{ForestGreen}{FOR EACH} variant \textcolor{ForestGreen}{IN} variants
+            \textcolor{ForestGreen}{IF} parentsEvidence[variant] > 0 \textcolor{ForestGreen}{THEN}
+                weight <- parentsEvidence[variant]/sumParentsEvidence
             \textcolor{ForestGreen}{ELSE}
-                \textcolor{BurntOrange}{weight} <- 1/\textcolor{BurntOrange}{variants}_count
-            \textcolor{BurntOrange}{zScaled} <- \textcolor{BurntOrange}{z[variant]} * \textcolor{BurntOrange}{weight}
-            \textcolor{BurntOrange}{ecs} <- \textcolor{BurntOrange}{ecs} + \textcolor{BurntOrange}{zScaled}
-        ecsList.add(\textcolor{BurntOrange}{ecs})
-    \textcolor{ForestGreen}{RETURN} \textcolor{BrickRed}{coherence_from_ecs}(ecsList)
+                weight <- 1/variants_count
+            zScaled <- z[variant] * weight
+            ecs <- ecs + zScaled
+        ecsList.add(ecs)
+    \textcolor{ForestGreen}{RETURN} coherence_from_ecs(ecsList)
 \end{Verbatim}
 \normalsize
 
