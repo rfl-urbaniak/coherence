@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2020.7.16)  3 NOV 2021 13:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.5.27)  10 OCT 2022 11:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Rafal_latex7.sty
 (./Rafal_latex7.sty
-LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21>
 
 ! LaTeX Error: \usepackage before \documentclass.
 
@@ -97,7 +97,31 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.11 \usepackage{
+l.12 \usepackage{
+                 fancyvrb}
+\usepackage may only appear in the document preamble, i.e.,
+between \documentclass and \begin{document}.
+
+
+! LaTeX Error: \usepackage before \documentclass.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.14 \usepackage[lined, linesnumbered, longend]{
+                                                algorithm2e}
+\usepackage may only appear in the document preamble, i.e.,
+between \documentclass and \begin{document}.
+
+
+! LaTeX Error: \usepackage before \documentclass.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.16 \usepackage{
                  etex}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -109,7 +133,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.13 \usepackage{
+l.18 \usepackage{
                  marvosym}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -121,7 +145,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.14 \usepackage[notextcomp]{
+l.19 \usepackage[notextcomp]{
                              kpfonts}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -133,7 +157,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.15 \usepackage{
+l.20 \usepackage{
                  nicefrac}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -145,7 +169,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.17 \usepackage{
+l.22 \usepackage{
                  floatrow}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -157,7 +181,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.18 \usepackage[titletoc]{
+l.23 \usepackage[titletoc]{
                            appendix}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -169,7 +193,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.20 \usepackage{
+l.25 \usepackage{
                  tcolorbox}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -181,7 +205,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.23 \usepackage[textsize=footnotesize]{
+l.28 \usepackage[textsize=footnotesize]{
                                         todonotes}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -193,8 +217,8 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.41 \usepackage{
-                 times}
+l.47 \usepackage{
+                 mathptmx}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
 
@@ -205,7 +229,19 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.42 \usepackage{
+l.48 \usepackage[scaled=0.86]{
+                              helvet}
+\usepackage may only appear in the document preamble, i.e.,
+between \documentclass and \begin{document}.
+
+
+! LaTeX Error: \usepackage before \documentclass.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.49 \usepackage{
                  t1enc}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -217,7 +253,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.51 \usepackage{
+l.58 \usepackage{
                  amsfonts}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -229,7 +265,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.52 \usepackage{
+l.59 \usepackage{
                  amssymb}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -241,7 +277,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.53 \usepackage{
+l.60 \usepackage{
                  amsthm}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -253,7 +289,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.54 \usepackage{
+l.61 \usepackage{
                  amsmath}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -265,7 +301,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.55 \usepackage{
+l.62 \usepackage{
                  mathtools}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -277,13 +313,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.57 \usepackage{
+l.64 \usepackage{
                  geometry}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
 
 ! Undefined control sequence.
-l.58  \geometry
+l.65  \geometry
                {a4paper,left=35mm,top=20mm,}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -298,7 +334,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.58  \geometry{a
+l.65  \geometry{a
                  4paper,left=35mm,top=20mm,}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -331,14 +367,14 @@ Missing character: There is no m in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no , in font nullfont!
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 58--59
+Overfull \hbox (14.22636pt too wide) in paragraph at lines 65--66
 [] 
  []
 
-\c@fact=\count79
-\c@q=\count80
-\c@lemma=\count81
-\c@theorem=\count82
+\c@fact=\count185
+\c@q=\count186
+\c@lemma=\count187
+\c@theorem=\count188
 
 ! LaTeX Error: Command \* already defined.
                Or name \end... illegal, see p.192 of the manual.
@@ -347,7 +383,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.147 \newtheorem*{reply*}{
+l.154 \newtheorem*{reply*}{
                            Reply}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -360,7 +396,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.147 \newtheorem*{reply*}{R
+l.154 \newtheorem*{reply*}{R
                             eply}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -377,13 +413,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.148 \usepackage{
+l.155 \usepackage{
                   enumitem}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
 
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 147--152
+Overfull \hbox (14.22636pt too wide) in paragraph at lines 154--159
 []
  []
 
@@ -394,7 +430,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.153 \usepackage{
+l.160 \usepackage{
                   float}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -406,7 +442,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.169 \usepackage[authoryear]{
+l.176 \usepackage[authoryear]{
                               natbib}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
@@ -418,13 +454,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.175 \usepackage{
+l.182 \usepackage{
                   tikz}
 \usepackage may only appear in the document preamble, i.e.,
 between \documentclass and \begin{document}.
 
 ! Undefined control sequence.
-l.176 \usetikzlibrary
+l.183 \usetikzlibrary
                      {positioning,shapes,arrows}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -439,7 +475,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.176 \usetikzlibrary{p
+l.183 \usetikzlibrary{p
                        ositioning,shapes,arrows}
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -470,7 +506,7 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no w in font nullfont!
 Missing character: There is no s in font nullfont!
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 176--177
+Overfull \hbox (14.22636pt too wide) in paragraph at lines 183--184
 [] 
  []
 
@@ -482,11 +518,11 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 176--177
 
  
 Here is how much of TeX's memory you used:
- 59 strings out of 492982
- 428 string characters out of 6134896
- 53911 words of memory out of 5000000
- 3724 multiletter control sequences out of 15000+600000
- 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 69 strings out of 478287
+ 688 string characters out of 5849289
+ 289007 words of memory out of 5000000
+ 18365 multiletter control sequences out of 15000+600000
+ 469259 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 9i,0n,13p,109b,16s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 13i,0n,14p,109b,18s stack positions out of 5000i,500n,10000p,200000b,80000s
 !  ==> Fatal error occurred, no output PDF file produced!

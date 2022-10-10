@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.5.27)  10 OCT 2022 11:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.5.27)  10 OCT 2022 11:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**coherencePaper40.tex
-(./coherencePaper40.tex
+**/home/rafal/Lprojects/coherence/paper/coherencePaper40Diff.tex
+(/home/rafal/Lprojects/coherence/paper/coherencePaper40Diff.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-01-21> (/usr/share/texlive/texmf-dist/tex/latex/koma
 -script/scrartcl.cls
@@ -302,7 +302,7 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \c@LT@chunks=\count279
 \LT@p@ftn=\toks25
 )
-Class scrartcl Info: longtable captions redefined on input line 39.
+Class scrartcl Info: longtable captions redefined on input line 84.
 (/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen150
@@ -1552,67 +1552,105 @@ File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
 )) (/usr/share/texlive/texmf-dist/tex/latex/xurl/xurl.sty
 Package: xurl 2022/01/09 v 0.10 modify URL breaks
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 299.
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 30
-5.
+Package hyperref Info: Option `colorlinks' set `true' on input line 350.
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/settobox.sty
+Package: settobox 2016/05/16 v1.5 Assign box dimensions to length registers (HO
+)
+)
+\DIFdelgraphicsbox=\box127
+\DIFdelgraphicswidth=\skip143
+\DIFdelgraphicsheight=\skip144
+LaTeX Info: Redefining \DIFaddbegin on input line 407.
+LaTeX Info: Redefining \DIFaddend on input line 408.
+LaTeX Info: Redefining \DIFdelbegin on input line 409.
+LaTeX Info: Redefining \DIFdelend on input line 410.
+LaTeX Info: Redefining \DIFaddbeginFL on input line 415.
+LaTeX Info: Redefining \DIFaddendFL on input line 416.
+LaTeX Info: Redefining \DIFdelbeginFL on input line 417.
+LaTeX Info: Redefining \DIFdelendFL on input line 418.
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count373
+\lst@gtempboxa=\box128
+\lst@token=\toks61
+\lst@length=\count374
+\lst@currlwidth=\dimen333
+\lst@column=\count375
+\lst@pos=\count376
+\lst@lostspace=\dimen334
+\lst@width=\dimen335
+\lst@newlines=\count377
+\lst@lineno=\count378
+\lst@maxwidth=\dimen336
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count379
+\lst@skipnumbers=\count380
+\lst@framebox=\box129
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 43
+7.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
-) (./coherencePaper40.aux)
-\openout1 = `coherencePaper40.aux'.
+)
+No file coherencePaper40Diff.aux.
+\openout1 = `coherencePaper40Diff.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 305.
-LaTeX Font Info:    Trying to load font information for OML+jkp on input line 3
-05.
+LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 437.
+LaTeX Font Info:    Trying to load font information for OML+jkp on input line 4
+37.
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 305.
-LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 305.
-LaTeX Font Info:    Trying to load font information for OMS+jkp on input line 3
-05.
+LaTeX Font Info:    ... okay on input line 437.
+LaTeX Font Info:    Checking defaults for OMS/jkp/m/n on input line 437.
+LaTeX Font Info:    Trying to load font information for OMS+jkp on input line 4
+37.
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omsjkp.fd
 File: omsjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 305.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 305.
-LaTeX Font Info:    ... okay on input line 305.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 305.
-LaTeX Font Info:    ... okay on input line 305.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 305.
-LaTeX Font Info:    ... okay on input line 305.
-LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 305.
-LaTeX Font Info:    Trying to load font information for OMX+jkp on input line 3
-05.
+LaTeX Font Info:    ... okay on input line 437.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 437.
+LaTeX Font Info:    ... okay on input line 437.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 437.
+LaTeX Font Info:    ... okay on input line 437.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 437.
+LaTeX Font Info:    ... okay on input line 437.
+LaTeX Font Info:    Checking defaults for OMX/jkp/m/n on input line 437.
+LaTeX Font Info:    Trying to load font information for OMX+jkp on input line 4
+37.
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/omxjkp.fd
 File: omxjkp.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 305.
-LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 305.
+LaTeX Font Info:    ... okay on input line 437.
+LaTeX Font Info:    Checking defaults for U/jkpexa/m/n on input line 437.
 LaTeX Font Info:    Trying to load font information for U+jkpexa on input line 
-305.
+437.
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpexa.fd
 File: ujkpexa.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    ... okay on input line 305.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 305.
-LaTeX Font Info:    ... okay on input line 305.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 305.
-LaTeX Font Info:    ... okay on input line 305.
-Package scrbase Info: activating english \contentsname on input line 305.
-Package scrbase Info: activating english \listfigurename on input line 305.
-Package scrbase Info: activating english \listtablename on input line 305.
-LaTeX Info: Redefining \microtypecontext on input line 305.
-Package microtype Info: Applying patch `item' on input line 305.
-Package microtype Info: Applying patch `toc' on input line 305.
-Package microtype Info: Applying patch `eqnum' on input line 305.
-Package microtype Info: Applying patch `footnote' on input line 305.
+LaTeX Font Info:    ... okay on input line 437.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 437.
+LaTeX Font Info:    ... okay on input line 437.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 437.
+LaTeX Font Info:    ... okay on input line 437.
+Package scrbase Info: activating english \contentsname on input line 437.
+Package scrbase Info: activating english \listfigurename on input line 437.
+Package scrbase Info: activating english \listtablename on input line 437.
+LaTeX Info: Redefining \microtypecontext on input line 437.
+Package microtype Info: Applying patch `item' on input line 437.
+Package microtype Info: Applying patch `toc' on input line 437.
+Package microtype Info: Applying patch `eqnum' on input line 437.
+Package microtype Info: Applying patch `footnote' on input line 437.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 305.
+LaTeX Info: Redefining \showhyphens on input line 437.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1620,17 +1658,17 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 ) (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count373
-\scratchdimen=\dimen333
-\scratchbox=\box127
-\nofMPsegments=\count374
-\nofMParguments=\count375
-\everyMPshowfont=\toks61
-\MPscratchCnt=\count376
-\MPscratchDim=\dimen334
-\MPnumerator=\count377
-\makeMPintoPDFobject=\count378
-\everyMPtoPDFconversion=\toks62
+\scratchcounter=\count381
+\scratchdimen=\dimen337
+\scratchbox=\box130
+\nofMPsegments=\count382
+\nofMParguments=\count383
+\everyMPshowfont=\toks62
+\MPscratchCnt=\count384
+\MPscratchDim=\dimen338
+\MPnumerator=\count385
+\makeMPintoPDFobject=\count386
+\everyMPtoPDFconversion=\toks63
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -1643,6 +1681,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: floatrow package is loaded.
 Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: Fixing longtable code of `floatrow' package.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
@@ -1650,9 +1689,9 @@ Package caption Info: End \AtBeginDocument code.
 (/usr/share/texlive/texmf-dist/tex/latex/floatrow/fr-longtable.sty
 Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
 
-\flrow@LT@lasthead=\box128
-\flrow@LT@prelastfoot=\box129
-\c@FBLTpage=\count379
+\flrow@LT@lasthead=\box131
+\flrow@LT@prelastfoot=\box132
+\c@FBLTpage=\count387
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1688,7 +1727,7 @@ Package: fr-longtable 2007/11/28 v0.1b (beta) floatrow: additions for longtable
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 305.
+Package hyperref Info: Link coloring ON on input line 437.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1696,278 +1735,1071 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count380
+\c@section@level=\count388
 )
-LaTeX Info: Redefining \ref on input line 305.
-LaTeX Info: Redefining \pageref on input line 305.
-LaTeX Info: Redefining \nameref on input line 305.
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 30
-7.
+LaTeX Info: Redefining \ref on input line 437.
+LaTeX Info: Redefining \pageref on input line 437.
+LaTeX Info: Redefining \nameref on input line 437.
+\c@lstlisting=\count389
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 43
+9.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.6pt on input line 307.
+(Font)              scaled to size 8.6pt on input line 439.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `phv' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 8.6pt on input line 307.
+(Font)              scaled to size 8.6pt on input line 439.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 17.83641pt on input line 307.
+(Font)              scaled to size 17.83641pt on input line 439.
 LaTeX Font Info:    Trying to load font information for OT1+ztmcm on input line
- 307.
+ 439.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OML+ztmcm on input line
- 307.
+ 439.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OMS+ztmcm on input line
- 307.
+ 439.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for OMX+ztmcm on input line
- 307.
+ 439.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
 LaTeX Font Info:    Trying to load font information for U+jkpsya on input line 
-307.
+439.
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsya.fd
 File: ujkpsya.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for U+jkpsyb on input line 
-307.
+439.
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsyb.fd
 File: ujkpsyb.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for U+jkpmia on input line 
-307.
+439.
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpmia.fd
 File: ujkpmia.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    Trying to load font information for U+jkpsyc on input line 
-307.
+439.
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ujkpsyc.fd
 File: ujkpsyc.fd 2006/08/15 v1.0
 )
-LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 3
-07.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 4
+39.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 307.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 439.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 307.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 439.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 307.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 439.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 12.384pt on input line 316.
+(Font)              scaled to size 12.384pt on input line 457.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 323.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 464.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 323.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 464.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 323.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 464.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 323.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 464.
 LaTeX Font Info:    Trying to load font information for OT1+jkpss on input line
- 323.
+ 464.
 (/usr/share/texlive/texmf-dist/tex/latex/kpfonts/ot1jkpss.fd
 File: ot1jkpss.fd 2007/07/16 Fontinst v1.928 font definitions for OT1/jkpss.
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 6.88pt on input line 330.
+(Font)              scaled to size 6.88pt on input line 471.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 6.88pt on input line 330.
+(Font)              scaled to size 6.88pt on input line 471.
 [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 3
-50.
+
+LaTeX Warning: Reference `sec:measures' on page 2 undefined on input line 479.
+
+
+LaTeX Warning: Reference `sec:examples' on page 2 undefined on input line 479.
+
+
+LaTeX Warning: Reference `sec:discussion' on page 2 undefined on input line 479
+.
+
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 4
+91.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [2] [3]
+)
+
+LaTeX Warning: Reference `coh:Shogenji' on page 2 undefined on input line 503.
+
+[2] [3]
 LaTeX Font Info:    Trying to load font information for T1+futura on input line
- 464.
-LaTeX Font Info:    No file T1futura.fd. on input line 464.
+ 634.
+LaTeX Font Info:    No file T1futura.fd. on input line 634.
 
 LaTeX Font Warning: Font shape `T1/futura/m/n' undefined
-(Font)              using `T1/cmr/m/n' instead on input line 464.
+(Font)              using `T1/cmr/m/n' instead on input line 634.
 
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
-) [4]
+)
+! Undefined control sequence.
+<argument> \DIFdelbegin  %DIFDELCMD < \NormalTok 
+                                                 {FUNCTION structured\_coher...
+l.650 ...herence(BN,evidenceNodes,evidenceStates)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {    parentedNodes \textless {}{-} vector...
+l.651 ...ss{}{-} vector of non{-}root nodes in BN}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {    ecsList \textless {}{-} []}
+l.652 ...\NormalTok{    ecsList \textless{}{-} []}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {    FOR EACH parentedNode IN parentedNodes}
+l.653 ...  FOR EACH parentedNode IN parentedNodes}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {        variants \textless {}{-} parents...
+l.654 ...\_possible\_states(parents,parentedNode)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {        variants\_count \textless {}{-} ...
+l.655 ...s\_count \textless{}{-} length(variants)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {        sumParentsNarr \textless {}{-} 0}
+l.656 ...{        sumParentsNarr \textless{}{-} 0}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {        FOR EACH variant IN variants}
+l.657 ...Tok{        FOR EACH variant IN variants}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {            childPrior \textless {}{-} p...
+l.658 ...robability of the child state in variant}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {            childPosterior \textless {}{...
+l.659 ...obability of the child state in variant,}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {                        obtained by upda...
+l.660 ...tained by updating on the parents states}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {                        from this variant}
+l.661 ...                       from this variant}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {            parentsEvidence[variant] \te...
+l.662 ...nt] \textless{}{-} joint probability of }
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {                        the parents stat...
+l.663 ...nts states in variant in BN updated with}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {                        evidenceStates o...
+l.664 ...         evidenceStates of evidenceNodes}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {            sumParentsEvidence \textless...
+l.665 ...ntsEvidence +  parentsEvidence[variant] }
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {            z[variant] \textless {}{-} z...
+l.666 ...ion\_measure(childPrior, childPosterior)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {        ecs \textless {}{-} 0  \#expecte...
+l.667 ...ss{}{-} 0  \#expected confirmation score}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {        FOR EACH variant IN variants}
+l.668 ...Tok{        FOR EACH variant IN variants}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {            IF parentsEvidence[variant] ...
+l.669 ...sEvidence[variant] \textgreater{} 0 THEN}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {                weight \textless {}{-} p...
+l.670 ...entsEvidence[variant]/sumParentsEvidence}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {            ELSE}
+l.671 %DIFDELCMD < \NormalTok{            ELSE}
+                                               
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {                weight \textless {}{-} 1...
+l.672 ... weight \textless{}{-} 1/variants\_count}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {            zScaled \textless {}{-} z[va...
+l.673 ...caled \textless{}{-} z[variant] * weight}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {            ecs \textless {}{-} ecs + zS...
+l.674 ...        ecs \textless{}{-} ecs + zScaled}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {        ecsList.add(ecs)}
+l.675 ...MD < \NormalTok{        ecsList.add(ecs)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> %DIFDELCMD < \NormalTok 
+                                   {    RETURN coherence\_from\_ecs(ecsList)}
+l.676 ...    RETURN coherence\_from\_ecs(ecsList)}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: \begin{Verbatim} on input line 633 ended by \end{Highlighting}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.677 %DIFDELCMD < \end{Highlighting}
+                                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.677 %DIFDELCMD < \end{Highlighting}
+                                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.677 %DIFDELCMD < \end{Highlighting}
+                                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Underfull \hbox (badness 10000) detected at line 677
+[]\T1/cmr/m/n/8 %DIFDELCMD < 
+ []
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.677 %DIFDELCMD < \end{Highlighting}
+                                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra }, or forgotten \endgroup.
+\FancyVerbFormatLine #1->\FV@ObeyTabs {#1}
+                                          
+l.677 %DIFDELCMD < \end{Highlighting}
+                                     
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten \endgroup.
+\FV@ListProcessLine ...Frame \FV@RightListNumber }
+                                                  \hss }
+l.677 %DIFDELCMD < \end{Highlighting}
+                                     
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten \endgroup.
+\FV@ListProcessLine ...\FV@RightListNumber }\hss }
+                                                  
+l.677 %DIFDELCMD < \end{Highlighting}
+                                     
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+Runaway argument?
+\DIFdelend \DIFaddbegin \DIFadd {\textcolor {ForestGreen}{FUNCTION} \textcolor 
+\ETC.
+! Paragraph ended before \FancyVerbGetLine was complete.
+<to be read again> 
+                   \par 
+l.687 
+      
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Runaway argument?
+! Paragraph ended before \FV@CheckScan was complete.
+<to be read again> 
+                   \par 
+l.687 
+      
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+! Infinite glue shrinkage found in a paragraph.
+<recently read> \tex_par:D 
+                           
+l.687 
+      
+The paragraph just ended includes some glue that has
+infinite shrinkability, e.g., `\hskip 0pt minus 1fil'.
+Such glue doesn't belong there---it allows a paragraph
+of any length to fit on one line. But it's safe to proceed,
+since the offensive shrinkability has been made finite.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.690     ecsList <- }
+                      []
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+\@textcolor ...otect \leavevmode {\color #1{#2}#3}
+                                                  
+l.690     ecsList <- }
+                      []
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Improper \spacefactor.
+<argument> ...def \UL@spfactor {\the \spacefactor 
+                                                  }
+l.690     ecsList <- }
+                      []
+You can refer to \spacefactor only in horizontal mode;
+you can refer to \prevdepth only in vertical mode; and
+neither of these is meaningful inside \write. So
+I'm forgetting what you said and using zero instead.
+
+! Extra }, or forgotten $.
+\UL@word ...r \ifx \expandafter \UL@end #1\egroup 
+                                                  \egroup \unskip \unskip \u...
+l.690     ecsList <- }
+                      []
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten $.
+\UL@word ...expandafter \UL@end #1\egroup \egroup 
+                                                  \unskip \unskip \unskip \s...
+l.690     ecsList <- }
+                      []
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! You can't use `\spacefactor' in math mode.
+\UL@word ... \unskip \unskip \unskip \spacefactor 
+                                                  \UL@spfactor \let \UL@word...
+l.690     ecsList <- }
+                      []
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+! Extra }, or forgotten $.
+\UL@word ...stop \UL@leaders \fi \fi \fi \UL@word 
+                                                  \@empty 
+l.690     ecsList <- }
+                      []
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Extra }, or forgotten $.
+\DIFaddtex #1->{\protect \color {blue}\uwave {#1}}
+                                                  
+l.690     ecsList <- }
+                      []
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! You can't use `macro parameter character #' in math mode.
+<argument> ...textcolor {BurntOrange}{ecs} <- 0 ##
+                                                  expected confirmation scor...
+l.715 }
+       \end{Verbatim}
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.715 }\end{Verbatim}
+                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.715 }\end{Verbatim}
+                     
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.715 }\end{Verbatim}
+                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.715 }\end{Verbatim}
+                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.715 }\end{Verbatim}
+                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.715 }\end{Verbatim}
+                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.715 }\end{Verbatim}
+                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.715 }\end{Verbatim}
+                     
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+! LaTeX Error: \begin{document} ended by \end{Verbatim}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.715 }\end{Verbatim}
+                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Extra \endgroup.
+<recently read> \endgroup 
+                          
+l.715 }\end{Verbatim}
+                     
+Things are pretty mixed up, but I think the worst is over.
+
+[4]
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 10.32pt on input line 540.
-[5]
-<coherencePaper40_files/figure-latex/plotBirdDag-1.pdf, id=77, 206.7725pt x 293
+(Font)              scaled to size 10.32pt on input line 742.
+
+LaTeX Warning: Reference `tab:penguinsPropositions' on page 5 undefined on inpu
+t line 744.
+
+
+LaTeX Warning: Reference `fig:BGP' on page 5 undefined on input line 777.
+
+<coherencePaper40_files/figure-latex/plotBirdDag-1.pdf, id=62, 206.7725pt x 293
 .095pt>
 File: coherencePaper40_files/figure-latex/plotBirdDag-1.pdf Graphic file (type 
 pdf)
 <use coherencePaper40_files/figure-latex/plotBirdDag-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/plotBirdDag-1.pdf 
- used on input line 581.
+ used on input line 783.
 (pdftex.def)             Requested size: 163.32008pt x 231.50224pt.
-[6 <./coherencePaper40_files/figure-latex/plotBirdDag-1.pdf>]
-<coherencePaper40_files/figure-latex/TwoDiceDAG2-1.pdf, id=100, 53.19875pt x 24
-6.9225pt>
+[5]
+
+LaTeX Warning: Reference `tab:penguinsCoherence' on page 6 undefined on input l
+ine 827.
+
+
+LaTeX Warning: Reference `tab:penguinsDesiderata' on page 6 undefined on input 
+line 827.
+
+[6 </home/rafal/Lprojects/coherence/paper/coherencePaper40_files/figure-latex/p
+lotBirdDag-1.pdf>]
+<coherencePaper40_files/figure-latex/TwoDiceDAG2-1.pdf, id=91, 53.19875pt x 246
+.9225pt>
 File: coherencePaper40_files/figure-latex/TwoDiceDAG2-1.pdf Graphic file (type 
 pdf)
 <use coherencePaper40_files/figure-latex/TwoDiceDAG2-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/TwoDiceDAG2-1.pdf 
- used on input line 692.
+ used on input line 897.
 (pdftex.def)             Requested size: 53.19861pt x 246.92188pt.
-[7 <./coherencePaper40_files/figure-latex/TwoDiceDAG2-1.pdf>]
-<coherencePaper40_files/figure-latex/ThreeDiceDAG2-1.pdf, id=118, 311.1625pt x 
+
+LaTeX Warning: Reference `tab:diceCoherence' on page 7 undefined on input line 
+1004.
+
+
+LaTeX Warning: Reference `tab:diceDesiderata2' on page 7 undefined on input lin
+e 1004.
+
+[7 </home/rafal/Lprojects/coherence/paper/coherencePaper40_files/figure-latex/T
+woDiceDAG2-1.pdf>]
+<coherencePaper40_files/figure-latex/ThreeDiceDAG2-1.pdf, id=106, 311.1625pt x 
 246.9225pt>
 File: coherencePaper40_files/figure-latex/ThreeDiceDAG2-1.pdf Graphic file (typ
 e pdf)
 <use coherencePaper40_files/figure-latex/ThreeDiceDAG2-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/ThreeDiceDAG2-1.pd
-f  used on input line 782.
+f  used on input line 1146.
 (pdftex.def)             Requested size: 244.98004pt x 194.40349pt.
 
-Overfull \hbox (53.37798pt too wide) in paragraph at lines 841--841
+Overfull \hbox (6.79987pt too wide) in paragraph at lines 1146--1146
+[][]  
+ []
+
+
+Overfull \hbox (53.37798pt too wide) in paragraph at lines 1205--1205
 [][] 
  []
 
 
-Overfull \hbox (58.93791pt too wide) in paragraph at lines 866--866
+Overfull \hbox (58.93791pt too wide) in paragraph at lines 1230--1230
 [][] 
  []
 
-[8 <./coherencePaper40_files/figure-latex/ThreeDiceDAG2-1.pdf>] [9]
-<coherencePaper40_files/figure-latex/plotDunnitDAG1-1.pdf, id=152, 353.32pt x 2
+
+LaTeX Warning: Reference `tab:diceCoherenceThree' on page 8 undefined on input 
+line 1237.
+
+
+LaTeX Warning: Reference `tab:diceDesiderataThree2' on page 8 undefined on inpu
+t line 1237.
+
+[8 </home/rafal/Lprojects/coherence/paper/coherencePaper40_files/figure-latex/T
+hreeDiceDAG2-1.pdf>]
+
+LaTeX Warning: Reference `tab:dunnitPropositions1' on page 9 undefined on input
+ line 1275.
+
+
+LaTeX Warning: Reference `tab:dunnitPropositions2' on page 9 undefined on input
+ line 1292.
+
+
+LaTeX Warning: Reference `tab:dunnitPropositions3' on page 9 undefined on input
+ line 1307.
+
+
+LaTeX Warning: Reference `fig:twinless' on page 9 undefined on input line 1332.
+
+
+
+LaTeX Warning: Reference `fig:twin' on page 9 undefined on input line 1332.
+
+[9]
+<coherencePaper40_files/figure-latex/plotDunnitDAG1-1.pdf, id=132, 353.32pt x 2
 72.01625pt>
 File: coherencePaper40_files/figure-latex/plotDunnitDAG1-1.pdf Graphic file (ty
 pe pdf)
 <use coherencePaper40_files/figure-latex/plotDunnitDAG1-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/plotDunnitDAG1-1.p
-df  used on input line 974.
+df  used on input line 1339.
 (pdftex.def)             Requested size: 85.74199pt x 66.01158pt.
 
-Overfull \hbox (1.562pt too wide) in paragraph at lines 996--996
+Overfull \hbox (1.562pt too wide) in paragraph at lines 1361--1361
 [][] 
  []
 
 
-Overfull \hbox (8.78197pt too wide) in paragraph at lines 1019--1019
+Overfull \hbox (8.78197pt too wide) in paragraph at lines 1384--1384
 [][] 
  []
 
-<coherencePaper40_files/figure-latex/plotDunnitFullDAG-1.pdf, id=153, 399.4925p
+<coherencePaper40_files/figure-latex/plotDunnitFullDAG-1.pdf, id=133, 399.4925p
 t x 272.01625pt>
 File: coherencePaper40_files/figure-latex/plotDunnitFullDAG-1.pdf Graphic file 
 (type pdf)
 <use coherencePaper40_files/figure-latex/plotDunnitFullDAG-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/plotDunnitFullDAG-
-1.pdf  used on input line 1029.
+1.pdf  used on input line 1394.
 (pdftex.def)             Requested size: 114.31981pt x 77.84088pt.
-[10 <./coherencePaper40_files/figure-latex/plotDunnitDAG1-1.pdf> <./coherencePa
-per40_files/figure-latex/plotDunnitFullDAG-1.pdf>]
-<coherencePaper40_files/figure-latex/plotJapaneseDAG-1.pdf, id=180, 54.2025pt x
+
+LaTeX Warning: Reference `tab:dunnitCoherence' on page 10 undefined on input li
+ne 1428.
+
+
+LaTeX Warning: Reference `tab:dunnitDesiderata' on page 10 undefined on input l
+ine 1428.
+
+[10 </home/rafal/Lprojects/coherence/paper/coherencePaper40_files/figure-latex/
+plotDunnitDAG1-1.pdf> </home/rafal/Lprojects/coherence/paper/coherencePaper40_f
+iles/figure-latex/plotDunnitFullDAG-1.pdf>]
+
+LaTeX Warning: Reference `tab:japanesePropositions1' on page 11 undefined on in
+put line 1468.
+
+
+LaTeX Warning: Reference `fig:japanese' on page 11 undefined on input line 1499
+.
+
+<coherencePaper40_files/figure-latex/plotJapaneseDAG-1.pdf, id=159, 54.2025pt x
  246.9225pt>
 File: coherencePaper40_files/figure-latex/plotJapaneseDAG-1.pdf Graphic file (t
 ype pdf)
 <use coherencePaper40_files/figure-latex/plotJapaneseDAG-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/plotJapaneseDAG-1.
-pdf  used on input line 1141.
+pdf  used on input line 1506.
 (pdftex.def)             Requested size: 54.20236pt x 246.92188pt.
-[11 <./coherencePaper40_files/figure-latex/plotJapaneseDAG-1.pdf>]
-<coherencePaper40_files/figure-latex/robbersDAGplot-1.pdf, id=199, 311.1625pt x
+
+LaTeX Warning: Reference `tab:japaneseCoherence' on page 11 undefined on input 
+line 1580.
+
+
+LaTeX Warning: Reference `tab:japaneseDesiderata' on page 11 undefined on input
+ line 1580.
+
+[11 </home/rafal/Lprojects/coherence/paper/coherencePaper40_files/figure-latex/
+plotJapaneseDAG-1.pdf>]
+
+LaTeX Warning: Reference `tab:robbersPropositions' on page 12 undefined on inpu
+t line 1622.
+
+<coherencePaper40_files/figure-latex/robbersDAGplot-1.pdf, id=174, 311.1625pt x
  246.9225pt>
 File: coherencePaper40_files/figure-latex/robbersDAGplot-1.pdf Graphic file (ty
 pe pdf)
 <use coherencePaper40_files/figure-latex/robbersDAGplot-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/robbersDAGplot-1.p
-df  used on input line 1300.
+df  used on input line 1665.
 (pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1305.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1670.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1305.
-[12] [13 <./coherencePaper40_files/figure-latex/robbersDAGplot-1.pdf>]
-<coherencePaper40_files/figure-latex/plotBeatlesDAG-1.pdf, id=230, 413.545pt x 
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1670.
+[12]
+
+LaTeX Warning: Reference `tab:robbersCoherence' on page 13 undefined on input l
+ine 1712.
+
+
+LaTeX Warning: Reference `tab:robbersDesiderata' on page 13 undefined on input 
+line 1712.
+
+
+LaTeX Warning: Reference `tab:beatles' on page 13 undefined on input line 1748.
+
+
+[13 </home/rafal/Lprojects/coherence/paper/coherencePaper40_files/figure-latex/
+robbersDAGplot-1.pdf>]
+<coherencePaper40_files/figure-latex/plotBeatlesDAG-1.pdf, id=203, 413.545pt x 
 246.9225pt>
 File: coherencePaper40_files/figure-latex/plotBeatlesDAG-1.pdf Graphic file (ty
 pe pdf)
 <use coherencePaper40_files/figure-latex/plotBeatlesDAG-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/plotBeatlesDAG-1.p
-df  used on input line 1426.
+df  used on input line 1791.
 (pdftex.def)             Requested size: 85.74272pt x 51.19589pt.
-[14 <./coherencePaper40_files/figure-latex/plotBeatlesDAG-1.pdf>]
-<coherencePaper40_files/figure-latex/plotw1w2dag-1.pdf, id=252, 311.1625pt x 24
+
+LaTeX Warning: Reference `tab:beatlesCoherence' on page 14 undefined on input l
+ine 1806.
+
+
+LaTeX Warning: Reference `tab:beatlesDesiderata2' on page 14 undefined on input
+ line 1806.
+
+
+LaTeX Warning: Reference `tab:witnessesProp' on page 14 undefined on input line
+ 1840.
+
+[14 </home/rafal/Lprojects/coherence/paper/coherencePaper40_files/figure-latex/
+plotBeatlesDAG-1.pdf>]
+
+LaTeX Warning: Reference `fig:w1w2' on page 15 undefined on input line 1876.
+
+<coherencePaper40_files/figure-latex/plotw1w2dag-1.pdf, id=221, 311.1625pt x 24
 6.9225pt>
 File: coherencePaper40_files/figure-latex/plotw1w2dag-1.pdf Graphic file (type 
 pdf)
 <use coherencePaper40_files/figure-latex/plotw1w2dag-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/plotw1w2dag-1.pdf 
- used on input line 1523.
+ used on input line 1888.
 (pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
 
-Overfull \hbox (113.10822pt too wide) in paragraph at lines 1543--1552
+Overfull \hbox (113.10822pt too wide) in paragraph at lines 1909--1918
 [][] 
  []
 
-<coherencePaper40_files/figure-latex/plotw3w4dag-1.pdf, id=254, 311.1625pt x 24
+
+LaTeX Warning: Reference `fig:witness' on page 15 undefined on input line 1923.
+
+
+<coherencePaper40_files/figure-latex/plotw3w4dag-1.pdf, id=222, 311.1625pt x 24
 6.9225pt>
 File: coherencePaper40_files/figure-latex/plotw3w4dag-1.pdf Graphic file (type 
 pdf)
 <use coherencePaper40_files/figure-latex/plotw3w4dag-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/plotw3w4dag-1.pdf 
- used on input line 1565.
+ used on input line 1945.
 (pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
-<coherencePaper40_files/figure-latex/plotw4w5dag-1.pdf, id=255, 311.1625pt x 24
+
+Overfull \hbox (6.7993pt too wide) in paragraph at lines 1945--1945
+ [][] 
+ []
+
+<coherencePaper40_files/figure-latex/plotw4w5dag-1.pdf, id=223, 311.1625pt x 24
 6.9225pt>
 File: coherencePaper40_files/figure-latex/plotw4w5dag-1.pdf Graphic file (type 
 pdf)
 <use coherencePaper40_files/figure-latex/plotw4w5dag-1.pdf>
 Package pdftex.def Info: coherencePaper40_files/figure-latex/plotw4w5dag-1.pdf 
- used on input line 1569.
+ used on input line 1949.
 (pdftex.def)             Requested size: 163.31528pt x 129.59856pt.
-[15 <./coherencePaper40_files/figure-latex/plotw1w2dag-1.pdf> <./coherencePaper
-40_files/figure-latex/plotw3w4dag-1.pdf> <./coherencePaper40_files/figure-latex
-/plotw4w5dag-1.pdf>] [16] [17] [18] [19] (./coherencePaper40.aux)
+
+Overfull \hbox (6.7993pt too wide) in paragraph at lines 1949--1949
+ [][] 
+ []
+
+[15 </home/rafal/Lprojects/coherence/paper/coherencePaper40_files/figure-latex/
+plotw1w2dag-1.pdf> </home/rafal/Lprojects/coherence/paper/coherencePaper40_file
+s/figure-latex/plotw3w4dag-1.pdf> </home/rafal/Lprojects/coherence/paper/cohere
+ncePaper40_files/figure-latex/plotw4w5dag-1.pdf>]
+
+LaTeX Warning: Reference `tab:witnessesCoherence' on page 16 undefined on input
+ line 1975.
+
+
+LaTeX Warning: Reference `tab:witnessesDesiderata' on page 16 undefined on inpu
+t line 1975.
+
+[16]
+
+LaTeX Warning: Reference `tab:resultsJoint' on page 17 undefined on input line 
+2037.
+
+
+LaTeX Warning: Reference `tab:desiderataJoint' on page 17 undefined on input li
+ne 2037.
+
+[17] [18] [19] (/home/rafal/Lprojects/coherence/paper/coherencePaper40Diff.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 40575 strings out of 478287
- 788695 string characters out of 5849289
- 1268305 words of memory out of 5000000
- 57362 multiletter control sequences out of 15000+600000
- 602169 words of font info for 517 fonts, out of 8000000 for 9000
+ 41976 strings out of 478287
+ 809635 string characters out of 5849289
+ 1293817 words of memory out of 5000000
+ 58765 multiletter control sequences out of 15000+600000
+ 600682 words of font info for 506 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 108i,16n,106p,10639b,727s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 108i,16n,106p,10681b,732s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf/
 fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/kpfonts/jkpss
-mn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></us
-r/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/s
-ymbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
-w/times/utmri8a.pfb>
-Output written on coherencePaper40.pdf (19 pages, 287135 bytes).
+mn8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/latxfont/la
+sy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/rsfs/rsfs10.pfb></usr
+/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/sy
+mbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
+/times/utmri8a.pfb>
+Output written on /home/rafal/Lprojects/coherence/paper/coherencePaper40Diff.pd
+f (19 pages, 300334 bytes).
 PDF statistics:
- 495 PDF objects out of 1000 (max. 8388607)
- 406 compressed objects within 5 object streams
+ 463 PDF objects out of 1000 (max. 8388607)
+ 373 compressed objects within 4 object streams
  127 named destinations out of 1000 (max. 500000)
  116908 words of extra memory for PDF output out of 128383 (max. 10000000)
 

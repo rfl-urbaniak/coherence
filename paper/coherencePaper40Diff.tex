@@ -1,4 +1,7 @@
 % Options for packages loaded elsewhere
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL coherencePaper40OLD.tex   Mon Oct 10 11:02:55 2022
+%DIF ADD coherencePaper40.tex      Mon Oct 10 11:46:00 2022
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
@@ -35,6 +38,48 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+%DIF 38-77d38
+%DIF < \usepackage{color}
+%DIF < \usepackage{fancyvrb}
+%DIF < \newcommand{\VerbBar}{|}
+%DIF < \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+%DIF < \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+%DIF < % Add ',fontsize=\small' for more characters per line
+%DIF < \usepackage{framed}
+%DIF < \definecolor{shadecolor}{RGB}{248,248,248}
+%DIF < \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+%DIF < \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+%DIF < \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+%DIF < \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+%DIF < \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+%DIF < \newcommand{\BuiltInTok}[1]{#1}
+%DIF < \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+%DIF < \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+%DIF < \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+%DIF < \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+%DIF < \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+%DIF < \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+%DIF < \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+%DIF < \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+%DIF < \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+%DIF < \newcommand{\ExtensionTok}[1]{#1}
+%DIF < \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+%DIF < \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+%DIF < \newcommand{\ImportTok}[1]{#1}
+%DIF < \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+%DIF < \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+%DIF < \newcommand{\NormalTok}[1]{#1}
+%DIF < \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+%DIF < \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+%DIF < \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+%DIF < \newcommand{\RegionMarkerTok}[1]{#1}
+%DIF < \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+%DIF < \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+%DIF < \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+%DIF < \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+%DIF < \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+%DIF < \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+%DIF -------
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -95,10 +140,12 @@
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{ragged2e}
-%\usepackage[ruled, lined, linesnumbered, commentsnumbered, %longend]{algorithm2e}
-\usepackage{fancyvrb}
-
-\usepackage[lined, linesnumbered, longend]{algorithm2e}
+%DIF 138a98-101
+%\usepackage[ruled, lined, linesnumbered, commentsnumbered, %longend]{algorithm2e} %DIF > 
+\usepackage{fancyvrb} %DIF > 
+ %DIF > 
+\usepackage[lined, linesnumbered, longend]{algorithm2e} %DIF > 
+%DIF -------
 
 \usepackage{etex}
 %\usepackage{yfonts}
@@ -125,7 +172,11 @@
 
 
 
-\setlength{\parindent}{5mm}
+%DIF 164c128
+%DIF < \setlength{\parindent}{10pt}
+%DIF -------
+\setlength{\parindent}{5mm} %DIF > 
+%DIF -------
 \setlength{\parskip}{1pt}
 
 
@@ -301,16 +352,106 @@
 \title{Structured probabilistic coherence \linebreak and the usual counterexamples to probabilistic measures of coherence}
 \author{}
 \date{\vspace{-2.5em}}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFaddtex}[1]{{\protect\color{blue}\uwave{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdeltex}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF HYPERREF PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF LISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_UNDERLINE %DIF PREAMBLE
+  moredelim=[il][\color{red}\sout]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\uwave]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
 \maketitle
 
-\setlength{\abovedisplayskip}{-10pt}
+\DIFdelbegin %DIFDELCMD < {
+%DIFDELCMD < \hypersetup{linkcolor=blue}
+%DIFDELCMD < \setcounter{tocdepth}{3}
+%DIFDELCMD < \tableofcontents
+%DIFDELCMD < }
+%DIFDELCMD < %%%
+\DIFdelend \setlength{\abovedisplayskip}{-10pt}
 \setlength{\belowdisplayskip}{5pt}
 
-\begin{quote}\textbf{Abstract.}
-We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. 
-\end{quote}
+\DIFdelbegin %DIFDELCMD < \pagebreak
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \begin{quote}\textbf{\DIFadd{Abstract.}}
+\DIFadd{We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. 
+}\end{quote}
+\DIFaddend 
 
 \hypertarget{introduction-motivations}{%
 \section{Introduction \& motivations}\label{introduction-motivations}}
@@ -455,14 +596,43 @@ Inspired by these failures, in {[}REFERENCE SUPRESSED FOR ANONYMITY{]} we propos
 While we refer the reader to a more extensive treatment in {[}REFERENCE SUPRESSED FOR ANONYMITY{]}, we now briefly discuss the main idea behind it. A Bayesian network (BN) represents agent's probabilistic belief state with respect to the relevant nodes. Additionally, some of the nodes are distinguished as narration nodes---the agent holds definite beliefs about which states of these nodes occur, without assigning probabilities equal 1 to them.\footnote{Also, we assume that the agent does not assign probability 0 to the narration being true.} If actual learning takes place, the evidence nodes and their states need to be specified as well.
 
 Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' binary beliefs.\footnote{Conceptually, it is possible to not restrict ourselves this way and look at all combinations of states of the nodes which are assigned non-null probabilities. But then, effectively, the binary content of the narration would have no impact on the coherence score, and we would obtain a coherence measure for the purely probabilistic part of agents' convictions. While this might be a worthy enterprise, we do not purse this idea in this paper. Calculations of a measure thus modified can be achieved by fairly straighforward modification of our code.} For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)\footnote{\s{Z} is \(0\) if \(\s{posterior} = \s{prior}\), \(\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}\) if \({\s{posterior} > \s{prior}}\), and \(\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}\) in the remaining case. Call the posterior of the evidence given a hypothesis \s{likelihood} and the probability of the evidence conditional on the negation of the hypothesis \s{nlikelihood}. Then, likelihood ratio is
-  \(\frac{\s{likelihood}}{\s{nlikelihood}}\) and \s{L} is \(\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}\)}. Then, a weighted average of these scores is obtained. The weights are the normalized probabilities of the combinations of parents' states obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.} Here is a description of the structured coherence measure, for clarity presented in the form of a pseudo-code and the \(z\)-confirmation measure (for other confirmation measures the code needs to be modified, but the required modification is straightforward).
+  \(\frac{\s{likelihood}}{\s{nlikelihood}}\) and \s{L} is \(\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}\)}. Then, a weighted average of these scores is obtained. The weights are the normalized probabilities of the combinations of parents' states obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.} \DIFaddbegin \DIFadd{Here is a description of the structured coherence measure, for clarity presented in the form of a pseudo-code and the \(z\)-confirmation measure (for other confirmation measures the code needs to be modified, but the required modification is straightforward).
+}\DIFaddend 
 
-\vspace{2mm}
+\DIFdelbegin %DIFDELCMD < \pagebreak 
+%DIFDELCMD < \footnotesize
+%DIFDELCMD < 
 
-\footnotesize
+%DIFDELCMD < \begin{Shaded}
+%DIFDELCMD < \begin{Highlighting}[]
+%DIFDELCMD < \NormalTok{FUNCTION parents\_child\_possible\_states(parents,child)}
+%DIFDELCMD < \NormalTok{    IF child included in narration THEN}
+%DIFDELCMD < \NormalTok{        consequentStates \textless{}{-} the unique state of child as reported in the narration}
+%DIFDELCMD < \NormalTok{    ELSE}
+%DIFDELCMD < \NormalTok{        consequentStates \textless{}{-} all possible states of child}
+%DIFDELCMD < \NormalTok{    FOR EACH parent in parents}
+%DIFDELCMD < \NormalTok{        IF parent included in narration THEN}
+%DIFDELCMD < \NormalTok{            parentStates[parent] \textless{}{-} the unique state of parent as reported in the narration}
+%DIFDELCMD < \NormalTok{        ELSE}
+%DIFDELCMD < \NormalTok{            parentStates[parent] \textless{}{-} all possible states of parent}
+%DIFDELCMD < \NormalTok{    parentsStates \textless{}{-} all combinations of parentStates}
+%DIFDELCMD < \NormalTok{    variants \textless{}{-} list of all possible combinations of consequentStates and parentsStates}
+%DIFDELCMD < \NormalTok{    RETURN variants}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \vspace{2mm}
+\DIFaddend 
+
+\DIFdelbegin %DIFDELCMD < \NormalTok{FUNCTION coherence\_from\_ecs(ecs)}
+%DIFDELCMD < \NormalTok{    IF min(ecs) \textless{}= 0 THEN}
+%DIFDELCMD < \NormalTok{        RETURN mean(ecs) * (min(ecs)+1) {-} min(ecs)min(ecs)}
+%DIFDELCMD < \NormalTok{        \#this is equivalent to (1{-} |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)}
+%DIFDELCMD < \NormalTok{    ELSE}
+%DIFDELCMD < \NormalTok{        RETURN mean(ecs)}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \footnotesize
 \begin{Verbatim}[commandchars=\\\{\},fontfamily=futura,numbers=left,
 xleftmargin=20mm]
-\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{parents_child_possible_states}(\textcolor{NavyBlue}{parents},\textcolor{NavyBlue}{child}, \textcolor{NavyBlue}{narration})
+\DIFadd{\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{parents_child_possible_states}(\textcolor{NavyBlue}{parents},\textcolor{NavyBlue}{child}, \textcolor{NavyBlue}{narration})
     \textcolor{ForestGreen}{IF} \textcolor{NavyBlue}{child} included in \textcolor{NavyBlue}{narration} \textcolor{ForestGreen}{THEN}
         consequentStates <- the unique state of \textcolor{NavyBlue}{child} as reported in the \textcolor{NavyBlue}{narration}
     \textcolor{ForestGreen}{ELSE}
@@ -475,18 +645,50 @@ xleftmargin=20mm]
     \textcolor{BurntOrange}{parentsStates} <- all combinations of \textcolor{BurntOrange}{parentStates}
     \textcolor{BurntOrange}{variants} <- list of all possible combinations of \textcolor{BurntOrange}{consequentStates} and \textcolor{BurntOrange}{parentsStates}
     \textcolor{ForestGreen}{RETURN} \textcolor{BurntOrange}{variants}
+}\DIFaddend 
 
-\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{coherence_from_ecs}(\textcolor{NavyBlue}{ecs})
+\DIFdelbegin %DIFDELCMD < \NormalTok{FUNCTION structured\_coherence(BN,evidenceNodes,evidenceStates)}
+%DIFDELCMD < \NormalTok{    parentedNodes \textless{}{-} vector of non{-}root nodes in BN}
+%DIFDELCMD < \NormalTok{    ecsList \textless{}{-} []}
+%DIFDELCMD < \NormalTok{    FOR EACH parentedNode IN parentedNodes}
+%DIFDELCMD < \NormalTok{        variants \textless{}{-} parents\_child\_possible\_states(parents,parentedNode)}
+%DIFDELCMD < \NormalTok{        variants\_count \textless{}{-} length(variants)}
+%DIFDELCMD < \NormalTok{        sumParentsNarr \textless{}{-} 0}
+%DIFDELCMD < \NormalTok{        FOR EACH variant IN variants}
+%DIFDELCMD < \NormalTok{            childPrior \textless{}{-} prior probability of the child state in variant}
+%DIFDELCMD < \NormalTok{            childPosterior \textless{}{-} posterior probability of the child state in variant,}
+%DIFDELCMD < \NormalTok{                        obtained by updating on the parents states}
+%DIFDELCMD < \NormalTok{                        from this variant}
+%DIFDELCMD < \NormalTok{            parentsEvidence[variant] \textless{}{-} joint probability of }
+%DIFDELCMD < \NormalTok{                        the parents states in variant in BN updated with}
+%DIFDELCMD < \NormalTok{                        evidenceStates of evidenceNodes}
+%DIFDELCMD < \NormalTok{            sumParentsEvidence \textless{}{-} sumParentsEvidence +  parentsEvidence[variant] }
+%DIFDELCMD < \NormalTok{            z[variant] \textless{}{-} z\_confirmation\_measure(childPrior, childPosterior)}
+%DIFDELCMD < \NormalTok{        ecs \textless{}{-} 0  \#expected confirmation score}
+%DIFDELCMD < \NormalTok{        FOR EACH variant IN variants}
+%DIFDELCMD < \NormalTok{            IF parentsEvidence[variant] \textgreater{} 0 THEN}
+%DIFDELCMD < \NormalTok{                weight \textless{}{-} parentsEvidence[variant]/sumParentsEvidence}
+%DIFDELCMD < \NormalTok{            ELSE}
+%DIFDELCMD < \NormalTok{                weight \textless{}{-} 1/variants\_count}
+%DIFDELCMD < \NormalTok{            zScaled \textless{}{-} z[variant] * weight}
+%DIFDELCMD < \NormalTok{            ecs \textless{}{-} ecs + zScaled}
+%DIFDELCMD < \NormalTok{        ecsList.add(ecs)}
+%DIFDELCMD < \NormalTok{    RETURN coherence\_from\_ecs(ecsList)}
+%DIFDELCMD < \end{Highlighting}
+%DIFDELCMD < \end{Shaded}
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \DIFadd{\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{coherence_from_ecs}(\textcolor{NavyBlue}{ecs})
     \textcolor{ForestGreen}{IF} min(\textcolor{NavyBlue}{ecs}) <= 0 \textcolor{ForestGreen}{THEN}
         \textcolor{ForestGreen}{RETURN} mean(\textcolor{NavyBlue}{ecs}) * (min(\textcolor{NavyBlue}{ecs})+1) - min(\textcolor{NavyBlue}{ecs})min(\textcolor{NavyBlue}{ecs})
         #this is equivalent to (1- |min(\textcolor{NavyBlue}{ecs})|) * mean(\textcolor{NavyBlue}{ecs}) + |min(\textcolor{NavyBlue}{ecs})| * min(\textcolor{NavyBlue}{ecs})
     \textcolor{ForestGreen}{ELSE}
         \textcolor{ForestGreen}{RETURN} mean(\textcolor{NavyBlue}{ecs})
+}\DIFaddend 
 
-\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{structured_coherence}(\textcolor{NavyBlue}{BN},\textcolor{NavyBlue}{narration},\textcolor{NavyBlue}{evidenceNodes},\textcolor{NavyBlue}{evidenceStates})
+\DIFaddbegin \DIFadd{\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{structured_coherence}(\textcolor{NavyBlue}{BN},\textcolor{NavyBlue}{narration},\textcolor{NavyBlue}{evidenceNodes},\textcolor{NavyBlue}{evidenceStates})
     \textcolor{BurntOrange}{parentedNodes} <- vector of non-root nodes in \textcolor{NavyBlue}{BN}
-    ecsList <- []
-    \textcolor{ForestGreen}{FOR EACH} \textcolor{BurntOrange}{parentedNode} \textcolor{ForestGreen}{IN} \textcolor{BurntOrange}{parentedNodes}
+    ecsList <- }[]
+    \DIFadd{\textcolor{ForestGreen}{FOR EACH} \textcolor{BurntOrange}{parentedNode} \textcolor{ForestGreen}{IN} \textcolor{BurntOrange}{parentedNodes}
         \textcolor{BurntOrange}{variants} <- \textcolor{BrickRed}{parents_child_possible_states}(parents,parentedNode, \textcolor{NavyBlue}{narration})
         \textcolor{BurntOrange}{variants_count} <- length(\textcolor{BurntOrange}{variants})
         \textcolor{BurntOrange}{sumParentsNarr} <- 0
@@ -495,7 +697,7 @@ xleftmargin=20mm]
             \textcolor{BurntOrange}{childPosterior} <- posterior probability of the child state in \textcolor{BurntOrange}{variant},
                         obtained by updating on the parents states
                         from this \textcolor{BurntOrange}{variant}
-            parentsEvidence[variant] <- joint probability of 
+            parentsEvidence}[\DIFadd{variant}] \DIFadd{<- joint probability of 
                         the parents states in \textcolor{BurntOrange}{variant} in \textcolor{NavyBlue}{BN} updated with
                         \textcolor{NavyBlue}{evidenceStates} of \textcolor{NavyBlue}{evidenceNodes}
             \textcolor{BurntOrange}{sumParentsEvidence} <- \textcolor{BurntOrange}{sumParentsEvidence} +  \textcolor{BurntOrange}{parentsEvidence[variant]} 
@@ -510,12 +712,12 @@ xleftmargin=20mm]
             \textcolor{BurntOrange}{ecs} <- \textcolor{BurntOrange}{ecs} + \textcolor{BurntOrange}{zScaled}
         ecsList.add(\textcolor{BurntOrange}{ecs})
     \textcolor{ForestGreen}{RETURN} \textcolor{BrickRed}{coherence_from_ecs}(ecsList)
-\end{Verbatim}
-\normalsize
+}\end{Verbatim}
+\DIFaddend \normalsize
 
-\vspace{2mm}
+\DIFaddbegin \vspace{2mm}
 
-\noindent Having introduced the coherence measures at play, let us now move to the key counterexamples discussed in the literature.
+\DIFaddend \noindent Having introduced the coherence measures at play, let us now move to the key counterexamples discussed in the literature.
 
 \hypertarget{challenges-and-their-treatment}{%
 \section{\texorpdfstring{Challenges and their treatment \label{sec:examples}}{Challenges and their treatment }}\label{challenges-and-their-treatment}}
@@ -626,7 +828,7 @@ G &  &  & Pr\\
 
 \begin{table}[H]
 
-\caption{\label{tab:penguinsCoherence}Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1  in the calculations is involved.}
+\caption{\label{tab:penguinsCoherence}Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1  \DIFdelbeginFL \DIFdelFL{at an arrow used }\DIFdelendFL in the calculations is involved.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lrrrrrrrrrr}
@@ -667,7 +869,9 @@ Penguins: BG$<<$ BP$<$ BGP & FALSE & FALSE & TRUE & TRUE & TRUE & TRUE & TRUE & 
     \item[(\s{D=const})] the coherence of \s{D} should not change.
 \end{description}\vspace{2mm}
 
-\textbf{Bayesian networks.} When one is about to represent the scenario as a BN the situation is not straightforward. On one hand, the scenario description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors explicitly bring up (1 and .5) do not capture this information. The simplest approach is to build a DAG containing two nodes.
+\textbf{Bayesian networks.} When one is about to represent the scenario as a BN the situation is not straightforward. On one hand, the scenario description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors explicitly bring up (1 and .5) do not capture this information. \DIFdelbegin \DIFdel{In the simplest approach in which the information about the die is ignored, we can }\DIFdelend \DIFaddbegin \DIFadd{The simplest approach is to }\DIFaddend build a DAG containing two nodes\DIFdelbegin \DIFdel{:
+}\DIFdelend \DIFaddbegin \DIFadd{.
+}\DIFaddend 
 
 \begin{table}[H]
 
@@ -683,14 +887,68 @@ T & The result is a two.\\
 \end{tabular}
 \end{table}
 
-\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs. Note that on this approach the information about which die is tossed is not used in the structured coherence calculations, since in the only combination of node states that agrees with the narration \s{T} happens, and only those combinations which are not excluded by the narration are considered in coherence calculations.
+\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs. \DIFaddbegin \DIFadd{Note that on this approach the information about which die is tossed is not used in the structured coherence calculations, since in the only combination of node states that agrees with the narration \s{T} happens, and only those combinations which are not excluded by the narration are considered in coherence calculations.
+}\DIFaddend 
 
 \begin{figure}[H]
 \scalebox{.6}{\begin{subfigure}[!ht]{0.3\textwidth}
 
 \begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/TwoDiceDAG2-1} \end{center}
 \end{subfigure}}
-\scalebox{.9}{\begin{subfigure}[!ht]{0.3\textwidth}
+\DIFdelbeginFL %DIFDELCMD < \scalebox{.9}{\begin{subfigure}[!ht]{0.3\textwidth}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{tabular}{lr}
+%DIFDELCMD < \toprule
+%DIFDELCMD < T & Pr\\
+%DIFDELCMD < \midrule
+%DIFDELCMD < 1 & 0.167 = \nicefrac{1\,}{6}\\
+%DIFDELCMD < 0 & 0.833 = \nicefrac{5\,}{6}\\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < 
+
+%DIFDELCMD < \vspace{1mm}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{tabular}{lrr}
+%DIFDELCMD < \toprule
+%DIFDELCMD < \multicolumn{1}{c}{TF} & \multicolumn{2}{c}{T} \\
+%DIFDELCMD <   & 1 & 0\\
+%DIFDELCMD < \midrule
+%DIFDELCMD < 1 & 1 & 0.2 = \nicefrac{1\,}{5}\\
+%DIFDELCMD < 0 & 0 & 0.8 = \nicefrac{4\,}{5}\\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < 
+
+%DIFDELCMD < \end{subfigure}} 
+%DIFDELCMD < \scalebox{.9}{\begin{subfigure}[!ht]{0.3\textwidth}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{tabular}{lr}
+%DIFDELCMD < \toprule
+%DIFDELCMD < T & Pr\\
+%DIFDELCMD < \midrule
+%DIFDELCMD < 1 & 0.083 = \nicefrac{1\,}{12}\\
+%DIFDELCMD < 0 & 0.917  = \nicefrac{11\,}{12}\\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < \vspace{1mm}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{tabular}{lrr}
+%DIFDELCMD < \toprule
+%DIFDELCMD < \multicolumn{1}{c}{TF} & \multicolumn{2}{c}{T} \\
+%DIFDELCMD <   & 1 & 0\\
+%DIFDELCMD < \midrule
+%DIFDELCMD < 1 & 1 & 0.091 = \nicefrac{1\,}{11} \\
+%DIFDELCMD < 0 & 0 & 0.909 = \nicefrac{10\,}{11}\\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < \end{subfigure}} 
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \scalebox{.9}{\begin{subfigure}[!ht]{0.3\textwidth}
 
 \begin{tabular}{lr}
 \toprule
@@ -737,6 +995,7 @@ T & Pr\\
 \bottomrule
 \end{tabular}
 \end{subfigure}} 
+\DIFaddendFL 
 
 \caption{Two-node BNs for the dice problem, with CPTs for a regular die (center) and for a dodecahedron (right)}
 \label{fig:TwodiceBN}
@@ -773,14 +1032,119 @@ Dice: TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & 1 & Inf & 1\\
 \end{tabular}}
 \end{table}
 
-\textbf{Bayesian networks (again).} However, if we prefer to explicitly include the probabilistic information about all the potential outcomes as part of agents' overall narration considered in our coherence evaluation, we can use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with. We do so by adding a node \s{O} with as many equally probable states as sides of the die in question.
+\textbf{Bayesian networks (again).} However, if we \DIFaddbegin \DIFadd{prefer to explicitly }\DIFaddend include the probabilistic information about all the potential outcomes as part of agents' overall narration \DIFaddbegin \DIFadd{considered in our coherence evaluation}\DIFaddend , we can use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with. \DIFaddbegin \DIFadd{We do so by adding a node \s{O} with as many equally probable states as sides of the die in question.
+}\DIFaddend 
 
 \begin{figure}[H]
-\scalebox{.65}{\begin{subfigure}[!ht]{.6\textwidth}
+\DIFdelbeginFL %DIFDELCMD < \scalebox{.35}{\hspace{-4cm}\begin{subfigure}[!ht]{.7\textwidth}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{flushleft}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/ThreeDiceDAG2-1} \end{flushleft}
+%DIFDELCMD < \end{subfigure}}
+%DIFDELCMD < \scalebox{.55}{\begin{subfigure}[!ht]{0.35\textwidth}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{tabular}{lr}
+%DIFDELCMD < \toprule
+%DIFDELCMD < O & Pr\\
+%DIFDELCMD < \midrule
+%DIFDELCMD < 1 & 0.167 = \nicefrac{1\,}{6}\\
+%DIFDELCMD < 2 & 0.167\\
+%DIFDELCMD < 3 & 0.167\\
+%DIFDELCMD < 4 & 0.167\\
+%DIFDELCMD < 5 & 0.167\\
+%DIFDELCMD < 6 & 0.167\\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < 
+
+%DIFDELCMD < \vspace{1mm}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{tabular}{lrrrrrr}
+%DIFDELCMD < \toprule
+%DIFDELCMD < \multicolumn{1}{c}{T} & \multicolumn{2}{c}{O} \\
+%DIFDELCMD <   & 1 & 2 & 3 & 4 & 5 & 6\\
+%DIFDELCMD < \midrule
+%DIFDELCMD < 1 & 0 & 1 & 0 & 0 & 0 & 0\\
+%DIFDELCMD < 0 & 1 & 0 & 1 & 1 & 1 & 1\\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < 
+
+%DIFDELCMD < \vspace{1mm}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{tabular}{lrrrrrr}
+%DIFDELCMD < \toprule
+%DIFDELCMD < \multicolumn{1}{c}{TF} & \multicolumn{2}{c}{O} \\
+%DIFDELCMD <   & 1 & 2 & 3 & 4 & 5 & 6\\
+%DIFDELCMD < \midrule
+%DIFDELCMD < 1 & 0 & 1 & 0 & 1 & 0 & 0\\
+%DIFDELCMD < 0 & 1 & 0 & 1 & 0 & 1 & 1\\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < 
+
+%DIFDELCMD < \end{subfigure}} 
+%DIFDELCMD < \scalebox{.55}{\begin{subfigure}[!ht]{0.18\textwidth}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{tabular}{lr}
+%DIFDELCMD < \toprule
+%DIFDELCMD < O & Pr\\
+%DIFDELCMD < \midrule
+%DIFDELCMD < 1 & 0.083 = \nicefrac{1\,}{12}\\
+%DIFDELCMD < 2 & 0.083\\
+%DIFDELCMD < 3 & 0.083\\
+%DIFDELCMD < 4 & 0.083\\
+%DIFDELCMD < 5 & 0.083\\
+%DIFDELCMD < 6 & 0.083\\
+%DIFDELCMD < 7 & 0.083\\
+%DIFDELCMD < 8 & 0.083\\
+%DIFDELCMD < 9 & 0.083\\
+%DIFDELCMD < 10 & 0.083\\
+%DIFDELCMD < 11 & 0.083\\
+%DIFDELCMD < 12 & 0.083\\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < 
+
+%DIFDELCMD < \vspace{1mm}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{tabular}{lrrrrrrrrrrrr}
+%DIFDELCMD < \toprule
+%DIFDELCMD < \multicolumn{1}{c}{T} & \multicolumn{2}{c}{O} \\
+%DIFDELCMD <   & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+%DIFDELCMD < \midrule
+%DIFDELCMD < 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+%DIFDELCMD < 0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < 
+
+%DIFDELCMD < \vspace{1mm}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{tabular}{lrrrrrrrrrrrr}
+%DIFDELCMD < \toprule
+%DIFDELCMD < \multicolumn{1}{c}{TF} & \multicolumn{2}{c}{O} \\
+%DIFDELCMD <   & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+%DIFDELCMD < \midrule
+%DIFDELCMD < 1 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+%DIFDELCMD < 0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+%DIFDELCMD < \bottomrule
+%DIFDELCMD < \end{tabular}
+%DIFDELCMD < 
+
+%DIFDELCMD < \end{subfigure}} 
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \scalebox{.65}{\begin{subfigure}[!ht]{.6\textwidth}
 
 \begin{flushleft}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/ThreeDiceDAG2-1} \end{flushleft}
-\end{subfigure}} \hspace{1cm}
-\scalebox{1}{\begin{subfigure}[t]{0.2\textwidth}
+\end{subfigure}} \DIFaddFL{\hspace{1cm}
+}\scalebox{1}{\begin{subfigure}[t]{0.2\textwidth}
 \begin{tabular}{lr}
 \toprule
 O & Pr\\
@@ -864,8 +1228,9 @@ O & Pr\\
 \bottomrule
 \end{tabular}
 \end{subfigure}}
+\DIFaddendFL 
 
-\caption{Three-node BNs for the dice problem, with CPTs for a regular die  and for a dodecahedron.}
+\caption{Three-node BNs for the dice problem, with CPTs for a regular die  \DIFdelbeginFL \DIFdelFL{(center) }\DIFdelendFL and for a dodecahedron\DIFdelbeginFL \DIFdelFL{(right)}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{.}\DIFaddendFL }
 \label{fig:ThreediceBN}
 \end{figure}
 
@@ -902,7 +1267,7 @@ Dice (three nodes): TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & -0.819 
 
 \noindent This might seem problematic, but really should not. After all, now the narration is not merely `the result is a two (and a two or a four)', but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the \(n\)). Notice also how the measure that uses LR fails to pick up on this difference, as at least one of confirmation scores in the calculations is \(\infty\) and this fact overwhelms the expected confirmation score calculations.
 
-Further, we could also explore the option of the narration being `the die is fair, but it was tossed and the result was a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated with \s{T} and \s{TF} treated as evidence. When we proceed this way, the structured coherence scores are as in the two-node variant.
+Further, we could also explore the option of the narration being `the die \DIFdelbegin \DIFdel{was }\DIFdelend \DIFaddbegin \DIFadd{is }\DIFaddend fair, but it \DIFdelbegin \DIFdel{has been }\DIFdelend \DIFaddbegin \DIFadd{was }\DIFaddend tossed and the result \DIFdelbegin \DIFdel{is }\DIFdelend \DIFaddbegin \DIFadd{was }\DIFaddend a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated with \s{T} and \s{TF} treated as evidence. When we proceed this way, the \DIFaddbegin \DIFadd{structured }\DIFaddend coherence scores are as in the two-node \DIFdelbegin \DIFdel{variants}\DIFdelend \DIFaddbegin \DIFadd{variant}\DIFaddend .
 
 \hypertarget{dunnit}{%
 \subsection{Dunnit}\label{dunnit}}
@@ -1508,7 +1873,7 @@ Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} an
     \item[(\s{W4W5\textgreater W3W4})] \{\s{W4},\s{W5}\} should be more coherent than \{\s{W3},\s{W4}\}.
 \end{description}\vspace{2mm}
 
-\noindent \textbf{Bayesian networks.} The basic idea behind the CPTs we used is that for any particular witness we take the probability of them including the perpetrator in their list to be .8, and the probability of including an innocent to be .05. Of course, the example can be run with different conditional probability tables. Moreover, in this case, the fact that the witnesses provided their testimonies constitutes evidence (in contrast with the Robbers scenario, where there is no evidence as to who the perpetrator is), and so we update on it in our weights calculations. Let's first take a look at the BN for the \(\{\s{W1,W2}\}\) (Figure \ref{fig:w1w2}).
+\noindent \textbf{Bayesian networks.} The basic idea behind the CPTs we used is that for any particular witness we take the probability of them including the perpetrator in their list to be \DIFdelbegin \DIFdel{0.8}\DIFdelend \DIFaddbegin \DIFadd{.8}\DIFaddend , and the probability of including an innocent to be .05. Of course, the example can be run with different conditional probability tables. Moreover, in this case, the fact that the witnesses provided their testimonies constitutes evidence (in contrast with the Robbers scenario, where there is no evidence as to who the perpetrator is), and so we update on it in our weights calculations. Let's first take a look at the BN for the \DIFdelbegin \DIFdel{first scenario }\DIFdelend \DIFaddbegin \DIFadd{\(\{\s{W1,W2}\}\) }\DIFaddend (Figure \ref{fig:w1w2}).
 
 \vspace{1mm}
 \footnotesize
@@ -1535,10 +1900,11 @@ Peter & 0.167\\
 \bottomrule
 \end{tabular}
 \end{subfigure}
+\DIFaddbeginFL 
 
 \vspace{2mm} 
 
-\centering
+\DIFaddendFL \centering
 \begin{subfigure}[!ht]{0.3\textwidth}
 \begin{tabular}{lrrrrrr}
 \toprule
@@ -1558,22 +1924,36 @@ In the remaining two BNs for the problem the CPT for \textsf{D} remains the same
 
 \begin{figure}[H]
 \centering
-\scalebox{.8}{
+\DIFdelbeginFL %DIFDELCMD < \scalebox{1.2}{
+%DIFDELCMD < \begin{subfigure}[!ht]{0.4\textwidth}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotw3w4dag-1} \end{center}
+%DIFDELCMD < \end{subfigure}}
+%DIFDELCMD < 
+
+%DIFDELCMD < \scalebox{1.2}{\begin{subfigure}[!ht]{0.4\textwidth}
+%DIFDELCMD < 
+
+%DIFDELCMD < \begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotw4w5dag-1} \end{center}
+%DIFDELCMD < \end{subfigure}}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \scalebox{.8}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
 \begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotw3w4dag-1} \end{center}
-\end{subfigure}} \hspace{3mm}
-\scalebox{.8}{\begin{subfigure}[!ht]{0.4\textwidth}
+\end{subfigure}} \DIFaddFL{\hspace{3mm}
+}\scalebox{.8}{\begin{subfigure}[!ht]{0.4\textwidth}
 
 \begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotw4w5dag-1} \end{center}
 \end{subfigure}}
-\caption{Two remaining DAGs for the \textsf{Witness} problem.}
+\DIFaddendFL \caption{Two remaining DAGs for the \textsf{Witness} problem.}
 \label{fig:witness}
 \end{figure}
 
-We think that what this example illustrates is that we should really carefully think about whose cognitive perspective is taken when we represent a narration using a BN, focusing on whether the BN involves nodes which are not a part of the narration whose coherence is to be evaluated. In particular, the probabilistic information about the uniform distribution of guilt probability is not a part of any of the three involved narrations, but rather a part of a third-person set-up prior to obtaining any evidence.
+We think that what this example illustrates is that we should really carefully think about whose cognitive perspective is taken when we represent a narration using a BN, focusing on whether the BN involves nodes which are not \DIFaddbegin \DIFadd{a }\DIFaddend part of the narration whose coherence is to be evaluated. In particular, the probabilistic information about the uniform distribution of guilt probability is not \DIFaddbegin \DIFadd{a }\DIFaddend part of any of the three involved narrations, but rather a part of a third-person set-up prior to obtaining any evidence.
 
-To evaluate the coherence of a narration, one should think counterfactually, granting the (potentially probabilistic) consequences of the narration. In our case, a judge who evaluates the coherence of witness testimonies once she has heard them, no longer thinks that the distribution of \textsf{D} is uniform. And this agrees with the counterfactual strategy we just described: it is a consequence of the probabilistic set-up and the content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and \textsf{W2} were true, the distribution for \textsf{D} no longer would be uniform, and so it is unfair to judge the coherence of this scenario without updating one's assumptions about \textsf{D}.
+To evaluate the coherence of a narration, \DIFdelbegin \DIFdel{at least for unmentioned assumptions that one doesn't have strong independent reasons to keep, }\DIFdelend one should think counterfactually, granting the \DIFaddbegin \DIFadd{(potentially probabilistic) }\DIFaddend consequences of the narration\DIFdelbegin \DIFdel{and asking what would happen if it indeed was true}\DIFdelend . In our case, a judge who evaluates the coherence of witness testimonies once she has heard them, no longer thinks that the distribution of \textsf{D} is uniform. And this agrees with the counterfactual strategy we just described: it is a consequence of the probabilistic set-up and the content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and \textsf{W2} were true, the distribution for \textsf{D} no longer would be uniform, and so it is unfair to judge the coherence of this scenario without \DIFdelbegin \DIFdel{giving up this assumption and }\DIFdelend updating one's assumptions about \textsf{D}.
 
 \textbf{Results.} Note that in this case we're dealing with the perspective of someone who starts with a uniform prior for \s{D}, and subsequently considers what would happen if she obtained a given set of testimonies as evidence. Clearly, then, the distribution for \s{D} would no longer be uniform, but rather result from updating on this evidence.
 
@@ -1590,9 +1970,11 @@ To evaluate the coherence of a narration, one should think counterfactually, gra
 \end{tabular}
 \end{table}
 
-In the coherence calculations we first obtain how specific states of the narration child nodes would be confirmed by various states of \s{D}. In calculating these confirmation scores we do \emph{not} use the updated BN (recall the old evidence problem: confirmation by evidence already included would be null). However, the weights assigned to confirmation scores in the \s{ecs} calculations should be the (normalized) probabilities obtained by updating on the evidence. If given the evidence included in the scenario Steve is the most likely perpetrator, in your coherence calculations you give the most weight to the confirmation score obtained if he indeed is the perpetrator.
+In the coherence calculations we first obtain how specific states of the narration child nodes \DIFdelbegin \DIFdel{in a narration }\DIFdelend would be confirmed by various states of \s{D}. In calculating these confirmation scores we do \emph{not} use the updated BN (\DIFdelbegin \DIFdel{after all, }\DIFdelend \DIFaddbegin \DIFadd{recall the old evidence problem: }\DIFaddend confirmation by evidence \DIFdelbegin \DIFdel{if you start with BN according to which you already received it would not be positive}\DIFdelend \DIFaddbegin \DIFadd{already included would be null}\DIFaddend ). However, the weights assigned to confirmation scores in the \s{ecs} calculations should be the (normalized) probabilities obtained by updating on the evidence. If given the evidence included in the scenario Steve is the most likely perpetrator, in your coherence calculations you give the most weight to the confirmation score obtained if he indeed is the perpetrator.
 
 Once this strategy is taken, the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \ref{tab:witnessesCoherence} and the status of the desiderata is in Table \ref{tab:witnessesDesiderata}.
+\DIFdelbegin \DIFdel{Now all the weights come from Bayesian networks updated from the perspertive of a given narration, which is emphasized by our use of abbreviations SZnarr, SLRnarr, and SLnarr.
+}\DIFdelend 
 
 \begin{table}[H]
 
@@ -1628,7 +2010,7 @@ Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE 
 \hypertarget{depth}{%
 \subsection{Depth}\label{depth}}
 
-\textbf{The scenario.} There are eight equally likely suspects \(1, \dots, 8\), and three equally reliable witnesses each trying to identify the person responsible for the crime. Compare two sets, \s{X1} and \s{X2}, of claims about who is responsible. In contrast with Witnesses, the example ignores the fact that these are testimonies and focuses on the material disjunctive content:
+\textbf{The scenario.} There are eight equally likely suspects \(1, \dots, 8\), and three equally reliable witnesses each trying to identify the person responsible for the crime. Compare two sets, \s{X1} and \s{X2}, of claims about who is responsible. In contrast with Witnesses, the example ignores the fact that these are testimonies and \DIFdelbegin \DIFdel{by focusing }\DIFdelend \DIFaddbegin \DIFadd{focuses }\DIFaddend on the material disjunctive content:
 \begin{align*}
     X_1 & = \{(1 \vee 2 \vee 3), (1\vee 2 \vee 4), (1 \vee 3 \vee 4)\}\\
     X_2 & =  \{(1 \vee 2 \vee 3), (1\vee  4 \vee 5), (1 \vee 6 \vee 7)\}
@@ -1641,16 +2023,16 @@ Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE 
     \item[(\s{X1\textgreater X2})] $X_1$  should be more coherent than $X_2$.
 \end{description}\vspace{2mm}
 
-This desideratum presupposes we are dealing with claims made by different agents. However, on our approach the narration nodes and the BN involved are supposed to represent one agent's credal state. As long as you take the narration to be equivalent to the conjunction of the elements, an agent accepting all the elements of either \(X_1\) or \(X_2\) would simply accept that 1 is responsible, and we do not think it makes sense to ask about the coherence of a single proposition. Moreover, since both sets are logically equivalent, the desideratum would no longer be intuitive on the single-agent approach.
+This desideratum presupposes we are dealing with claims made by different \DIFdelbegin \DIFdel{persons}\DIFdelend \DIFaddbegin \DIFadd{agents}\DIFaddend . However, on our approach the narration nodes and the BN involved are supposed to represent one agent's credal state. As long as you take the narration to be equivalent to the conjunction of the elements, an agent accepting all the elements of either \(X_1\) or \(X_2\) would simply accept that 1 is responsible, and we do not think it makes sense to ask about the coherence of a single proposition. Moreover, since both sets are logically equivalent, the desideratum would no longer be intuitive on the single-agent approach.
 
-There is a way to represent the fact that different people made different testimonies within our approach by preceding the claims with ``witness \(a\) said''. We already employed this strategy to the Witnesses scenario, and will not do this here again, as the problem structure is essentially the same.
+There is a way to represent the fact that different people made different testimonies within our approach \DIFdelbegin \DIFdel{. We already employed this strategy to the Witnesses scenario---one simply needs to precede }\DIFdelend \DIFaddbegin \DIFadd{by preceding }\DIFaddend the claims with ``witness \(a\) said''\DIFdelbegin \DIFdel{---and we could deploy it here. But mathematically this would be repetitive, as there would be no essential difference in the calculations and essentially we would be back at the Dunnit problem with the sameresolution}\DIFdelend \DIFaddbegin \DIFadd{. We already employed this strategy to the Witnesses scenario, and will not do this here again, as the problem structure is essentially the same}\DIFaddend .
 
-If we insist that the disjunctions are put forward by different agents and the agent whose perspective we are trying to model does not assume that all of them are true, we should turn to another tool. There already exist working measures of such an agreement which give the desired results. For instance, both Fleiss \(\kappa\) and Light's \(\kappa\) give 0.467 for \s{X1} and -0.067 for \s{X2}, which is in line with the desideratum.
+If we insist that the \DIFdelbegin \DIFdel{propositions }\DIFdelend \DIFaddbegin \DIFadd{disjunctions }\DIFaddend are put forward by different agents and \DIFdelbegin \DIFdel{no one claims that all elements of the narration }\DIFdelend \DIFaddbegin \DIFadd{the agent whose perspective we are trying to model does not assume that all of them }\DIFaddend are true, we should turn to another tool. \DIFdelbegin \DIFdel{For instance, there already exists }\DIFdelend \DIFaddbegin \DIFadd{There already exist }\DIFaddend working measures of such an agreement which give the desired results. For instance, both Fleiss \(\kappa\) and Light's \(\kappa\) give 0.467 for \s{X1} and -0.067 for \s{X2}, which is in line with the desideratum.
 
 \hypertarget{summary}{%
 \section{\texorpdfstring{Summary \label{sec:discussion}}{Summary }}\label{summary}}
 
-Our goal was to improve on the existing probabilistic approaches to the notion of coherence. The main problem we identified had to do with taking average confirmation for all possible combinations of the elements of a given narration without paying attention to its structure. Accordingly, we developed an approach on which a narration is represented by means of a Bayesian network which captures additional structural information, and a selection of nodes on which an agent has a decisive stance. Given such a representation, the coherence of a narration is---roughly speaking---a function of the expected support of children nodes in the network, ignoring combinations of states logically excluded by the narration.
+Our goal was to improve on the existing probabilistic approaches to the notion of coherence. The main problem we identified had to do with taking average confirmation for all possible combinations of the elements of a given narration without paying attention to its structure. Accordingly, we developed an approach on which a narration is represented by means of a Bayesian network which captures additional structural information, and a selection of nodes on which an agent \DIFdelbegin \DIFdel{'s }\DIFdelend has a decisive stance. Given such a representation, the coherence of a narration is---roughly speaking---a function of the expected support of children nodes in the network, ignoring combinations of states logically excluded by the narration.
 
 In the literature there is a tradition of criticizng various probabilistic explications of coherence from the perspective of philosophical thought experiments meant to pump our intuitions about what conditions coherence should satisfy. We followed this path, arguing that our measure copes with such counterexamples much better than the other candidates on the market. All the calculations are displayed in Table \ref{tab:resultsJoint} and the desiderata yield Table \ref{tab:desiderataJoint}, with corresponding success rates in the last row.
 

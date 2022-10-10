@@ -35,6 +35,46 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -95,10 +135,6 @@
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{ragged2e}
-%\usepackage[ruled, lined, linesnumbered, commentsnumbered, %longend]{algorithm2e}
-\usepackage{fancyvrb}
-
-\usepackage[lined, linesnumbered, longend]{algorithm2e}
 
 \usepackage{etex}
 %\usepackage{yfonts}
@@ -125,7 +161,7 @@
 
 
 
-\setlength{\parindent}{5mm}
+\setlength{\parindent}{10pt}
 \setlength{\parskip}{1pt}
 
 
@@ -305,12 +341,15 @@
 \begin{document}
 \maketitle
 
+{
+\hypersetup{linkcolor=blue}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
 \setlength{\abovedisplayskip}{-10pt}
 \setlength{\belowdisplayskip}{5pt}
 
-\begin{quote}\textbf{Abstract.}
-We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. 
-\end{quote}
+\pagebreak
 
 \hypertarget{introduction-motivations}{%
 \section{Introduction \& motivations}\label{introduction-motivations}}
@@ -455,65 +494,66 @@ Inspired by these failures, in {[}REFERENCE SUPRESSED FOR ANONYMITY{]} we propos
 While we refer the reader to a more extensive treatment in {[}REFERENCE SUPRESSED FOR ANONYMITY{]}, we now briefly discuss the main idea behind it. A Bayesian network (BN) represents agent's probabilistic belief state with respect to the relevant nodes. Additionally, some of the nodes are distinguished as narration nodes---the agent holds definite beliefs about which states of these nodes occur, without assigning probabilities equal 1 to them.\footnote{Also, we assume that the agent does not assign probability 0 to the narration being true.} If actual learning takes place, the evidence nodes and their states need to be specified as well.
 
 Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' binary beliefs.\footnote{Conceptually, it is possible to not restrict ourselves this way and look at all combinations of states of the nodes which are assigned non-null probabilities. But then, effectively, the binary content of the narration would have no impact on the coherence score, and we would obtain a coherence measure for the purely probabilistic part of agents' convictions. While this might be a worthy enterprise, we do not purse this idea in this paper. Calculations of a measure thus modified can be achieved by fairly straighforward modification of our code.} For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)\footnote{\s{Z} is \(0\) if \(\s{posterior} = \s{prior}\), \(\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}\) if \({\s{posterior} > \s{prior}}\), and \(\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}\) in the remaining case. Call the posterior of the evidence given a hypothesis \s{likelihood} and the probability of the evidence conditional on the negation of the hypothesis \s{nlikelihood}. Then, likelihood ratio is
-  \(\frac{\s{likelihood}}{\s{nlikelihood}}\) and \s{L} is \(\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}\)}. Then, a weighted average of these scores is obtained. The weights are the normalized probabilities of the combinations of parents' states obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.} Here is a description of the structured coherence measure, for clarity presented in the form of a pseudo-code and the \(z\)-confirmation measure (for other confirmation measures the code needs to be modified, but the required modification is straightforward).
+  \(\frac{\s{likelihood}}{\s{nlikelihood}}\) and \s{L} is \(\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}\)}. Then, a weighted average of these scores is obtained. The weights are the normalized probabilities of the combinations of parents' states obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.}
 
-\vspace{2mm}
-
+\pagebreak 
 \footnotesize
-\begin{Verbatim}[commandchars=\\\{\},fontfamily=futura,numbers=left,
-xleftmargin=20mm]
-\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{parents_child_possible_states}(\textcolor{NavyBlue}{parents},\textcolor{NavyBlue}{child}, \textcolor{NavyBlue}{narration})
-    \textcolor{ForestGreen}{IF} \textcolor{NavyBlue}{child} included in \textcolor{NavyBlue}{narration} \textcolor{ForestGreen}{THEN}
-        consequentStates <- the unique state of \textcolor{NavyBlue}{child} as reported in the \textcolor{NavyBlue}{narration}
-    \textcolor{ForestGreen}{ELSE}
-        \textcolor{BurntOrange}{consequentStates} <- all possible states of \textcolor{NavyBlue}{child}
-    \textcolor{ForestGreen}{FOR EACH} \textcolor{BurntOrange}{parent} \textcolor{ForestGreen}{IN} \textcolor{NavyBlue}{parents}
-        \textcolor{ForestGreen}{IF} \textcolor{BurntOrange}{parent} included in \textcolor{NavyBlue}{narration} \textcolor{ForestGreen}{THEN}
-            \textcolor{BurntOrange}{parentStates[parent]} <- the unique state of \textcolor{BurntOrange}{parent} as reported in the \textcolor{NavyBlue}{narration}
-        \textcolor{ForestGreen}{ELSE}
-            \textcolor{BurntOrange}{parentStates[parent]} <- all possible states of \textcolor{BurntOrange}{parent}
-    \textcolor{BurntOrange}{parentsStates} <- all combinations of \textcolor{BurntOrange}{parentStates}
-    \textcolor{BurntOrange}{variants} <- list of all possible combinations of \textcolor{BurntOrange}{consequentStates} and \textcolor{BurntOrange}{parentsStates}
-    \textcolor{ForestGreen}{RETURN} \textcolor{BurntOrange}{variants}
 
-\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{coherence_from_ecs}(\textcolor{NavyBlue}{ecs})
-    \textcolor{ForestGreen}{IF} min(\textcolor{NavyBlue}{ecs}) <= 0 \textcolor{ForestGreen}{THEN}
-        \textcolor{ForestGreen}{RETURN} mean(\textcolor{NavyBlue}{ecs}) * (min(\textcolor{NavyBlue}{ecs})+1) - min(\textcolor{NavyBlue}{ecs})min(\textcolor{NavyBlue}{ecs})
-        #this is equivalent to (1- |min(\textcolor{NavyBlue}{ecs})|) * mean(\textcolor{NavyBlue}{ecs}) + |min(\textcolor{NavyBlue}{ecs})| * min(\textcolor{NavyBlue}{ecs})
-    \textcolor{ForestGreen}{ELSE}
-        \textcolor{ForestGreen}{RETURN} mean(\textcolor{NavyBlue}{ecs})
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{FUNCTION parents\_child\_possible\_states(parents,child)}
+\NormalTok{    IF child included in narration THEN}
+\NormalTok{        consequentStates \textless{}{-} the unique state of child as reported in the narration}
+\NormalTok{    ELSE}
+\NormalTok{        consequentStates \textless{}{-} all possible states of child}
+\NormalTok{    FOR EACH parent in parents}
+\NormalTok{        IF parent included in narration THEN}
+\NormalTok{            parentStates[parent] \textless{}{-} the unique state of parent as reported in the narration}
+\NormalTok{        ELSE}
+\NormalTok{            parentStates[parent] \textless{}{-} all possible states of parent}
+\NormalTok{    parentsStates \textless{}{-} all combinations of parentStates}
+\NormalTok{    variants \textless{}{-} list of all possible combinations of consequentStates and parentsStates}
+\NormalTok{    RETURN variants}
 
-\textcolor{ForestGreen}{FUNCTION} \textcolor{BrickRed}{structured_coherence}(\textcolor{NavyBlue}{BN},\textcolor{NavyBlue}{narration},\textcolor{NavyBlue}{evidenceNodes},\textcolor{NavyBlue}{evidenceStates})
-    \textcolor{BurntOrange}{parentedNodes} <- vector of non-root nodes in \textcolor{NavyBlue}{BN}
-    ecsList <- []
-    \textcolor{ForestGreen}{FOR EACH} \textcolor{BurntOrange}{parentedNode} \textcolor{ForestGreen}{IN} \textcolor{BurntOrange}{parentedNodes}
-        \textcolor{BurntOrange}{variants} <- \textcolor{BrickRed}{parents_child_possible_states}(parents,parentedNode, \textcolor{NavyBlue}{narration})
-        \textcolor{BurntOrange}{variants_count} <- length(\textcolor{BurntOrange}{variants})
-        \textcolor{BurntOrange}{sumParentsNarr} <- 0
-        \textcolor{ForestGreen}{FOR EACH} \textcolor{BurntOrange}{variant} \textcolor{ForestGreen}{IN} \textcolor{BurntOrange}{variants}
-            \textcolor{BurntOrange}{childPrior} <- prior probability of the child state in \textcolor{BurntOrange}{variant}
-            \textcolor{BurntOrange}{childPosterior} <- posterior probability of the child state in \textcolor{BurntOrange}{variant},
-                        obtained by updating on the parents states
-                        from this \textcolor{BurntOrange}{variant}
-            parentsEvidence[variant] <- joint probability of 
-                        the parents states in \textcolor{BurntOrange}{variant} in \textcolor{NavyBlue}{BN} updated with
-                        \textcolor{NavyBlue}{evidenceStates} of \textcolor{NavyBlue}{evidenceNodes}
-            \textcolor{BurntOrange}{sumParentsEvidence} <- \textcolor{BurntOrange}{sumParentsEvidence} +  \textcolor{BurntOrange}{parentsEvidence[variant]} 
-            \textcolor{BurntOrange}{z[variant]} <- \textcolor{BrickRed}{z_confirmation_measure}(\textcolor{BurntOrange}{childPrior}, \textcolor{BurntOrange}{childPosterior})
-        \textcolor{BurntOrange}{ecs} <- 0  #expected confirmation score
-        \textcolor{ForestGreen}{FOR EACH} \textcolor{BurntOrange}{variant} \textcolor{ForestGreen}{IN} \textcolor{BurntOrange}{variants}
-            \textcolor{ForestGreen}{IF} \textcolor{BurntOrange}{parentsEvidence[variant]} > 0 \textcolor{ForestGreen}{THEN}
-                \textcolor{BurntOrange}{weight} <- \textcolor{BurntOrange}{parentsEvidence[variant]}/\textcolor{BurntOrange}{sumParentsEvidence}
-            \textcolor{ForestGreen}{ELSE}
-                \textcolor{BurntOrange}{weight} <- 1/\textcolor{BurntOrange}{variants}_count
-            \textcolor{BurntOrange}{zScaled} <- \textcolor{BurntOrange}{z[variant]} * \textcolor{BurntOrange}{weight}
-            \textcolor{BurntOrange}{ecs} <- \textcolor{BurntOrange}{ecs} + \textcolor{BurntOrange}{zScaled}
-        ecsList.add(\textcolor{BurntOrange}{ecs})
-    \textcolor{ForestGreen}{RETURN} \textcolor{BrickRed}{coherence_from_ecs}(ecsList)
-\end{Verbatim}
+
+\NormalTok{FUNCTION coherence\_from\_ecs(ecs)}
+\NormalTok{    IF min(ecs) \textless{}= 0 THEN}
+\NormalTok{        RETURN mean(ecs) * (min(ecs)+1) {-} min(ecs)min(ecs)}
+\NormalTok{        \#this is equivalent to (1{-} |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)}
+\NormalTok{    ELSE}
+\NormalTok{        RETURN mean(ecs)}
+
+\NormalTok{FUNCTION structured\_coherence(BN,evidenceNodes,evidenceStates)}
+\NormalTok{    parentedNodes \textless{}{-} vector of non{-}root nodes in BN}
+\NormalTok{    ecsList \textless{}{-} []}
+\NormalTok{    FOR EACH parentedNode IN parentedNodes}
+\NormalTok{        variants \textless{}{-} parents\_child\_possible\_states(parents,parentedNode)}
+\NormalTok{        variants\_count \textless{}{-} length(variants)}
+\NormalTok{        sumParentsNarr \textless{}{-} 0}
+\NormalTok{        FOR EACH variant IN variants}
+\NormalTok{            childPrior \textless{}{-} prior probability of the child state in variant}
+\NormalTok{            childPosterior \textless{}{-} posterior probability of the child state in variant,}
+\NormalTok{                        obtained by updating on the parents states}
+\NormalTok{                        from this variant}
+\NormalTok{            parentsEvidence[variant] \textless{}{-} joint probability of }
+\NormalTok{                        the parents states in variant in BN updated with}
+\NormalTok{                        evidenceStates of evidenceNodes}
+\NormalTok{            sumParentsEvidence \textless{}{-} sumParentsEvidence +  parentsEvidence[variant] }
+\NormalTok{            z[variant] \textless{}{-} z\_confirmation\_measure(childPrior, childPosterior)}
+\NormalTok{        ecs \textless{}{-} 0  \#expected confirmation score}
+\NormalTok{        FOR EACH variant IN variants}
+\NormalTok{            IF parentsEvidence[variant] \textgreater{} 0 THEN}
+\NormalTok{                weight \textless{}{-} parentsEvidence[variant]/sumParentsEvidence}
+\NormalTok{            ELSE}
+\NormalTok{                weight \textless{}{-} 1/variants\_count}
+\NormalTok{            zScaled \textless{}{-} z[variant] * weight}
+\NormalTok{            ecs \textless{}{-} ecs + zScaled}
+\NormalTok{        ecsList.add(ecs)}
+\NormalTok{    RETURN coherence\_from\_ecs(ecsList)}
+\end{Highlighting}
+\end{Shaded}
+
 \normalsize
-
-\vspace{2mm}
 
 \noindent Having introduced the coherence measures at play, let us now move to the key counterexamples discussed in the literature.
 
@@ -626,7 +666,7 @@ G &  &  & Pr\\
 
 \begin{table}[H]
 
-\caption{\label{tab:penguinsCoherence}Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1  in the calculations is involved.}
+\caption{\label{tab:penguinsCoherence}Coherence scores for the Penguins scenario (rounded). Note how LR might result in Inf if a conditional probability of 1 at an arrow used in the calculations is involved.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lrrrrrrrrrr}
@@ -667,7 +707,7 @@ Penguins: BG$<<$ BP$<$ BGP & FALSE & FALSE & TRUE & TRUE & TRUE & TRUE & TRUE & 
     \item[(\s{D=const})] the coherence of \s{D} should not change.
 \end{description}\vspace{2mm}
 
-\textbf{Bayesian networks.} When one is about to represent the scenario as a BN the situation is not straightforward. On one hand, the scenario description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors explicitly bring up (1 and .5) do not capture this information. The simplest approach is to build a DAG containing two nodes.
+\textbf{Bayesian networks.} When one is about to represent the scenario as a BN the situation is not straightforward. On one hand, the scenario description includes probabilistic information about what die we are dealing with, but on the other, the probabilities the authors explicitly bring up (1 and .5) do not capture this information. In the simplest approach in which the information about the die is ignored, we can build a DAG containing two nodes:
 
 \begin{table}[H]
 
@@ -683,7 +723,7 @@ T & The result is a two.\\
 \end{tabular}
 \end{table}
 
-\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs. Note that on this approach the information about which die is tossed is not used in the structured coherence calculations, since in the only combination of node states that agrees with the narration \s{T} happens, and only those combinations which are not excluded by the narration are considered in coherence calculations.
+\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs.
 
 \begin{figure}[H]
 \scalebox{.6}{\begin{subfigure}[!ht]{0.3\textwidth}
@@ -696,8 +736,8 @@ T & The result is a two.\\
 \toprule
 T & Pr\\
 \midrule
-1 & \nicefrac{1\,}{6}\\
-0 & \nicefrac{5\,}{6}\\
+1 & 0.167 = \nicefrac{1\,}{6}\\
+0 & 0.833 = \nicefrac{5\,}{6}\\
 \bottomrule
 \end{tabular}
 
@@ -708,8 +748,8 @@ T & Pr\\
 \multicolumn{1}{c}{TF} & \multicolumn{2}{c}{T} \\
   & 1 & 0\\
 \midrule
-1 & 1 &  \nicefrac{1\,}{5}\\
-0 & 0 &  \nicefrac{4\,}{5}\\
+1 & 1 & 0.2 = \nicefrac{1\,}{5}\\
+0 & 0 & 0.8 = \nicefrac{4\,}{5}\\
 \bottomrule
 \end{tabular}
 
@@ -720,8 +760,8 @@ T & Pr\\
 \toprule
 T & Pr\\
 \midrule
-1 & \nicefrac{1\,}{12}\\
-0 & \nicefrac{11\,}{12}\\
+1 & 0.083 = \nicefrac{1\,}{12}\\
+0 & 0.917  = \nicefrac{11\,}{12}\\
 \bottomrule
 \end{tabular}
 \vspace{1mm}
@@ -732,8 +772,8 @@ T & Pr\\
 \multicolumn{1}{c}{TF} & \multicolumn{2}{c}{T} \\
   & 1 & 0\\
 \midrule
-1 & 1 &  \nicefrac{1\,}{11} \\
-0 & 0 &  \nicefrac{10\,}{11}\\
+1 & 1 & 0.091 = \nicefrac{1\,}{11} \\
+0 & 0 & 0.909 = \nicefrac{10\,}{11}\\
 \bottomrule
 \end{tabular}
 \end{subfigure}} 
@@ -773,51 +813,34 @@ Dice: TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & 1 & Inf & 1\\
 \end{tabular}}
 \end{table}
 
-\textbf{Bayesian networks (again).} However, if we prefer to explicitly include the probabilistic information about all the potential outcomes as part of agents' overall narration considered in our coherence evaluation, we can use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with. We do so by adding a node \s{O} with as many equally probable states as sides of the die in question.
+\textbf{Bayesian networks (again).} However, if we include the probabilistic information about all the potential outcomes as part of agents' overall narration, we can use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with.
 
 \begin{figure}[H]
-\scalebox{.65}{\begin{subfigure}[!ht]{.6\textwidth}
+\scalebox{.35}{\hspace{-4cm}\begin{subfigure}[!ht]{.7\textwidth}
 
 \begin{flushleft}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/ThreeDiceDAG2-1} \end{flushleft}
-\end{subfigure}} \hspace{1cm}
-\scalebox{1}{\begin{subfigure}[t]{0.2\textwidth}
-\begin{tabular}{lr}
-\toprule
-O & Pr\\
-\midrule
-1 & \nicefrac{1\,}{6}\\
-2 & \nicefrac{1\,}{6}\\
-3 & \nicefrac{1\,}{6}\\
-4 & \nicefrac{1\,}{6}\\
-5 & \nicefrac{1\,}{6}\\
-6 & \nicefrac{1\,}{6}\\
-\bottomrule
-\end{tabular}
-\end{subfigure}} 
-\scalebox{1}{\begin{subfigure}[!ht]{0.2\textwidth}
-\begin{tabular}{lr}
-\toprule
-O & Pr\\
-\midrule
-1 & \nicefrac{1\,}{12}\\
-2 & \nicefrac{1\,}{12}\\
-3 & \nicefrac{1\,}{12}\\
-4 & \nicefrac{1\,}{12}\\
-5 & \nicefrac{1\,}{12}\\
-6 & \nicefrac{1\,}{12}\\
-7 & \nicefrac{1\,}{12}\\
-8 & \nicefrac{1\,}{12}\\
-9 & \nicefrac{1\,}{12}\\
-10 & \nicefrac{1\,}{12}\\
-11 & \nicefrac{1\,}{12}\\
-12 & \nicefrac{1\,}{12}\\
-\bottomrule
-\end{tabular}
 \end{subfigure}}
+\scalebox{.55}{\begin{subfigure}[!ht]{0.35\textwidth}
 
-\vspace{2mm}
+\begin{tabular}{lr}
+\toprule
+O & Pr\\
+\midrule
+1 & 0.167 = \nicefrac{1\,}{6}\\
+2 & 0.167\\
+3 & 0.167\\
+4 & 0.167\\
+5 & 0.167\\
+6 & 0.167\\
+\bottomrule
+\end{tabular}
 
-\scalebox{.9}{\begin{subfigure}[!ht]{0.35\textwidth}
+
+\vspace{1mm}
+
+
+
+
 \begin{tabular}{lrrrrrr}
 \toprule
 \multicolumn{1}{c}{T} & \multicolumn{2}{c}{O} \\
@@ -827,22 +850,12 @@ O & Pr\\
 0 & 1 & 0 & 1 & 1 & 1 & 1\\
 \bottomrule
 \end{tabular}
-\end{subfigure}}
-\scalebox{.9}{\begin{subfigure}[!ht]{0.45\textwidth}
-\begin{tabular}{lrrrrrrrrrrrr}
-\toprule
-\multicolumn{1}{c}{T} & \multicolumn{2}{c}{O} \\
-  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
-\midrule
-1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
-0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
-\bottomrule
-\end{tabular}
-\end{subfigure}}
 
-\vspace{2mm}
+\vspace{1mm}
 
-\scalebox{.9}{\begin{subfigure}[!ht]{0.35\textwidth}
+
+
+
 \begin{tabular}{lrrrrrr}
 \toprule
 \multicolumn{1}{c}{TF} & \multicolumn{2}{c}{O} \\
@@ -852,8 +865,52 @@ O & Pr\\
 0 & 1 & 0 & 1 & 0 & 1 & 1\\
 \bottomrule
 \end{tabular}
-\end{subfigure}}
-\scalebox{.9}{\begin{subfigure}[!ht]{0.45\textwidth}
+
+
+
+
+
+
+\end{subfigure}} 
+\scalebox{.55}{\begin{subfigure}[!ht]{0.18\textwidth}
+
+\begin{tabular}{lr}
+\toprule
+O & Pr\\
+\midrule
+1 & 0.083 = \nicefrac{1\,}{12}\\
+2 & 0.083\\
+3 & 0.083\\
+4 & 0.083\\
+5 & 0.083\\
+6 & 0.083\\
+7 & 0.083\\
+8 & 0.083\\
+9 & 0.083\\
+10 & 0.083\\
+11 & 0.083\\
+12 & 0.083\\
+\bottomrule
+\end{tabular}
+
+
+\vspace{1mm}
+
+
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+\multicolumn{1}{c}{T} & \multicolumn{2}{c}{O} \\
+  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+\midrule
+1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
+\bottomrule
+\end{tabular}
+
+\vspace{1mm}
+
+
+
 \begin{tabular}{lrrrrrrrrrrrr}
 \toprule
 \multicolumn{1}{c}{TF} & \multicolumn{2}{c}{O} \\
@@ -863,9 +920,10 @@ O & Pr\\
 0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1\\
 \bottomrule
 \end{tabular}
-\end{subfigure}}
 
-\caption{Three-node BNs for the dice problem, with CPTs for a regular die  and for a dodecahedron.}
+\end{subfigure}} 
+
+\caption{Three-node BNs for the dice problem, with CPTs for a regular die (center) and for a dodecahedron (right)}
 \label{fig:ThreediceBN}
 \end{figure}
 
@@ -902,7 +960,7 @@ Dice (three nodes): TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & -0.819 
 
 \noindent This might seem problematic, but really should not. After all, now the narration is not merely `the result is a two (and a two or a four)', but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the \(n\)). Notice also how the measure that uses LR fails to pick up on this difference, as at least one of confirmation scores in the calculations is \(\infty\) and this fact overwhelms the expected confirmation score calculations.
 
-Further, we could also explore the option of the narration being `the die is fair, but it was tossed and the result was a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated with \s{T} and \s{TF} treated as evidence. When we proceed this way, the structured coherence scores are as in the two-node variant.
+Further, we could also explore the option of the narration being `the die was fair, but it has been tossed and the result is a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated with \s{T} and \s{TF} treated as evidence. When we proceed this way, the coherence scores are as in the two-node variants.
 
 \hypertarget{dunnit}{%
 \subsection{Dunnit}\label{dunnit}}
@@ -1508,7 +1566,7 @@ Similarly, there is a greater agreement between \s{W4} and \s{W5} than \s{W3} an
     \item[(\s{W4W5\textgreater W3W4})] \{\s{W4},\s{W5}\} should be more coherent than \{\s{W3},\s{W4}\}.
 \end{description}\vspace{2mm}
 
-\noindent \textbf{Bayesian networks.} The basic idea behind the CPTs we used is that for any particular witness we take the probability of them including the perpetrator in their list to be .8, and the probability of including an innocent to be .05. Of course, the example can be run with different conditional probability tables. Moreover, in this case, the fact that the witnesses provided their testimonies constitutes evidence (in contrast with the Robbers scenario, where there is no evidence as to who the perpetrator is), and so we update on it in our weights calculations. Let's first take a look at the BN for the \(\{\s{W1,W2}\}\) (Figure \ref{fig:w1w2}).
+\noindent \textbf{Bayesian networks.} The basic idea behind the CPTs we used is that for any particular witness we take the probability of them including the perpetrator in their list to be 0.8, and the probability of including an innocent to be .05. Of course, the example can be run with different conditional probability tables. Moreover, in this case, the fact that the witnesses provided their testimonies constitutes evidence (in contrast with the Robbers scenario, where there is no evidence as to who the perpetrator is), and so we update on it in our weights calculations. Let's first take a look at the BN for the first scenario (Figure \ref{fig:w1w2}).
 
 \vspace{1mm}
 \footnotesize
@@ -1535,9 +1593,6 @@ Peter & 0.167\\
 \bottomrule
 \end{tabular}
 \end{subfigure}
-
-\vspace{2mm} 
-
 \centering
 \begin{subfigure}[!ht]{0.3\textwidth}
 \begin{tabular}{lrrrrrr}
@@ -1558,12 +1613,13 @@ In the remaining two BNs for the problem the CPT for \textsf{D} remains the same
 
 \begin{figure}[H]
 \centering
-\scalebox{.8}{
+\scalebox{1.2}{
 \begin{subfigure}[!ht]{0.4\textwidth}
 
 \begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotw3w4dag-1} \end{center}
-\end{subfigure}} \hspace{3mm}
-\scalebox{.8}{\begin{subfigure}[!ht]{0.4\textwidth}
+\end{subfigure}}
+
+\scalebox{1.2}{\begin{subfigure}[!ht]{0.4\textwidth}
 
 \begin{center}\includegraphics[width=1\linewidth]{coherencePaper40_files/figure-latex/plotw4w5dag-1} \end{center}
 \end{subfigure}}
@@ -1571,9 +1627,9 @@ In the remaining two BNs for the problem the CPT for \textsf{D} remains the same
 \label{fig:witness}
 \end{figure}
 
-We think that what this example illustrates is that we should really carefully think about whose cognitive perspective is taken when we represent a narration using a BN, focusing on whether the BN involves nodes which are not a part of the narration whose coherence is to be evaluated. In particular, the probabilistic information about the uniform distribution of guilt probability is not a part of any of the three involved narrations, but rather a part of a third-person set-up prior to obtaining any evidence.
+We think that what this example illustrates is that we should really carefully think about whose cognitive perspective is taken when we represent a narration using a BN, focusing on whether the BN involves nodes which are not part of the narration whose coherence is to be evaluated. In particular, the probabilistic information about the uniform distribution of guilt probability is not part of any of the three involved narrations, but rather a part of a third-person set-up prior to obtaining any evidence.
 
-To evaluate the coherence of a narration, one should think counterfactually, granting the (potentially probabilistic) consequences of the narration. In our case, a judge who evaluates the coherence of witness testimonies once she has heard them, no longer thinks that the distribution of \textsf{D} is uniform. And this agrees with the counterfactual strategy we just described: it is a consequence of the probabilistic set-up and the content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and \textsf{W2} were true, the distribution for \textsf{D} no longer would be uniform, and so it is unfair to judge the coherence of this scenario without updating one's assumptions about \textsf{D}.
+To evaluate the coherence of a narration, at least for unmentioned assumptions that one doesn't have strong independent reasons to keep, one should think counterfactually, granting the consequences of the narration and asking what would happen if it indeed was true. In our case, a judge who evaluates the coherence of witness testimonies once she has heard them, no longer thinks that the distribution of \textsf{D} is uniform. And this agrees with the counterfactual strategy we just described: it is a consequence of the probabilistic set-up and the content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and \textsf{W2} were true, the distribution for \textsf{D} no longer would be uniform, and so it is unfair to judge the coherence of this scenario without giving up this assumption and updating one's assumptions about \textsf{D}.
 
 \textbf{Results.} Note that in this case we're dealing with the perspective of someone who starts with a uniform prior for \s{D}, and subsequently considers what would happen if she obtained a given set of testimonies as evidence. Clearly, then, the distribution for \s{D} would no longer be uniform, but rather result from updating on this evidence.
 
@@ -1590,9 +1646,9 @@ To evaluate the coherence of a narration, one should think counterfactually, gra
 \end{tabular}
 \end{table}
 
-In the coherence calculations we first obtain how specific states of the narration child nodes would be confirmed by various states of \s{D}. In calculating these confirmation scores we do \emph{not} use the updated BN (recall the old evidence problem: confirmation by evidence already included would be null). However, the weights assigned to confirmation scores in the \s{ecs} calculations should be the (normalized) probabilities obtained by updating on the evidence. If given the evidence included in the scenario Steve is the most likely perpetrator, in your coherence calculations you give the most weight to the confirmation score obtained if he indeed is the perpetrator.
+In the coherence calculations we first obtain how specific states of the narration child nodes in a narration would be confirmed by various states of \s{D}. In calculating these confirmation scores we do \emph{not} use the updated BN (after all, confirmation by evidence if you start with BN according to which you already received it would not be positive). However, the weights assigned to confirmation scores in the \s{ecs} calculations should be the (normalized) probabilities obtained by updating on the evidence. If given the evidence included in the scenario Steve is the most likely perpetrator, in your coherence calculations you give the most weight to the confirmation score obtained if he indeed is the perpetrator.
 
-Once this strategy is taken, the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \ref{tab:witnessesCoherence} and the status of the desiderata is in Table \ref{tab:witnessesDesiderata}.
+Once this strategy is taken, the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \ref{tab:witnessesCoherence} and the status of the desiderata is in Table \ref{tab:witnessesDesiderata}. Now all the weights come from Bayesian networks updated from the perspertive of a given narration, which is emphasized by our use of abbreviations SZnarr, SLRnarr, and SLnarr.
 
 \begin{table}[H]
 
@@ -1628,7 +1684,7 @@ Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE 
 \hypertarget{depth}{%
 \subsection{Depth}\label{depth}}
 
-\textbf{The scenario.} There are eight equally likely suspects \(1, \dots, 8\), and three equally reliable witnesses each trying to identify the person responsible for the crime. Compare two sets, \s{X1} and \s{X2}, of claims about who is responsible. In contrast with Witnesses, the example ignores the fact that these are testimonies and focuses on the material disjunctive content:
+\textbf{The scenario.} There are eight equally likely suspects \(1, \dots, 8\), and three equally reliable witnesses each trying to identify the person responsible for the crime. Compare two sets, \s{X1} and \s{X2}, of claims about who is responsible. In contrast with Witnesses, the example ignores the fact that these are testimonies and by focusing on the material disjunctive content:
 \begin{align*}
     X_1 & = \{(1 \vee 2 \vee 3), (1\vee 2 \vee 4), (1 \vee 3 \vee 4)\}\\
     X_2 & =  \{(1 \vee 2 \vee 3), (1\vee  4 \vee 5), (1 \vee 6 \vee 7)\}
@@ -1641,16 +1697,16 @@ Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE 
     \item[(\s{X1\textgreater X2})] $X_1$  should be more coherent than $X_2$.
 \end{description}\vspace{2mm}
 
-This desideratum presupposes we are dealing with claims made by different agents. However, on our approach the narration nodes and the BN involved are supposed to represent one agent's credal state. As long as you take the narration to be equivalent to the conjunction of the elements, an agent accepting all the elements of either \(X_1\) or \(X_2\) would simply accept that 1 is responsible, and we do not think it makes sense to ask about the coherence of a single proposition. Moreover, since both sets are logically equivalent, the desideratum would no longer be intuitive on the single-agent approach.
+This desideratum presupposes we are dealing with claims made by different persons. However, on our approach the narration nodes and the BN involved are supposed to represent one agent's credal state. As long as you take the narration to be equivalent to the conjunction of the elements, an agent accepting all the elements of either \(X_1\) or \(X_2\) would simply accept that 1 is responsible, and we do not think it makes sense to ask about the coherence of a single proposition. Moreover, since both sets are logically equivalent, the desideratum would no longer be intuitive on the single-agent approach.
 
-There is a way to represent the fact that different people made different testimonies within our approach by preceding the claims with ``witness \(a\) said''. We already employed this strategy to the Witnesses scenario, and will not do this here again, as the problem structure is essentially the same.
+There is a way to represent the fact that different people made different testimonies within our approach. We already employed this strategy to the Witnesses scenario---one simply needs to precede the claims with ``witness \(a\) said''---and we could deploy it here. But mathematically this would be repetitive, as there would be no essential difference in the calculations and essentially we would be back at the Dunnit problem with the same resolution.
 
-If we insist that the disjunctions are put forward by different agents and the agent whose perspective we are trying to model does not assume that all of them are true, we should turn to another tool. There already exist working measures of such an agreement which give the desired results. For instance, both Fleiss \(\kappa\) and Light's \(\kappa\) give 0.467 for \s{X1} and -0.067 for \s{X2}, which is in line with the desideratum.
+If we insist that the propositions are put forward by different agents and no one claims that all elements of the narration are true, we should turn to another tool. For instance, there already exists working measures of such an agreement which give the desired results. For instance, both Fleiss \(\kappa\) and Light's \(\kappa\) give 0.467 for \s{X1} and -0.067 for \s{X2}, which is in line with the desideratum.
 
 \hypertarget{summary}{%
 \section{\texorpdfstring{Summary \label{sec:discussion}}{Summary }}\label{summary}}
 
-Our goal was to improve on the existing probabilistic approaches to the notion of coherence. The main problem we identified had to do with taking average confirmation for all possible combinations of the elements of a given narration without paying attention to its structure. Accordingly, we developed an approach on which a narration is represented by means of a Bayesian network which captures additional structural information, and a selection of nodes on which an agent has a decisive stance. Given such a representation, the coherence of a narration is---roughly speaking---a function of the expected support of children nodes in the network, ignoring combinations of states logically excluded by the narration.
+Our goal was to improve on the existing probabilistic approaches to the notion of coherence. The main problem we identified had to do with taking average confirmation for all possible combinations of the elements of a given narration without paying attention to its structure. Accordingly, we developed an approach on which a narration is represented by means of a Bayesian network which captures additional structural information, and a selection of nodes on which an agent's has a decisive stance. Given such a representation, the coherence of a narration is---roughly speaking---a function of the expected support of children nodes in the network, ignoring combinations of states logically excluded by the narration.
 
 In the literature there is a tradition of criticizng various probabilistic explications of coherence from the perspective of philosophical thought experiments meant to pump our intuitions about what conditions coherence should satisfy. We followed this path, arguing that our measure copes with such counterexamples much better than the other candidates on the market. All the calculations are displayed in Table \ref{tab:resultsJoint} and the desiderata yield Table \ref{tab:desiderataJoint}, with corresponding success rates in the last row.
 
