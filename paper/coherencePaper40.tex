@@ -6,6 +6,10 @@
 \documentclass[
   10pt,
 ]{scrartcl}
+\title{Structured probabilistic coherence \linebreak and the usual counterexamples to probabilistic measures of coherence}
+\author{}
+\date{\vspace{-2.5em}}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -35,6 +39,17 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Structured probabilistic coherence and the usual counterexamples to probabilistic measures of coherence},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={blue},
+  citecolor={blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -286,21 +301,6 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
-\hypersetup{
-  pdftitle={Structured probabilistic coherence and the usual counterexamples to probabilistic measures of coherence},
-  colorlinks=true,
-  linkcolor={blue},
-  filecolor={blue},
-  citecolor={blue},
-  urlcolor={blue},
-  pdfcreator={LaTeX via pandoc}}
-
-\title{Structured probabilistic coherence \linebreak and the usual counterexamples to probabilistic measures of coherence}
-\author{}
-\date{\vspace{-2.5em}}
 
 \begin{document}
 \maketitle
@@ -452,10 +452,21 @@ As we already mentioned in the introduction, formulating abstract formal require
 
 Inspired by these failures, in {[}REFERENCE SUPRESSED FOR ANONYMITY{]} we proposed to take a different perspective. Putting the earliest measures aside (they were problematic for various reasons), we noticed that the problems with the average mutual support measures stem from the fact that the coherence score is an average confirmation score for all possible combinations of the parts of a narration. Therefore we proposed to take a more fine-grained account. First, we represented an agent's credal state by means of a Bayesian network, which comprises not only a probabilistic measure but additional structural information. Then we used this structural information in our definition of coherence, so that only those directions of support are considered which in fact are indicated by the structure of the agent's belief state.
 
-While we refer the reader to a more extensive treatment in {[}REFERENCE SUPRESSED FOR ANONYMITY{]}, we now briefly discuss the main idea behind it. A Bayesian network (BN) represents agent's probabilistic belief state with respect to the relevant nodes. Additionally, some of the nodes are distinguished as narration nodes---the agent holds definite beliefs about which states of these nodes occur, without assigning probabilities equal 1 to them.\footnote{Also, we assume that the agent does not assign probability 0 to the narration being true.} If actual learning takes place, the evidence nodes and their states need to be specified as well.
+While we refer the reader to a more extensive treatment in {[}REFERENCE SUPRESSED FOR ANONYMITY{]}, we now briefly discuss the main idea behind it. A Bayesian network (BN) represents agent's probabilistic belief state with respect to the relevant variables.\todo{Add intro to BNs}
+
+For instance, consider a simplified DAG underlying the BN developed by (Fenton \& Neil, 2018\}) to illustrate a point about the notorious Sally Clark case (Figure \ref{fig:sc}).\footnote{ R. v. Clark (EWCA Crim 54, 2000) is a classic example of how the lack of probabilistic independence between events can be easily overlooked. Sally Clark's first son died in 1996 soon after birth, and her second son died in similar circumstances a few years later in 1998. At trial, the paediatrician Roy Meadow testified that the probability that a child from such a family would die of Sudden Infant Death Syndrome (SIDS) was 1 in 8,543. Meadow calculated that therefore the probability of both children dying of SIDS was approximately 1 in 73 million. Sally Clark was convicted of murdering her infant sons (the conviction was ultimately reversed on appeal). The calculation illegitimately assumes independence, as the environmental or genetic factors may predispose a family to SIDS. The winning appeal was based on new evidence: signs of a potentially lethal disease---contrary to what was assumed in the original case---were found in one of the bodies.} The arrows depict relationships of influence between variables. \textsf{Amurder} and \textsf{Bmurder} are binary nodes corresponding to whether Sally Clark's sons, call them A and B, were murdered. These influence whether signs of disease (\textsf{Adisease} and \textsf{Bdisease}) and bruising (\textsf{Abruising} and \textsf{B.bruising}) were present. Also, since son A died first, whether A was murdered casts some light on the probability of son B being murdered.
+
+\begin{figure}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{coherencePaper40_files/figure-latex/scDAG-1} \end{center}
+\caption{The directed acyclic graphs for the Sally Clark BN. }
+\label{fig:sc}
+\end{figure}
+
+Some of those nodes can be identified as \emph{evidence nodes}. these are the nodes on which the hypotheses about what happened have some probabilistic impact, but whose states can be in principle be found out by looking for evidence. In our example, these are the nodes corresponding to the sings of bruising or signs of disease in either of the children. A BN can also be put forward jointly with binary claims made by an agent. For instance, the prosecution might not only present the BN, but also claim that both children in fact have been murdered. That is, an agent might take a definite stance about a selection of nodes (here, the \s{Amurder} and \s{Bmurder})---in such a case, these become the \emph{narration nodes}, and the states that an agent claims they have are their corresponding \emph{narration states}.\footnote{We assume that the agent does not assign probability 0 to the narration they propose.}
 
 Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' binary beliefs.\footnote{Conceptually, it is possible to not restrict ourselves this way and look at all combinations of states of the nodes which are assigned non-null probabilities. But then, effectively, the binary content of the narration would have no impact on the coherence score, and we would obtain a coherence measure for the purely probabilistic part of agents' convictions. While this might be a worthy enterprise, we do not purse this idea in this paper. Calculations of a measure thus modified can be achieved by fairly straighforward modification of our code.} For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)\footnote{\s{Z} is \(0\) if \(\s{posterior} = \s{prior}\), \(\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}\) if \({\s{posterior} > \s{prior}}\), and \(\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}\) in the remaining case. Call the posterior of the evidence given a hypothesis \s{likelihood} and the probability of the evidence conditional on the negation of the hypothesis \s{nlikelihood}. Then, likelihood ratio is
-  \(\frac{\s{likelihood}}{\s{nlikelihood}}\) and \s{L} is \(\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}\)}. Then, a weighted average of these scores is obtained. The weights are the normalized probabilities of the combinations of parents' states obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.} Here is a description of the structured coherence measure, for clarity presented in the form of a pseudo-code and the \(z\)-confirmation measure (for other confirmation measures the code needs to be modified, but the required modification is straightforward).
+  \(\frac{\s{likelihood}}{\s{nlikelihood}}\) and \s{L} is \(\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}\)}. Then, a weighted average of these scores is obtained. The weights are the normalized probabilities of the combinations of parents' states obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.} Below, we present a pseudo-code for structured coherence.\footnote{Here, the measure is calculated with \(z\)-confirmation measure, for other confirmation measures the code needs to be modified, but the required modification is straightforward).}
 
 \vspace{2mm}
 \footnotesize
@@ -681,7 +692,7 @@ T & The result is a two.\\
 \end{tabular}
 \end{table}
 
-\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs. Note that on this approach the information about which die is tossed is not used in the structured coherence calculations, since in the only combination of node states that agrees with the narration \s{T} happens, and only those combinations which are not excluded by the narration are considered in coherence calculations.
+\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former.\todo{These simple BNs don't model the information about which die is dossed explicitly (as a separate node belonging to the narration, but rather the choice of the die is treated as a background information that impacts the states and probabilities of T and TF)} Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs. Note that on this approach the information about which die is tossed is not used in the structured coherence calculations, since in the only combination of node states that agrees with the narration \s{T} happens, and only those combinations which are not excluded by the narration are considered in coherence calculations.
 
 \begin{figure}[H]
 \scalebox{.6}{\begin{subfigure}[!ht]{0.3\textwidth}
@@ -771,7 +782,7 @@ Dice: TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & 1 & Inf & 1\\
 \end{tabular}}
 \end{table}
 
-\textbf{Bayesian networks (again).} However, if we prefer to explicitly include the probabilistic information about all the potential outcomes as part of agents' overall narration considered in our coherence evaluation, we can use a third node to represent the outcome of the toss. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with. We do so by adding a node \s{O} with as many equally probable states as sides of the die in question.
+\textbf{Bayesian networks (again).} However, if we prefer to explicitly include the probabilistic information about all the potential outcomes as part of agents' overall narration considered in our coherence evaluation, we can use a third node to represent the outcome of the toss. We do so by adding a node \s{O} with as many equally probable states as sides of the die in question. Then, again, the DAG will be shared by two BNs, which will differ in their CPTs depending on which die we're dealing with.
 
 \begin{figure}[H]
 \scalebox{.65}{\begin{subfigure}[!ht]{.6\textwidth}
@@ -898,9 +909,9 @@ Dice (three nodes): TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & -0.819 
 \end{tabular}}
 \end{table}
 
-\noindent This might seem problematic, but really should not. After all, now the narration is not merely `the result is a two (and a two or a four)', but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the \(n\)). Notice also how the measure that uses LR fails to pick up on this difference, as at least one of confirmation scores in the calculations is \(\infty\) and this fact overwhelms the expected confirmation score calculations.
+\noindent This might seem problematic, but really should not. After all, now the narration is not merely `the result is a two (and a two or a four),' but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).'\todo{Go back to the 2-node setup, explain the difference in a more nuanced way.} Here, the outcome being two is actually not too likely given that the die is fair, so there is no surprise the coherence score is negative (the more negative the larger the \(n\)). Notice also how the measure that uses LR fails to pick up on this difference, as at least one of confirmation scores in the calculations is \(\infty\) and this fact overwhelms the expected confirmation score calculations.
 
-Further, we could also explore the option of the narration being `the die is fair, but it was tossed and the result was a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated with \s{T} and \s{TF} treated as evidence. When we proceed this way, the structured coherence scores are as in the two-node variant.
+Further, we could also explore the option of the narration being `the die is fair, but it was tossed and the result was a two (and a two or a four).' The difference here is that now the agent no longer thinks that the (past) outcomes were all equally likely and \s{O} is updated with \s{T} and \s{TF} treated as evidence. When we proceed this way, the structured coherence scores are as in the two-node variant.\todo{why say a  bit more}
 
 \hypertarget{dunnit}{%
 \subsection{Dunnit}\label{dunnit}}
@@ -1641,7 +1652,7 @@ Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE 
 
 This desideratum presupposes we are dealing with claims made by different agents. However, on our approach the narration nodes and the BN involved are supposed to represent one agent's credal state. As long as you take the narration to be equivalent to the conjunction of the elements, an agent accepting all the elements of either \(X_1\) or \(X_2\) would simply accept that 1 is responsible, and we do not think it makes sense to ask about the coherence of a single proposition. Moreover, since both sets are logically equivalent, the desideratum would no longer be intuitive on the single-agent approach.
 
-There is a way to represent the fact that different people made different testimonies within our approach by preceding the claims with ``witness \(a\) said''. We already employed this strategy to the Witnesses scenario, and will not do this here again, as the problem structure is essentially the same.
+There is a way to represent the fact that different people made different testimonies within our approach by preceding the claims with ``witness \(a\) said.'' We already employed this strategy to the Witnesses scenario, and will not do this here again, as the problem structure is essentially the same.
 
 If we insist that the disjunctions are put forward by different agents and the agent whose perspective we are trying to model does not assume that all of them are true, we should turn to another tool. There already exist working measures of such an agreement which give the desired results. For instance, both Fleiss \(\kappa\) and Light's \(\kappa\) give 0.467 for \s{X1} and -0.067 for \s{X2}, which is in line with the desideratum.
 
