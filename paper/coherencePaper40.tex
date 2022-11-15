@@ -6,6 +6,10 @@
 \documentclass[
   10pt,
 ]{scrartcl}
+\title{Structured probabilistic coherence \linebreak and the usual counterexamples to probabilistic measures of coherence}
+\author{}
+\date{\vspace{-2.5em}}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -35,6 +39,17 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Structured probabilistic coherence and the usual counterexamples to probabilistic measures of coherence},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={blue},
+  citecolor={blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -286,21 +301,6 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
-\hypersetup{
-  pdftitle={Structured probabilistic coherence and the usual counterexamples to probabilistic measures of coherence},
-  colorlinks=true,
-  linkcolor={blue},
-  filecolor={blue},
-  citecolor={blue},
-  urlcolor={blue},
-  pdfcreator={LaTeX via pandoc}}
-
-\title{Structured probabilistic coherence \linebreak and the usual counterexamples to probabilistic measures of coherence}
-\author{}
-\date{\vspace{-2.5em}}
 
 \begin{document}
 \maketitle
@@ -309,7 +309,7 @@
 \setlength{\belowdisplayskip}{5pt}
 
 \begin{quote}\textbf{Abstract.}
-We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. We need to write an abstract. 
+The notion of coherence is  used in many philosophical, especially epistemological, discussions (for instance, in discussions  about the  truth-conduciveness of coherence), so a probabilistic explication of this  notion is desirable.  Yet,  such explications available on the market disagree and  face a number of counterexamples.  Reflecting on common phenomena that underlie these counterexamples leads  us to the formulation of  a new measure of coherence. It  diverges from the known candidates in three important respects: (1) It is not a function of a probabilistic measure and a set of propositions alone, because it is also sensitive to the selection and direction of arrows in a Bayesian network representing an agent's credal state. (2) The intermediate values used in the calculations are not confirmation scores between sets of propositions, but rather expected confirmation scores, and (3) instead of simply taking a mean of such values, the measure is also   sensitive to the   worst cases.  We apply our measure to the existing counterexamples and compare its performance to the performance of the other measures. It does a  better job.  
 \end{quote}
 
 \hypertarget{introduction-motivations}{%
@@ -909,7 +909,7 @@ Dice (three nodes): TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & -0.819 
 \end{tabular}}
 \end{table}
 
-\noindent This might seem problematic, but really should not. After all, now the narration represented by the three-node version is not merely `the result is a two (and a two or a four)', but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Both BNs models are based on the same agent's probabilistic convictions, but the narrations captured by the two representations are different.
+\noindent This might seem problematic, but really should not. After all, now the narration represented by the three-node version is not merely `the result is a two (and a two or a four),' but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Both BNs models are based on the same agent's probabilistic convictions, but the narrations captured by the two representations are different.
 
 If \s{O} is included and all possible results of a toss are equally probable, the outcome being two is actually not that likely, so there is no surprise the coherence score is negative (the more negative the larger the \(n\)) if the probabilistic information related to \s{O} is part of the narration.\footnote{Notice also how the measure that uses LR fails to pick up on this difference, as at least one of confirmation scores in the calculations is \(\infty\) and this fact overwhelms the expected confirmation score calculations.}
 
@@ -1654,7 +1654,7 @@ Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE 
 
 This desideratum presupposes we are dealing with claims made by different agents. However, on our approach the narration nodes and the BN involved are supposed to represent one agent's credal state. As long as you take the narration to be equivalent to the conjunction of the elements, an agent accepting all the elements of either \(X_1\) or \(X_2\) would simply accept that 1 is responsible, and we do not think it makes sense to ask about the coherence of a single proposition. Moreover, since both sets are logically equivalent, the desideratum would no longer be intuitive on the single-agent approach.
 
-There is a way to represent the fact that different people made different testimonies within our approach by preceding the claims with ``witness \(a\) said''. We already employed this strategy to the Witnesses scenario, and will not do this here again, as the problem structure is essentially the same.
+There is a way to represent the fact that different people made different testimonies within our approach by preceding the claims with ``witness \(a\) said.'' We already employed this strategy to the Witnesses scenario, and will not do this here again, as the problem structure is essentially the same.
 
 If we insist that the disjunctions are put forward by different agents and the agent whose perspective we are trying to model does not assume that all of them are true, we should turn to another tool. There already exist working measures of such an agreement which give the desired results. For instance, both Fleiss \(\kappa\) and Light's \(\kappa\) give 0.467 for \s{X1} and -0.067 for \s{X2}, which is in line with the desideratum.
 
