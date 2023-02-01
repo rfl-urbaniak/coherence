@@ -260,64 +260,8 @@ Once the state of a node has been found out, it becomes an \emph{evidence node}.
 Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents'  narration.\footnote{Conceptually, it is possible to not restrict ourselves this way and look at all combinations of states of the nodes which are assigned non-null probabilities. But then, effectively, the binary content of the narration would have no impact on the coherence score, and we would obtain a coherence measure for the purely probabilistic part of agents' convictions. While this might be a worthy enterprise, we do not purse this idea in this paper. Calculations of a measure thus modified can be achieved by fairly straighforward modification of our code.} For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison).^[\s{Z} is  $0$ if $\s{posterior} = \s{prior}$, $\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}$ if ${\s{posterior} > \s{prior}}$, and $\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}$ in the remaining case. Call the posterior of the evidence given a hypothesis \s{likelihood} and the probability of the evidence conditional on the negation of the hypothesis \s{nlikelihood}. Then, likelihood ratio (\s{LR}) is 
 $\frac{\s{likelihood}}{\s{nlikelihood}}$ and \s{L} is $\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}$] Then, a weighted average of these scores is obtained. The weights are the normalized  probabilities of the combinations of parents' states  obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, $(1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})$, otherwise.^[We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.] The appendix contains a pseudo-code for structured coherence.^[For other confirmation measures the code needs to be modified, but the required modification is straightforward).]
 
-\todo{Move to appendix.}
 
 
-\vspace{2mm}
-\footnotesize
-\begin{Verbatim}[commandchars=\\\{\},fontfamily=futura,numbers=left,
-                 xleftmargin=20mm]
-\textcolor{ForestGreen}{FUNCTION} parents_child_possible_states(parents,child,narration)
-    \textcolor{ForestGreen}{IF} child included in narration \textcolor{ForestGreen}{THEN}
-        consequentStates <- the unique state of child as reported in the narration
-    \textcolor{ForestGreen}{ELSE}
-        consequentStates <- all possible states of child
-    \textcolor{ForestGreen}{FOR EACH} parent \textcolor{ForestGreen}{IN} parents
-        \textcolor{ForestGreen}{IF} parent included in narration \textcolor{ForestGreen}{THEN}
-            parentStates[parent] <- the unique state of parent as reported in the narration
-        \textcolor{ForestGreen}{ELSE}
-            parentStates[parent] <- all possible states of parent
-    parentsStates <- all combinations of parentStates
-    variants <- list of all possible combinations of consequentStates and parentsStates
-    \textcolor{ForestGreen}{RETURN} variants
-
-\textcolor{ForestGreen}{FUNCTION} coherence_from_ecs(ecs)
-    \textcolor{ForestGreen}{IF} min(ecs) <= 0 \textcolor{ForestGreen}{THEN}
-        \textcolor{ForestGreen}{RETURN} mean(ecs) * (min(ecs)+1) - min(ecs)min(ecs)
-        \textcolor{gray}{#this is equivalent to (1- |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)}
-    \textcolor{ForestGreen}{ELSE}
-        \textcolor{ForestGreen}{RETURN} mean(ecs)
-
-\textcolor{ForestGreen}{FUNCTION} structured_coherence(BN,narration,evidenceNodes,evidenceStates)
-    parentedNodes <- vector of non-root nodes in BN
-    ecsList <- []
-    \textcolor{ForestGreen}{FOR EACH} parentedNode \textcolor{ForestGreen}{IN} parentedNodes
-        variants <- parents_child_possible_states(parents,parentedNode, narration)
-        variants_count <- length(variants)
-        sumParentsNarr <- 0
-        \textcolor{ForestGreen}{FOR EACH} variant \textcolor{ForestGreen}{IN} variants
-            childPrior <- prior probability of the child state in variant
-            childPosterior <- posterior probability of the child state in variant, 
-                obtained by updating on the parents states from this variant
-            parentsEvidence[variant] <- joint probability of 
-                the parents states in variant in BN updated with
-                evidenceStates of evidenceNodes
-            sumParentsEvidence <- sumParentsEvidence +  parentsEvidence[variant] 
-            z[variant] <- z_confirmation_measure(childPrior, childPosterior)
-        ecs <- 0  \textcolor{gray}{#expected confirmation score}
-        \textcolor{ForestGreen}{FOR EACH} variant \textcolor{ForestGreen}{IN} variants
-            \textcolor{ForestGreen}{IF} parentsEvidence[variant] > 0 \textcolor{ForestGreen}{THEN}
-                weight <- parentsEvidence[variant]/sumParentsEvidence
-            \textcolor{ForestGreen}{ELSE}
-                weight <- 1/variants_count
-            zScaled <- z[variant] * weight
-            ecs <- ecs + zScaled
-        ecsList.add(ecs)
-    \textcolor{ForestGreen}{RETURN} coherence_from_ecs(ecsList)
-\end{Verbatim}
-\normalsize
-
-\vspace{2mm}
 
 <!-- ```{r eval = FALSE, highlight = FALSE} -->
 
@@ -639,9 +583,6 @@ T & Pr\\
 
 
 
-\todo{Consider Inf = Inf to undefined}
-
-
 
 
 ```{r diceCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
@@ -650,6 +591,7 @@ diceTable <- CoherencesTableEvi(BN = list(Dod2RegularBN,Dod2DodecahedronBN),
               scenariosList = list(TTF, TTF), 
               statesList   = list(c("1", "1"), c("1", "1")),
               exampleName = "Dice")
+
 
 round(diceTable,3) %>%  kable(format = "latex",booktabs=T,
   linesep = "",  escape = FALSE, caption = "Coherence scores for a regular die and a dodecahedron in the dice problem with two nodes (rounded).") %>%
@@ -663,9 +605,10 @@ round(diceTable,3) %>%  kable(format = "latex",booktabs=T,
 diceDesiderata <- diceTable[1,] == diceTable[2,] 
 diceDesiderata <- as.data.frame(diceDesiderata)
 rownames(diceDesiderata) <- c("Dodecahedron:  Regular $=$  Dodecahedron")
+diceDesiderata[1,9] <- c("FALSE (?)")
 ```
 
-```{r diceDesiderata2,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+```{r diceDesiderata2b,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
 diceDesiderata %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Desideratum satisfaction for two-node BNs in the dice problem.") %>%
    kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
@@ -1588,7 +1531,7 @@ witnesses %>%  kable(format = "latex",booktabs=T,
 Olsson, when he originally brought up the example, focused on the content of the testimonials arguing that $\{$''Steve did it'', ''Steve did it''$\}$ and   $\{$"Steve, Martin or David did it", "Steve, John or James did it"$\}$ are logically equivalent (presumably, with the assumption that exactly one person did it), and so will be assigned the same level of coherence, which he finds unintuitive.  
 
 
-On our construal, the intuition that there is a difference in coherence between the two sets of testimonies essentially depends on the fact that they are testimonies. We take  each proposition to have the structure ‘‘Witness no. $X$ claims that \dots" instead---but then, the sets are no longer logically equivalent and a non-trivial probability measure can be used in coherence calculations.  We will  have some comments on the difference between these two approaches later on. \todo{WHERE}
+On our construal, the intuition that there is a difference in coherence between the two sets of testimonies essentially depends on the fact that they are testimonies. We take  each proposition to have the structure ‘‘Witness no. $X$ claims that \dots" instead---but then, the sets are no longer logically equivalent and a non-trivial probability measure can be used in coherence calculations. 
 
 
 \textbf{Desiderata.} First, we can observe that \s{W1} and \s{W2} fully agree. Testimonies of \s{W3} and \s{W4} overlap only partially, therefore it seems that \{\s{W1},\s{W2}\} is more coherent than \{\s{W3},\s{W4}\}.
@@ -1692,14 +1635,13 @@ To evaluate the coherence of a narration, one should think counterfactually, gra
 
 
 ```{r witnessesWeights,echo=FALSE,eval=TRUE, fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%",  dpi = 300}
- updatedW12BN <- updateBN(W12BN,c("W1","W2"), c("1","1"))
-#
- D12cpt <- as.data.frame(updatedW12BN$D[[4]])
- D12cpt$`updatedW12BN$D[[4]]` <- round(D12cpt$`updatedW12BN$D[[4]]`,3)
- colnames(D12cpt) <-  c("Pr")
+
+D12cpt <- data.frame(Steve = .981, Martin = 0.004, David = 0.004, John = 0.004, Peter = 0.004)
+
+rownames(D12cpt) <-  c("Pr")
 
 
-t(D12cpt) %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Propagated probabilities for D in the Witnesses scenario (rounded).") %>%   kable_styling(latex_options=c("striped","HOLD_position"))
+D12cpt %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Propagated probabilities for D in the Witnesses scenario (rounded).") %>%   kable_styling(latex_options=c("striped","HOLD_position"))
 ```
 
 
@@ -1843,8 +1785,7 @@ kl2 <- kappam.light(x2)
 
 
 
-If we insist that  the disjunctions are  put forward by different agents and  the agent whose perspective we are trying to model does not assume that all of them are true, we should turn to another tool.  There already exist working measures of such an agreement which give the desired results. For instance, both Fleiss $\kappa$  and Light's $\kappa$ give `r round(kf1$value,3)` for \s{X1} and `r round(kf2$value,3)` for \s{X2}, which is in line with the desideratum.
-\todo{add ref}
+If we insist that  the disjunctions are  put forward by different agents and  the agent whose perspective we are trying to model does not assume that all of them are true, we should turn to another tool.  There already exist working measures of such an agreement which give the desired results. For instance, both Fleiss $\kappa$  and Light's $\kappa$  [@Fleiss1971] give `r round(kf1$value,3)` for \s{X1} and `r round(kf2$value,3)` for \s{X2}, which is in line with the desideratum.
 
 
 
@@ -1853,238 +1794,10 @@ If we insist that  the disjunctions are  put forward by different agents and  th
 
 
 
-<!-- \todo{convert to table} -->
 
-<!-- \noindent \textbf{Bayesian networks.}   We start with representing the two scenarios with two fairly natural BNs (\textsf{C} stands for who Committed the crime, \textsf{TXYZ} stands for Testimony that $X\vee Y \vee Z$), see Figures \ref{fig:dod1} and \ref{fig:dod2}. -->
 
 
 
-
-
-<!-- \begin{figure}[H] -->
-<!-- \scalebox{1.7}{ -->
-<!-- \begin{subfigure}[!ht]{0.4\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- source("../code/bns//Depth.R") -->
-<!-- graphviz.plot(DX1DAG) -->
-<!-- ``` -->
-<!-- \end{subfigure}} -->
-<!-- \hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- CPkable0("DX1BN","C") -->
-<!-- CPkable1("DX1BN","T123") -->
-<!-- CPkable1("DX1BN","T124") -->
-<!-- CPkable1("DX1BN","T134") -->
-<!-- ``` -->
-<!-- \end{subfigure}} -->
-<!-- \caption{BN for \textsf{X1} in the \textsf{Depth} problem.} -->
-<!-- \label{fig:dod1} -->
-<!-- \end{figure} -->
-
-
-
-
-
-
-
-<!-- \begin{figure}[H] -->
-<!-- \scalebox{1.7}{ -->
-<!-- \begin{subfigure}[!ht]{0.4\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- graphviz.plot(DX2DAG) -->
-<!-- ``` -->
-<!-- \end{subfigure}} -->
-<!-- \hspace{-1cm}\scalebox{0.6}{\begin{subfigure}[!ht]{0.3\textwidth} -->
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- CPkable0("DX2BN","C") -->
-<!-- CPkable1("DX2BN","T123") -->
-<!-- CPkable1("DX2BN","T145") -->
-<!-- CPkable1("DX2BN","T167") -->
-<!-- ``` -->
-<!-- \end{subfigure}} -->
-<!-- \caption{BN for \textsf{X2} in the \textsf{Depth} problem.} -->
-<!-- \label{fig:dod2} -->
-<!-- \end{figure} -->
-
-
-
-<!-- \textbf{Results.} One effect of dropping the "the witness testified that" and using the testimony contents themselves is that the CPTs for the narration nodes are deterministically connected with the root node. In result, the coherence calculations give the results in Table \@ref(tab:depthCoherence), and the status of the desiderata is pictured in Table \@ref(tab:depthDesiderata). -->
-
-
-
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- X1 <- c("T123","T124","T134") -->
-<!-- X2 <- c("T123","T145","T167") -->
-<!-- BN <- DepthBN -->
-
-<!-- depthTableX1 <- CoherencesTableEvi(DX1BN, -->
-<!--                                scenariosList = list(X1), -->
-<!--                                statesList   = list(c("1","1","1")), -->
-<!--                                exampleName = "Depth" -->
-<!-- ) -->
-
-<!-- depthTableX2 <- CoherencesTableEvi(DX2BN, -->
-<!--                                         scenariosList = list(X2), -->
-<!--                                         statesList   = list(c("1","1","1")), -->
-<!--                                         exampleName = "Depth" -->
-<!-- ) -->
-
-<!-- depthTable <- rbind(depthTableX1,depthTableX2) -->
-<!-- ``` -->
-
-<!-- <!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} --> 
-<!-- <!-- load("../calculations/RdataObjects/depthTableNarr.Rda") --> 
-<!-- <!-- load("../calculations/RdataObjects/depthResultsNarr.Rda") --> 
-<!-- <!-- load("../calculations/RdataObjects/WNarrTable.Rda") --> 
-
-<!-- <!-- colnames(depthTableNarr) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1", "S2") --> 
-<!-- <!-- colnames(depthResultsNarr) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S1","S2") --> 
-
-<!-- ```{r depthCoherence, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- round(depthTable,3) %>% -->
-<!--   kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Coherence scores for the Depth problem (rounded).") %>%   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
-<!-- ``` -->
-
-
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- X1greaterX2<- depthTable[1,] > depthTable[2,] -->
-<!-- depthResults <- as.data.frame(rbind(X1greaterX2)) -->
-<!-- rownames(depthResults) <- c("Depth: X$_1>$X$_2$") -->
-<!-- ``` -->
-
-
-
-
-<!-- ```{r depthDesiderata, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE,  fig.show = "hold", out.width = "70%", dpi = 300} -->
-<!-- depthResults %>%  kable(format = "latex",booktabs=T, -->
-<!--                         linesep = "",  escape = FALSE, caption = "Desiderata satisfaction for the Depth problem.") %>% -->
-<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
-<!-- ``` -->
-
-
-<!-- \todo{need to revise this} -->
-<!-- Note that this time we listed two values for our measure. \textsf{Structured 1} shows the values obtained if we do not update the weighting of the node not included in the narration, and \textsf{Structured 2} is the result of such an updated weighing (analogous to the updating involved in the \textsf{Witness} problem). Now, what are we to make of this? -->
-
-<!-- \textsf{Structured 1} is negative. This isn't too surprising: after all, this is the coherence of the narration with the probabilistic assumption that the distribution for \textsf{C} is uniform, and this probabilistic assumption undermines the narration. Why, however, does \textsf{Structured 2} equal 1, and why are the results identical for both narrations?  This, upon reflection, isn't too suprising either. If the BN and the narration is supposed to represent a single agent's credal state, there is only one state of \textsf{C} in which the whole narration $X_1$ is true -- trivially, it is the one in which suspect 1 is guilty, and it is the same unique state of \textsf{C} in which the whole narration $X_2$ is true.  Since seen as narrations these sets have exactly the same truth conditions, there is no surprise in them being equally coherent. -->
-
-
-
-
- <!-- Let's further illustrate  our point about the  requirement that the BN should represent a single agent's cognitive state. For instance, you can represent, the situation in $A$ from the perspective of the first witness. This suggests we should focus only on the nodes involved in the narration, and on the fact that from the witness' perspective the suspects are not equally likely. The example doesn't provide us enough information to build a table for \textsf{C}. In fact, no information about the wintess attitude towards this node is given, but given they say what they say, it's unlikely they think the distribution is uniform. So let's take one of the witness' own statements as the root (which ones we choose doesn't change the outcome). Clearly (or, at least, hopefully, if we talk about witnesses), the agent thinks her own claim is very likely and evaluates the probability of the other statements in $A$ or $B$ from its perspective. This gives us two different BNs, and when we calculate the respective coherence scores we actually do get the desired result, which isn't too hard for the other measures either.  -->
-
-
-
-
-
-<!-- \begin{figure}[H] -->
-<!-- \hspace{2cm}\scalebox{0.6}{ -->
-<!-- \begin{subfigure}[!ht]{0.3\textwidth} -->
-<!-- ```{r plotT123,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", dpi = 300} -->
-<!-- source("../code/bns/Depth.R") -->
-<!-- graphviz.plot(T123DAG) -->
-<!-- ``` -->
-<!-- \end{subfigure} }\hfill -->
-<!-- \begin{subfigure}[!ht]{0.6\textwidth} -->
-<!-- \centering\begingroup\fontsize{9}{11}\selectfont -->
-<!-- \begin{tabular}{lrr} -->
-<!-- \toprule -->
-<!-- \multicolumn{1}{c}{T124} & \multicolumn{2}{c}{T123} \\ -->
-<!--   & 1 & 0\\ -->
-<!-- \midrule -->
-<!-- \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.667} & \cellcolor{gray!6}{0.2}\\ -->
-<!-- 0 & 0.333 & 0.8\\ -->
-<!-- \bottomrule -->
-<!-- \end{tabular} -->
-<!-- \endgroup{} -->
-<!-- \end{subfigure} -->
-<!-- \caption{A witness perspective for the \textsf{agreement} problem, set $A$.} -->
-<!-- \end{figure} -->
-
-
-
-<!-- \begin{figure}[H] -->
-<!-- \hspace{2cm}\scalebox{0.6}{ -->
-<!-- \begin{subfigure}[!ht]{0.3\textwidth} -->
-
-<!-- ```{r plotT1232,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%",  dpi = 300} -->
-<!-- graphviz.plot(T123DAG2) -->
-<!-- ``` -->
-<!-- \end{subfigure}} \hfill -->
-<!-- \begin{subfigure}[!ht]{0.6\textwidth} -->
-<!-- \centering\begingroup\fontsize{9}{11}\selectfont -->
-
-<!-- \begin{tabular}{lrr} -->
-<!-- \toprule -->
-<!-- \multicolumn{1}{c}{T124} & \multicolumn{2}{c}{T123} \\ -->
-<!--   & 1 & 0\\ -->
-<!-- \midrule -->
-<!-- \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0.333} & \cellcolor{gray!6}{0.4}\\ -->
-<!-- 0 & 0.667 & 0.6\\ -->
-<!-- \bottomrule -->
-<!-- \end{tabular} -->
-<!-- \endgroup{} -->
-<!-- \end{subfigure} -->
-<!-- \caption{A witness perspective for the \textsf{agreement} problem, set $B$.} -->
-<!-- \end{figure} -->
-
-
-
-<!-- \noindent Now, the resulting calculations and outcomes are in Tables \@ref(tab:depthFurtherCoherence) and \@ref(tab:depthFurtherDesiderata), and the situation is no longer problematic for any of the measures. -->
-
-
-
-
-
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
-<!-- witnessA1 <- CoherencesTable(T123BN, -->
-<!--                                  scenariosList = list(c("T123","T124")), -->
-<!--                                  statesList   = list(c("1","1")), -->
-<!--                                  exampleName = "WitnessA" -->
-<!-- ) -->
-
-<!-- witnessB1 <- CoherencesTable(T123BN2, -->
-<!--                              scenariosList = list(c("T123","T145")), -->
-<!--                              statesList   = list(c("1","1")), -->
-<!--                              exampleName = "WitnessB" -->
-<!-- ) -->
-
-
-<!-- depthPerspectiveTable <- rbind(witnessA1,witnessB1) -->
-<!-- ``` -->
-
-
-<!-- <!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} --> 
-<!-- <!-- load("../calculations/RdataObjects/depthPerspectiveTable.Rda") --> 
-<!-- <!-- load("../calculations/RdataObjects/depthPerspectiveResults.Rda") --> 
-
-<!-- <!-- colnames(depthPerspectiveTable) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") --> 
-<!-- <!-- colnames(depthPerspectiveResults) <- c("OG","OGen","Sh","ShGen","Fit","DM","R","S") --> 
-<!-- <!-- ``` --> 
-
-
-<!-- ```{r depthFurtherCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
-<!-- round(depthPerspectiveTable,3) %>%  kable(format = "latex",booktabs=T, -->
-<!--                         linesep = "",  escape = FALSE, caption = "Coherence scores in a single agent version of the Depth scenario (rounded).") %>% -->
-<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
-<!-- ``` -->
-
-
-
-
-
-<!-- ```{r,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
-<!-- X1greaterX2<- depthPerspectiveTable[1,] > depthPerspectiveTable[2,]  -->
-<!-- depthPerspectiveResults <- as.data.frame(rbind(X1greaterX2)) -->
-<!-- rownames(depthPerspectiveResults) <- c("Depth: X$_1>$X$_2$") -->
-<!-- ``` -->
-
-
-
-<!-- ```{r depthFurtherDesiderata,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"} -->
-<!-- depthPerspectiveResults %>%  kable(format = "latex",booktabs=T, -->
-<!--                         linesep = "",  escape = FALSE, caption = "Desideratum satisfaction in the single agent version of the Depth scenario.") %>% -->
-<!--   kable_styling(latex_options=c("striped","scale_down","HOLD_position")) -->
-<!-- ``` -->
 
 
 
@@ -2182,7 +1895,65 @@ desiderataJoint %>%  kable(format = "latex",booktabs=T,
 
 
 
+# Appendix:  structured coherence calculation pseudo-code
 
+
+
+\vspace{2mm}
+\footnotesize
+\begin{Verbatim}[commandchars=\\\{\},fontfamily=futura,numbers=left,
+                 xleftmargin=20mm]
+\textcolor{ForestGreen}{FUNCTION} parents_child_possible_states(parents,child,narration)
+    \textcolor{ForestGreen}{IF} child included in narration \textcolor{ForestGreen}{THEN}
+        consequentStates <- the unique state of child as reported in the narration
+    \textcolor{ForestGreen}{ELSE}
+        consequentStates <- all possible states of child
+    \textcolor{ForestGreen}{FOR EACH} parent \textcolor{ForestGreen}{IN} parents
+        \textcolor{ForestGreen}{IF} parent included in narration \textcolor{ForestGreen}{THEN}
+            parentStates[parent] <- the unique state of parent as reported in the narration
+        \textcolor{ForestGreen}{ELSE}
+            parentStates[parent] <- all possible states of parent
+    parentsStates <- all combinations of parentStates
+    variants <- list of all possible combinations of consequentStates and parentsStates
+    \textcolor{ForestGreen}{RETURN} variants
+
+\textcolor{ForestGreen}{FUNCTION} coherence_from_ecs(ecs)
+    \textcolor{ForestGreen}{IF} min(ecs) <= 0 \textcolor{ForestGreen}{THEN}
+        \textcolor{ForestGreen}{RETURN} mean(ecs) * (min(ecs)+1) - min(ecs)min(ecs)
+        \textcolor{gray}{#this is equivalent to (1- |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)}
+    \textcolor{ForestGreen}{ELSE}
+        \textcolor{ForestGreen}{RETURN} mean(ecs)
+
+\textcolor{ForestGreen}{FUNCTION} structured_coherence(BN,narration,evidenceNodes,evidenceStates)
+    parentedNodes <- vector of non-root nodes in BN
+    ecsList <- []
+    \textcolor{ForestGreen}{FOR EACH} parentedNode \textcolor{ForestGreen}{IN} parentedNodes
+        variants <- parents_child_possible_states(parents,parentedNode, narration)
+        variants_count <- length(variants)
+        sumParentsNarr <- 0
+        \textcolor{ForestGreen}{FOR EACH} variant \textcolor{ForestGreen}{IN} variants
+            childPrior <- prior probability of the child state in variant
+            childPosterior <- posterior probability of the child state in variant, 
+                obtained by updating on the parents states from this variant
+            parentsEvidence[variant] <- joint probability of 
+                the parents states in variant in BN updated with
+                evidenceStates of evidenceNodes
+            sumParentsEvidence <- sumParentsEvidence +  parentsEvidence[variant] 
+            z[variant] <- z_confirmation_measure(childPrior, childPosterior)
+        ecs <- 0  \textcolor{gray}{#expected confirmation score}
+        \textcolor{ForestGreen}{FOR EACH} variant \textcolor{ForestGreen}{IN} variants
+            \textcolor{ForestGreen}{IF} parentsEvidence[variant] > 0 \textcolor{ForestGreen}{THEN}
+                weight <- parentsEvidence[variant]/sumParentsEvidence
+            \textcolor{ForestGreen}{ELSE}
+                weight <- 1/variants_count
+            zScaled <- z[variant] * weight
+            ecs <- ecs + zScaled
+        ecsList.add(ecs)
+    \textcolor{ForestGreen}{RETURN} coherence_from_ecs(ecsList)
+\end{Verbatim}
+\normalsize
+
+\vspace{2mm}
 
 
 

@@ -6,10 +6,6 @@
 \documentclass[
   10pt,
 ]{scrartcl}
-\title{Structured probabilistic coherence \linebreak and the usual counterexamples to probabilistic measures of coherence}
-\author{}
-\date{\vspace{-2.5em}}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -39,17 +35,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Structured probabilistic coherence and the usual counterexamples to probabilistic measures of coherence},
-  colorlinks=true,
-  linkcolor={blue},
-  filecolor={blue},
-  citecolor={blue},
-  urlcolor={blue},
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -301,6 +286,21 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Structured probabilistic coherence and the usual counterexamples to probabilistic measures of coherence},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={blue},
+  citecolor={blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Structured probabilistic coherence \linebreak and the usual counterexamples to probabilistic measures of coherence}
+\author{}
+\date{\vspace{-2.5em}}
 
 \begin{document}
 \maketitle
@@ -309,7 +309,7 @@
 \setlength{\belowdisplayskip}{5pt}
 
 \begin{quote}\textbf{Abstract.}
-The notion of coherence is  used in many philosophical, especially epistemological, discussions (for instance, in discussions  about the  truth-conduciveness of coherence), so a probabilistic explication of this  notion is desirable.  Yet,  such explications available on the market disagree and  face a number of counterexamples.  Reflecting on common phenomena that underlie these counterexamples leads  us to the formulation of  a new measure of coherence. It  diverges from the known candidates in three important respects: (1) It is not a function of a probabilistic measure and a set of propositions alone, because it is also sensitive to the selection and direction of arrows in a Bayesian network representing an agent's credal state. (2) The intermediate values used in the calculations are not confirmation scores between sets of propositions, but rather expected confirmation scores, and (3) instead of simply taking a mean of such values, the measure is also   sensitive to the   worst cases.  We apply our measure to the existing counterexamples and compare its performance to the performance of the other measures. It does a  better job.  
+The notion of coherence is  used in many philosophical, especially epistemological, discussions (for instance, in discussions  about the  truth-conduciveness of coherence), so a formal explication of this notion is desirable.  Yet,  such explications available on the market disagree and  face a number of counterexamples.  Reflecting on common phenomena that underlie these counterexamples leads  us to the formulation of  a new measure of coherence. It  diverges from the known candidates in three important respects: (1) it is not a function of a probabilistic measure and a set of propositions alone, because it is also sensitive to the structure of agent's beliefs, (2) unlike in the case of quite a few coherence measures, it is  sensitive to the  weakest links in the narration, and (3) it is not obtained by simply averaging confirmation levels between all possible combinations of elements.    We apply our measure to the existing counterexamples and compare its performance to the performance of the other measures. It does a  better job.  
 \end{quote}
 
 \hypertarget{introduction-motivations}{%
@@ -320,22 +320,20 @@ The notion of coherence is often used in many philosophical, especially epistemo
 There is also a more practical reason to develop a better understanding of the notion: a plausible measure of coherence could be used to better evaluate the quality of some stories or narrations. For example in the legal context we would like to be able to assess the quality of a testimony in the court of law (Allen, 2010; Pennington \& Hastie, 1991; Spottswood, 2013; Vlek, 2016).
 
 Multiple probabilistic explications of coherence have been proposed
-(Douven \& Meijs, 2007; Fitelson, 2003; Glass, 2002; Meijs \& Douven, 2007; Olsson, 2001; Roche, 2013; Shogenji, 1999). However, clear general principles to choose between them are hard to come by. One paper where some such principles have been formulated is (Schippers, 2014), where a list of seemingly plausible adequacy conditions for a coherence measure is proposed and shown to be inconsistent to argue for pluralism about the notion of coherence. However, some of those requirements are quite non-trivial.\footnote{Let us illustrate this. The (Dependence) condition formulated there requires that the coherence score of a set of propositions is above (below) the neutral score if for all pairs of non-empty subsets the posterior of an element of a pair conditional on the other element is higher than the prior of the former. This makes some of the features of the coherence measure dependent on the priors, and whether it should be so is not obvious. On the other hand, (Agreement) is formulated in terms of conditional probabilities between such pairs. If on a given measure \(\mathsf{P}\) all conditional probabilities (between pairs already mentioned) are higher than on \(\mathsf{P}'\), the coherence of a set given \(\mathsf{P}\) should be higher than given \(\mathsf{P}'\). The (Equivalence) requirement is that any finite set of logically equivalent propositions should be maximally coherent. This is suspicious, as the set \(\{ 0= 1, 2, = 5\}\) is a set of equivalent propositions (with sufficiently strong notion of logical equivalence in the background), but we would intuitively hesitate to say it's maximally coherent.}
+(Douven \& Meijs, 2007; Fitelson, 2003; Glass, 2002; Meijs \& Douven, 2007; Olsson, 2001; Roche, 2013; Shogenji, 1999). However, clear general principles to choose between them are hard to come by. One paper where some such principles have been formulated is (Schippers, 2014), where a list of seemingly plausible adequacy conditions for a coherence measure is proposed and shown to be inconsistent to argue for pluralism about the notion of coherence. However, some of those requirements are rather strong and controversial.\footnote{Let us illustrate this. The (Dependence) condition formulated there requires that the coherence score of a set of propositions is above (below) the neutral score if for all pairs of non-empty subsets the posterior of an element of a pair conditional on the other element is higher than (lower than) the prior of the former. This makes some of the features of the coherence measure dependent on the priors, and whether it should be so is not obvious. On the other hand, (Agreement) is formulated in terms of conditional probabilities between such pairs. If on a given measure \(\mathsf{P}\) all conditional probabilities (between pairs already mentioned) are higher than on \(\mathsf{P}'\), the coherence of a set given \(\mathsf{P}\) should be higher than given \(\mathsf{P}'\). The (Equivalence) requirement is that any finite set of logically equivalent propositions should be maximally coherent. This is suspicious, as the set \(\{ 0= 1, 2 = 5\}\) is a set of equivalent propositions (with sufficiently strong notion of logical equivalence in the background), but we would intuitively hesitate to say it's maximally coherent.}
 
 The general point here is not that the approach taken in (Schippers, 2014) is flawed, but rather that the task of formulating general principles for coherence is a challenge, and that no clear list of such uncontroversial desiderata is on the horizon.
 
 One approach to obtaining some clarity on which abstract conditions are plausible is looking at various thought experiments in which our intuitions about what the coherence scores should be (at least comparatively) are more robust than direct assessment of general requirements. In fact, looking at examples is what the main stream of literature on probabilistic coherence focused on, and each probabilistic measure of coherence faces a selection of seemingly intuitive counterexamples.
 
-We decided to work with this methodology. We first gathered key examples that occur in the literature, represented them in terms of Bayesian networks, and developed \textbf{\textsf{R}} scripts calculating all coherence scores for the Bayesian networks at play, pushing further the results obtained by Koscholke (2016).\footnote{
-  The whole work has been made possible by all those who contributed to the development of \textsf{\textbf{R}} language, and Marco Scutari, the author of \textsf{\textbf{bnlearn}} package, who was kind enough to extend his package with additional features upon our requests (Scutari \& Denis, 2015).} Then we reflected on the results, noticing that one weakness of the measures is that they pay little attention to the underlying structure of a given narration in the calculation of its coherence.
+We decided to work with this methodology. We first gathered key examples that occur in the literature, developed \textbf{\textsf{R}} scripts calculating all coherence scores for these scenarios, expanding on the exploration already developed in Koscholke (2016).\footnote{
+  As we represented the scenarios with Bayesian networks in our calculations (the choice of this form of representation is useful for computational reasons, but has no impact on the outcomes, as these outcomes are functions of probability measures), the work has been made possible by all those who contributed to the development of \textsf{\textbf{R}} language, and Marco Scutari, the author of \textsf{\textbf{bnlearn}} package, who was kind enough to extend his package with additional features upon our requests (Scutari \& Denis, 2015).} Then we reflected on the results, noticing that one weakness of the measures is that they pay little attention to the underlying structure of a given narration in the calculation of its coherence.
 
-Inspired by this observation, we formulate our own proposal, which diverges from the known purely probabilistic measures of coherence in three important respects: (i) It is not a function of a probability measure and a set
-of propositions alone, because it is also sensitive to the selection and direction of edges in a Bayesian network representing an agent's credal state. (ii) Unlike in the case of quite a few coherence measures, it is sensitive to
-the weakest links in the narration. (iii) It is not obtained by simply averaging confirmation levels between all possible combinations of elements.
+Inspired by this observation, we formulate our own proposal, which diverges from the known purely probabilistic measures of coherence in the following important respects. (i) We don't think of agent's credal state as captured by a set of propositions and a probabilistic measure, but rather as a narration, in which the relations of (intended direct) dependence between proposition is crucial. Our representation of a narration will be composed of a set of propositions, a probability measure and a directed acyclic graph representing these structural assumptions---that is, we will be thinking of agent's credal states in terms of Bayesian networks. (ii) Coherence is not a function of a probability measure and a set of propositions alone, because it is also sensitive to this structure. (ii) Unlike in the case of quite a few coherence measures, it is sensitive to the weakest links in the narration. (iii) It is not obtained by simply averaging confirmation levels between all possible combinations of elements.
 
 We described this approach in a more detailed introduction to this measure {[}ANONYMIZED{]}, which explains the method and some of the theoretical decisions that we have made, and show how it works using a Bayesian network developed for the well-known Sally Clark case (Fenton \& Neil, 2018). The goal of the current paper is to discuss a range of philosophical counterexamples to the existing probabilistic measures of coherence and evaluate the performance of our approach using those as a benchmark, arguing that it performs much better than the existing ones.
 
-Accordingly, in Section \ref{sec:measures} we introduce all the coherence measures, including the key motivations for and a pseudo-code description of our measure. In Section \ref{sec:examples} we describe the thought experiments meant as counterexamples to coherence measures, their corresponding desiderata and their status on various coherence measures, including ours. The order of the discussion of any given example is straightforward: we first explain what the situation we are to consider is, what the intuitive desiderata related to it are supposed to be, how the situation is represented by means of a Bayesian network(s), and what happens when we apply all coherence measures. We end with Section \ref{sec:discussion} in which we compare all of the results and draw some general conclusions.
+Accordingly, in Section \ref{sec:measures} we introduce all the coherence measures, including the key motivations for and a pseudo-code description of our measure. In Section \ref{sec:examples} we describe the thought experiments meant as counterexamples to coherence measures, their corresponding desiderata and their status on various coherence measures, including ours. The order of the discussion of any given example is straightforward: we first describe the example and the intuitive desiderata related to it, then we explain how the situation is represented by means of a Bayesian network(s), and investigate what happens when we apply all coherence measures. We end with Section \ref{sec:discussion} in which we compare all of the results and draw some general conclusions.
 
 \hypertarget{probabilistic-coherence-measures-and-structured-coherence}{%
 \section{Probabilistic coherence measures and structured coherence}\label{probabilistic-coherence-measures-and-structured-coherence}}
@@ -347,8 +345,7 @@ Quite a few different measures of coherence have been proposed in the literature
 \begin{itemize}
 \tightlist
 \item
-  Shogenji's
-  \textbf{deviation from independence} (Shogenji, 1999), is defined as the ratio between the probability of the
+  Shogenji's \textbf{deviation from independence} (Shogenji, 1999), is defined as the ratio between the probability of the
   conjunction of all claims, and the probability that the conjunction
   would get if all its conjuncts were probabilistically independent (scaling from 0 to \(\infty\) with neutral point 1):
 \end{itemize}
@@ -356,10 +353,10 @@ Quite a few different measures of coherence have been proposed in the literature
 \begin{align}
     \tag{Shogenji}
     \label{coh:Shogenji}
-     \mathcal{C}_{S}(S)=\frac{P(\bigwedge S)}{\prod_{i=1}^{\vert S \vert}\{P(S_i)\vert i \in S\}}
+     \mathcal{C}_{S}(S)=\frac{P(\bigwedge S)}{\prod_{i=1}^{n}P(S_i)}
 \end{align}
 
-\noindent This measure was later generalized by Meijs \& Douven (2007). According to this approach, \eqref{coh:Shogenji} is applied not only to the whole set of propositions, but to each non-empty non-singleton subset of the set, and the final value is defined as the average of all sub-values thus obtained.
+\noindent where \(S=\{S_1, \dots, S_n\}\) is a set of propositions whose coherence is to be evaluated. This measure was later generalized by Meijs \& Douven (2007). According to this approach, \eqref{coh:Shogenji} is applied not only to the whole set of propositions, but to each non-empty non-singleton subset of the set, and the final value is defined as the average of all sub-values thus obtained.
 
 \begin{itemize}
 \tightlist
@@ -448,13 +445,13 @@ Both of these approaches are susceptible to various objections and counterexampl
 
 Mind your head: different measures use different scales and have different neutral points (values taken for any set of probabilistically independent propositions; not all measures have neutral points). This is worth keeping in mind when it comes to various desiderata that we will discuss.
 
-As we already mentioned in the introduction, formulating abstract formal requirements for a coherence measure and investigating whether a given coherence measure satisfies them has not resulted in an agreement. For this reason, we follow another path, which has dominated the literature on the topic. We look at how the measures behave in test scenarios. Many putative scenarios were put forward as counterexamples. They usually have the form of a few propositions formulated in natural language, such that intuitive judgments of coherence involved and the formal coherence calculations seem to diverge (Akiba, 2000; Bovens \& Hartmann, 2004; Koscholke, 2016; Meijs \& Douven, 2007, 2007; Merricks, 1995; Schippers \& Koscholke, 2019, 2019; Shogenji, 1999, 2001, 2006; Siebel, 2004, 2006). We will focus on these examples in what follows. To spoil the experience, let us already point out that the probabilistic measures we introduced above do not seem to handle these examples very well (read on for details).
+As we already mentioned in the introduction, formulating abstract formal requirements for a coherence measure and investigating whether a given coherence measure satisfies them has not resulted in an agreement. For this reason, we follow another path, which has dominated the literature on the topic. We look at how the measures behave in test scenarios. Many putative scenarios were put forward as counterexamples. They usually have the form of a few propositions formulated in natural language, such that intuitive judgments of coherence involved and the formal coherence calculations seem to diverge (Akiba, 2000; Bovens \& Hartmann, 2004; Koscholke, 2016; Meijs \& Douven, 2007, 2007; Merricks, 1995; Schippers \& Koscholke, 2019, 2019; Shogenji, 1999, 2001, 2006; Siebel, 2004, 2006). The probabilistic measures we introduced above do not seem to handle these examples very well (read on for details).
 
-Inspired by these failures, in {[}REFERENCE SUPRESSED FOR ANONYMITY{]} we proposed to take a different perspective. Putting the earliest measures aside (they were problematic for various reasons), we noticed that the problems with the average mutual support measures stem from the fact that the coherence score is an average confirmation score for all possible combinations of the parts of a narration. Therefore we proposed to take a more fine-grained account. First, we represented an agent's credal state by means of a Bayesian network, which comprises not only a probabilistic measure but additional structural information. Then we used this structural information in our definition of coherence, so that only those directions of support are considered which in fact are indicated by the structure of the agent's belief state.
+Inspired by these failures, in {[}REFERENCE SUPRESSED FOR ANONYMITY{]} we proposed to take a different perspective. Putting the earliest measures aside (they were problematic for reasons discussed in the literature we already referred to), we noticed that the problems with the average mutual support measures stem from the fact that the coherence score is an average confirmation score for all possible combinations of the parts of a narration. Therefore we proposed to take a more fine-grained account. First, we represented an agent's credal state by means of a Bayesian network, which comprises not only a probabilistic measure but additional structural information. Then we used this structural information in our definition of coherence, so that only those directions of support are considered which in fact are indicated by the structure of the agent's belief state.
 
-While we refer the reader to a more extensive treatment in {[}REFERENCE SUPRESSED FOR ANONYMITY{]}, we now briefly discuss the main idea behind it. A Bayesian network (BN) is a type of probabilistic graphical model that represents a set of variables and their independence relationships with a directed acyclic graph (DAG). It also involves parameters that encode probabilistic information about the variables and relations between them. Formally, a BN is defined by a pair \(\langle G, \theta \rangle\), where \(G\) is a DAG whose nodes represent random variables \(X_1, X_2, \dots, X_n\), and whose edges identify direct dependencies between these variables. \(\theta\) is a set of parameters that defines the factorization of a probability distribution, which includes the probability of each \(X_i\) conditional on the set of its parents (\(p_i\)) of \(X_i\) in \(G\): \(\theta_{X_i \vert p_i}=P(X_i \vert p_i)\).
+While we refer the reader to a more extensive treatment in {[}REFERENCE SUPRESSED FOR ANONYMITY{]}, we now briefly discuss the main idea behind it. A Bayesian network (BN) is a type of probabilistic graphical model that represents a set of variables and their independence relationships with a directed acyclic graph (DAG). It also involves parameters that encode probabilistic information about the variables and relations between them. Formally, a BN is defined by a pair \(\langle G, \theta \rangle\), where \(G\) is a DAG whose nodes represent random variables \(X_1, X_2, \dots, X_n\), and whose edges identify direct dependencies between these variables. \(\theta\) is a set of parameters that defines the factorization of a probability distribution, which includes the probability of each \(X_i\) conditional on the set of its parents (\(pa_i\)) in \(G\): \(\theta_{X_i \vert pa_i}=P(X_i \vert pa_i)\). \(\theta_{X_i \vert pa_i}\) is called the \(X_i\)'s conditional probability table (CPT).\footnote{We are not dealing with continuous random variables in this paper.}
 
-For instance, consider a DAG underlying the BN developed by (Fenton \& Neil, 2018\}) to illustrate a point about the notorious Sally Clark case (Figure \ref{fig:sc})---it only represents a few key elements of the case to make a point.\footnote{ R. v. Clark (EWCA Crim 54, 2000) is a classic example of how the lack of probabilistic independence between events can be easily overlooked. Sally Clark's first son died in 1996 soon after birth, and her second son died in similar circumstances a few years later in 1998. At trial, the paediatrician Roy Meadow testified that the probability that a child from such a family would die of Sudden Infant Death Syndrome (SIDS) was 1 in 8,543. Meadow calculated that therefore the probability of both children dying of SIDS was approximately 1 in 73 million. Sally Clark was convicted of murdering her infant sons (the conviction was ultimately reversed on appeal). The calculation illegitimately assumes independence, as the environmental or genetic factors may predispose a family to SIDS. The winning appeal was based on new evidence: signs of a potentially lethal disease---contrary to what was assumed in the original case---were found in one of the bodies.} The arrows depict relationships of influence between variables. \textsf{Amurder} and \textsf{Bmurder} are binary nodes corresponding to whether Sally Clark's sons, call them A and B, were murdered. These influence whether signs of disease (\textsf{Adisease} and \textsf{Bdisease}) and bruising (\textsf{Abruising} and \textsf{B.bruising}) were present. Also, since son A died first, whether A was murdered casts some light on the probability of son B being murdered.
+For instance, consider a DAG underlying the BN developed by (Fenton \& Neil, 2018\}) to illustrate a point about the notorious Sally Clark case (Figure \ref{fig:sc}).\footnote{ R. v. Clark (EWCA Crim 54, 2000) is a classic example of how the lack of probabilistic independence between events can be easily overlooked. Sally Clark's first son died in 1996 soon after birth, and her second son died in similar circumstances a few years later in 1998. At trial, the paediatrician Roy Meadow testified that the probability that a child from such a family would die of Sudden Infant Death Syndrome (SIDS) was 1 in 8,543. Meadow calculated that therefore the probability of both children dying of SIDS was approximately 1 in 73 million. Sally Clark was convicted of murdering her infant sons (the conviction was ultimately reversed on appeal). The calculation illegitimately assumes independence, as the environmental or genetic factors may predispose a family to SIDS. The winning appeal was based on new evidence: signs of a potentially lethal disease---contrary to what was assumed in the original case---were found in one of the bodies.} The arrows depict relationships of (usually causal) influence between variables. \textsf{Amurder} and \textsf{Bmurder} are binary nodes corresponding to whether Sally Clark's sons, call them A and B, were murdered. These influence whether signs of disease (\textsf{Adisease} and \textsf{Bdisease}) and bruising (\textsf{Abruising} and \textsf{B.bruising}) were present. Also, since son A died first, whether A was murdered casts some light on the probability of son B being murdered. The notion of direct dependence, of course, is model-relative. Once we restrict attention to a set of propositions, whether dependence is direct or not depends on whether we think the influence is mediated by other variables considered in the model.
 
 \begin{figure}
 
@@ -465,64 +462,8 @@ For instance, consider a DAG underlying the BN developed by (Fenton \& Neil, 201
 
 Once the state of a node has been found out, it becomes an \emph{evidence node}. If, for instance, the evidence includes information about the the sings of bruising and signs of disease in the children, nodes \s{Abruising, Bbruising, Adisease} and \s{Bdisease} become evidence nodes. A BN can also be put forward jointly with binary claims made by an agent. For instance, the prosecution might not only present the BN, but also claim that both children in fact have been murdered. That is, an agent might take a definite stance about a selection of nodes (here, the \s{Amurder} and \s{Bmurder})---in such a case, these become the \emph{narration nodes}, and the states that an agent claims they have are their corresponding \emph{narration states}.\footnote{We assume that the agent does not assign probability 0 to the narration they propose.}
 
-Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' narration.\footnote{Conceptually, it is possible to not restrict ourselves this way and look at all combinations of states of the nodes which are assigned non-null probabilities. But then, effectively, the binary content of the narration would have no impact on the coherence score, and we would obtain a coherence measure for the purely probabilistic part of agents' convictions. While this might be a worthy enterprise, we do not purse this idea in this paper. Calculations of a measure thus modified can be achieved by fairly straighforward modification of our code.} For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison)\footnote{\s{Z} is \(0\) if \(\s{posterior} = \s{prior}\), \(\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}\) if \({\s{posterior} > \s{prior}}\), and \(\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}\) in the remaining case. Call the posterior of the evidence given a hypothesis \s{likelihood} and the probability of the evidence conditional on the negation of the hypothesis \s{nlikelihood}. Then, likelihood ratio is
-  \(\frac{\s{likelihood}}{\s{nlikelihood}}\) and \s{L} is \(\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}\)}. Then, a weighted average of these scores is obtained. The weights are the normalized probabilities of the combinations of parents' states obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.} Below, we present a pseudo-code for structured coherence.\footnote{Here, the measure is calculated with \(z\)-confirmation measure, for other confirmation measures the code needs to be modified, but the required modification is straightforward).}
-
-\vspace{2mm}
-\footnotesize
-\begin{Verbatim}[commandchars=\\\{\},fontfamily=futura,numbers=left,
-                 xleftmargin=20mm]
-\textcolor{ForestGreen}{FUNCTION} parents_child_possible_states(parents,child,narration)
-    \textcolor{ForestGreen}{IF} child included in narration \textcolor{ForestGreen}{THEN}
-        consequentStates <- the unique state of child as reported in the narration
-    \textcolor{ForestGreen}{ELSE}
-        consequentStates <- all possible states of child
-    \textcolor{ForestGreen}{FOR EACH} parent \textcolor{ForestGreen}{IN} parents
-        \textcolor{ForestGreen}{IF} parent included in narration \textcolor{ForestGreen}{THEN}
-            parentStates[parent] <- the unique state of parent as reported in the narration
-        \textcolor{ForestGreen}{ELSE}
-            parentStates[parent] <- all possible states of parent
-    parentsStates <- all combinations of parentStates
-    variants <- list of all possible combinations of consequentStates and parentsStates
-    \textcolor{ForestGreen}{RETURN} variants
-
-\textcolor{ForestGreen}{FUNCTION} coherence_from_ecs(ecs)
-    \textcolor{ForestGreen}{IF} min(ecs) <= 0 \textcolor{ForestGreen}{THEN}
-        \textcolor{ForestGreen}{RETURN} mean(ecs) * (min(ecs)+1) - min(ecs)min(ecs)
-        \textcolor{gray}{#this is equivalent to (1- |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)}
-    \textcolor{ForestGreen}{ELSE}
-        \textcolor{ForestGreen}{RETURN} mean(ecs)
-
-\textcolor{ForestGreen}{FUNCTION} structured_coherence(BN,narration,evidenceNodes,evidenceStates)
-    parentedNodes <- vector of non-root nodes in BN
-    ecsList <- []
-    \textcolor{ForestGreen}{FOR EACH} parentedNode \textcolor{ForestGreen}{IN} parentedNodes
-        variants <- parents_child_possible_states(parents,parentedNode, narration)
-        variants_count <- length(variants)
-        sumParentsNarr <- 0
-        \textcolor{ForestGreen}{FOR EACH} variant \textcolor{ForestGreen}{IN} variants
-            childPrior <- prior probability of the child state in variant
-            childPosterior <- posterior probability of the child state in variant, 
-                obtained by updating on the parents states from this variant
-            parentsEvidence[variant] <- joint probability of 
-                the parents states in variant in BN updated with
-                evidenceStates of evidenceNodes
-            sumParentsEvidence <- sumParentsEvidence +  parentsEvidence[variant] 
-            z[variant] <- z_confirmation_measure(childPrior, childPosterior)
-        ecs <- 0  \textcolor{gray}{#expected confirmation score}
-        \textcolor{ForestGreen}{FOR EACH} variant \textcolor{ForestGreen}{IN} variants
-            \textcolor{ForestGreen}{IF} parentsEvidence[variant] > 0 \textcolor{ForestGreen}{THEN}
-                weight <- parentsEvidence[variant]/sumParentsEvidence
-            \textcolor{ForestGreen}{ELSE}
-                weight <- 1/variants_count
-            zScaled <- z[variant] * weight
-            ecs <- ecs + zScaled
-        ecsList.add(ecs)
-    \textcolor{ForestGreen}{RETURN} coherence_from_ecs(ecsList)
-\end{Verbatim}
-\normalsize
-
-\vspace{2mm}
+Each parented node in the BN receives its expected confirmation score (\s{ECS}). It is calculated by looking at all combinations of its states and states of its parents not excluded by agents' narration.\footnote{Conceptually, it is possible to not restrict ourselves this way and look at all combinations of states of the nodes which are assigned non-null probabilities. But then, effectively, the binary content of the narration would have no impact on the coherence score, and we would obtain a coherence measure for the purely probabilistic part of agents' convictions. While this might be a worthy enterprise, we do not purse this idea in this paper. Calculations of a measure thus modified can be achieved by fairly straighforward modification of our code.} For each of these combinations, the confirmation score between the parents' states and the child state is calculated (in the pseudo-code, we use confirmation measure \s{Z}, in further calculations we also use measures \s{LR} and \s{L} for comparison).\footnote{\s{Z} is \(0\) if \(\s{posterior} = \s{prior}\), \(\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}\) if \({\s{posterior} > \s{prior}}\), and \(\frac{\s{posterior} - \s{prior}}{1 - \s{prior}}\) in the remaining case. Call the posterior of the evidence given a hypothesis \s{likelihood} and the probability of the evidence conditional on the negation of the hypothesis \s{nlikelihood}. Then, likelihood ratio (\s{LR}) is
+  \(\frac{\s{likelihood}}{\s{nlikelihood}}\) and \s{L} is \(\frac{\s{likelihood} - \s{nlikelihood}}{\s{likelihood} + \s{nlikelihood}}\)} Then, a weighted average of these scores is obtained. The weights are the normalized probabilities of the combinations of parents' states obtained in the BN (updated with the evidence, if it has been specified). If both the child and the parent nodes belong to the narration, there is only one possible combination so after normalization it gets weight 1. The final coherence score is either the mean of the \s{ecs} scores for all the child nodes, if all of them are positive, or it is a weighted average of their mean and their minimum, \((1- |\s{min}(\s{ecs})|) \times \s{mean}(\s{ecs}) + |\s{min}(\s{ecs})| \times \s{min}(\s{ecs})\), otherwise.\footnote{We have developed \textbf{\textsf{R}} code calculating this and other measures to handle calculations that will be discussed further on, the code with documentation is available at ANONYMIZED.} The appendix contains a pseudo-code for structured coherence.\footnote{For other confirmation measures the code needs to be modified, but the required modification is straightforward).}
 
 \noindent Having introduced the coherence measures at play, let us now move to the key counterexamples discussed in the literature.
 
@@ -548,7 +489,7 @@ Here are the counterexamples put forward against various coherence measures in t
 \hypertarget{penguins}{%
 \subsection{Penguins}\label{penguins}}
 
-\textbf{The scenario.} This is a challenge to the Olsson-Glass measure discussed in (Bovens \& Hartmann, 2004, p. 50) and (Meijs \& Douven, 2007). It consists of the propositions (instead of \emph{letters} or \emph{abbreviations}, we'll talk about \emph{nodes}, as these will be used later on in Bayesian networks) displayed in Table \ref{tab:penguinsPropositions}.
+\textbf{The scenario.} This is a challenge to the Olsson-Glass measure discussed in (Bovens \& Hartmann, 2004, p. 50) and (Meijs \& Douven, 2007). It consists of the propositions ( we'll call them \emph{nodes}, as these will be used later on in Bayesian networks) displayed in Table \ref{tab:penguinsPropositions}.
 
 \begin{table}[H]
 
@@ -631,7 +572,7 @@ G &  &  & Pr\\
 \label{fig:BGP}
 \end{figure}
 
-\noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \ref{tab:penguinsCoherence}) and see if the desiderata are satisfied (Table \ref{tab:penguinsDesiderata}). The measures are: Olsson-Glass, generalized Olsson-Glass, Shogenji, generalized Shogenji, Douven-Meijs, Roche, Fitelson, Structured with Z, LR, and L used as a confirmation measure.\footnote{One phenomenon woth noticing is that the structured measure in its variant that employs likelihood ratio gives \s{Infinity} in one case. The reason why this happens is as follows. One of the child nodes is \s{G}. We need to calculate the expected support its parents' states provide for \s{G}. In the case the scenario actually specifies that all nodes have value 1, this boils down to calculating the likelihood ratio for only one case. We treat \((\s{B} = 1 \wedge \s{P} = 1)=\s{E}\) as the evidence. \(\pr{E \vert \s{G} =1} = .02\), that is, if Tweety is grounded, the probability that it's a bird and a penguin is quite low, but \(\pr{E \vert \neg \s{G}} = 0\), because it is impossible that Tweety is a bird and a penguin if she isn't grounded. But then, the LR would require dividing \(.02\) by \(0\), which the calculations take at the limit to be infinity. Such cases will come up whenever some combinations of evidence under considerations are excluded by the state of a child node, and in the expected value calculations the presence of infinity will spread, as it is enough that it's the LR for at least one combination with a non-zero probability. This is one of the reasons we do not really think likelihood ratio is the appropriate measure for coherence calculations.}
+\noindent \textbf{Results.} Now, let's calculate the coherence scores (Table \ref{tab:penguinsCoherence}) and see if the desiderata are satisfied (Table \ref{tab:penguinsDesiderata}). The measures are: Olsson-Glass (OG), generalized Olsson-Glass (OGgen), Shogenji (Sh), generalized Shogenji (ShGen), Douven-Meijs (DM), Roche (R), Fitelson (Fi), Structured with Z (SZ), LR (SLR), and L (SL) used as a confirmation measure.\footnote{One phenomenon woth noticing is that the structured measure in its variant that employs likelihood ratio gives \s{Infinity} in one case. The reason why this happens is as follows. One of the child nodes is \s{G}. We need to calculate the expected support its parents' states provide for \s{G}. In the case the scenario actually specifies that all nodes have value 1, this boils down to calculating the likelihood ratio for only one case. We treat \((\s{B} = 1 \wedge \s{P} = 1)=\s{E}\) as the evidence. \(\pr{E \vert \s{G} =1} = .02\), that is, if Tweety is grounded, the probability that it's a bird and a penguin is quite low, but \(\pr{E \vert \neg \s{G}} = 0\), because it is impossible that Tweety is a bird and a penguin if she isn't grounded. But then, the LR would require dividing \(.02\) by \(0\), which the calculations take at the limit to be infinity. Such cases will come up whenever some combinations of evidence under considerations are excluded by the state of a child node, and in the expected value calculations the presence of infinity will spread, as it is enough that it's the LR for at least one combination with a non-zero probability. This is one of the reasons we do not really think likelihood ratio is the appropriate measure for coherence calculations.}
 
 \begin{table}[H]
 
@@ -692,7 +633,7 @@ T & The result is a two.\\
 \end{tabular}
 \end{table}
 
-\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs. These simple BNs do not model the information about which die is dossed explicitly (as a separate node belonging to the narration, but rather the choice of the die is treated as a background information that impacts the states and probabilities of T and TF).
+\noindent and since \s{TF} logically follows from \s{T}, it's natural to draw an arrow from the latter to the former. Then, the BNs corresponding to different types of dice will share the DAG, and will differ in their CPTs. These simple BNs do not model the information about which die is tossed explicitly (as a separate node belonging to the narration, but rather the choice of the die is treated as a background information that impacts the states and probabilities of T and TF).
 
 \begin{figure}[H]
 \scalebox{.6}{\begin{subfigure}[!ht]{0.3\textwidth}
@@ -770,14 +711,14 @@ Dice: TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & 1 & Inf & 1\\
 
 \begin{table}[H]
 
-\caption{\label{tab:diceDesiderata2}Desideratum satisfaction for two-node BNs in the dice problem.}
+\caption{\label{tab:diceDesiderata2b}Desideratum satisfaction for two-node BNs in the dice problem.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllllllllll}
 \toprule
   & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
+\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE (?)} & \cellcolor{gray!6}{TRUE}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -909,7 +850,7 @@ Dice (three nodes): TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & -0.819 
 \end{tabular}}
 \end{table}
 
-\noindent This might seem problematic, but really should not. After all, now the narration represented by the three-node version is not merely `the result is a two (and a two or a four),' but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Both BNs models are based on the same agent's probabilistic convictions, but the narrations captured by the two representations are different.
+\noindent This might seem problematic, but really should not. After all, now the narration represented by the three-node version is not merely `the result is a two (and a two or a four)', but rather `I will toss this \(n\)-sided fair die and the result will be a two (and a two or a four).' Both BNs models are based on the same agent's probabilistic convictions, but the narrations captured by the two representations are different.
 
 If \s{O} is included and all possible results of a toss are equally probable, the outcome being two is actually not that likely, so there is no surprise the coherence score is negative (the more negative the larger the \(n\)) if the probabilistic information related to \s{O} is part of the narration.\footnote{Notice also how the measure that uses LR fails to pick up on this difference, as at least one of confirmation scores in the calculations is \(\infty\) and this fact overwhelms the expected confirmation score calculations.}
 
@@ -1296,8 +1237,6 @@ According to Siebel (2004, p. 336) committing both crimes by the murderer should
     \item[(\s{PR}$>$\s{P}$\neg$\s{R})] \{\s{P,R}\} should be more coherent than \{\s{P},$\neg$\s{R}\} and \{$\neg$\s{P},\s{R}\}.
 \end{description}\vspace{2mm}
 
-\noindent  This requirement is slightly more controversial. Even though \{\s{P,R}\} is the most probable setup, \s{P} and \s{R} disconfirm each other (\(Pr(P|R)<Pr(P)\) and \(Pr(R|P)<Pr(R)\)). Moreover, the intuition behind this desideratum seems to conflict with the intuition behind (\s{JO2}\(>\)\s{JO3}).
-
 \textbf{Bayesian networks.} The robbers counterexample illustrates the point we already discussed when we talked about the Dice example: a purely probabilistic assumption may or may not be explicitly included as part of the narration. Its explicit inclusion, achieved by the addition of a node in a BN can play a role in coherence calculations. Here, such an inclusion is in line with the example as it was proposed in the literature, where the underlying prior probabilities were explicitly listed as part of the story.
 
 \vspace{1mm}
@@ -1483,7 +1422,7 @@ Beatles: minimal & TRUE & FALSE & TRUE & FALSE & FALSE & FALSE & FALSE & TRUE & 
 \hypertarget{the-witnesses}{%
 \subsection{The Witnesses}\label{the-witnesses}}
 
-\textbf{The scenario.} This counterexample comes from (Olsson, 2005, p. 391). Equally reliable witnesses try to identify a criminal. Consider the reports listed in Table \ref{tab:witnessesProp} (we extended the original scenario by adding \s{W5}).
+\textbf{The scenario.} This example comes from (Olsson, 2005, p. 391). Equally reliable witnesses try to identify a criminal. Consider the reports listed in Table \ref{tab:witnessesProp} (we extended the original scenario by adding \s{W5}).
 
 \begin{table}[H]
 
@@ -1503,7 +1442,9 @@ D & Who committed the deed (6  possible values)\\
 \end{tabular}
 \end{table}
 
-\noindent Note that this time each proposition has the structure ``Witness no. \(X\) claims that \dots'' instead of explicitly stating the witness' testimony.
+Olsson, when he originally brought up the example, focused on the content of the testimonials arguing that \(\{\)`'Steve did it'`,'`Steve did it''\(\}\) and \(\{\)``Steve, Martin or David did it'', ``Steve, John or James did it''\(\}\) are logically equivalent (presumably, with the assumption that exactly one person did it), and so will be assigned the same level of coherence, which he finds unintuitive.
+
+On our construal, the intuition that there is a difference in coherence between the two sets of testimonies essentially depends on the fact that they are testimonies. We take each proposition to have the structure '\,'Witness no. \(X\) claims that \dots'' instead---but then, the sets are no longer logically equivalent and a non-trivial probability measure can be used in coherence calculations.
 
 \textbf{Desiderata.} First, we can observe that \s{W1} and \s{W2} fully agree. Testimonies of \s{W3} and \s{W4} overlap only partially, therefore it seems that \{\s{W1},\s{W2}\} is more coherent than \{\s{W3},\s{W4}\}.
 \vspace{2mm}
@@ -1586,24 +1527,24 @@ We think that what this example illustrates is that we should really carefully t
 
 To evaluate the coherence of a narration, one should think counterfactually, granting the (potentially probabilistic) consequences of the narration. In our case, a judge who evaluates the coherence of witness testimonies once she has heard them, no longer thinks that the distribution of \textsf{D} is uniform. And this agrees with the counterfactual strategy we just described: it is a consequence of the probabilistic set-up and the content of \textsf{W1} and \textsf{W2} that if \textsf{W1} and \textsf{W2} were true, the distribution for \textsf{D} no longer would be uniform, and so it is unfair to judge the coherence of this scenario without updating one's assumptions about \textsf{D}.
 
-\textbf{Results.} Note that in this case we're dealing with the perspective of someone who starts with a uniform prior for \s{D}, and subsequently considers what would happen if she obtained a given set of testimonies as evidence. Clearly, then, the distribution for \s{D} would no longer be uniform, but rather result from updating on this evidence.
+\textbf{Results.} Note that in this case we're dealing with the perspective of someone who starts with a uniform prior for \s{D}, and subsequently considers what would happen if she obtained a given set of testimonies as evidence. Clearly, then, the distribution for \s{D} would no longer be uniform, but rather result from updating on this evidence (the posterior is presented in Table 24).
 
 \begin{table}[H]
 
 \caption{\label{tab:witnessesWeights}Propagated probabilities for D in the Witnesses scenario (rounded).}
 \centering
-\begin{tabular}[t]{lrrrrrr}
+\begin{tabular}[t]{lrrrrr}
 \toprule
-  & Steve & Martin & David & John & James & Peter\\
+  & Steve & Martin & David & John & Peter\\
 \midrule
-\cellcolor{gray!6}{Pr} & \cellcolor{gray!6}{0.981} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004}\\
+\cellcolor{gray!6}{Pr} & \cellcolor{gray!6}{0.981} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004} & \cellcolor{gray!6}{0.004}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 In the coherence calculations we first obtain how specific states of the narration child nodes would be confirmed by various states of \s{D}. In calculating these confirmation scores we do \emph{not} use the updated BN (recall the old evidence problem: confirmation by evidence already included would be null). However, the weights assigned to confirmation scores in the \s{ecs} calculations should be the (normalized) probabilities obtained by updating on the evidence. If given the evidence included in the scenario Steve is the most likely perpetrator, in your coherence calculations you give the most weight to the confirmation score obtained if he indeed is the perpetrator.
 
-Once this strategy is taken, the problem turns out to be not that challenging for any of the coherence measures under discussion. The coherence scores are displayed in Table \ref{tab:witnessesCoherence} and the status of the desiderata is in Table \ref{tab:witnessesDesiderata}.
+Once we make a distinction between the logically equivalent sets of contents of testimonies, and non-trivially dependent sets of statements about which witness said what, the problem turns out to be not that challenging for any of the coherence measures under discussion with the prior we described. The coherence scores are displayed in Table \ref{tab:witnessesCoherence} and the status of the desiderata is in Table \ref{tab:witnessesDesiderata}.
 
 \begin{table}[H]
 
@@ -1654,9 +1595,9 @@ Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE 
 
 This desideratum presupposes we are dealing with claims made by different agents. However, on our approach the narration nodes and the BN involved are supposed to represent one agent's credal state. As long as you take the narration to be equivalent to the conjunction of the elements, an agent accepting all the elements of either \(X_1\) or \(X_2\) would simply accept that 1 is responsible, and we do not think it makes sense to ask about the coherence of a single proposition. Moreover, since both sets are logically equivalent, the desideratum would no longer be intuitive on the single-agent approach.
 
-There is a way to represent the fact that different people made different testimonies within our approach by preceding the claims with ``witness \(a\) said.'' We already employed this strategy to the Witnesses scenario, and will not do this here again, as the problem structure is essentially the same.
+There is a way to represent the fact that different people made different testimonies within our approach by preceding the claims with ``witness \(a\) said''. We already employed this strategy to the Witnesses scenario, and will not do this here again, as the problem structure is essentially the same.
 
-If we insist that the disjunctions are put forward by different agents and the agent whose perspective we are trying to model does not assume that all of them are true, we should turn to another tool. There already exist working measures of such an agreement which give the desired results. For instance, both Fleiss \(\kappa\) and Light's \(\kappa\) give 0.467 for \s{X1} and -0.067 for \s{X2}, which is in line with the desideratum.
+If we insist that the disjunctions are put forward by different agents and the agent whose perspective we are trying to model does not assume that all of them are true, we should turn to another tool. There already exist working measures of such an agreement which give the desired results. For instance, both Fleiss \(\kappa\) and Light's \(\kappa\) (Fleiss, 1971) give 0.467 for \s{X1} and -0.067 for \s{X2}, which is in line with the desideratum.
 
 \hypertarget{summary}{%
 \section{\texorpdfstring{Summary \label{sec:discussion}}{Summary }}\label{summary}}
@@ -1721,6 +1662,65 @@ Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE 
 \end{tabular}}
 \end{table}
 
+\hypertarget{appendix-structured-coherence-calculation-pseudo-code}{%
+\section{Appendix: structured coherence calculation pseudo-code}\label{appendix-structured-coherence-calculation-pseudo-code}}
+
+\vspace{2mm}
+\footnotesize
+\begin{Verbatim}[commandchars=\\\{\},fontfamily=futura,numbers=left,
+                 xleftmargin=20mm]
+\textcolor{ForestGreen}{FUNCTION} parents_child_possible_states(parents,child,narration)
+    \textcolor{ForestGreen}{IF} child included in narration \textcolor{ForestGreen}{THEN}
+        consequentStates <- the unique state of child as reported in the narration
+    \textcolor{ForestGreen}{ELSE}
+        consequentStates <- all possible states of child
+    \textcolor{ForestGreen}{FOR EACH} parent \textcolor{ForestGreen}{IN} parents
+        \textcolor{ForestGreen}{IF} parent included in narration \textcolor{ForestGreen}{THEN}
+            parentStates[parent] <- the unique state of parent as reported in the narration
+        \textcolor{ForestGreen}{ELSE}
+            parentStates[parent] <- all possible states of parent
+    parentsStates <- all combinations of parentStates
+    variants <- list of all possible combinations of consequentStates and parentsStates
+    \textcolor{ForestGreen}{RETURN} variants
+
+\textcolor{ForestGreen}{FUNCTION} coherence_from_ecs(ecs)
+    \textcolor{ForestGreen}{IF} min(ecs) <= 0 \textcolor{ForestGreen}{THEN}
+        \textcolor{ForestGreen}{RETURN} mean(ecs) * (min(ecs)+1) - min(ecs)min(ecs)
+        \textcolor{gray}{#this is equivalent to (1- |min(ecs)|) * mean(ecs) + |min(ecs)| * min(ecs)}
+    \textcolor{ForestGreen}{ELSE}
+        \textcolor{ForestGreen}{RETURN} mean(ecs)
+
+\textcolor{ForestGreen}{FUNCTION} structured_coherence(BN,narration,evidenceNodes,evidenceStates)
+    parentedNodes <- vector of non-root nodes in BN
+    ecsList <- []
+    \textcolor{ForestGreen}{FOR EACH} parentedNode \textcolor{ForestGreen}{IN} parentedNodes
+        variants <- parents_child_possible_states(parents,parentedNode, narration)
+        variants_count <- length(variants)
+        sumParentsNarr <- 0
+        \textcolor{ForestGreen}{FOR EACH} variant \textcolor{ForestGreen}{IN} variants
+            childPrior <- prior probability of the child state in variant
+            childPosterior <- posterior probability of the child state in variant, 
+                obtained by updating on the parents states from this variant
+            parentsEvidence[variant] <- joint probability of 
+                the parents states in variant in BN updated with
+                evidenceStates of evidenceNodes
+            sumParentsEvidence <- sumParentsEvidence +  parentsEvidence[variant] 
+            z[variant] <- z_confirmation_measure(childPrior, childPosterior)
+        ecs <- 0  \textcolor{gray}{#expected confirmation score}
+        \textcolor{ForestGreen}{FOR EACH} variant \textcolor{ForestGreen}{IN} variants
+            \textcolor{ForestGreen}{IF} parentsEvidence[variant] > 0 \textcolor{ForestGreen}{THEN}
+                weight <- parentsEvidence[variant]/sumParentsEvidence
+            \textcolor{ForestGreen}{ELSE}
+                weight <- 1/variants_count
+            zScaled <- z[variant] * weight
+            ecs <- ecs + zScaled
+        ecsList.add(ecs)
+    \textcolor{ForestGreen}{RETURN} coherence_from_ecs(ecsList)
+\end{Verbatim}
+\normalsize
+
+\vspace{2mm}
+
 \hypertarget{references}{%
 \section*{References}\label{references}}
 \addcontentsline{toc}{section}{References}
@@ -1750,6 +1750,9 @@ Fenton, N., \& Neil, M. (2018). \emph{Risk assessment and decision analysis with
 
 \leavevmode\vadjust pre{\hypertarget{ref-fitelson2003ProbabilisticTheoryCoherence}{}}%
 Fitelson, B. (2003). A {Probabilistic Theory} of {Coherence}. \emph{Analysis}, \emph{63}(3), 194--199.
+
+\leavevmode\vadjust pre{\hypertarget{ref-Fleiss1971}{}}%
+Fleiss, J. L. (1971). Measuring nominal scale agreement among many raters. \emph{Psychological Bulletin}, \emph{76}(5), 378--382. \url{https://doi.org/10.1037/h0031619}
 
 \leavevmode\vadjust pre{\hypertarget{ref-glass2002}{}}%
 Glass, D. H. (2002). Coherence, {Explanation}, and {Bayesian Networks}. In G. Goos, J. Hartmanis, J. van Leeuwen, M. O'Neill, R. F. E. Sutcliffe, C. Ryan, \ldots{} N. J. L. Griffith (Eds.), \emph{Artificial {Intelligence} and {Cognitive Science}} (Vol. 2464, pp. 177--182). {Berlin, Heidelberg}: {Springer Berlin Heidelberg}. \url{https://doi.org/10.1007/3-540-45750-X_23}
