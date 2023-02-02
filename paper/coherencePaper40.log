@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.11.15)  1 FEB 2023 16:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.11.15)  2 FEB 2023 16:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1939,6 +1939,14 @@ Package pdftex.def Info: coherencePaper40_files/figure-latex/plotw4w5dag-1.pdf
 [16 <./coherencePaper40_files/figure-latex/plotw1w2dag-1.pdf> <./coherencePaper
 40_files/figure-latex/plotw3w4dag-1.pdf> <./coherencePaper40_files/figure-latex
 /plotw4w5dag-1.pdf>] [17]
+
+LaTeX Warning: Reference `tab:resultsJoint' on page 18 undefined on input line 
+1607.
+
+
+LaTeX Warning: Reference `tab:desiderataJoint' on page 18 undefined on input li
+ne 1607.
+
 LaTeX Font Info:    Trying to load font information for T1+futura on input line
  1671.
 LaTeX Font Info:    No file T1futura.fd. on input line 1671.
@@ -1959,9 +1967,9 @@ LaTeX Warning: There were undefined references.
  ) 
 Here is how much of TeX's memory you used:
  40591 strings out of 478287
- 789267 string characters out of 5849288
- 1274303 words of memory out of 5000000
- 57368 multiletter control sequences out of 15000+600000
+ 789210 string characters out of 5849288
+ 1273303 words of memory out of 5000000
+ 57369 multiletter control sequences out of 15000+600000
  603363 words of font info for 519 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,16n,106p,10639b,727s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1980,10 +1988,10 @@ ymbol/usyr.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb><
 ive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmri8a.pfb>
-Output written on coherencePaper40.pdf (20 pages, 299024 bytes).
+Output written on coherencePaper40.pdf (20 pages, 298737 bytes).
 PDF statistics:
- 524 PDF objects out of 1000 (max. 8388607)
- 431 compressed objects within 5 object streams
- 136 named destinations out of 1000 (max. 500000)
- 116921 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 518 PDF objects out of 1000 (max. 8388607)
+ 425 compressed objects within 5 object streams
+ 135 named destinations out of 1000 (max. 500000)
+ 116913 words of extra memory for PDF output out of 128383 (max. 10000000)
 

@@ -711,14 +711,14 @@ Dice: TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & 1 & Inf & 1\\
 
 \begin{table}[H]
 
-\caption{\label{tab:diceDesiderata2b}Desideratum satisfaction for two-node BNs in the dice problem.}
+\caption{\label{tab:diceDesiderata2c}Desideratum satisfaction for two-node BNs in the dice problem.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllllllllll}
 \toprule
   & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE (?)} & \cellcolor{gray!6}{TRUE}\\
+\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{TRUE}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -819,7 +819,7 @@ O & Pr\\
 \label{fig:ThreediceBN}
 \end{figure}
 
-\textbf{Results (again).} In such a setup, the results are as in Table \ref{tab:diceCoherenceThree}, and the status of the desideratum is summarized in Table \ref{tab:diceDesiderataThree2}.
+\textbf{Results (again).} In such a setup, the results are as in Table \ref{tab:diceCoherenceThree}, and the status of the desideratum is summarized in Table \ref{tab:diceDesiderataThree2c}.
 
 \begin{table}[H]
 
@@ -838,14 +838,14 @@ Dice (three nodes): TTF 111 & 0.5 & 0.5 & 6 & 6 & 0.625 & 0.75 & 0.917 & -0.819 
 
 \begin{table}[H]
 
-\caption{\label{tab:diceDesiderataThree2}Desideratum satisfaction for three-node BNs in the dice problem.}
+\caption{\label{tab:diceDesiderataThree2c}Desideratum satisfaction for three-node BNs in the dice problem.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllllllllll}
 \toprule
   & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE}\\
+\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{FALSE}\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1254,7 +1254,7 @@ According to Siebel (2004, p. 336) committing both crimes by the murderer should
 \centering\begingroup\fontsize{9}{11}\selectfont
 \begin{tabular}{lr}
 \toprule
-  & Pr\\
+ W & Pr\\
 \midrule
 \cellcolor{gray!6}{OnlyP} & \cellcolor{gray!6}{0.2}\\
 OnlyR & 0.2\\
@@ -1267,7 +1267,7 @@ OnlyR & 0.2\\
 
 \begin{tabular}{lrrr}
 \toprule
-\multicolumn{1}{c}{MisP} & \multicolumn{3}{c}{WhoMurdered} \\
+\multicolumn{1}{c}{P} & \multicolumn{3}{c}{W} \\
   & OnlyP & OnlyR & Both\\
 \midrule
 \cellcolor{gray!6}{1} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1}\\
@@ -1277,7 +1277,7 @@ OnlyR & 0.2\\
 
 \begin{tabular}{lrrr}
 \toprule
-\multicolumn{1}{c}{MisR} & \multicolumn{3}{c}{WhoMurdered} \\
+\multicolumn{1}{c}{R} & \multicolumn{3}{c}{W} \\
   & OnlyP & OnlyR & Both\\
 \midrule
 \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{1}\\
@@ -1294,20 +1294,20 @@ OnlyR & 0.2\\
 \label{fig:Robbers}
 \end{figure}
 
-\textbf{Results.} Coherence calculations yield the results in Table \ref{tab:robbersCoherence}, and the performance of the coherence measures with respect to the desiderata is illustrated in Table \ref{tab:robbersDesiderata}.
+\textbf{Results.} Coherence calculations yield the results in Table \ref{tab:robbersCoherence3}, and the performance of the coherence measures with respect to the desiderata is illustrated in Table \ref{tab:robbersDesiderata}.
 
 \begin{table}[H]
 
-\caption{\label{tab:robbersCoherence}Coherence scores in the Robbers scenario (rounded).}
+\caption{\label{tab:robbersCoherence3}Coherence scores in the Robbers scenario (rounded).}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lrrrrrrrrrr}
 \toprule
   & OG & OGGen & Sh & ShGen & DM & R & Fi & SZ & SLR & SL\\
 \midrule
-Robbers: MIsPMIsR 11 & 0.60 & 0.60 & 0.937 & 0.937 & -0.050 & 0.750 & -0.143 & 0.60 & Inf & 0.60\\
-Robbers: MIsPMIsR 10 & 0.25 & 0.25 & 1.250 & 1.250 & 0.125 & 0.625 & 0.571 & -0.36 & Inf & -0.36\\
-Robbers: MIsPMIsR 01 & 0.25 & 0.25 & 1.250 & 1.250 & 0.125 & 0.625 & 0.571 & -0.36 & Inf & -0.36\\
+Robbers: PR 11 & 0.60 & 0.60 & 0.937 & 0.937 & -0.050 & 0.750 & -0.143 & 0.60 & Inf & 0.60\\
+Robbers: PR 10 & 0.25 & 0.25 & 1.250 & 1.250 & 0.125 & 0.625 & 0.571 & -0.36 & Inf & -0.36\\
+Robbers: PR 01 & 0.25 & 0.25 & 1.250 & 1.250 & 0.125 & 0.625 & 0.571 & -0.36 & Inf & -0.36\\
 \bottomrule
 \end{tabular}}
 \end{table}
@@ -1608,7 +1608,7 @@ In the literature there is a tradition of criticizng various probabilistic expli
 
 \begin{table}[H]
 
-\caption{\label{tab:resultsJoint}Coherence scores in all the examples considered (rounded).}
+\caption{\label{tab:resultsJoint2}Coherence scores in all the examples considered (rounded).}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lrrrrrrrrrr}
@@ -1625,9 +1625,9 @@ Dunnit: MGWI 1111 & 0.000 & 0.087 & 4.294 & 11.012 & 0.167 & 0.266 & 0.169 & -0.
 Japanese Swords 1: JO 11 & 0.004 & 0.004 & 80.251 & 80.251 & 0.008 & 0.008 & 0.976 & 0.008 & 80.930 & 0.976\\
 \cellcolor{gray!6}{Japanese Swords 2: JO 11} & \cellcolor{gray!6}{0.818} & \cellcolor{gray!6}{0.818} & \cellcolor{gray!6}{9.000} & \cellcolor{gray!6}{9.000} & \cellcolor{gray!6}{0.800} & \cellcolor{gray!6}{0.900} & \cellcolor{gray!6}{0.976} & \cellcolor{gray!6}{0.889} & \cellcolor{gray!6}{81.000} & \cellcolor{gray!6}{0.976}\\
 Japanese Swords 3: JO 11 & 0.818 & 0.818 & 1.080 & 1.080 & 0.067 & 0.900 & 0.286 & 0.400 & 1.800 & 0.286\\
-\cellcolor{gray!6}{Robbers: MIsPMIsR 11} & \cellcolor{gray!6}{0.600} & \cellcolor{gray!6}{0.600} & \cellcolor{gray!6}{0.937} & \cellcolor{gray!6}{0.937} & \cellcolor{gray!6}{-0.050} & \cellcolor{gray!6}{0.750} & \cellcolor{gray!6}{-0.143} & \cellcolor{gray!6}{0.600} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{0.600}\\
-Robbers: MIsPMIsR 10 & 0.250 & 0.250 & 1.250 & 1.250 & 0.125 & 0.625 & 0.571 & -0.360 & Inf & -0.360\\
-\cellcolor{gray!6}{Robbers: MIsPMIsR 01} & \cellcolor{gray!6}{0.250} & \cellcolor{gray!6}{0.250} & \cellcolor{gray!6}{1.250} & \cellcolor{gray!6}{1.250} & \cellcolor{gray!6}{0.125} & \cellcolor{gray!6}{0.625} & \cellcolor{gray!6}{0.571} & \cellcolor{gray!6}{-0.360} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{-0.360}\\
+\cellcolor{gray!6}{Robbers: PR 11} & \cellcolor{gray!6}{0.600} & \cellcolor{gray!6}{0.600} & \cellcolor{gray!6}{0.937} & \cellcolor{gray!6}{0.937} & \cellcolor{gray!6}{-0.050} & \cellcolor{gray!6}{0.750} & \cellcolor{gray!6}{-0.143} & \cellcolor{gray!6}{0.600} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{0.600}\\
+Robbers: PR 10 & 0.250 & 0.250 & 1.250 & 1.250 & 0.125 & 0.625 & 0.571 & -0.360 & Inf & -0.360\\
+\cellcolor{gray!6}{Robbers: PR 01} & \cellcolor{gray!6}{0.250} & \cellcolor{gray!6}{0.250} & \cellcolor{gray!6}{1.250} & \cellcolor{gray!6}{1.250} & \cellcolor{gray!6}{0.125} & \cellcolor{gray!6}{0.625} & \cellcolor{gray!6}{0.571} & \cellcolor{gray!6}{-0.360} & \cellcolor{gray!6}{Inf} & \cellcolor{gray!6}{-0.360}\\
 Beatles: JPGRD 11111 & 0.000 & 0.202 & 0.000 & 1.423 & 0.025 & 0.322 & -0.036 & -1.000 & 0.000 & -1.000\\
 \cellcolor{gray!6}{Witness: W1W2 11} & \cellcolor{gray!6}{0.451} & \cellcolor{gray!6}{0.451} & \cellcolor{gray!6}{3.551} & \cellcolor{gray!6}{3.551} & \cellcolor{gray!6}{0.446} & \cellcolor{gray!6}{0.621} & \cellcolor{gray!6}{0.771} & \cellcolor{gray!6}{0.729} & \cellcolor{gray!6}{18.501} & \cellcolor{gray!6}{0.871}\\
 Witness: W3W4 11 & 0.187 & 0.187 & 0.740 & 0.740 & -0.110 & 0.315 & -0.234 & 0.494 & 4.863 & 0.528\\
@@ -1638,7 +1638,7 @@ Witness: W3W4 11 & 0.187 & 0.187 & 0.740 & 0.740 & -0.110 & 0.315 & -0.234 & 0.4
 
 \begin{table}[H]
 
-\caption{\label{tab:desiderataJoint}Desiderata satisfaction in all the examples considered, including success rates.}
+\caption{\label{tab:desiderataJoint2}Desiderata satisfaction in all the examples considered, including success rates.}
 \centering
 \resizebox{\linewidth}{!}{
 \begin{tabular}[t]{lllllllllll}
@@ -1647,7 +1647,7 @@ Witness: W3W4 11 & 0.187 & 0.187 & 0.740 & 0.740 & -0.110 & 0.315 & -0.234 & 0.4
 \midrule
 \cellcolor{gray!6}{Penguins: BG$<$BGP} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
 Penguins: BG$<<$ BP$<$ BGP & FALSE & FALSE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
-\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
+\cellcolor{gray!6}{Dodecahedron:  Regular $=$  Dodecahedron} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{NA} & \cellcolor{gray!6}{TRUE}\\
 Dunnit: Dunnit$<$Twin & FALSE & FALSE & TRUE & TRUE & FALSE & FALSE & TRUE & TRUE & TRUE & TRUE\\
 \cellcolor{gray!6}{Swords: JO2$>$JO1} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{FALSE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
 Swords: JO2$>$JO3 & FALSE & FALSE & TRUE & TRUE & TRUE & FALSE & TRUE & TRUE & TRUE & TRUE\\
@@ -1657,13 +1657,13 @@ Robbers: PR$>$neutral & NA & NA & FALSE & FALSE & FALSE & TRUE & FALSE & TRUE & 
 Beatles: minimal & TRUE & FALSE & TRUE & FALSE & FALSE & FALSE & FALSE & TRUE & TRUE & TRUE\\
 \cellcolor{gray!6}{Witness: W$_1$W$_2>$W$_3$W$_4$} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE} & \cellcolor{gray!6}{TRUE}\\
 Witness: W$_4$W$_5>$W$_3$W$_4$ & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE & TRUE\\
-\cellcolor{gray!6}{Success rate} & \cellcolor{gray!6}{50\%} & \cellcolor{gray!6}{50\%} & \cellcolor{gray!6}{67\%} & \cellcolor{gray!6}{50\%} & \cellcolor{gray!6}{50\%} & \cellcolor{gray!6}{67\%} & \cellcolor{gray!6}{67\%} & \cellcolor{gray!6}{100\%} & \cellcolor{gray!6}{92\%} & \cellcolor{gray!6}{100\%}\\
+\cellcolor{gray!6}{Success rate} & \cellcolor{gray!6}{50\%} & \cellcolor{gray!6}{50\%} & \cellcolor{gray!6}{67\%} & \cellcolor{gray!6}{50\%} & \cellcolor{gray!6}{50\%} & \cellcolor{gray!6}{67\%} & \cellcolor{gray!6}{67\%} & \cellcolor{gray!6}{100\%} & \cellcolor{gray!6}{91\%} & \cellcolor{gray!6}{100\%}\\
 \bottomrule
 \end{tabular}}
 \end{table}
 
-\hypertarget{appendix-structured-coherence-calculation-pseudo-code}{%
-\section{Appendix: structured coherence calculation pseudo-code}\label{appendix-structured-coherence-calculation-pseudo-code}}
+\appendix
+\section*{Appendix:  structured coherence calculation pseudo-code}
 
 \vspace{2mm}
 \footnotesize

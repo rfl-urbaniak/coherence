@@ -600,15 +600,15 @@ round(diceTable,3) %>%  kable(format = "latex",booktabs=T,
 
 
 
-```{r diceDesiderataCalculation ,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"}
+```{r diceDesiderataCalculation2 ,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"}
 
 diceDesiderata <- diceTable[1,] == diceTable[2,] 
 diceDesiderata <- as.data.frame(diceDesiderata)
 rownames(diceDesiderata) <- c("Dodecahedron:  Regular $=$  Dodecahedron")
-diceDesiderata[1,9] <- c("FALSE (?)")
+diceDesiderata[1,9] <- c(NA)
 ```
 
-```{r diceDesiderata2b,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+```{r diceDesiderata2c,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
 diceDesiderata %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Desideratum satisfaction for two-node BNs in the dice problem.") %>%
    kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
@@ -812,7 +812,7 @@ O & Pr\\
 
 
 
-\textbf{Results (again).} In such a setup, the results are as in Table \@ref(tab:diceCoherenceThree), and the status of the desideratum  is summarized in Table \@ref(tab:diceDesiderataThree2).
+\textbf{Results (again).} In such a setup, the results are as in Table \@ref(tab:diceCoherenceThree), and the status of the desideratum  is summarized in Table \@ref(tab:diceDesiderataThree2c).
 
 
 
@@ -830,14 +830,15 @@ round(diceTableThree,3) %>%  kable(format = "latex",booktabs=T,
 
 
 
-```{r diceDesiderataCalculationThree ,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"}
+```{r diceDesiderataCalculationThreeb ,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%"}
 
 diceDesiderataThree <- diceTableThree[1,] == diceTableThree[2,] 
 diceDesiderataThree <- as.data.frame(diceDesiderataThree)
 rownames(diceDesiderataThree) <- c("Dodecahedron:  Regular $=$  Dodecahedron")
+diceDesiderataThree[1,9] <- c(NA)
 ```
 
-```{r diceDesiderataThree2,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
+```{r diceDesiderataThree2c,echo=FALSE,eval=TRUE,fig.align = "center",cache=FALSE, fig.show = "hold", out.width = "100%", message = FALSE, warning = FALSE}
 diceDesiderataThree %>%  kable(format = "latex",booktabs=T, linesep = "",  escape = FALSE, caption = "Desideratum satisfaction for three-node BNs in the dice problem.") %>%
    kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
 ```
@@ -1294,7 +1295,7 @@ graphviz.plot(robbersDAGsimplified)
 \centering\begingroup\fontsize{9}{11}\selectfont
 \begin{tabular}{lr}
 \toprule
-  & Pr\\
+ W & Pr\\
 \midrule
 \cellcolor{gray!6}{OnlyP} & \cellcolor{gray!6}{0.2}\\
 OnlyR & 0.2\\
@@ -1307,7 +1308,7 @@ OnlyR & 0.2\\
 
 \begin{tabular}{lrrr}
 \toprule
-\multicolumn{1}{c}{MisP} & \multicolumn{3}{c}{WhoMurdered} \\
+\multicolumn{1}{c}{P} & \multicolumn{3}{c}{W} \\
   & OnlyP & OnlyR & Both\\
 \midrule
 \cellcolor{gray!6}{1} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1}\\
@@ -1317,7 +1318,7 @@ OnlyR & 0.2\\
 
 \begin{tabular}{lrrr}
 \toprule
-\multicolumn{1}{c}{MisR} & \multicolumn{3}{c}{WhoMurdered} \\
+\multicolumn{1}{c}{R} & \multicolumn{3}{c}{W} \\
   & OnlyP & OnlyR & Both\\
 \midrule
 \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{1}\\
@@ -1337,7 +1338,7 @@ OnlyR & 0.2\\
 
 
 
-\textbf{Results.} Coherence calculations yield the  results in Table \@ref(tab:robbersCoherence), and the performance of the coherence measures with respect to the desiderata is illustrated in Table \@ref(tab:robbersDesiderata).
+\textbf{Results.} Coherence calculations yield the  results in Table \@ref(tab:robbersCoherence3), and the performance of the coherence measures with respect to the desiderata is illustrated in Table \@ref(tab:robbersDesiderata).
 
 
 ```{r robbersBNtable,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
@@ -1345,12 +1346,13 @@ robbersBNTable <- CoherencesTableEvi(list(robbersBN,robbersBN,robbersBN),
                     scenariosList = list(c("MIsP","MIsR"),c("MIsP","MIsR"),c("MIsP","MIsR")),
                     statesList   = list(c("1","1"),c("1","0"),c("0","1")),
                     exampleName = "Robbers")
+rownames(robbersBNTable) <- c("Robbers: PR 11","Robbers: PR 10", "Robbers: PR 01")
 ```
 
 
 
 
-```{r robbersCoherence,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
+```{r robbersCoherence3,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", fig.height= 2, fig.width= 2, out.width = "90%"}
 round(robbersBNTable,3) %>% kable(format = "latex",booktabs=T,
                         #col.names = c(node, "1", "0"),
                         linesep = "",  escape = FALSE, caption = "Coherence scores in the Robbers scenario (rounded).") %>%
@@ -1820,7 +1822,7 @@ In the literature there is a tradition of criticizng various probabilistic expli
 
 
 
-```{r jointTables,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+```{r jointTables2,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 resultsJoint <- rbind(round(penguinsTable,3),
 round(diceTable,3), 
 round(DunnitTableSeparate,3),
@@ -1849,7 +1851,7 @@ rownames(desiderataJoint)[13] <- "Success rate"
 
 
 
-```{r resultsJoint,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+```{r resultsJoint2,echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 round(resultsJoint,3) %>%  kable(format = "latex",booktabs=T,
                         linesep = "",  escape = FALSE, caption = "Coherence scores in all the examples considered (rounded).") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
@@ -1859,7 +1861,7 @@ round(resultsJoint,3) %>%  kable(format = "latex",booktabs=T,
 
 
 
-```{r desiderataJoint, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
+```{r desiderataJoint2, echo=FALSE,eval=TRUE,fig.align = "center",cache=TRUE, fig.show = "hold", out.width = "100%"}
 desiderataJoint %>%  kable(format = "latex",booktabs=T,
                         linesep = "",  escape = FALSE, caption = "Desiderata satisfaction in all the examples considered, including success rates.") %>%
   kable_styling(latex_options=c("striped","scale_down","HOLD_position"))
@@ -1895,7 +1897,13 @@ desiderataJoint %>%  kable(format = "latex",booktabs=T,
 
 
 
-# Appendix:  structured coherence calculation pseudo-code
+
+
+
+
+
+\appendix
+\section*{Appendix:  structured coherence calculation pseudo-code}
 
 
 
@@ -1956,7 +1964,5 @@ desiderataJoint %>%  kable(format = "latex",booktabs=T,
 \vspace{2mm}
 
 
-
-
-# References {-}
+# References
 

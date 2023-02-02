@@ -1,0 +1,45 @@
+---
+title: "Structured probabilistic coherence \\linebreak and the usual counterexamples to probabilistic measures of coherence"
+author: 
+- "\\normalsize Alicja Kowalewska  (Carnegie Mellon University, kowalewskaalicja1@gmail.com)" 
+- "\\normalsize Rafal Urbaniak (University of Gdansk, rfl.urbaniak@gmail.com)"
+output:
+  bookdown::pdf_document2:
+  number_sections: true
+df_print: kable 
+keep_tex: true
+toc: no
+toc_depth: 3
+includes:
+  in_header:
+  - Rafal_latex7.sty
+fontsize: 10pt
+bibliography: coherence.bib
+csl: apa-6th-edition.csl 
+documentclass: scrartcl
+linkcolor: blue 
+filecolor: blue
+citecolor: blue
+urlcolor: blue
+toccolor: blue
+---
+
+
+
+
+
+
+
+\begin{quote}
+\textbf{Abstract.} The notion of coherence is  used in many philosophical, especially epistemological,
+discussions (for instance, in discussions  about the  truth-conduciveness of coherence), 
+so a formal explication of this notion is desirable.  Yet,  such explications available on the
+market disagree and  face a number of counterexamples.  Reflecting on common phenomena that underlie
+these counterexamples leads  us to the formulation of  a new measure of coherence. It  diverges from 
+the known candidates in three important respects: (1) it is not a function of a probabilistic measure
+and a set of propositions alone, because it is also sensitive to the structure of agent's beliefs, (2)
+unlike in the case of quite a few coherence measures, it is  sensitive to the  weakest links in the narration, 
+and (3) it is not obtained by simply averaging confirmation levels between all possible combinations of elements. 
+We apply our measure to the existing counterexamples and compare its performance to the performance of the other measures.
+It does a  better job.  
+\end{quote}
