@@ -1895,6 +1895,9 @@ desiderataJoint %>%  kable(format = "latex",booktabs=T,
 <!-- ``` -->
 
 
+# Statements and Declarations
+
+The work of one of the authors was supported by a research grant of the National Science Center (grant number suppressed to preserve anonymity). The authors have no other competing interests to declare that are relevant to the content of the article.
 
 
 
@@ -1962,6 +1965,7 @@ desiderataJoint %>%  kable(format = "latex",booktabs=T,
 \normalsize
 
 \vspace{2mm}
+
 
 
 # References
